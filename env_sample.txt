@@ -1,0 +1,46 @@
+# .env sample file
+# Save as .env
+# You can safely delete all lines that start with #
+
+# I included 2 separate bot tokens here in case you wish to switch
+# back and forth between a testing bot application and a live
+# production bot application.  Just include tokens for both
+# and set correct BOTMODE var.
+
+# Testing Discord Bot token
+BOTMODE="TEST"
+TEST_BOT_TOKEN=
+
+# Production Discord Bot
+# BOTMODE="PROD"
+PROD_BOT_TOKEN=
+
+###########################################
+
+# MariaDB db settings
+DB_HOST=
+DB_USER=
+DB_PASS=
+DB_NAME=
+
+###########################################
+
+# Blizzard API
+# https://develop.battle.net/access/clients
+BATTLENET_CLIENT_ID=
+BATTLENET_CLIENT_SECRET=
+
+###########################################
+
+# Local vars for development version
+ENV_VERSION="dotenv variables"
+# ENV_VERSION="Heroku vars"
+
+# I use DEVMODE="TRUE" when running code locally
+# Several places in code have Print statements that show
+# on process info when DEVMODE, so none of those will print
+# when running remotely as auto-deployed bot.
+# Remote deployment server doesn't have this var set, 
+# so DEVMODE will always be false when running remotely.
+DEVMODE="TRUE"
+

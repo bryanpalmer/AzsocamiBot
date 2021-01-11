@@ -1,0 +1,40 @@
+{
+    "_links": {
+        "self": {
+            "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/character-media?namespace=profile-us"
+        }
+    },
+    "character": {
+        "key": {
+            "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn?namespace=profile-us"
+        },
+        "name": "Aaryn",
+        "id": 186224258,
+        "realm": {
+            "key": {
+                "href": "https://us.api.blizzard.com/data/wow/realm/12?namespace=dynamic-us"
+            },
+            "name": "Silver Hand",
+            "id": 12,
+            "slug": "silver-hand"
+        }
+    },
+    "assets": [
+        {
+            "key": "avatar",
+            "value": "https://render-us.worldofwarcraft.com/character/silver-hand/130/186224258-avatar.jpg"
+        },
+        {
+            "key": "inset",
+            "value": "https://render-us.worldofwarcraft.com/character/silver-hand/130/186224258-inset.jpg"
+        },
+        {
+            "key": "main",
+            "value": "https://render-us.worldofwarcraft.com/character/silver-hand/130/186224258-main.jpg"
+        },
+        {
+            "key": "main-raw",
+            "value": "https://render-us.worldofwarcraft.com/character/silver-hand/130/186224258-main-raw.png"
+        }
+    ]
+}

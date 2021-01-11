@@ -1,0 +1,129 @@
+{
+    "_links": {
+        "self": {
+            "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn?namespace=profile-us"
+        }
+    },
+    "id": 186224258,
+    "name": "Aaryn",
+    "gender": {
+        "type": "MALE",
+        "name": "Male"
+    },
+    "faction": {
+        "type": "ALLIANCE",
+        "name": "Alliance"
+    },
+    "race": {
+        "key": {
+            "href": "https://us.api.blizzard.com/data/wow/playable-race/1?namespace=static-9.0.2_36532-us"
+        },
+        "name": "Human",
+        "id": 1
+    },
+    "character_class": {
+        "key": {
+            "href": "https://us.api.blizzard.com/data/wow/playable-class/1?namespace=static-9.0.2_36532-us"
+        },
+        "name": "Warrior",
+        "id": 1
+    },
+    "active_spec": {
+        "key": {
+            "href": "https://us.api.blizzard.com/data/wow/playable-specialization/71?namespace=static-9.0.2_36532-us"
+        },
+        "name": "Arms",
+        "id": 71
+    },
+    "realm": {
+        "key": {
+            "href": "https://us.api.blizzard.com/data/wow/realm/12?namespace=dynamic-us"
+        },
+        "name": "Silver Hand",
+        "id": 12,
+        "slug": "silver-hand"
+    },
+    "guild": {
+        "key": {
+            "href": "https://us.api.blizzard.com/data/wow/guild/silver-hand/azsocami?namespace=profile-us"
+        },
+        "name": "Azsocami",
+        "id": 49669,
+        "realm": {
+            "key": {
+                "href": "https://us.api.blizzard.com/data/wow/realm/12?namespace=dynamic-us"
+            },
+            "name": "Silver Hand",
+            "id": 12,
+            "slug": "silver-hand"
+        },
+        "faction": {
+            "type": "ALLIANCE",
+            "name": "Alliance"
+        }
+    },
+    "level": 60,
+    "experience": 0,
+    "achievement_points": 14550,
+    "achievements": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/achievements?namespace=profile-us"
+    },
+    "titles": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/titles?namespace=profile-us"
+    },
+    "pvp_summary": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/pvp-summary?namespace=profile-us"
+    },
+    "encounters": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/encounters?namespace=profile-us"
+    },
+    "media": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/character-media?namespace=profile-us"
+    },
+    "last_login_timestamp": 1610310557000,
+    "average_item_level": 201,
+    "equipped_item_level": 199,
+    "specializations": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/specializations?namespace=profile-us"
+    },
+    "statistics": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/statistics?namespace=profile-us"
+    },
+    "mythic_keystone_profile": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/mythic-keystone-profile?namespace=profile-us"
+    },
+    "equipment": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/equipment?namespace=profile-us"
+    },
+    "appearance": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/appearance?namespace=profile-us"
+    },
+    "collections": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/collections?namespace=profile-us"
+    },
+    "reputations": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/reputations?namespace=profile-us"
+    },
+    "quests": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/quests?namespace=profile-us"
+    },
+    "achievements_statistics": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/achievements/statistics?namespace=profile-us"
+    },
+    "professions": {
+        "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/professions?namespace=profile-us"
+    },
+    "covenant_progress": {
+        "chosen_covenant": {
+            "key": {
+                "href": "https://us.api.blizzard.com/data/wow/covenant/2?namespace=static-9.0.2_36532-us"
+            },
+            "name": "Venthyr",
+            "id": 2
+        },
+        "renown_level": 21,
+        "soulbinds": {
+            "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/soulbinds?namespace=profile-us"
+        }
+    }
+}

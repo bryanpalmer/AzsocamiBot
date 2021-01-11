@@ -1,0 +1,2820 @@
+{
+    "_links": {
+        "self": {
+            "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn/equipment?namespace=profile-us"
+        }
+    },
+    "character": {
+        "key": {
+            "href": "https://us.api.blizzard.com/profile/wow/character/silver-hand/aaryn?namespace=profile-us"
+        },
+        "name": "Aaryn",
+        "id": 186224258,
+        "realm": {
+            "key": {
+                "href": "https://us.api.blizzard.com/data/wow/realm/12?namespace=dynamic-us"
+            },
+            "name": "Silver Hand",
+            "id": 12,
+            "slug": "silver-hand"
+        }
+    },
+    "equipped_items": [
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/178812?namespace=static-9.0.2_36532-us"
+                },
+                "id": 178812
+            },
+            "slot": {
+                "type": "HEAD",
+                "name": "Head"
+            },
+            "quantity": 1,
+            "context": 23,
+            "bonus_list": [
+                6807,
+                6652,
+                7193,
+                1498,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Wing Commander's Helmet",
+            "modified_appearance_id": 111516,
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/178812?namespace=static-9.0.2_36532-us"
+                },
+                "id": 178812
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Plate",
+                "id": 4
+            },
+            "inventory_type": {
+                "type": "HEAD",
+                "name": "Head"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "armor": {
+                "value": 133,
+                "display": {
+                    "display_string": "133 Armor",
+                    "color": {
+                        "r": 255,
+                        "g": 255,
+                        "b": 255,
+                        "a": 1
+                    }
+                }
+            },
+            "stats": [
+                {
+                    "type": {
+                        "type": "STRENGTH",
+                        "name": "Strength"
+                    },
+                    "value": 55,
+                    "display": {
+                        "display_string": "+55 Strength",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "INTELLECT",
+                        "name": "Intellect"
+                    },
+                    "value": 55,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+55 Intellect",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 87,
+                    "display": {
+                        "display_string": "+87 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "HASTE_RATING",
+                        "name": "Haste"
+                    },
+                    "value": 44,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+44 Haste",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "MASTERY_RATING",
+                        "name": "Mastery"
+                    },
+                    "value": 68,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+68 Mastery",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "sell_price": {
+                "value": 609360,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "60",
+                    "silver": "93",
+                    "copper": "60"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 184,
+                "display_string": "Item Level 184"
+            },
+            "transmog": {
+                "item": {
+                    "key": {
+                        "href": "https://us.api.blizzard.com/data/wow/item/180900?namespace=static-9.0.2_36532-us"
+                    },
+                    "name": "Dread Sentinel's Ebony Headgear",
+                    "id": 180900
+                },
+                "display_string": "Transmogrified to:\nDread Sentinel's Ebony Headgear",
+                "item_modified_appearance_id": 113263
+            },
+            "durability": {
+                "value": 100,
+                "display_string": "Durability 100 / 100"
+            },
+            "name_description": {
+                "display_string": "Mythic",
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/180115?namespace=static-9.0.2_36532-us"
+                },
+                "id": 180115
+            },
+            "slot": {
+                "type": "NECK",
+                "name": "Neck"
+            },
+            "quantity": 1,
+            "context": 35,
+            "bonus_list": [
+                7203,
+                6652,
+                7193,
+                1501,
+                5865,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Azure-Venom Choker",
+            "modified_appearance_id": 0,
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/180115?namespace=static-9.0.2_36532-us"
+                },
+                "id": 180115
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/0?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Miscellaneous",
+                "id": 0
+            },
+            "inventory_type": {
+                "type": "NECK",
+                "name": "Neck"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "stats": [
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 66,
+                    "display": {
+                        "display_string": "+66 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "CRIT_RATING",
+                        "name": "Critical Strike"
+                    },
+                    "value": 124,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+124 Critical Strike",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "VERSATILITY",
+                        "name": "Versatility"
+                    },
+                    "value": 60,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+60 Versatility",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "sell_price": {
+                "value": 363097,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "36",
+                    "silver": "30",
+                    "copper": "97"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 207,
+                "display_string": "Item Level 207"
+            },
+            "is_subclass_hidden": true,
+            "name_description": {
+                "display_string": "Mythic 4",
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/182994?namespace=static-9.0.2_36532-us"
+                },
+                "id": 182994
+            },
+            "slot": {
+                "type": "SHOULDER",
+                "name": "Shoulders"
+            },
+            "quantity": 1,
+            "context": 1,
+            "bonus_list": [
+                6805,
+                6652
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Epaulettes of Overwhelming Force",
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/182994?namespace=static-9.0.2_36532-us"
+                },
+                "id": 182994
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Plate",
+                "id": 4
+            },
+            "inventory_type": {
+                "type": "SHOULDER",
+                "name": "Shoulder"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "armor": {
+                "value": 132,
+                "display": {
+                    "display_string": "132 Armor",
+                    "color": {
+                        "r": 255,
+                        "g": 255,
+                        "b": 255,
+                        "a": 1
+                    }
+                }
+            },
+            "stats": [
+                {
+                    "type": {
+                        "type": "STRENGTH",
+                        "name": "Strength"
+                    },
+                    "value": 48,
+                    "display": {
+                        "display_string": "+48 Strength",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "INTELLECT",
+                        "name": "Intellect"
+                    },
+                    "value": 48,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+48 Intellect",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 80,
+                    "display": {
+                        "display_string": "+80 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "CRIT_RATING",
+                        "name": "Critical Strike"
+                    },
+                    "value": 60,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+60 Critical Strike",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "HASTE_RATING",
+                        "name": "Haste"
+                    },
+                    "value": 30,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+30 Haste",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "sell_price": {
+                "value": 634229,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "63",
+                    "silver": "42",
+                    "copper": "29"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 200,
+                "display_string": "Item Level 200"
+            },
+            "transmog": {
+                "item": {
+                    "key": {
+                        "href": "https://us.api.blizzard.com/data/wow/item/180921?namespace=static-9.0.2_36532-us"
+                    },
+                    "name": "Dread Sentinel's Ebony Spaulders",
+                    "id": 180921
+                },
+                "display_string": "Transmogrified to:\nDread Sentinel's Ebony Spaulders",
+                "item_modified_appearance_id": 113284
+            },
+            "durability": {
+                "value": 97,
+                "display_string": "Durability 97 / 100"
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/89195?namespace=static-9.0.2_36532-us"
+                },
+                "id": 89195
+            },
+            "slot": {
+                "type": "SHIRT",
+                "name": "Shirt"
+            },
+            "quantity": 1,
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Artisan Officer's Shirt",
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/89195?namespace=static-9.0.2_36532-us"
+                },
+                "id": 89195
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/0?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Miscellaneous",
+                "id": 0
+            },
+            "inventory_type": {
+                "type": "BODY",
+                "name": "Shirt"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "sell_price": {
+                "value": 400000,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "40",
+                    "silver": "0",
+                    "copper": "0"
+                }
+            },
+            "level": {
+                "value": 1,
+                "display_string": "Item Level 1"
+            },
+            "transmog": {
+                "item": {
+                    "key": {
+                        "href": "https://us.api.blizzard.com/data/wow/item/2575?namespace=static-9.0.2_36532-us"
+                    },
+                    "name": "Red Linen Shirt",
+                    "id": 2575
+                },
+                "display_string": "Transmogrified to:\nRed Linen Shirt",
+                "item_modified_appearance_id": 877
+            },
+            "is_subclass_hidden": true
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/178814?namespace=static-9.0.2_36532-us"
+                },
+                "id": 178814
+            },
+            "enchantments": [
+                {
+                    "display_string": "Enchanted: Primary Stats +30",
+                    "source_item": {
+                        "key": {
+                            "href": "https://us.api.blizzard.com/data/wow/item/177962?namespace=static-9.0.2_36532-us"
+                        },
+                        "name": "Enchant Chest - Eternal Stats",
+                        "id": 177962
+                    },
+                    "enchantment_id": 6230,
+                    "enchantment_slot": {
+                        "id": 0,
+                        "type": "PERMANENT"
+                    }
+                }
+            ],
+            "slot": {
+                "type": "CHEST",
+                "name": "Chest"
+            },
+            "quantity": 1,
+            "context": 23,
+            "bonus_list": [
+                6807,
+                6652,
+                1498,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Breastplate of Otherworldly Influence",
+            "modified_appearance_id": 111518,
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/178814?namespace=static-9.0.2_36532-us"
+                },
+                "id": 178814
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Plate",
+                "id": 4
+            },
+            "inventory_type": {
+                "type": "CHEST",
+                "name": "Chest"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "armor": {
+                "value": 178,
+                "display": {
+                    "display_string": "178 Armor",
+                    "color": {
+                        "r": 255,
+                        "g": 255,
+                        "b": 255,
+                        "a": 1
+                    }
+                }
+            },
+            "stats": [
+                {
+                    "type": {
+                        "type": "STRENGTH",
+                        "name": "Strength"
+                    },
+                    "value": 55,
+                    "display": {
+                        "display_string": "+55 Strength",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "INTELLECT",
+                        "name": "Intellect"
+                    },
+                    "value": 55,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+55 Intellect",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 87,
+                    "display": {
+                        "display_string": "+87 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "CRIT_RATING",
+                        "name": "Critical Strike"
+                    },
+                    "value": 39,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+39 Critical Strike",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "HASTE_RATING",
+                        "name": "Haste"
+                    },
+                    "value": 73,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+73 Haste",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "sell_price": {
+                "value": 820234,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "82",
+                    "silver": "2",
+                    "copper": "34"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 184,
+                "display_string": "Item Level 184"
+            },
+            "transmog": {
+                "item": {
+                    "key": {
+                        "href": "https://us.api.blizzard.com/data/wow/item/180902?namespace=static-9.0.2_36532-us"
+                    },
+                    "name": "Dread Sentinel's Ebony Chestplate",
+                    "id": 180902
+                },
+                "display_string": "Transmogrified to:\nDread Sentinel's Ebony Chestplate",
+                "item_modified_appearance_id": 113265
+            },
+            "durability": {
+                "value": 165,
+                "display_string": "Durability 165 / 165"
+            },
+            "name_description": {
+                "display_string": "Mythic",
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/171418?namespace=static-9.0.2_36532-us"
+                },
+                "id": 171418
+            },
+            "slot": {
+                "type": "WAIST",
+                "name": "Waist"
+            },
+            "quantity": 1,
+            "context": 63,
+            "bonus_list": [
+                7105,
+                7193,
+                6647,
+                6650,
+                6717,
+                1507
+            ],
+            "quality": {
+                "type": "LEGENDARY",
+                "name": "Legendary"
+            },
+            "name": "Shadowghast Waistguard",
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/171418?namespace=static-9.0.2_36532-us"
+                },
+                "id": 171418
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Plate",
+                "id": 4
+            },
+            "inventory_type": {
+                "type": "WAIST",
+                "name": "Waist"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "limit_category": "Unique-Equipped: Shadowlands Crafted Legendary (1)",
+            "armor": {
+                "value": 114,
+                "display": {
+                    "display_string": "114 Armor",
+                    "color": {
+                        "r": 255,
+                        "g": 255,
+                        "b": 255,
+                        "a": 1
+                    }
+                }
+            },
+            "stats": [
+                {
+                    "type": {
+                        "type": "STRENGTH",
+                        "name": "Strength"
+                    },
+                    "value": 53,
+                    "display": {
+                        "display_string": "+53 Strength",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "INTELLECT",
+                        "name": "Intellect"
+                    },
+                    "value": 53,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+53 Intellect",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 91,
+                    "display": {
+                        "display_string": "+91 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "CRIT_RATING",
+                        "name": "Critical Strike"
+                    },
+                    "value": 48,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+48 Critical Strike",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "VERSATILITY",
+                        "name": "Versatility"
+                    },
+                    "value": 48,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+48 Versatility",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "spells": [
+                {
+                    "spell": {
+                        "key": {
+                            "href": "https://us.api.blizzard.com/data/wow/spell/339058?namespace=static-9.0.2_36532-us"
+                        },
+                        "name": "Third Eye of the Jailer",
+                        "id": 339058
+                    },
+                    "description": "Equip: Killing an enemy grants you the Third Eye, increasing your Strength by 1% for 10 sec, stacking up to 7 and increasing the duration by 1 sec for each additional stack. The duration of the Third Eye is increased by 50% while in the Maw."
+                }
+            ],
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "description": "An exceptionally well crafted piece of armor worthy of being empowered by the Runecarver.",
+            "level": {
+                "value": 210,
+                "display_string": "Item Level 210"
+            },
+            "transmog": {
+                "item": {
+                    "key": {
+                        "href": "https://us.api.blizzard.com/data/wow/item/180924?namespace=static-9.0.2_36532-us"
+                    },
+                    "name": "Dread Sentinel's Ebony Girdle",
+                    "id": 180924
+                },
+                "display_string": "Transmogrified to:\nDread Sentinel's Ebony Girdle",
+                "item_modified_appearance_id": 113287
+            },
+            "durability": {
+                "value": 68,
+                "display_string": "Durability 68 / 70"
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/178701?namespace=static-9.0.2_36532-us"
+                },
+                "id": 178701
+            },
+            "slot": {
+                "type": "LEGS",
+                "name": "Legs"
+            },
+            "quantity": 1,
+            "context": 16,
+            "bonus_list": [
+                7203,
+                6652,
+                1501,
+                5852,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Gormshell Greaves",
+            "modified_appearance_id": 111449,
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/178701?namespace=static-9.0.2_36532-us"
+                },
+                "id": 178701
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Plate",
+                "id": 4
+            },
+            "inventory_type": {
+                "type": "LEGS",
+                "name": "Legs"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "armor": {
+                "value": 163,
+                "display": {
+                    "display_string": "163 Armor",
+                    "color": {
+                        "r": 255,
+                        "g": 255,
+                        "b": 255,
+                        "a": 1
+                    }
+                }
+            },
+            "stats": [
+                {
+                    "type": {
+                        "type": "STRENGTH",
+                        "name": "Strength"
+                    },
+                    "value": 60,
+                    "display": {
+                        "display_string": "+60 Strength",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "INTELLECT",
+                        "name": "Intellect"
+                    },
+                    "value": 60,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+60 Intellect",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 99,
+                    "display": {
+                        "display_string": "+99 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "HASTE_RATING",
+                        "name": "Haste"
+                    },
+                    "value": 48,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+48 Haste",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "MASTERY_RATING",
+                        "name": "Mastery"
+                    },
+                    "value": 69,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+69 Mastery",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "sell_price": {
+                "value": 825063,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "82",
+                    "silver": "50",
+                    "copper": "63"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 194,
+                "display_string": "Item Level 194"
+            },
+            "transmog": {
+                "item": {
+                    "key": {
+                        "href": "https://us.api.blizzard.com/data/wow/item/180916?namespace=static-9.0.2_36532-us"
+                    },
+                    "name": "Dread Sentinel's Ebony Legguards",
+                    "id": 180916
+                },
+                "display_string": "Transmogrified to:\nDread Sentinel's Ebony Legguards",
+                "item_modified_appearance_id": 113466
+            },
+            "durability": {
+                "value": 119,
+                "display_string": "Durability 119 / 120"
+            },
+            "name_description": {
+                "display_string": "Mythic 4",
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/183027?namespace=static-9.0.2_36532-us"
+                },
+                "id": 183027
+            },
+            "slot": {
+                "type": "FEET",
+                "name": "Feet"
+            },
+            "quantity": 1,
+            "context": 3,
+            "bonus_list": [
+                7189,
+                6652,
+                1472,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Errant Crusader's Greaves",
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/183027?namespace=static-9.0.2_36532-us"
+                },
+                "id": 183027
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Plate",
+                "id": 4
+            },
+            "inventory_type": {
+                "type": "FEET",
+                "name": "Feet"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "armor": {
+                "value": 120,
+                "display": {
+                    "display_string": "120 Armor",
+                    "color": {
+                        "r": 255,
+                        "g": 255,
+                        "b": 255,
+                        "a": 1
+                    }
+                }
+            },
+            "stats": [
+                {
+                    "type": {
+                        "type": "STRENGTH",
+                        "name": "Strength"
+                    },
+                    "value": 48,
+                    "display": {
+                        "display_string": "+48 Strength",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "INTELLECT",
+                        "name": "Intellect"
+                    },
+                    "value": 48,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+48 Intellect",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 80,
+                    "display": {
+                        "display_string": "+80 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "HASTE_RATING",
+                        "name": "Haste"
+                    },
+                    "value": 60,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+60 Haste",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "MASTERY_RATING",
+                        "name": "Mastery"
+                    },
+                    "value": 31,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+31 Mastery",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "sell_price": {
+                "value": 617760,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "61",
+                    "silver": "77",
+                    "copper": "60"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 200,
+                "display_string": "Item Level 200"
+            },
+            "transmog": {
+                "item": {
+                    "key": {
+                        "href": "https://us.api.blizzard.com/data/wow/item/180905?namespace=static-9.0.2_36532-us"
+                    },
+                    "name": "Dread Sentinel's Ebony Greatboots",
+                    "id": 180905
+                },
+                "display_string": "Transmogrified to:\nDread Sentinel's Ebony Greatboots",
+                "item_modified_appearance_id": 113268
+            },
+            "durability": {
+                "value": 80,
+                "display_string": "Durability 80 / 80"
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/183018?namespace=static-9.0.2_36532-us"
+                },
+                "id": 183018
+            },
+            "enchantments": [
+                {
+                    "display_string": "Enchanted: Shaded Hearthing",
+                    "source_item": {
+                        "key": {
+                            "href": "https://us.api.blizzard.com/data/wow/item/172416?namespace=static-9.0.2_36532-us"
+                        },
+                        "name": "Enchant Bracers - Shaded Hearthing",
+                        "id": 172416
+                    },
+                    "enchantment_id": 6222,
+                    "enchantment_slot": {
+                        "id": 0,
+                        "type": "PERMANENT"
+                    }
+                }
+            ],
+            "slot": {
+                "type": "WRIST",
+                "name": "Wrist"
+            },
+            "quantity": 1,
+            "context": 3,
+            "bonus_list": [
+                7189,
+                6652,
+                7194,
+                1472,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Hellhound Cuffs",
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/183018?namespace=static-9.0.2_36532-us"
+                },
+                "id": 183018
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Plate",
+                "id": 4
+            },
+            "inventory_type": {
+                "type": "WRIST",
+                "name": "Wrist"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "armor": {
+                "value": 96,
+                "display": {
+                    "display_string": "96 Armor",
+                    "color": {
+                        "r": 255,
+                        "g": 255,
+                        "b": 255,
+                        "a": 1
+                    }
+                }
+            },
+            "stats": [
+                {
+                    "type": {
+                        "type": "STRENGTH",
+                        "name": "Strength"
+                    },
+                    "value": 36,
+                    "display": {
+                        "display_string": "+36 Strength",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "INTELLECT",
+                        "name": "Intellect"
+                    },
+                    "value": 36,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+36 Intellect",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 60,
+                    "display": {
+                        "display_string": "+60 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "CRIT_RATING",
+                        "name": "Critical Strike"
+                    },
+                    "value": 21,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+21 Critical Strike",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "HASTE_RATING",
+                        "name": "Haste"
+                    },
+                    "value": 46,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+46 Haste",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "sell_price": {
+                "value": 432216,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "43",
+                    "silver": "22",
+                    "copper": "16"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 200,
+                "display_string": "Item Level 200"
+            },
+            "transmog": {
+                "item": {
+                    "key": {
+                        "href": "https://us.api.blizzard.com/data/wow/item/180929?namespace=static-9.0.2_36532-us"
+                    },
+                    "name": "Dread Sentinel's Ebony Vambraces",
+                    "id": 180929
+                },
+                "display_string": "Transmogrified to:\nDread Sentinel's Ebony Vambraces",
+                "item_modified_appearance_id": 113292
+            },
+            "durability": {
+                "value": 55,
+                "display_string": "Durability 55 / 55"
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/180104?namespace=static-9.0.2_36532-us"
+                },
+                "id": 180104
+            },
+            "enchantments": [
+                {
+                    "display_string": "Enchanted: +15 Strength",
+                    "source_item": {
+                        "key": {
+                            "href": "https://us.api.blizzard.com/data/wow/item/172408?namespace=static-9.0.2_36532-us"
+                        },
+                        "name": "Enchant Gloves - Eternal Strength",
+                        "id": 172408
+                    },
+                    "enchantment_id": 6210,
+                    "enchantment_slot": {
+                        "id": 0,
+                        "type": "PERMANENT"
+                    }
+                }
+            ],
+            "slot": {
+                "type": "HANDS",
+                "name": "Hands"
+            },
+            "quantity": 1,
+            "context": 16,
+            "bonus_list": [
+                7206,
+                6652,
+                1501,
+                5858,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Distorted Construct's Gauntlets",
+            "modified_appearance_id": 112881,
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/180104?namespace=static-9.0.2_36532-us"
+                },
+                "id": 180104
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Plate",
+                "id": 4
+            },
+            "inventory_type": {
+                "type": "HAND",
+                "name": "Hands"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "armor": {
+                "value": 108,
+                "display": {
+                    "display_string": "108 Armor",
+                    "color": {
+                        "r": 255,
+                        "g": 255,
+                        "b": 255,
+                        "a": 1
+                    }
+                }
+            },
+            "stats": [
+                {
+                    "type": {
+                        "type": "STRENGTH",
+                        "name": "Strength"
+                    },
+                    "value": 48,
+                    "display": {
+                        "display_string": "+48 Strength",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "INTELLECT",
+                        "name": "Intellect"
+                    },
+                    "value": 48,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+48 Intellect",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 80,
+                    "display": {
+                        "display_string": "+80 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "CRIT_RATING",
+                        "name": "Critical Strike"
+                    },
+                    "value": 37,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+37 Critical Strike",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "HASTE_RATING",
+                        "name": "Haste"
+                    },
+                    "value": 53,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+53 Haste",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "sell_price": {
+                "value": 438429,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "43",
+                    "silver": "84",
+                    "copper": "29"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 200,
+                "display_string": "Item Level 200"
+            },
+            "transmog": {
+                "item": {
+                    "key": {
+                        "href": "https://us.api.blizzard.com/data/wow/item/180910?namespace=static-9.0.2_36532-us"
+                    },
+                    "name": "Dread Sentinel's Ebony Grips",
+                    "id": 180910
+                },
+                "display_string": "Transmogrified to:\nDread Sentinel's Ebony Grips",
+                "item_modified_appearance_id": 113273
+            },
+            "durability": {
+                "value": 55,
+                "display_string": "Durability 55 / 55"
+            },
+            "name_description": {
+                "display_string": "Mythic 7",
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/178781?namespace=static-9.0.2_36532-us"
+                },
+                "id": 178781
+            },
+            "enchantments": [
+                {
+                    "display_string": "Enchanted: +16 Haste",
+                    "source_item": {
+                        "key": {
+                            "href": "https://us.api.blizzard.com/data/wow/item/172362?namespace=static-9.0.2_36532-us"
+                        },
+                        "name": "Enchant Ring - Tenet of Haste",
+                        "id": 172362
+                    },
+                    "enchantment_id": 6166,
+                    "enchantment_slot": {
+                        "id": 0,
+                        "type": "PERMANENT"
+                    }
+                }
+            ],
+            "slot": {
+                "type": "FINGER_1",
+                "name": "Ring 1"
+            },
+            "quantity": 1,
+            "context": 23,
+            "bonus_list": [
+                6807,
+                6652,
+                7193,
+                1498,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Ritual Commander's Ring",
+            "modified_appearance_id": 0,
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/178781?namespace=static-9.0.2_36532-us"
+                },
+                "id": 178781
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/0?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Miscellaneous",
+                "id": 0
+            },
+            "inventory_type": {
+                "type": "FINGER",
+                "name": "Finger"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "unique_equipped": "Unique-Equipped",
+            "stats": [
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 49,
+                    "display": {
+                        "display_string": "+49 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "CRIT_RATING",
+                        "name": "Critical Strike"
+                    },
+                    "value": 57,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+57 Critical Strike",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "VERSATILITY",
+                        "name": "Versatility"
+                    },
+                    "value": 90,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+90 Versatility",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "sell_price": {
+                "value": 529275,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "52",
+                    "silver": "92",
+                    "copper": "75"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 184,
+                "display_string": "Item Level 184"
+            },
+            "is_subclass_hidden": true,
+            "name_description": {
+                "display_string": "Mythic",
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/178933?namespace=static-9.0.2_36532-us"
+                },
+                "id": 178933
+            },
+            "enchantments": [
+                {
+                    "display_string": "Enchanted: +16 Critical Strike",
+                    "source_item": {
+                        "key": {
+                            "href": "https://us.api.blizzard.com/data/wow/item/172361?namespace=static-9.0.2_36532-us"
+                        },
+                        "name": "Enchant Ring - Tenet of Critical Strike",
+                        "id": 172361
+                    },
+                    "enchantment_id": 6164,
+                    "enchantment_slot": {
+                        "id": 0,
+                        "type": "PERMANENT"
+                    }
+                }
+            ],
+            "slot": {
+                "type": "FINGER_2",
+                "name": "Ring 2"
+            },
+            "quantity": 1,
+            "context": 35,
+            "bonus_list": [
+                7204,
+                6652,
+                7194,
+                1501,
+                5868,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Arachnid Cipher Ring",
+            "modified_appearance_id": 0,
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/178933?namespace=static-9.0.2_36532-us"
+                },
+                "id": 178933
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/0?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Miscellaneous",
+                "id": 0
+            },
+            "inventory_type": {
+                "type": "FINGER",
+                "name": "Finger"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "unique_equipped": "Unique-Equipped",
+            "stats": [
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 68,
+                    "display": {
+                        "display_string": "+68 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "CRIT_RATING",
+                        "name": "Critical Strike"
+                    },
+                    "value": 114,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+114 Critical Strike",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "HASTE_RATING",
+                        "name": "Haste"
+                    },
+                    "value": 76,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+76 Haste",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "sell_price": {
+                "value": 535237,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "53",
+                    "silver": "52",
+                    "copper": "37"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 210,
+                "display_string": "Item Level 210"
+            },
+            "is_subclass_hidden": true,
+            "name_description": {
+                "display_string": "Mythic 5",
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/179350?namespace=static-9.0.2_36532-us"
+                },
+                "id": 179350
+            },
+            "slot": {
+                "type": "TRINKET_1",
+                "name": "Trinket 1"
+            },
+            "quantity": 1,
+            "context": 16,
+            "bonus_list": [
+                6808,
+                6652,
+                1501,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Inscrutable Quantum Device",
+            "modified_appearance_id": 0,
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/179350?namespace=static-9.0.2_36532-us"
+                },
+                "id": 179350
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/0?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Miscellaneous",
+                "id": 0
+            },
+            "inventory_type": {
+                "type": "TRINKET",
+                "name": "Trinket"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "unique_equipped": "Unique-Equipped",
+            "stats": [
+                {
+                    "type": {
+                        "type": "STRENGTH",
+                        "name": "Strength"
+                    },
+                    "value": 54,
+                    "display": {
+                        "display_string": "+54 Strength",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "AGILITY",
+                        "name": "Agility"
+                    },
+                    "value": 54,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+54 Agility",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "INTELLECT",
+                        "name": "Intellect"
+                    },
+                    "value": 54,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+54 Intellect",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "spells": [
+                {
+                    "spell": {
+                        "key": {
+                            "href": "https://us.api.blizzard.com/data/wow/spell/330323?namespace=static-9.0.2_36532-us"
+                        },
+                        "name": "Inscrutable Quantum Device",
+                        "id": 330323
+                    },
+                    "description": "Use: ??? (3 Min Cooldown)"
+                }
+            ],
+            "sell_price": {
+                "value": 733522,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "73",
+                    "silver": "35",
+                    "copper": "22"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 187,
+                "display_string": "Item Level 187"
+            },
+            "is_subclass_hidden": true,
+            "name_description": {
+                "display_string": "Mythic 2",
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/184016?namespace=static-9.0.2_36532-us"
+                },
+                "id": 184016
+            },
+            "slot": {
+                "type": "TRINKET_2",
+                "name": "Trinket 2"
+            },
+            "quantity": 1,
+            "context": 5,
+            "bonus_list": [
+                7188,
+                6652,
+                1485,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Skulker's Wing",
+            "modified_appearance_id": 0,
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/184016?namespace=static-9.0.2_36532-us"
+                },
+                "id": 184016
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/0?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Miscellaneous",
+                "id": 0
+            },
+            "inventory_type": {
+                "type": "TRINKET",
+                "name": "Trinket"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "unique_equipped": "Unique-Equipped",
+            "stats": [
+                {
+                    "type": {
+                        "type": "STRENGTH",
+                        "name": "Strength"
+                    },
+                    "value": 69,
+                    "display": {
+                        "display_string": "+69 Strength",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "AGILITY",
+                        "name": "Agility"
+                    },
+                    "value": 69,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+69 Agility",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "spells": [
+                {
+                    "spell": {
+                        "key": {
+                            "href": "https://us.api.blizzard.com/data/wow/spell/345019?namespace=static-9.0.2_36532-us"
+                        },
+                        "name": "Skulking Predator",
+                        "id": 345019
+                    },
+                    "description": "Use: Become the Skulking Predator for 10 sec, gaining 90 Speed and pouncing on the next enemy to come within 8 yds, dealing 6,198 Physical damage. (1 Min 30 Sec Cooldown)"
+                }
+            ],
+            "sell_price": {
+                "value": 745096,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "74",
+                    "silver": "50",
+                    "copper": "96"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 213,
+                "display_string": "Item Level 213"
+            },
+            "is_subclass_hidden": true,
+            "name_description": {
+                "display_string": "Heroic",
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/179349?namespace=static-9.0.2_36532-us"
+                },
+                "id": 179349
+            },
+            "enchantments": [
+                {
+                    "display_string": "Enchanted: +30 Stamina",
+                    "source_item": {
+                        "key": {
+                            "href": "https://us.api.blizzard.com/data/wow/item/177660?namespace=static-9.0.2_36532-us"
+                        },
+                        "name": "Enchant Cloak - Soul Vitality",
+                        "id": 177660
+                    },
+                    "enchantment_id": 6208,
+                    "enchantment_slot": {
+                        "id": 0,
+                        "type": "PERMANENT"
+                    }
+                }
+            ],
+            "slot": {
+                "type": "BACK",
+                "name": "Back"
+            },
+            "quantity": 1,
+            "context": 16,
+            "bonus_list": [
+                7206,
+                6652,
+                1501,
+                5858,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Dealer Xy'exa's Cape",
+            "modified_appearance_id": 111666,
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/179349?namespace=static-9.0.2_36532-us"
+                },
+                "id": 179349
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Armor",
+                "id": 4
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/4/item-subclass/1?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Cloth",
+                "id": 1
+            },
+            "inventory_type": {
+                "type": "CLOAK",
+                "name": "Back"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "armor": {
+                "value": 35,
+                "display": {
+                    "display_string": "35 Armor",
+                    "color": {
+                        "r": 255,
+                        "g": 255,
+                        "b": 255,
+                        "a": 1
+                    }
+                }
+            },
+            "stats": [
+                {
+                    "type": {
+                        "type": "STRENGTH",
+                        "name": "Strength"
+                    },
+                    "value": 36,
+                    "display": {
+                        "display_string": "+36 Strength",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "AGILITY",
+                        "name": "Agility"
+                    },
+                    "value": 36,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+36 Agility",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "INTELLECT",
+                        "name": "Intellect"
+                    },
+                    "value": 36,
+                    "is_negated": true,
+                    "display": {
+                        "display_string": "+36 Intellect",
+                        "color": {
+                            "r": 128,
+                            "g": 128,
+                            "b": 128,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 60,
+                    "display": {
+                        "display_string": "+60 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "VERSATILITY",
+                        "name": "Versatility"
+                    },
+                    "value": 27,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+27 Versatility",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "MASTERY_RATING",
+                        "name": "Mastery"
+                    },
+                    "value": 42,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+42 Mastery",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "sell_price": {
+                "value": 643223,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "64",
+                    "silver": "32",
+                    "copper": "23"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 200,
+                "display_string": "Item Level 200"
+            },
+            "transmog": {
+                "item": {
+                    "key": {
+                        "href": "https://us.api.blizzard.com/data/wow/item/180938?namespace=static-9.0.2_36532-us"
+                    },
+                    "name": "Dread Sentinel's Ebony Cloak",
+                    "id": 180938
+                },
+                "display_string": "Transmogrified to:\nDread Sentinel's Ebony Cloak",
+                "item_modified_appearance_id": 113298
+            },
+            "is_subclass_hidden": true,
+            "name_description": {
+                "display_string": "Mythic 7",
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        },
+        {
+            "item": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item/178866?namespace=static-9.0.2_36532-us"
+                },
+                "id": 178866
+            },
+            "enchantments": [
+                {
+                    "display_string": "Enchanted: Celestial Guidance",
+                    "source_item": {
+                        "key": {
+                            "href": "https://us.api.blizzard.com/data/wow/item/172366?namespace=static-9.0.2_36532-us"
+                        },
+                        "name": "Enchant Weapon - Celestial Guidance",
+                        "id": 172366
+                    },
+                    "enchantment_id": 6229,
+                    "enchantment_slot": {
+                        "id": 0,
+                        "type": "PERMANENT"
+                    }
+                }
+            ],
+            "slot": {
+                "type": "MAIN_HAND",
+                "name": "Main Hand"
+            },
+            "quantity": 1,
+            "context": 35,
+            "bonus_list": [
+                7206,
+                6652,
+                1501,
+                5871,
+                6646
+            ],
+            "quality": {
+                "type": "EPIC",
+                "name": "Epic"
+            },
+            "name": "Dessia's Decimating Decapitator",
+            "modified_appearance_id": 111561,
+            "media": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/media/item/178866?namespace=static-9.0.2_36532-us"
+                },
+                "id": 178866
+            },
+            "item_class": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/2?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Weapon",
+                "id": 2
+            },
+            "item_subclass": {
+                "key": {
+                    "href": "https://us.api.blizzard.com/data/wow/item-class/2/item-subclass/1?namespace=static-9.0.2_36532-us"
+                },
+                "name": "Axe",
+                "id": 1
+            },
+            "inventory_type": {
+                "type": "TWOHWEAPON",
+                "name": "Two-Hand"
+            },
+            "binding": {
+                "type": "ON_ACQUIRE",
+                "name": "Binds when picked up"
+            },
+            "weapon": {
+                "damage": {
+                    "min_value": 126,
+                    "max_value": 263,
+                    "display_string": "126 - 263 Damage",
+                    "damage_class": {
+                        "type": "PHYSICAL",
+                        "name": "Physical"
+                    }
+                },
+                "attack_speed": {
+                    "value": 3600,
+                    "display_string": "Speed 3.60"
+                },
+                "dps": {
+                    "value": 54.027775,
+                    "display_string": "(54.0 damage per second)"
+                }
+            },
+            "stats": [
+                {
+                    "type": {
+                        "type": "STRENGTH",
+                        "name": "Strength"
+                    },
+                    "value": 72,
+                    "display": {
+                        "display_string": "+72 Strength",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "STAMINA",
+                        "name": "Stamina"
+                    },
+                    "value": 126,
+                    "display": {
+                        "display_string": "+126 Stamina",
+                        "color": {
+                            "r": 255,
+                            "g": 255,
+                            "b": 255,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "CRIT_RATING",
+                        "name": "Critical Strike"
+                    },
+                    "value": 82,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+82 Critical Strike",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                },
+                {
+                    "type": {
+                        "type": "MASTERY_RATING",
+                        "name": "Mastery"
+                    },
+                    "value": 49,
+                    "is_equip_bonus": true,
+                    "display": {
+                        "display_string": "+49 Mastery",
+                        "color": {
+                            "r": 0,
+                            "g": 255,
+                            "b": 0,
+                            "a": 1
+                        }
+                    }
+                }
+            ],
+            "sell_price": {
+                "value": 1596740,
+                "display_strings": {
+                    "header": "Sell Price:",
+                    "gold": "159",
+                    "silver": "67",
+                    "copper": "40"
+                }
+            },
+            "requirements": {
+                "level": {
+                    "value": 60,
+                    "display_string": "Requires Level 60"
+                }
+            },
+            "level": {
+                "value": 213,
+                "display_string": "Item Level 213"
+            },
+            "transmog": {
+                "item": {
+                    "key": {
+                        "href": "https://us.api.blizzard.com/data/wow/item/128910?namespace=static-9.0.2_36532-us"
+                    },
+                    "name": "Strom'kar, the Warbreaker",
+                    "id": 128910
+                },
+                "display_string": "Transmogrified to:\nStrom'kar, the Warbreaker",
+                "item_modified_appearance_id": 80764
+            },
+            "durability": {
+                "value": 118,
+                "display_string": "Durability 118 / 120"
+            },
+            "name_description": {
+                "display_string": "Mythic 7",
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        }
+    ]
+}
