@@ -244,7 +244,7 @@ async def clean(ctx, limit: int = 20):
 
 @bot.command(aliases=["team"])
 async def raidteam(ctx):
-    conn = wowapi.create_connection()        
+    conn = wowapi.create_connection()
     lastRun = wowapi.getLastRun("UPDATE_MEMBERS")
     print(f"Last updated {lastRun}, current datetime {datetime.datetime.now()}")
 
@@ -261,7 +261,7 @@ async def raidteam(ctx):
         # await msgId.edit(content=waitMsg)
         charData = wowapi.getCharacterInfo(key[1], key[2])
         character = wowclasses.Character(charData)
-        wowapi.updateMemberById(conn, recId, charObj):
+        wowapi.updateMemberById(conn, key[0], character)
         # devmode(vars(character))
         memberRole = key[3]
         team[memberRole].append(character)
