@@ -4,7 +4,8 @@ import datetime
 import json
 import os
 
-import mariadb
+# import mariadb
+import mysql.connector
 import requests
 
 import umj  # DB calls for TheUndermineJournal items database
@@ -88,7 +89,7 @@ def getRole(charEntered):
 def create_connection():
     conn = None
     try:
-        conn = mariadb.connect(
+        conn = mysql.connector.connect(
             user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT, database=DB_NAME
         )
     except mariadb.Error as e:
