@@ -1,0 +1,60 @@
+{
+    168583: {'id': 168583, 'name': 'Widowbloom', 'classname': 'Tradeskill', 'subclass': 'Herb', 'type': 'Unknown', 'quantity': 11224, 'unitcost': 104.0
+    },
+    168586: {'id': 168586, 'name': 'Rising Glory', 'classname': 'Tradeskill', 'subclass': 'Herb', 'type': 'Unknown', 'quantity': 6866, 'unitcost': 24.75
+    },
+    168589: {'id': 168589, 'name': 'Marrowroot', 'classname': 'Tradeskill', 'subclass': 'Herb', 'type': 'Unknown', 'quantity': 10293, 'unitcost': 55.5
+    },
+    169701: {'id': 169701, 'name': 'Death Blossom', 'classname': 'Tradeskill', 'subclass': 'Herb', 'type': 'Unknown', 'quantity': 707, 'unitcost': 25.99
+    },
+    170554: {'id': 170554, 'name': "Vigil's Torch", 'classname': 'Tradeskill', 'subclass': 'Herb', 'type': 'Unknown', 'quantity': 20613, 'unitcost': 61.45
+    },
+    171267: {'id': 171267, 'name': 'Spiritual Healing Potion', 'classname': 'Consumable', 'subclass': 'Potion', 'type': 'Unknown', 'quantity': 1094, 'unitcost': 88.99
+    },
+    171270: {'id': 171270, 'name': 'Potion of Spectral Agility', 'classname': 'Consumable', 'subclass': 'Potion', 'type': 'Unknown', 'quantity': 223, 'unitcost': 870.99
+    },
+    171273: {'id': 171273, 'name': 'Potion of Spectral Intellect', 'classname': 'Consumable', 'subclass': 'Potion', 'type': 'Unknown', 'quantity': 177, 'unitcost': 450.74
+    },
+    171275: {'id': 171275, 'name': 'Potion of Spectral Strength', 'classname': 'Consumable', 'subclass': 'Potion', 'type': 'Unknown', 'quantity': 199, 'unitcost': 230.49
+    },
+    171276: {'id': 171276, 'name': 'Spectral Flask of Power', 'classname': 'Consumable', 'subclass': 'Flask', 'type': 'Unknown', 'quantity': 468, 'unitcost': 1898.99
+    },
+    171284: {'id': 171284, 'name': 'Eternal Cauldron', 'classname': 'Consumable', 'subclass': 'Other', 'type': 'Unknown', 'quantity': 0, 'unitcost': 0
+    },
+    171315: {'id': 171315, 'name': 'Nightshade', 'classname': 'Tradeskill', 'subclass': 'Herb', 'type': 'Unknown', 'quantity': 2006, 'unitcost': 100.99
+    },
+    171437: {'id': 171437, 'name': 'Shaded Sharpening Stone', 'classname': 'Consumable', 'subclass': 'Other', 'type': 'Unknown', 'quantity': 1887, 'unitcost': 40.0
+    },
+    171439: {'id': 171439, 'name': 'Shaded Weightstone', 'classname': 'Consumable', 'subclass': 'Other', 'type': 'Unknown', 'quantity': 26, 'unitcost': 225.0
+    },
+    171841: {'id': 171841, 'name': 'Shaded Stone', 'classname': 'Tradeskill', 'subclass': 'Metal & Stone', 'type': 'Unknown', 'quantity': 8570, 'unitcost': 1.1
+    },
+    172043: {'id': 172043, 'name': 'Feast of Gluttonous Hedonism', 'classname': 'Consumable', 'subclass': 'Food & Drink', 'type': 'Unknown', 'quantity': 29, 'unitcost': 3000.0
+    },
+    172053: {'id': 172053, 'name': 'Tenebrous Ribs', 'classname': 'Tradeskill', 'subclass': 'Cooking', 'type': 'Unknown', 'quantity': 1741, 'unitcost': 78.3
+    },
+    172055: {'id': 172055, 'name': 'Phantasmal Haunch', 'classname': 'Tradeskill', 'subclass': 'Cooking', 'type': 'Unknown', 'quantity': 1865, 'unitcost': 9.41
+    },
+    172089: {'id': 172089, 'name': 'Desolate Leather', 'classname': 'Tradeskill', 'subclass': 'Leather', 'type': 'Unknown', 'quantity': 26507, 'unitcost': 1.45
+    },
+    172094: {'id': 172094, 'name': 'Callous Hide', 'classname': 'Tradeskill', 'subclass': 'Leather', 'type': 'Unknown', 'quantity': 6098, 'unitcost': 149.99
+    },
+    172096: {'id': 172096, 'name': 'Heavy Desolate Leather', 'classname': 'Tradeskill', 'subclass': 'Leather', 'type': 'Unknown', 'quantity': 7775, 'unitcost': 22.0
+    },
+    172097: {'id': 172097, 'name': 'Heavy Callous Hide', 'classname': 'Tradeskill', 'subclass': 'Leather', 'type': 'Unknown', 'quantity': 1357, 'unitcost': 1400.0
+    },
+    172347: {'id': 172347, 'name': 'Heavy Desolate Armor Kit', 'classname': 'Item Enhancement', 'subclass': 'Misc', 'type': 'Unknown', 'quantity': 640, 'unitcost': 314.0
+    },
+    173034: {'id': 173034, 'name': 'Silvergill Pike', 'classname': 'Tradeskill', 'subclass': 'Cooking', 'type': 'Unknown', 'quantity': 575, 'unitcost': 80.49
+    },
+    173036: {'id': 173036, 'name': 'Spinefin Piranha', 'classname': 'Tradeskill', 'subclass': 'Cooking', 'type': 'Unknown', 'quantity': 934, 'unitcost': 39.99
+    },
+    173037: {'id': 173037, 'name': 'Elysian Thade', 'classname': 'Tradeskill', 'subclass': 'Cooking', 'type': 'Unknown', 'quantity': 908, 'unitcost': 50.0
+    },
+    173204: {'id': 173204, 'name': 'Lightless Silk', 'classname': 'Tradeskill', 'subclass': 'Cloth', 'type': 'Unknown', 'quantity': 7837, 'unitcost': 197.0
+    },
+    180457: {'id': 180457, 'name': 'Shadestone', 'classname': 'Tradeskill', 'subclass': 'Other', 'type': 'Unknown', 'quantity': 31, 'unitcost': 4500.0
+    },
+    181468: {'id': 181468, 'name': 'Veiled Augment Rune', 'classname': 'Consumable', 'subclass': 'Other', 'type': 'Unknown', 'quantity': 43, 'unitcost': 1217.65
+    }
+}

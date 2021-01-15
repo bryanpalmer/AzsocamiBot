@@ -19,7 +19,7 @@ def create_connection():
             port=3306,
             database="newsstand",
         )
-    except Error as e:
+    except mariadb.Error as e:
         print(e)
     finally:
         return conn
@@ -94,3 +94,10 @@ def getItemByName(conn, itemName):
     except mariadb.Error as e:
         print(e.args[0])
     return retVal
+
+
+# May not need this, will just use subclass as type for now
+# def getMatType(classname, subclass)
+#     matType = None
+#     if classname == 'Tradeskill' and subclass == "Herb":
+#         matType = "Herb"

@@ -165,7 +165,7 @@ def addMemberToDB(playerName, playerRealm, playerRole):
     statusMsg = ""
     try:
         cursor.execute(
-            "insert into members (name, realm, role) values (?,?,?);", memberData
+            "insert into members (name, realmslug, role) values (?,?,?);", memberData
         )
         conn.commit()
         statusMsg = (
@@ -193,6 +193,26 @@ def deleteMemberFromDB(playerName):
         statusMsg = f"Error removing {playerName.title()}, ERROR: {e.args[0]}"
     finally:
         conn.close()
+    return statusMsg
+
+
+def changeMemberRole(playerName, playerRole):
+    print(f"Changing member role {playerName.title()} | {playerRole}")
+    statusMsg = "Error changing role.  Contact Bryan."
+    try:
+        conn = create_connection()
+        cursor = conn.cursor()
+        memberData = (playerRole, playerName.title())
+        cursor.execute("UPDATE members SET role=? WHERE name=?;", memberData)
+        conn.commit()
+        statusMsg = f"{playerName.title()} changed to {playerRole}."
+
+    except mariadb.Error as e:
+        print("Error: " + e.args[0])
+
+    finally:
+        conn.close()
+
     return statusMsg
 
 
@@ -272,6 +292,69 @@ def getAllTableRows(tableName):
     return retList
 
 
+def getRaidMatsList():
+    sql = "SELECT id, name FROM raidmats;"
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute(sql)
+    rows = cur.fetchall()
+    conn.close()
+    retList = []
+    for row in rows:
+        retList.append(row[0])
+    return retList
+
+
+def getRaidMats():
+    sql = "SELECT id, name FROM raidmats ORDER BY name;"
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute(sql)
+    rows = cur.fetchall()
+    conn.close()
+    retList = {}
+    for row in rows:
+        retList[row[0]] = {
+            "id": row[0],
+            "name": row[1],
+            "classname": "",
+            "subclass": "",
+            "type": "Unknown",
+            "quantity": 0,
+            "unitcost": 0,
+        }
+        # retList.append(row[0])
+    return retList
+
+
+def getTableStructure(tableName):
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute(f"DESCRIBE {tableName};")
+    rows = cur.fetchall()
+    conn.close()
+    retList = []
+    for row in rows:
+        retList.append(row)
+    return retList
+
+
+def getLastRun(procName):
+    retVal = None
+    try:
+        conn = create_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT lastrun FROM dtcache WHERE process=?;", (procName,))
+        row = cur.fetchone()
+        retVal = row[0]
+        conn.close()
+
+    except mariadb.Error as e:
+        print("Error: " + e.args[0])
+
+    return retVal
+
+
 ###############################################################
 ###############################################################
 
@@ -333,32 +416,20 @@ def getCharacterEquipment(charName, charRealm):
     return charData
 
 
-def getTableStructure(tableName):
-    conn = create_connection()
-    cur = conn.cursor()
-    cur.execute(f"DESCRIBE {tableName};")
-    rows = cur.fetchall()
-    conn.close()
-    retList = []
-    for row in rows:
-        retList.append(row)
-    return retList
-
-
-def getLastRun(procName):
-    retVal = None
-    try:
-        conn = create_connection()
-        cur = conn.cursor()
-        cur.execute("SELECT lastrun FROM dtcache WHERE process=?;", (procName,))
-        row = cur.fetchone()
-        retVal = row[0]
-        conn.close()
-
-    except mariadb.Error as e:
-        print("Error: " + e.args[0])
-
-    return retVal
+def getAuctionHouseData():
+    # returns json for all auction house data
+    print("getAuctionHouseData()...")
+    token = getAccessToken()
+    # server realm is hardcoded to silver-hand:12
+    auctionHouse_uri = (
+        "https://us.api.blizzard.com/data/wow/connected-realm/12/auctions"
+    )
+    response = requests.get(
+        auctionHouse_uri,
+        params={"namespace": "dynamic-us", "locale": "en_US", "access_token": token},
+    )
+    ahdata = json.loads(response.text)
+    return ahdata
 
 
 ###############################################################

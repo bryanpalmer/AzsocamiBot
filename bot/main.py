@@ -1,22 +1,32 @@
 # main.py
+from os.path import dirname, join, os
 
-from os.path import join, dirname, os
-
-import asyncio
-import os
-import datetime
-
-import discord
-from discord.ext import commands
 from dotenv import load_dotenv
 
+## Load up required environment variables if .env exists
+## else vars are already loaded via heroku environment
+## This must be done before importing wowapi and wowclasses
 dotenv_path = join(dirname(__file__), "../.env")
 load_dotenv(
     dotenv_path,
     verbose=True,
 )
+
+
+import asyncio
+import datetime
+import os
+
+import discord
+from discord.ext import commands
+
 import wowapi
 import wowclasses
+import umj
+
+# TODO: Set up logging for bot
+# import logging
+
 
 # import jsonpickle
 
@@ -57,6 +67,13 @@ async def on_ready():
     print("I am online")
     print(f"Using {ENVVERSION}")
     print(f"Command prefix is:  {COMMAND_PREFIX}")
+
+
+@bot.event
+async def on_message(message):
+    # channel = bot.get_channel(799290844862480445)
+    # await channel.send(message.content)
+    await bot.process_commands(message)
 
 
 ###############################################################
@@ -203,7 +220,7 @@ async def change_member_role(ctx, playerName):
 
     try:
         msg = await bot.wait_for(
-            "message", check=check, timeout=10
+            "message", check=check, timeout=20
         )  # 30 seconds to reply
         role = wowapi.getRole(msg.content.lower())
         await ctx.send(wowapi.changeMemberRole(playerName, role))
@@ -326,6 +343,113 @@ async def raidteam(ctx):
     conn.close()
 
     # await cmdId.delete()
+
+
+@bot.command(aliases=["mats"])
+async def raidmats(ctx):
+    raidMats = wowapi.getRaidMats()
+    # print(raidMats)
+    ahData = wowapi.getAuctionHouseData()
+    umjConn = umj.create_connection()
+
+    for mat in raidMats:
+        # fill out class/subclass info from items db
+        curId = raidMats[mat]["id"]
+        item = umj.getItemById(umjConn, curId)
+        raidMats[mat]["classname"] = item.classname
+        raidMats[mat]["subclass"] = item.subclass
+
+    for auction in ahData["auctions"]:
+        # check auction data for raw mats
+        if auction["item"]["id"] in raidMats:
+            curID = auction["item"]["id"]
+            raidMats[curID]["quantity"] += auction["quantity"]
+            if (
+                raidMats[curID]["unitcost"] == 0
+                or auction["unit_price"] / 10000 < raidMats[curID]["unitcost"]
+            ):
+                raidMats[curID]["unitcost"] = auction["unit_price"] / 10000
+
+    umjConn.close()
+
+    # print(raidMats)
+    # Herb
+    # Potion
+    # Flask
+    # Other
+    # Metal & Stone
+    # Food & Drink
+    # Cooking
+    # Leather
+    # Misc
+    # Cloth
+    # Other
+
+    foodTxt = ""
+    alchTxt = ""
+    lwTxt = ""
+    goodsTxt = ""
+
+    for key in raidMats:
+        name = raidMats[key]["name"]
+        qty = raidMats[key]["quantity"]
+        ttlcost = raidMats[key]["unitcost"]
+        mattype = raidMats[key]["subclass"]
+        matclass = raidMats[key]["classname"]
+        # assign each mat to a specific embed field
+        if matclass == "Tradeskill" and (mattype == "Herb" or mattype == "Other"):
+            if qty > 0:
+                alchTxt += f"{ name }: {qty} - *{round(ttlcost,2)}g*\n"
+            else:
+                alchTxt += f"{ name }: None Available\n"
+
+        elif matclass == "Tradeskill" and mattype == "Cooking":
+            if qty > 0:
+                foodTxt += f"{ name }: {qty} - *{round(ttlcost,2)}g*\n"
+            else:
+                foodTxt += f"{ name }: None Available\n"
+
+        elif matclass == "Tradeskill" and (
+            mattype == "Leather" or mattype == "Cloth" or mattype == "Metal & Stone"
+        ):
+            if qty > 0:
+                lwTxt += f"{ name }: {qty} - *{round(ttlcost,2)}g*\n"
+            else:
+                lwTxt += f"{ name }: None Available\n"
+
+        elif (
+            matclass == "Consumable"
+            and (
+                mattype == "Potion"
+                or mattype == "Flask"
+                or mattype == "Other"
+                or mattype == "Food & Drink"
+            )
+        ) or (matclass == "Item Enhancement" and mattype == "Misc"):
+            if qty > 0:
+                goodsTxt += f"[{ name }](https://www.wowhead.com/item={key}): {qty} - *{round(ttlcost,2)}g*\n"
+            else:
+                goodsTxt += (
+                    f"[{ name }](https://www.wowhead.com/item={key}): None Available\n"
+                )
+
+        else:
+            print(f"{key} - {name} missing category:  {matclass} | {mattype}")
+
+    response = discord.Embed(
+        title="Raid Mats",
+        url="https://www.wowhead.com/",
+        description="Current auction house prices for common raid mats on our server.",
+        color=discord.Color.blue(),
+    )
+    response.add_field(name="Alchemy Mats", value=alchTxt, inline=True)
+    response.add_field(name="Cooking Mats", value=foodTxt, inline=True)
+    response.add_field(name="Skin/Cloth/Mine Mats", value=lwTxt, inline=False)
+    response.add_field(name="Finished Goods", value=goodsTxt, inline=False)
+    response.set_footer(
+        text="Auction house data is limited to hourly updates, so quantities and prices may vary slightly."
+    )
+    await ctx.send(embed=response)
 
 
 ###############################################################
