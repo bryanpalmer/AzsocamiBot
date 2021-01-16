@@ -519,6 +519,42 @@ async def status(ctx):
     await ctx.send(msg)
 
 
+### get_table_structure (hidden)
+@bot.command()
+@commands.is_owner()
+async def get_table_structure(ctx, table):
+    retList = wowapi.getTableStructure(table)
+    msg = ""
+    for item in retList:
+        for x in range(len(item)):
+            msg += f"{item[x]} "
+        msg += "\n"
+    await ctx.send(msg)
+
+
+### get_table_contents (hidden)
+@bot.command()
+@commands.is_owner()
+async def get_table_contents(ctx, table):
+    retList = wowapi.getTableContents(table)
+    msgList = []
+    msg = ""
+    for item in retList:
+        curLen = len(msg)
+        newMsg = ""
+        for x in range(len(item)):
+            newMsg += f"{item[x]} "
+        newMsg += "\n"
+        if curLen + len(newMsg) < 2000:
+            msg += newMsg
+        else:
+            msgList.append(msg)
+            msg = newMsg
+    msgList.append(msg)
+    for message in msgList:
+        await ctx.send(message)
+
+
 @bot.command()
 @commands.is_owner()
 async def update_members(ctx):

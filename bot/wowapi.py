@@ -360,6 +360,18 @@ def getTableStructure(tableName):
     return retList
 
 
+def getTableContents(tableName):
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute(f"SELECT * FROM {tableName};")
+    rows = cur.fetchall()
+    conn.close()
+    retList = []
+    for row in rows:
+        retList.append(row)
+    return retList
+
+
 def getLastRun(procName):
     retVal = None
     try:
