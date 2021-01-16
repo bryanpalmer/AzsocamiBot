@@ -394,8 +394,9 @@ def setLastRun(procName):
         cur = conn.cursor()
         cur.execute(
             "UPDATE dtcache SET lastrun = %s WHERE process=%s;",
-            (datetime.datetime.now(), procName),
+            (datetime.datetime.now(), procName.upper()),
         )
+        conn.commit()
         conn.close()
     except mysql.Error as e:
         print("Error: " + e)

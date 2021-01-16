@@ -113,9 +113,9 @@ async def help(ctx):
     if author.name.lower() == "aaryn":
         embed2 = discord.Embed(color=discord.Color.orange())
         embed2.set_author(name="Admin Only Commands")
-        embed2.add_field(
-            name=".db_members", value="ADMIN: List members database rows.", inline=False
-        )
+        # embed2.add_field(
+        #     name=".db_members", value="ADMIN: List members database rows.", inline=False
+        # )
         embed2.add_field(
             name=".add_member",
             value="ADMIN: add_member <playername> <realm> Add new member.",
@@ -131,6 +131,17 @@ async def help(ctx):
             value="ADMIN: change_member_role <playername> Change member role.",
             inline=False,
         )
+        embed2.add_field(
+            name=".get_table_contents",
+            value="ADMIN: get_table_contents <tablename> List table contents.",
+            inline=False,
+        )
+        embed2.add_field(
+            name=".get_table_structure",
+            value="ADMIN: get_table_structure <tablename> List table structure.",
+            inline=False,
+        )
+
         await ctx.send(embed=embed2)
 
 
@@ -283,6 +294,8 @@ async def raidteam(ctx, arg1="DB"):
 
     conn = wowapi.create_connection()
 
+    # team is dictionary with 5 roles, each with a list of character objects
+    # added if the character falls into that role.
     team = {"Tank": [], "Healer": [], "Melee DPS": [], "Ranged DPS": [], "Alt": []}
     msgId = await ctx.send("Gathering member data...  Please wait.")
 
@@ -365,10 +378,15 @@ async def raidteam(ctx, arg1="DB"):
         value=f"""The team consists of {memberCount} members, with an average iLvl of: {round(ttlIlvl / memberCount)}.  *Does not include Alts*""",
         inline=False,
     )
-    response.add_field(name="Tanks", value=tanks[0:1023], inline=False)
-    response.add_field(name="Healers", value=heals[0:1023], inline=False)
-    response.add_field(name="Melee DPS", value=mdps[0:1023], inline=False)
-    response.add_field(name="Ranged DPS", value=rdps[0:1023], inline=False)
+    # TODO:  Break value strings down to multiple sub-1024 fields if len()>1024
+    if len(tanks) > 0:
+        response.add_field(name="Tanks", value=tanks[0:1023], inline=False)
+    if len(heals) > 0:
+        response.add_field(name="Healers", value=heals[0:1023], inline=False)
+    if len(mdps) > 0:
+        response.add_field(name="Melee DPS", value=mdps[0:1023], inline=False)
+    if len(rdps) > 0:
+        response.add_field(name="Ranged DPS", value=rdps[0:1023], inline=False)
     if len(alts) > 0:
         response.add_field(name="ALTS", value=alts[0:1023], inline=False)
 
@@ -538,13 +556,12 @@ async def get_table_structure(ctx, table):
 async def get_table_contents(ctx, table):
     retList = wowapi.getTableContents(table)
     msgList = []
-    msg = ""
+    msg = "\n"
     for item in retList:
         curLen = len(msg)
-        newMsg = ""
+        newMsg = "\n"
         for x in range(len(item)):
             newMsg += f"{item[x]} "
-        newMsg += "\n"
         if curLen + len(newMsg) < 2000:
             msg += newMsg
         else:
