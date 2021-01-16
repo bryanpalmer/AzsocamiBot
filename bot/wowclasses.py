@@ -39,23 +39,39 @@ class Item:
 
 
 class Character:
-    def __init__(self, charJson):
-        # see character.json in devstuff
-        self.wowid = charJson["id"]
-        self.name = charJson["name"]
-        self.gender = charJson["gender"]["name"]
-        self.faction = charJson["faction"]["name"]
-        self.race = charJson["race"]["name"]
-        self.classname = charJson["character_class"]["name"]
-        self.active_spec = charJson["active_spec"]["name"]
-        self.realmname = charJson["realm"]["name"]
-        self.realmslug = charJson["realm"]["slug"]
-        self.realmid = charJson["realm"]["id"]
-        self.guild = charJson["guild"]["name"]
-        self.level = charJson["level"]
-        self.ilvl = charJson["equipped_item_level"]
-        self.covenant = charJson["covenant_progress"]["chosen_covenant"]["name"]
-        # self.covenant_renown = charJson['covenant_progress']['renown_level']
+    def __init__(self, charJson, dtype="JSON"):
+        if dtype == "JSON":
+            # see character.json in devstuff
+            self.wowid = charJson["id"]
+            self.name = charJson["name"]
+            self.gender = charJson["gender"]["name"]
+            self.faction = charJson["faction"]["name"]
+            self.race = charJson["race"]["name"]
+            self.classname = charJson["character_class"]["name"]
+            self.active_spec = charJson["active_spec"]["name"]
+            self.realmname = charJson["realm"]["name"]
+            self.realmslug = charJson["realm"]["slug"]
+            self.realmid = charJson["realm"]["id"]
+            self.guild = charJson["guild"]["name"]
+            self.level = charJson["level"]
+            self.ilvl = charJson["equipped_item_level"]
+            self.covenant = charJson["covenant_progress"]["chosen_covenant"]["name"]
+            # self.covenant_renown = charJson['covenant_progress']['renown_level']
+        elif dtype == "ROW":
+            self.wowid = charJson[1]
+            self.name = charJson[2]
+            self.gender = charJson[6]
+            self.faction = charJson[11]
+            self.race = charJson[12]
+            self.classname = charJson[3]
+            self.active_spec = charJson[4]
+            self.realmname = charJson[7]
+            self.realmslug = charJson[8]
+            self.realmid = charJson[9]
+            self.guild = charJson[10]
+            self.level = charJson[5]
+            self.ilvl = charJson[14]
+            self.covenant = charJson[13]
 
 
 class CharacterEquipment:

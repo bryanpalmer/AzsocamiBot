@@ -1,11 +1,12 @@
 # wowapi.py
+from urllib.parse import urlparse
 
 import datetime
 import json
 import os
 
-import mariadb
-# import mysql.connector as mariadb
+# import mariadb
+import mysql.connector as mysql
 import requests
 
 import umj  # DB calls for TheUndermineJournal items database
@@ -18,6 +19,7 @@ DB_USER = os.getenv("DB_USER")
 DB_PASS = os.getenv("DB_PASS")
 DB_NAME = os.getenv("DB_NAME")
 DB_PORT = 3306
+print(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT)
 BNET_CLIENTID = os.getenv("BATTLENET_CLIENT_ID")
 BNET_SECRET = os.getenv("BATTLENET_CLIENT_SECRET")
 
@@ -89,11 +91,12 @@ def getRole(charEntered):
 def create_connection():
     conn = None
     try:
-        conn = mariadb.connect(
+        conn = mysql.connect(
             user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT, database=DB_NAME
         )
-    except mariadb.Error as e:
+    except mysql.Error as e:
         print(e)
+        print(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT)
     finally:
         return conn
 
@@ -110,7 +113,7 @@ def getAccessTokenFromDB():
         retVal = record[0]
         expires = record[1]
         cursor.close()
-    except mariadb.Error as e:
+    except mysql.Error as e:
         print(e.args[0])
     finally:
         if conn:
@@ -127,7 +130,7 @@ def updateAccessToken(accessToken, expires_in):
     try:
         cur.execute(
             """UPDATE config
-            SET value = ?, expires=?
+            SET value = %s, expires=%s
             WHERE id = 'access_token';""",
             (accessToken, expiresDT),
         )
@@ -135,7 +138,7 @@ def updateAccessToken(accessToken, expires_in):
         devmode(
             f"Updating access token to: {accessToken} and expiration to: {expiresDT}"
         )
-    except mariadb.Error as e:
+    except mysql.Error as e:
         print(e.args[0])
 
     conn.close()
@@ -147,6 +150,22 @@ def getMembersList():
     cursor = conn.cursor()
     cursor.execute(
         "SELECT id, name, realmslug, role, expires FROM members ORDER BY name;"
+    )
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+
+def getTeamMembersList():
+    devmode("Retrieving Team Members List from DB")
+    conn = create_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """SELECT id, wowid, name, class,
+            spec, level, gender, realmname,
+            realmslug, realmid, guild, faction,
+            race, covenant, ilevel, role
+           FROM members ORDER BY name;"""
     )
     rows = cursor.fetchall()
     conn.close()
@@ -166,13 +185,13 @@ def addMemberToDB(playerName, playerRealm, playerRole):
     statusMsg = ""
     try:
         cursor.execute(
-            "insert into members (name, realmslug, role) values (?,?,?);", memberData
+            "insert into members (name, realmslug, role) values (%s,%s,%s);", memberData
         )
         conn.commit()
         statusMsg = (
             f"Added {playerName.title()}, ({playerRealm.lower()}) as {playerRole}"
         )
-    except mariadb.Error as e:
+    except mysql.Error as e:
         print("Error: " + e.args[0])
         statusMsg = f"Error adding {playerName.title()}, ERROR: {e.args[0]}"
     finally:
@@ -186,10 +205,10 @@ def deleteMemberFromDB(playerName):
     cursor = conn.cursor()
     statusMsg = ""
     try:
-        cursor.execute("delete from members where name=?;", (playerName.title(),))
+        cursor.execute("delete from members where name=%s;", (playerName.title(),))
         conn.commit()
         statusMsg = f"Successfully removed {playerName.title()}."
-    except mariadb.Error as e:
+    except mysql.Error as e:
         print("Error: " + e.args[0])
         statusMsg = f"Error removing {playerName.title()}, ERROR: {e.args[0]}"
     finally:
@@ -204,11 +223,11 @@ def changeMemberRole(playerName, playerRole):
         conn = create_connection()
         cursor = conn.cursor()
         memberData = (playerRole, playerName.title())
-        cursor.execute("UPDATE members SET role=? WHERE name=?;", memberData)
+        cursor.execute("UPDATE members SET role=%s WHERE name=%s;", memberData)
         conn.commit()
         statusMsg = f"{playerName.title()} changed to {playerRole}."
 
-    except mariadb.Error as e:
+    except mysql.Error as e:
         print("Error: " + e.args[0])
 
     finally:
@@ -237,22 +256,22 @@ def updateAllMemberData():
 def updateMemberById(conn, recId, charObj):
     sql = """UPDATE members
         SET
-            wowid       = ?,
-            name        = ?,
-            class       = ?,
-            spec        = ?,
-            level       = ?,
-            gender      = ?,
-            realmname   = ?,
-            realmslug   = ?,
-            realmid     = ?,
-            guild       = ?,
-            faction     = ?,
-            race        = ?,
-            covenant    = ?,
-            ilevel      = ?,
-            expires     = ?
-        WHERE id = ?;"""
+            wowid       = %s,
+            name        = %s,
+            class       = %s,
+            spec        = %s,
+            level       = %s,
+            gender      = %s,
+            realmname   = %s,
+            realmslug   = %s,
+            realmid     = %s,
+            guild       = %s,
+            faction     = %s,
+            race        = %s,
+            covenant    = %s,
+            ilevel      = %s,
+            expires     = %s
+        WHERE id = %s;"""
 
     mbr = (
         charObj.wowid,
@@ -276,7 +295,7 @@ def updateMemberById(conn, recId, charObj):
         cur = conn.cursor()
         cur.execute(sql, mbr)
         conn.commit()
-    except mariadb.Error as e:
+    except mysql.Error as e:
         print("Error: " + e.args[0])
 
 
@@ -290,6 +309,7 @@ def getAllTableRows(tableName):
     retList = []
     for row in rows:
         retList.append(row)
+        # print(row)
     return retList
 
 
@@ -345,15 +365,28 @@ def getLastRun(procName):
     try:
         conn = create_connection()
         cur = conn.cursor()
-        cur.execute("SELECT lastrun FROM dtcache WHERE process=?;", (procName,))
+        cur.execute("SELECT lastrun FROM dtcache WHERE process=%s;", (procName,))
         row = cur.fetchone()
         retVal = row[0]
         conn.close()
 
-    except mariadb.Error as e:
-        print("Error: " + e.args[0])
+    except mysql.Error as e:
+        print("Error: " + e)
 
     return retVal
+
+
+def setLastRun(procName):
+    try:
+        conn = create_connection()
+        cur = conn.cursor()
+        cur.execute(
+            "UPDATE dtcache SET lastrun = %s WHERE process=%s;",
+            (datetime.datetime.now(), procName),
+        )
+        conn.close()
+    except mysql.Error as e:
+        print("Error: " + e)
 
 
 ###############################################################
@@ -442,6 +475,37 @@ def getAuctionHouseData():
 ###############################################################
 # https://lingojam.com/GiantTextGenerator
 
+#  ████  ███  █   █ █████ █████  ████
+# █     █   █ ██  █ █       █   █
+# █     █   █ █ █ █ ████    █   █  ██
+# █     █   █ █  ██ █       █   █   █
+#  ████  ███  █   █ █     █████  ███
+def initConfigTable():
+    print("Reinitializing Config Table")
+    try:
+        conn = create_connection()
+        cursor = conn.cursor()
+        # drop existing table
+        cursor.execute("DROP TABLE IF EXISTS config;")
+        sql = """CREATE TABLE config (
+                id          VARCHAR (20)  PRIMARY KEY,
+                value       VARCHAR (200),
+                expires     DATETIME);"""
+        cursor.execute(sql)
+        conn.commit()
+        initialRecordsList = [
+            ("access_token", "Invalid", datetime.datetime.now()),
+        ]
+        cursor.executemany(
+            "insert into config (id, value, expires) values (%s,%s,%s);",
+            initialRecordsList,
+        )
+        conn.commit()
+        conn.close()
+    except mysql.Error as e:
+        print(e)
+
+
 #  ████  █████  ████  ███   ████ █   █ █████
 #  █   █   █   █     █   █ █     █   █ █
 #  █   █   █   █     █████ █     █████ ████
@@ -465,12 +529,12 @@ def initDTCacheTable():
             ("AUCTION_HOUSE", datetime.datetime.now()),
         ]
         cursor.executemany(
-            "insert into dtcache (process, lastrun) values (?,?);", activitiesList
+            "insert into dtcache (process, lastrun) values (%s,%s);", activitiesList
         )
         conn.commit()
         conn.close()
-    except mariadb.Error as e:
-        print(e.args[0])
+    except mysql.Error as e:
+        print(e)
 
 
 #  █   █ █████ █   █ ████  █████ ████  █████
@@ -517,14 +581,21 @@ def initMembersTable():
             ("Kaitaa", "silver-hand", "Healer"),
             ("Innestra", "silver-hand", "Tank"),
             ("Nixena", "silver-hand", "Alt"),
+            ("Aresda", "silver-hand", "Healer"),
+            ("Cradon", "silver-hand", "Ranged DPS"),
+            ("Tesbasara", "silver-hand", "Ranged DPS"),
+            ("Arrya", "silver-hand", "Alt"),
+            ("Peek", "silver-hand", "Alt"),
+            ("Tomoyo", "silver-hand", "Alt"),
+            ("Däeris", "silver-hand", "Alt"),
         ]
         cursor.executemany(
-            "insert into members (name, realmslug, role) values (?,?,?);", memberList
+            "insert into members (name, realmslug, role) values (%s,%s,%s);", memberList
         )
         conn.commit()
         conn.close()
-    except mariadb.Error as e:
-        print(e.args[0])
+    except mysql.Error as e:
+        print(e)
 
 
 # ████   ███  █████ ████  █   █  ███  █████ █████
@@ -576,8 +647,8 @@ def initRaidmatsTable():
             (171439, "Shaded Weightstone"),
             (181468, "Veiled Augment Rune"),
         ]
-        cursor.executemany("insert into raidmats (id, name) values (?,?);", matList)
+        cursor.executemany("insert into raidmats (id, name) values (%s,%s);", matList)
         conn.commit()
         conn.close()
-    except mariadb.Error as e:
-        print(e.args[0])
+    except mysql.Error as e:
+        print(e)

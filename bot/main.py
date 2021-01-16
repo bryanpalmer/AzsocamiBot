@@ -27,9 +27,6 @@ import umj
 # TODO: Set up logging for bot
 # import logging
 
-
-# import jsonpickle
-
 TESTBOT = os.getenv("BOTMODE") == "TEST"
 BOTMODE = os.getenv("BOTMODE")
 if TESTBOT:
@@ -143,6 +140,7 @@ async def db_members(ctx):
     membersList = wowapi.getAllTableRows("members")
     msg = ""
     for member in membersList:
+        print(member)
         for x in range(len(member)):
             msg += f"{member[x]} "
         msg += "\n"
@@ -260,12 +258,17 @@ async def clean(ctx, limit: int = 20):
 
 
 @bot.command(aliases=["team"])
-async def raidteam(ctx):
-    conn = wowapi.create_connection()
-    lastRun = wowapi.getLastRun("UPDATE_MEMBERS")
-    print(f"Last updated {lastRun}, current datetime {datetime.datetime.now()}")
+async def raidteam(ctx, arg1="DB"):
 
-    teamList = wowapi.getMembersList()
+    if arg1.lower() == "update":
+        teamMode = "API"
+        teamList = wowapi.getMembersList()
+    else:
+        teamMode = "DB"
+        teamList = wowapi.getTeamMembersList()
+
+    conn = wowapi.create_connection()
+
     team = {"Tank": [], "Healer": [], "Melee DPS": [], "Ranged DPS": [], "Alt": []}
     msgId = await ctx.send("Gathering member data...  Please wait.")
 
@@ -273,18 +276,26 @@ async def raidteam(ctx):
     memberCount = 0
     # waitMsg = "Gathering member data..."
     for key in teamList:
-        await msgId.edit(content=f"Researching {key[1]}")
-        # waitMsg += "."
-        # await msgId.edit(content=waitMsg)
-        charData = wowapi.getCharacterInfo(key[1], key[2])
-        character = wowclasses.Character(charData)
-        wowapi.updateMemberById(conn, key[0], character)
-        # devmode(vars(character))
-        memberRole = key[3]
+        if teamMode == "API":
+            await msgId.edit(content=f"Retrieving {key[1]}")
+            charData = wowapi.getCharacterInfo(key[1], key[2])
+            character = wowclasses.Character(charData, "JSON")
+            wowapi.updateMemberById(conn, key[0], character)
+            memberRole = key[3]
+        else:
+            character = wowclasses.Character(key, "ROW")
+            memberRole = key[15]
+
         team[memberRole].append(character)
         if memberRole != "Alt":
             ttlIlvl += character.ilvl
             memberCount += 1
+
+    if teamMode == "API":
+        wowapi.setLastRun("UPDATE_MEMBERS")
+        lastRun = datetime.datetime.now()
+    else:
+        lastRun = wowapi.getLastRun("UPDATE_MEMBERS")
 
     armoryUrl = f"https://worldofwarcraft.com/en-us/character/us/"
     # print(jsonpickle.encode(team, indent=2))
@@ -323,8 +334,11 @@ async def raidteam(ctx):
     response = discord.Embed(
         title="Raid Team",
         url="https://www.warcraftlogs.com/guild/calendar/556460/",
-        description="Current guild raid team roster.",
+        description=f"""Current guild raid team roster as of { lastRun.strftime("%c") }.\nType **{COMMAND_PREFIX}team update** to force update from WoW armory.""",
         color=discord.Color.blue(),
+    )
+    response.set_footer(
+        text=f"""Member data is current as of { lastRun.strftime("%c") }."""
     )
     response.add_field(
         name="Team Roster",
@@ -495,7 +509,7 @@ async def update_members(ctx):
 
 
 @bot.command()
-@commands.has_role("ADMIN")
+@commands.is_owner()
 async def recreate_members_table(ctx):
     wowapi.initMembersTable()
     # wowapi.updateAllMemberData()
@@ -503,7 +517,18 @@ async def recreate_members_table(ctx):
 
 
 @bot.command()
-@commands.has_role("ADMIN")
+@commands.is_owner()
+async def recreate_full_database(ctx):
+    wowapi.initConfigTable()
+    wowapi.initMembersTable()
+    wowapi.initRaidmatsTable()
+    wowapi.initDTCacheTable()
+    # wowapi.updateAllMemberData()
+    await ctx.send("Fresh database initialized.")
+
+
+@bot.command()
+@commands.is_owner()
 async def recreate_raidmats_table(ctx):
     wowapi.initRaidmatsTable()
     # wowapi.updateAllMemberData()
