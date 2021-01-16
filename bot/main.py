@@ -37,14 +37,15 @@ else:
 ENVVERSION = os.getenv("ENV_VERSION")
 DEVMODE = os.getenv("DEVMODE") == "TRUE"
 DEBUG_MODE = os.getenv("DEBUG_MODE") == "TRUE"
+COMMAND_PREFIX = os.getenv("COMMAND_PREFIX")
 if DEVMODE:
     print("Environment vars: ", ENVVERSION)
     print("Current Bot: ", BOTMODE)
     print("Bot Token: ", DISCORD_BOT_TOKEN)
     print("Debug mode: ", DEBUG_MODE)
-    COMMAND_PREFIX = ";"
-else:
-    COMMAND_PREFIX = "."
+    # COMMAND_PREFIX = ";"
+# else:
+# COMMAND_PREFIX = "."
 
 
 bot = commands.Bot(command_prefix=COMMAND_PREFIX)
@@ -131,6 +132,19 @@ async def help(ctx):
             inline=False,
         )
         await ctx.send(embed=embed2)
+
+
+### RULES
+@bot.command()
+async def rules(ctx):
+    msg = """
+        Rule #1:  It's Ben's fault.  Always.
+        Rule #2:  Priority loot order for plate classes is: Derek, Bryan, Tammie, the new guy, anyone that has a plate alt, anyone that wants to DE the drop for crystal, and finally Ben.
+        Rule #3:  When speaking to Ben, please use small words.
+        Rule #4:  If you are a priest, and Ben runs past you on a narrow walkway, you must yank him back.
+        Rule #5:  Thou shall not upset thy tank or thy healer.
+        """
+    await ctx.send(msg)
 
 
 ### db_members (hidden)
@@ -337,9 +351,15 @@ async def raidteam(ctx, arg1="DB"):
         description=f"""Current guild raid team roster as of { lastRun.strftime("%c") }.\nType **{COMMAND_PREFIX}team update** to force update from WoW armory.""",
         color=discord.Color.blue(),
     )
+    reqBy = ctx.message.author.name
+    reqPic = ctx.message.author.avatar_url
     response.set_footer(
-        text=f"""Member data is current as of { lastRun.strftime("%c") }."""
+        text=f"Requested by {reqBy} | Last crawled at {lastRun.strftime('%c')}",
+        icon_url=reqPic,
     )
+    # response.set_footer(
+    #     text=f"""Member data is current as of { lastRun.strftime("%c") }."""
+    # )
     response.add_field(
         name="Team Roster",
         value=f"""The team consists of {memberCount} members, with an average iLvl of: {round(ttlIlvl / memberCount)}.  *Does not include Alts*""",
