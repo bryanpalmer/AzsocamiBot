@@ -4,8 +4,8 @@ import datetime
 import json
 import os
 
-# import mariadb
-import mysql.connector as mariadb
+import mariadb
+# import mysql.connector as mariadb
 import requests
 
 import umj  # DB calls for TheUndermineJournal items database
@@ -236,7 +236,7 @@ def updateAllMemberData():
 
 def updateMemberById(conn, recId, charObj):
     sql = """UPDATE members
-        SET 
+        SET
             wowid       = ?,
             name        = ?,
             class       = ?,
@@ -250,7 +250,7 @@ def updateMemberById(conn, recId, charObj):
             faction     = ?,
             race        = ?,
             covenant    = ?,
-            ilevel      = ?, 
+            ilevel      = ?,
             expires     = ?
         WHERE id = ?;"""
 
