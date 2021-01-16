@@ -15,6 +15,8 @@ TEST_BOT_TOKEN=
 # BOTMODE="PROD"
 PROD_BOT_TOKEN=
 
+COMMAND_PREFIX="."
+
 ###########################################
 
 # MariaDB db settings
@@ -40,7 +42,7 @@ ENV_VERSION="dotenv variables"
 # Several places in code have Print statements that show
 # on process info when DEVMODE, so none of those will print
 # when running remotely as auto-deployed bot.
-# Remote deployment server doesn't have this var set, 
+# Remote deployment server doesn't have this var set,
 # so DEVMODE will always be false when running remotely.
 DEVMODE="TRUE"
 
