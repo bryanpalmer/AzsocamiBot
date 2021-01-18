@@ -524,16 +524,16 @@ async def legendaries(ctx):
 
     msg1 = f"""**Legendary Armors** *(1 of 3)*\n
             **Cloth Armors**\n```{cloth}```\n
-            **Leather Armors**\n```{leather}```\n"""
-    msg2 = f"""**Legendary Armors** *(2 of 3)*
+            **Leather Armors**\n```{leather}```"""
+    msg2 = f"""**Legendary Armors** *(2 of 3)*\n
             **Mail Armor**\n```{mail}```\n
-            **Plate Armor**\n```{plate}```\n"""
+            **Plate Armor**\n```{plate}```"""
     msg3 = f"""**Legendary Armors** *(3 of 3)*\n
-            **Miscellaneous**\n```{misc}```\n"""
+            **Miscellaneous**\n```{misc}```"""
 
-    print(len(msg1), msg1)
-    print(len(msg2), msg2)
-    print(len(msg3), msg3)
+    # print(len(msg1), msg1)
+    # print(len(msg2), msg2)
+    # print(len(msg3), msg3)
     await ctx.send(msg1)
     await ctx.send(msg2)
     await ctx.send(msg3)
