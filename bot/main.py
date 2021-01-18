@@ -1,7 +1,7 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.39"
+VERSION = "0.1.40"
 VERSIONDATE = "2021-01-18"
 
 from os.path import dirname, join, os
@@ -33,9 +33,9 @@ import wowclasses
 import umj
 
 # TODO: Set up logging for bot
-import logging
+# import logging
 
-logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
 
 # Critical Vars and Settings
 COMMAND_PREFIX = os.getenv("COMMAND_PREFIX")  # Bot command prefix
@@ -59,13 +59,13 @@ if DEVMODE:
     print("Current Bot: ", BOTMODE)
     print("Bot Token: ", DISCORD_BOT_TOKEN)
     print("Debug mode: ", DEBUG_MODE)
-    logger = logging.getLogger("discord")
-    logger.setLevel(logging.INFO)
-    handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
-    handler.setFormatter(
-        logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s")
-    )
-    logger.addHandler(handler)
+    # logger = logging.getLogger("discord")
+    # logger.setLevel(logging.INFO)
+    # handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
+    # handler.setFormatter(
+    #     logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s")
+    # )
+    # logger.addHandler(handler)
 
 
 bot = commands.Bot(command_prefix=COMMAND_PREFIX)
@@ -75,8 +75,9 @@ bot.remove_command("help")
 
 @bot.event
 async def on_ready():
-    updateTeamDataBG.start()
     actMsg = "Let's Blame Ben"
+    if DEVMODE == False:
+        updateTeamDataBG.start()
     if DEVMODE == True:
         actMsg = "DEVMODE"
 
@@ -101,18 +102,18 @@ async def on_message(message):
     await bot.process_commands(message)
 
 
-@bot.event
-async def on_error(err, *args, **kwargs):
-    if err == "on_command_error":
-        await args[0].send("Something went wrong.")
-    # raise
+# @bot.event
+# async def on_error(err, *args, **kwargs):
+#     if err == "on_command_error":
+#         await args[0].send("Something went wrong.")
+#     # raise
 
 
-@bot.event
-async def on_command_error(ctx, exc):
-    if isinstance(exc, CommandNotFound):
-        # We just want to ignore Command Not Found errors
-        pass
+# @bot.event
+# async def on_command_error(ctx, exc):
+#     if isinstance(exc, CommandNotFound):
+#         # We just want to ignore Command Not Found errors
+#         pass
 
 
 ###############################################################
@@ -435,6 +436,110 @@ async def raidteam(ctx, arg1="DB"):
     # await cmdId.delete()
 
 
+@bot.command(aliases=["lpc"])
+async def legendaries(ctx):
+    msgId = await ctx.send("Gathering data, please wait...")
+    armors = wowapi.getLegendaryArmorsList()
+    # print(armors)
+    umjConn = umj.create_connection()
+    for armorId in armors:
+        curId = armors[armorId]["id"]
+        # print(armorId, curId)
+        item = umj.getItemById(umjConn, curId)
+        armors[armorId]["name"] = item.name
+        armors[armorId]["classname"] = item.classname
+        armors[armorId]["subclass"] = item.subclass
+        # print(vars(item))
+    # print(armors)
+    umjConn.close()
+
+    ahData = wowapi.getAuctionHouseData()
+
+    for auction in ahData["auctions"]:
+        # check auction data for legendaries
+        # print(auction)
+        if auction["item"]["id"] in armors:
+            # print(auction)
+            curID = auction["item"]["id"]
+            context = auction["item"]["context"]
+            # print(curID, context)
+            if context == 63:
+                armors[curID]["lvl1qty"] += auction["quantity"]
+                if (
+                    armors[curID]["lvl1cost"] == 0
+                    or auction["buyout"] / 10000 < armors[curID]["lvl1cost"]
+                ):
+                    armors[curID]["lvl1cost"] = auction["buyout"] / 10000
+            if context == 64:
+                armors[curID]["lvl2qty"] += auction["quantity"]
+                if (
+                    armors[curID]["lvl2cost"] == 0
+                    or auction["buyout"] / 10000 < armors[curID]["lvl2cost"]
+                ):
+                    armors[curID]["lvl2cost"] = auction["buyout"] / 10000
+            if context == 65:
+                armors[curID]["lvl3qty"] += auction["quantity"]
+                if (
+                    armors[curID]["lvl3cost"] == 0
+                    or auction["buyout"] / 10000 < armors[curID]["lvl3cost"]
+                ):
+                    armors[curID]["lvl3cost"] = auction["buyout"] / 10000
+            if context == 66:
+                armors[curID]["lvl4qty"] += auction["quantity"]
+                if (
+                    armors[curID]["lvl4cost"] == 0
+                    or auction["buyout"] / 10000 < armors[curID]["lvl4cost"]
+                ):
+                    armors[curID]["lvl4cost"] = auction["buyout"] / 10000
+
+    heading = f"{'Name'.ljust(25,' ')}\t{'iLvl 190'.rjust(10,' ')}\t{'iLvl 210'.rjust(10,' ')}\t{'iLvl 225'.rjust(10,' ')}\t{'iLvl 235'.rjust(10,' ')}\n"
+    cloth = heading
+    leather = heading
+    mail = heading
+    plate = heading
+    misc = heading
+    # cloth = ""
+    # leather = ""
+    # mail = ""
+    # plate = ""
+    # misc = ""
+    for armorId in armors:
+        msgLine = f"{armors[armorId]['name'].ljust(25,' ')}\t{armors[armorId]['lvl1cost']:>10,.2f}\t{armors[armorId]['lvl2cost']:>10,.2f}\t{armors[armorId]['lvl3cost']:>10,.2f}\t{armors[armorId]['lvl4cost']:>10,.2f}\n"
+        if (
+            armors[armorId]["subclass"] == "Cloth"
+            and "Cape" not in armors[armorId]["name"]
+        ):
+            cloth += msgLine
+        elif armors[armorId]["subclass"] == "Leather":
+            leather += msgLine
+        elif armors[armorId]["subclass"] == "Mail":
+            mail += msgLine
+        elif armors[armorId]["subclass"] == "Plate":
+            plate += msgLine
+        elif (
+            armors[armorId]["subclass"] == "Miscellaneous"
+            or "Cape" in armors[armorId]["name"]
+        ):
+            misc += msgLine
+
+    msg1 = f"""**Legendary Armors** *(1 of 3)*\n
+            **Cloth Armors**\n```{cloth}```\n
+            **Leather Armors**\n```{leather}```\n"""
+    msg2 = f"""**Legendary Armors** *(2 of 3)*
+            **Mail Armor**\n```{mail}```\n
+            **Plate Armor**\n```{plate}```\n"""
+    msg3 = f"""**Legendary Armors** *(3 of 3)*\n
+            **Miscellaneous**\n```{misc}```\n"""
+
+    print(len(msg1), msg1)
+    print(len(msg2), msg2)
+    print(len(msg3), msg3)
+    await ctx.send(msg1)
+    await ctx.send(msg2)
+    await ctx.send(msg3)
+    await msgId.delete()
+
+
 @bot.command(aliases=["mats"])
 async def raidmats(ctx):
     raidMats = wowapi.getRaidMats()
@@ -650,7 +755,8 @@ def localTimeStr(utcTime):
 @bot.command()
 async def changelog(ctx):
     msg = """
-```## 0.1.39 - 2021-01-18
+```## 0.1.40 - 2021-01-18
+ - Added .lpc (.legendaries) command
  - Added automatic hourly background updates of member data.
 
 ## 0.1.38 - 2021-01-17

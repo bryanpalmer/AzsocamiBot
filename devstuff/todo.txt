@@ -8,3 +8,66 @@
 # ADMIN
 
 
+
+
+
+
+
+
+
+# Old stuff - keep around for a while
+    # armors = [
+    #     173241,  # Cloth Armors
+    #     173243,
+    #     173244,
+    #     173245,
+    #     173246,
+    #     173247,
+    #     173248,
+    #     173249,
+    #     172314,  # Leather
+    #     172315,
+    #     172316,
+    #     172317,
+    #     172318,
+    #     172319,
+    #     172320,
+    #     172321,
+    #     172322,  # Mail
+    #     172323,
+    #     172324,
+    #     172325,
+    #     172326,
+    #     172327,
+    #     172328,
+    #     172329,
+    #     171412,  # Plate Armors
+    #     171413,
+    #     171414,
+    #     171415,
+    #     171416,
+    #     171417,
+    #     171418,
+    #     171419,
+    #     178926,  # Jewelry
+    #     178927,
+    #     173242,  # Cape
+    # ]
+    # retList = {}
+    # for id in armors:
+    #     retList[id] = {
+    #         "id": id,
+    #         "name": "Unknown",
+    #         "classname": "",
+    #         "subclass": "",
+    #         "type": "Unknown",
+    #         "lvl1qty": 0,
+    #         "lvl1cost": 0,
+    #         "lvl2qty": 0,
+    #         "lvl2cost": 0,
+    #         "lvl3qty": 0,
+    #         "lvl3cost": 0,
+    #         "lvl4qty": 0,
+    #         "lvl4cost": 0,
+    #     }
+    # print(retList)
