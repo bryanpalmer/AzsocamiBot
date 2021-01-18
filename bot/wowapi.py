@@ -251,6 +251,7 @@ def updateAllMemberData():
         charData = getCharacterInfo(memberName, memberRealm)
         char = wowclasses.Character(charData)
         updateMemberById(conn, memberId, char)
+    setLastRun("UPDATE_MEMBERS")
 
 
 def updateMemberById(conn, recId, charObj):

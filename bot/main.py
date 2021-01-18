@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.38"
-VERSIONDATE = "2021-01-17"
+VERSION = "0.1.39"
+VERSIONDATE = "2021-01-18"
 
 from os.path import dirname, join, os
 
@@ -25,14 +25,17 @@ import time
 import os
 
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
+from discord.ext.commands import CommandNotFound
 
 import wowapi
 import wowclasses
 import umj
 
 # TODO: Set up logging for bot
-# import logging
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 # Critical Vars and Settings
 COMMAND_PREFIX = os.getenv("COMMAND_PREFIX")  # Bot command prefix
@@ -56,6 +59,13 @@ if DEVMODE:
     print("Current Bot: ", BOTMODE)
     print("Bot Token: ", DISCORD_BOT_TOKEN)
     print("Debug mode: ", DEBUG_MODE)
+    logger = logging.getLogger("discord")
+    logger.setLevel(logging.INFO)
+    handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
+    handler.setFormatter(
+        logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s")
+    )
+    logger.addHandler(handler)
 
 
 bot = commands.Bot(command_prefix=COMMAND_PREFIX)
@@ -65,6 +75,7 @@ bot.remove_command("help")
 
 @bot.event
 async def on_ready():
+    updateTeamDataBG.start()
     actMsg = "Let's Blame Ben"
     if DEVMODE == True:
         actMsg = "DEVMODE"
@@ -77,11 +88,31 @@ async def on_ready():
     print(f"Command prefix is:  {COMMAND_PREFIX}")
 
 
+@tasks.loop(hours=1)
+async def updateTeamDataBG():
+    print("Updating Team data in background.")
+    wowapi.updateAllMemberData()
+
+
 @bot.event
 async def on_message(message):
     # channel = bot.get_channel(799290844862480445)
     # await channel.send(message.content)
     await bot.process_commands(message)
+
+
+@bot.event
+async def on_error(err, *args, **kwargs):
+    if err == "on_command_error":
+        await args[0].send("Something went wrong.")
+    # raise
+
+
+@bot.event
+async def on_command_error(ctx, exc):
+    if isinstance(exc, CommandNotFound):
+        # We just want to ignore Command Not Found errors
+        pass
 
 
 ###############################################################
@@ -524,12 +555,13 @@ async def shutdown(ctx):
 @bot.command()
 @commands.is_owner()
 async def status(ctx):
-    msg = "Bot running as "
+    msg = f"AzsocamiBot version {VERSION}, released {VERSIONDATE}.\n"
+    msg += "Bot running as "
     if TESTBOT:
         msg += "TEST BOT.\n"
     else:
         msg += "PRODUCTION BOT.\n"
-    msg += f"TZ:  {time.tzname}\n"
+    msg += f"Server Timezone:  {time.tzname}\n"
     msg += f"Server Time:  {datetime.datetime.now().strftime(TIMEFORMAT)}\n"
     msg += f"Bot Local Time:  {localTimeStr(datetime.datetime.now())}"
     await ctx.send(msg)
@@ -618,7 +650,10 @@ def localTimeStr(utcTime):
 @bot.command()
 async def changelog(ctx):
     msg = """
-```## 0.1.38 - 2021-01-17
+```## 0.1.39 - 2021-01-18
+ - Added automatic hourly background updates of member data.
+
+## 0.1.38 - 2021-01-17
  - Added .changelog command.
  - Added .version command.
  - Added .status command.
