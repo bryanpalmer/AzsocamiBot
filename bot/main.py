@@ -400,7 +400,6 @@ async def raidteam(ctx, arg1="DB"):
 @bot.command(aliases=["mats"])
 async def raidmats(ctx):
     raidMats = wowapi.getRaidMats()
-    # print(raidMats)
     ahData = wowapi.getAuctionHouseData()
     umjConn = umj.create_connection()
 
@@ -423,7 +422,8 @@ async def raidmats(ctx):
                 raidMats[curID]["unitcost"] = auction["unit_price"] / 10000
 
     umjConn.close()
-
+    wowapi.setLastRun("AUCTION_HOUSE")
+    lastRun = datetime.datetime.now()
     # print(raidMats)
     # Herb
     # Potion
@@ -499,7 +499,7 @@ async def raidmats(ctx):
     response.add_field(name="Skin/Cloth/Mine Mats", value=lwTxt, inline=False)
     response.add_field(name="Finished Goods", value=goodsTxt, inline=False)
     response.set_footer(
-        text="Auction house data is limited to hourly updates, so quantities and prices may vary slightly."
+        text=f"Auction house data last collected at {lastRun.strftime('%c')}"
     )
     await ctx.send(embed=response)
 
