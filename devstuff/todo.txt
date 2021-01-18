@@ -1,0 +1,10 @@
+# TODO:  Cogs separation for commands and events
+
+
+
+# DEFAULT
+
+
+# ADMIN
+
+
