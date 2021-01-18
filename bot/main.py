@@ -72,7 +72,7 @@ async def on_ready():
     await bot.change_presence(
         status=discord.Status.idle, activity=discord.Game(f"{actMsg}")
     )
-    print("I am online")
+    print("AzsocamiBot version {VERSION} is now online.")
     print(f"Using {ENVVERSION}")
     print(f"Command prefix is:  {COMMAND_PREFIX}")
 
