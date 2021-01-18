@@ -1,4 +1,9 @@
 # main.py
+# TODO: Add automatic versioning system
+# versioneer
+VERSION = "0.1.38"
+VERSIONDATE = "2021-01-17"
+
 from os.path import dirname, join, os
 
 from dotenv import load_dotenv
@@ -7,11 +12,11 @@ from dotenv import load_dotenv
 ## else vars are already loaded via heroku environment
 ## This must be done before importing wowapi and wowclasses
 dotenv_path = join(dirname(__file__), "../.env")
+print("Env vars in:", dotenv_path)
 load_dotenv(
     dotenv_path,
     verbose=True,
 )
-
 
 import asyncio
 import datetime
@@ -29,27 +34,28 @@ import umj
 # TODO: Set up logging for bot
 # import logging
 
+# Critical Vars and Settings
+COMMAND_PREFIX = os.getenv("COMMAND_PREFIX")  # Bot command prefix
+ENVVERSION = os.getenv("ENV_VERSION")  # Local .env or server vars
+TIMEZONE = "US/Central"  # Timezone for bot responses
+TIMEFORMAT = "%Y-%m-%d %H:%M:%S %Z"
+
+# In Test mode, bot uses non bot-test token instead of production bot token
+BOTMODE = os.getenv("BOTMODE")  # TEST or PROD
 TESTBOT = os.getenv("BOTMODE") == "TEST"
-BOTMODE = os.getenv("BOTMODE")
 if TESTBOT:
     DISCORD_BOT_TOKEN = os.getenv("TEST_BOT_TOKEN")
 else:
     DISCORD_BOT_TOKEN = os.getenv("AZSOCAMIBOT_TOKEN")
-# DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-ENVVERSION = os.getenv("ENV_VERSION")
-DEVMODE = os.getenv("DEVMODE") == "TRUE"
-DEBUG_MODE = os.getenv("DEBUG_MODE") == "TRUE"
-COMMAND_PREFIX = os.getenv("COMMAND_PREFIX")
-TIMEZONE = "US/Central"
-TIMEFORMAT = "%Y-%m-%d %H:%M:%S %Z%z"
+
+# In dev mode, certain functions are more verbose than normal
+DEVMODE = os.getenv("DEVMODE") == "TRUE"  # Boolean flag for devmode
+DEBUG_MODE = os.getenv("DEBUG_MODE") == "TRUE"  # Currently unused
 if DEVMODE:
     print("Environment vars: ", ENVVERSION)
     print("Current Bot: ", BOTMODE)
     print("Bot Token: ", DISCORD_BOT_TOKEN)
     print("Debug mode: ", DEBUG_MODE)
-    # COMMAND_PREFIX = ";"
-# else:
-# COMMAND_PREFIX = "."
 
 
 bot = commands.Bot(command_prefix=COMMAND_PREFIX)
@@ -365,18 +371,15 @@ async def raidteam(ctx, arg1="DB"):
     response = discord.Embed(
         title="Raid Team",
         url="https://www.warcraftlogs.com/guild/calendar/556460/",
-        description=f"""Current guild raid team roster as of { lastRun.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT) }.\nType **{COMMAND_PREFIX}team update** to force update from WoW armory.""",
+        description=f"""Current guild raid team roster as of { localTimeStr(lastRun) }.\nType **{COMMAND_PREFIX}team update** to force update from WoW armory.""",
         color=discord.Color.blue(),
     )
     reqBy = ctx.message.author.name
     reqPic = ctx.message.author.avatar_url
     response.set_footer(
-        text=f"Requested by {reqBy} | Last crawled at {lastRun.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)}",
+        text=f"Requested by {reqBy} | Last crawled at {localTimeStr(lastRun)}",
         icon_url=reqPic,
     )
-    # response.set_footer(
-    #     text=f"""Member data is current as of { lastRun.strftime("%c") }."""
-    # )
     response.add_field(
         name="Team Roster",
         value=f"""The team consists of {memberCount} members, with an average iLvl of: {round(ttlIlvl / memberCount)}.  *Does not include Alts*""",
@@ -428,18 +431,6 @@ async def raidmats(ctx):
     umjConn.close()
     wowapi.setLastRun("AUCTION_HOUSE")
     lastRun = datetime.datetime.now()
-    # print(raidMats)
-    # Herb
-    # Potion
-    # Flask
-    # Other
-    # Metal & Stone
-    # Food & Drink
-    # Cooking
-    # Leather
-    # Misc
-    # Cloth
-    # Other
 
     foodTxt = ""
     alchTxt = ""
@@ -503,7 +494,7 @@ async def raidmats(ctx):
     response.add_field(name="Skin/Cloth/Mine Mats", value=lwTxt, inline=False)
     response.add_field(name="Finished Goods", value=goodsTxt, inline=False)
     response.set_footer(
-        text=f"Auction house data last collected at {lastRun.strftime('%c')}"
+        text=f"Auction house data last collected at {localTimeStr(lastRun)}"
     )
     await ctx.send(embed=response)
 
@@ -540,7 +531,7 @@ async def status(ctx):
         msg += "PRODUCTION BOT.\n"
     msg += f"TZ:  {time.tzname}\n"
     msg += f"Server Time:  {datetime.datetime.now().strftime(TIMEFORMAT)}\n"
-    msg += f"Bot Local Time:  {datetime.datetime.now().astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)}"
+    msg += f"Bot Local Time:  {localTimeStr(datetime.datetime.now())}"
     await ctx.send(msg)
 
 
@@ -613,6 +604,37 @@ async def recreate_raidmats_table(ctx):
     wowapi.initRaidmatsTable()
     # wowapi.updateAllMemberData()
     await ctx.send("Raidmats table is created and set to initial values.")
+
+
+@bot.command()
+async def version(ctx):
+    await ctx.send(f"AzsocamiBot version {VERSION}, released {VERSIONDATE}.")
+
+
+def localTimeStr(utcTime):
+    return utcTime.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)
+
+
+@bot.command()
+async def changelog(ctx):
+    msg = """
+```## 0.1.38 - 2021-01-17
+ - Added .changelog command.
+ - Added .version command.
+ - Added .status command.
+ - Changed time displays to use CST instead of UTC.
+ - Fixed getAuctionHouse() to handle bad responses.
+ - Fixed WoW API auth token calls to handle bad responses.
+
+## 0.1.35 - 2021-01-16
+ - Added .team update to force armory update.
+ - Added auto-deployment from repo to Heroku server
+ - Changed code now lives on github (Ask Bryan for access)
+ - Changed .team to get data from db instead of armory
+ - Changed .mats and .team now record time last run in db
+ - Changed db access from mariadb to mysql
+```"""
+    await ctx.send(msg)
 
 
 def devmode(msg):

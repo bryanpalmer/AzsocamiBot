@@ -417,28 +417,40 @@ def setLastRun(procName):
 
 def generateAccessToken():
     token_uri = "https://us.battle.net/oauth/token"
-    resp = requests.post(
-        token_uri,
-        data={
-            "grant_type": "client_credentials",
-            "client_id": BNET_CLIENTID,
-            "client_secret": BNET_SECRET,
-        },
-    )
-    # devmode(resp.text)
-    accessTokenResponse = json.loads(resp.text)
-    if accessTokenResponse.get("access_token") is None:
-        # no access token
+    try:
+        resp = requests.post(
+            token_uri,
+            data={
+                "grant_type": "client_credentials",
+                "client_id": BNET_CLIENTID,
+                "client_secret": BNET_SECRET,
+            },
+        )
+        resp.raise_for_status()
+        accessTokenResponse = json.loads(resp.text)
+        if accessTokenResponse.get("access_token") is None:
+            # no access token
+            status = "fail"
+            message = "Something went wrong trying to get an access token."
+        else:
+            # access token returned
+            status = "ok"
+            message = "New access token save and ready for use."
+            updateAccessToken(
+                accessTokenResponse["access_token"], accessTokenResponse["expires_in"]
+            )
+
+    except requests.exceptions.HTTPError as err:
+        print(err)
         status = "fail"
         message = "Something went wrong trying to get an access token."
-    else:
-        # access token returned
-        status = "ok"
-        message = "New access token save and ready for use."
-        updateAccessToken(
-            accessTokenResponse["access_token"], accessTokenResponse["expires_in"]
-        )
-    return {"status": status, "message": message, "raw_response": accessTokenResponse}
+
+    finally:
+        return {
+            "status": status,
+            "message": message,
+            "raw_response": accessTokenResponse,
+        }
 
 
 def getCharacterInfo(charName, charRealm):
@@ -471,12 +483,24 @@ def getAuctionHouseData():
     auctionHouse_uri = (
         "https://us.api.blizzard.com/data/wow/connected-realm/12/auctions"
     )
-    response = requests.get(
-        auctionHouse_uri,
-        params={"namespace": "dynamic-us", "locale": "en_US", "access_token": token},
-    )
-    ahdata = json.loads(response.text)
-    return ahdata
+    try:
+        response = requests.get(
+            auctionHouse_uri,
+            params={
+                "namespace": "dynamic-us",
+                "locale": "en_US",
+                "access_token": token,
+            },
+        )
+        response.raise_for_status()
+        ahdata = json.loads(response.text)
+
+    except requests.exceptions.HTTPError as err:
+        print(err)
+        ahdata = {}
+
+    finally:
+        return ahdata
 
 
 ###############################################################
