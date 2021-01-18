@@ -15,6 +15,8 @@ load_dotenv(
 
 import asyncio
 import datetime
+from pytz import timezone
+import time
 import os
 
 import discord
@@ -38,6 +40,8 @@ ENVVERSION = os.getenv("ENV_VERSION")
 DEVMODE = os.getenv("DEVMODE") == "TRUE"
 DEBUG_MODE = os.getenv("DEBUG_MODE") == "TRUE"
 COMMAND_PREFIX = os.getenv("COMMAND_PREFIX")
+TIMEZONE = "US/Central"
+TIMEFORMAT = "%Y-%m-%d %H:%M:%S %Z%z"
 if DEVMODE:
     print("Environment vars: ", ENVVERSION)
     print("Current Bot: ", BOTMODE)
@@ -361,13 +365,13 @@ async def raidteam(ctx, arg1="DB"):
     response = discord.Embed(
         title="Raid Team",
         url="https://www.warcraftlogs.com/guild/calendar/556460/",
-        description=f"""Current guild raid team roster as of { lastRun.strftime("%c") }.\nType **{COMMAND_PREFIX}team update** to force update from WoW armory.""",
+        description=f"""Current guild raid team roster as of { lastRun.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT) }.\nType **{COMMAND_PREFIX}team update** to force update from WoW armory.""",
         color=discord.Color.blue(),
     )
     reqBy = ctx.message.author.name
     reqPic = ctx.message.author.avatar_url
     response.set_footer(
-        text=f"Requested by {reqBy} | Last crawled at {lastRun.strftime('%c')}",
+        text=f"Requested by {reqBy} | Last crawled at {lastRun.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)}",
         icon_url=reqPic,
     )
     # response.set_footer(
@@ -534,6 +538,9 @@ async def status(ctx):
         msg += "TEST BOT.\n"
     else:
         msg += "PRODUCTION BOT.\n"
+    msg += f"TZ:  {time.tzname}\n"
+    msg += f"Server Time:  {datetime.datetime.now().strftime(TIMEFORMAT)}\n"
+    msg += f"Bot Local Time:  {datetime.datetime.now().astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)}"
     await ctx.send(msg)
 
 
