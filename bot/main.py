@@ -15,6 +15,7 @@ load_dotenv(
 
 import asyncio
 import datetime
+import time
 import os
 
 import discord
@@ -534,6 +535,7 @@ async def status(ctx):
         msg += "TEST BOT.\n"
     else:
         msg += "PRODUCTION BOT.\n"
+    msg += f"TZ:  {time.tzname}"
     await ctx.send(msg)
 
 
