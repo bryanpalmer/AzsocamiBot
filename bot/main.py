@@ -374,20 +374,6 @@ async def whoami(ctx):
     await ctx.send(f"You are {ctx.message.author.name}, using {ENVVERSION}")
 
 
-# @bot.command()
-# async def clean(ctx, limit: int = 20):
-#     passed = 0
-#     failed = 0
-#     async for msg in ctx.message.channel.history(limit=limit):
-#         if msg.author.id == bot.user.id or msg.content[0] == COMMAND_PREFIX:
-#             try:
-#                 await msg.delete()
-#                 passed += 1
-#             except:
-#                 failed += 1
-#     devmode(f"[Complete] Removed {passed} messages with {failed} fails")
-
-
 @bot.command(aliases=["team"])
 async def raidteam(ctx, arg1="DB"):
 
@@ -808,15 +794,19 @@ async def version(ctx):
 async def clean(ctx, number=50):
     mgs = []
     number = int(number)
+    cleaned = 0
 
     async for x in ctx.message.channel.history(limit=number):
         if x.author.id == bot.user.id:
             mgs.append(x)
+            cleaned += 1
             # print(x)
         if x.content[:1] == COMMAND_PREFIX:
             mgs.append(x)
+            cleaned += 1
             # print(x.content[:1])
     await ctx.message.channel.delete_messages(mgs)
+    print(f"Removed {cleaned} messages and commands.")
 
 
 def localTimeStr(utcTime):
