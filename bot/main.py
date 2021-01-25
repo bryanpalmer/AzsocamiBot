@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.42"
-VERSIONDATE = "2021-01-22"
+VERSION = "0.1.43"
+VERSIONDATE = "2021-01-25"
 
 from os.path import dirname, join, os
 
@@ -21,6 +21,7 @@ load_dotenv(
 import asyncio
 import datetime
 from pytz import timezone
+from operator import itemgetter
 import time
 import os
 
@@ -372,6 +373,51 @@ async def ping(ctx):
 @bot.command(name="whoami")
 async def whoami(ctx):
     await ctx.send(f"You are {ctx.message.author.name}, using {ENVVERSION}")
+
+
+@bot.command(aliases=["tc"])
+async def twistingcorridors(ctx):
+    msgId = await ctx.send("Gathering member data...  Please wait.")
+    teamList = wowapi.getMembersList()
+    # conn = wowapi.create_connection()
+    members = []
+    for person in teamList:
+        await msgId.edit(content=f"Retrieving {person[1]}")
+        charData = wowapi.getCharacterAchievements(person[1], person[2])
+        highestCompleted = 0
+        completed = [(0, "None")]
+        for item in charData["achievements"]:
+            if item["id"] in (14468, 14469, 14470, 14471, 14472, 14568, 14569, 14570):
+                if item["id"] > highestCompleted:
+                    highestCompleted = item["id"]
+                    completed.append((item["id"], item["achievement"]["name"]))
+        HighestFinished = max(completed, key=itemgetter(1))[1]
+        members.append((person[1].title(), HighestFinished))
+    # conn.close()
+    # print(members)
+    # Build response embed
+    # response = discord.Embed(
+    #     title="Twisting Corridors Achievements",
+    #     description=f"""Current Twisting Corridors achievements for guild team roster.""",
+    #     color=discord.Color.blue(),
+    # )
+    # reqBy = ctx.message.author.name
+    # reqPic = ctx.message.author.avatar_url
+    # response.set_footer(
+    #     text=f"Requested by {reqBy} | Last crawled at {localTimeStr(datetime.datetime.now())}",
+    #     icon_url=reqPic,
+    # )
+    respVal = f"```{'Name'.ljust(15,' ')}\t{'Highest Completed'}\n"
+    for member in members:
+        respVal += f"{member[0].ljust(15,' ')}\t{member[1].ljust(30,' ')}\n"
+    respVal += "```"
+    # response.add_field(
+    #     name="Roster",
+    #     value=respVal,
+    #     inline=False,
+    # )
+    await ctx.send(respVal)
+    await msgId.delete()
 
 
 @bot.command(aliases=["team"])
@@ -816,7 +862,10 @@ def localTimeStr(utcTime):
 @bot.command()
 async def changelog(ctx):
     msg = """
-```## 0.1.42 - 2021-01-25
+```## 0.1.43 - 2021-01-25
+ - Added .tc command to track Twisting Corridors runs.
+
+## 0.1.42 - 2021-01-25
  - Added commands to add and remove raidmats items.
  - Changed clean to handle bulk messages without rate-limiting.
 
