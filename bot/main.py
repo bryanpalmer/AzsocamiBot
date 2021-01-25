@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.40"
-VERSIONDATE = "2021-01-18"
+VERSION = "0.1.41"
+VERSIONDATE = "2021-01-22"
 
 from os.path import dirname, join, os
 
@@ -59,13 +59,6 @@ if DEVMODE:
     print("Current Bot: ", BOTMODE)
     print("Bot Token: ", DISCORD_BOT_TOKEN)
     print("Debug mode: ", DEBUG_MODE)
-    # logger = logging.getLogger("discord")
-    # logger.setLevel(logging.INFO)
-    # handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
-    # handler.setFormatter(
-    #     logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s")
-    # )
-    # logger.addHandler(handler)
 
 
 bot = commands.Bot(command_prefix=COMMAND_PREFIX)
@@ -109,11 +102,11 @@ async def on_message(message):
 #     # raise
 
 
-# @bot.event
-# async def on_command_error(ctx, exc):
-#     if isinstance(exc, CommandNotFound):
-#         # We just want to ignore Command Not Found errors
-#         pass
+@bot.event
+async def on_command_error(ctx, exc):
+    if isinstance(exc, CommandNotFound):
+        # We just want to ignore Command Not Found errors
+        pass
 
 
 ###############################################################
@@ -130,17 +123,37 @@ async def help(ctx):
     author = ctx.message.author
     embed = discord.Embed(color=discord.Color.orange())
     embed.set_author(name="Help")
-    embed.add_field(
-        name=".ping", value="Returns Pong to check bot latency.", inline=False
-    )
+    # embed.add_field(
+    #     name=".ping", value="Returns Pong to check bot latency.", inline=False
+    # )
     embed.add_field(
         name=".mats or .raidmats",
-        value="Gets current Auction House pricing on common raid mats.",
+        value="Current Auction House pricing on common raid mats.",
+        inline=False,
+    )
+    embed.add_field(
+        name=".lpc or .legendaries",
+        value=".lpc [armorType] - Auction House pricing on legendary base armors.",
         inline=False,
     )
     embed.add_field(
         name=".team or .raidteam",
-        value="Gets current raid team lookup data.",
+        value="team [update] - List current team members data. Update is Optional.",
+        inline=False,
+    )
+    embed.add_field(
+        name=".add_member",
+        value="add_member <playername> [<realm>] Add new member. Realm defaults to silver-hand.",
+        inline=False,
+    )
+    embed.add_field(
+        name=".remove_member",
+        value="remove_member <playername> Remove member.",
+        inline=False,
+    )
+    embed.add_field(
+        name=".change_member_role",
+        value="change_member_role <playername> Change member role.",
         inline=False,
     )
     embed.add_field(
@@ -151,6 +164,17 @@ async def help(ctx):
         value="Cleans all AzsocamiBot messages and commands from channel.",
         inline=False,
     )
+    embed.add_field(
+        name=".changelog",
+        value="AzsocamiBot change log.",
+        inline=False,
+    )
+    embed.add_field(
+        name=".version",
+        value="AzsocamiBot version info.",
+        inline=False,
+    )
+
     await ctx.send(embed=embed)
     if author.name.lower() == "aaryn":
         embed2 = discord.Embed(color=discord.Color.orange())
@@ -158,21 +182,6 @@ async def help(ctx):
         # embed2.add_field(
         #     name=".db_members", value="ADMIN: List members database rows.", inline=False
         # )
-        embed2.add_field(
-            name=".add_member",
-            value="ADMIN: add_member <playername> <realm> Add new member.",
-            inline=False,
-        )
-        embed2.add_field(
-            name=".remove_member",
-            value="ADMIN: remove_member <playername> Remove member.",
-            inline=False,
-        )
-        embed2.add_field(
-            name=".change_member_role",
-            value="ADMIN: change_member_role <playername> Change member role.",
-            inline=False,
-        )
         embed2.add_field(
             name=".get_table_contents",
             value="ADMIN: get_table_contents <tablename> List table contents.",
@@ -192,7 +201,7 @@ async def help(ctx):
 async def rules(ctx):
     msg = """
         Rule #1:  It's Ben's fault.  Always.
-        Rule #2:  Priority loot order for plate classes is: Derek, Bryan, Tammie, the new guy, anyone that has a plate alt, anyone that wants to DE the drop for crystal, and finally Ben.
+        Rule #2:  Loot Priority Order: Everyone else, then Ben.
         Rule #3:  When speaking to Ben, please use small words.
         Rule #4:  If you are a priest, and Ben runs past you on a narrow walkway, you must yank him back.
         Rule #5:  Thou shall not upset thy tank or thy healer.
@@ -200,8 +209,8 @@ async def rules(ctx):
     await ctx.send(msg)
 
 
-### db_members (hidden)
-@bot.command(hidden=True)
+### db_members
+@bot.command()
 @commands.is_owner()
 async def db_members(ctx):
     membersList = wowapi.getAllTableRows("members")
@@ -214,7 +223,7 @@ async def db_members(ctx):
     await ctx.send(msg)
 
 
-@bot.command(hidden=True)
+@bot.command()
 @commands.has_any_role("RAID LEAD", "ADMIN")
 async def add_member(ctx, playerName, playerRealm="silver-hand"):
     msgId = await ctx.send(
@@ -242,7 +251,7 @@ async def add_member(ctx, playerName, playerRealm="silver-hand"):
         await msgId.delete()
 
 
-@bot.command(hidden=True)
+@bot.command()
 @commands.has_any_role("RAID LEAD", "ADMIN")
 async def remove_member(ctx, playerName):
     msgId = await ctx.send(f"Are you sure?  **Y**es or **N**o.")
@@ -268,7 +277,7 @@ async def remove_member(ctx, playerName):
         await msgId.delete()
 
 
-@bot.command(hidden=True)
+@bot.command()
 @commands.has_any_role("RAID LEAD", "ADMIN")
 async def change_member_role(ctx, playerName):
     msgId = await ctx.send(
@@ -437,29 +446,20 @@ async def raidteam(ctx, arg1="DB"):
 
 
 @bot.command(aliases=["lpc"])
-async def legendaries(ctx):
+async def legendaries(ctx, armortype="All"):
     msgId = await ctx.send("Gathering data, please wait...")
+
+    if armortype.lower() not in ("all", "cloth", "leather", "mail", "plate", "misc"):
+        # bad argument passed, defaulting to 'All'
+        armorType = "ALL"
+    else:
+        armorType = armortype.upper()
+
     armors = wowapi.getLegendaryArmorsList()
-    # print(armors)
-    umjConn = umj.create_connection()
-    for armorId in armors:
-        curId = armors[armorId]["id"]
-        # print(armorId, curId)
-        item = umj.getItemById(umjConn, curId)
-        armors[armorId]["name"] = item.name
-        armors[armorId]["classname"] = item.classname
-        armors[armorId]["subclass"] = item.subclass
-        # print(vars(item))
-    # print(armors)
-    umjConn.close()
-
     ahData = wowapi.getAuctionHouseData()
-
     for auction in ahData["auctions"]:
         # check auction data for legendaries
-        # print(auction)
         if auction["item"]["id"] in armors:
-            # print(auction)
             curID = auction["item"]["id"]
             context = auction["item"]["context"]
             # print(curID, context)
@@ -498,11 +498,6 @@ async def legendaries(ctx):
     mail = heading
     plate = heading
     misc = heading
-    # cloth = ""
-    # leather = ""
-    # mail = ""
-    # plate = ""
-    # misc = ""
     for armorId in armors:
         msgLine = f"{armors[armorId]['name'].ljust(25,' ')}\t{armors[armorId]['lvl1cost']:>10,.2f}\t{armors[armorId]['lvl2cost']:>10,.2f}\t{armors[armorId]['lvl3cost']:>10,.2f}\t{armors[armorId]['lvl4cost']:>10,.2f}\n"
         if (
@@ -522,21 +517,26 @@ async def legendaries(ctx):
         ):
             misc += msgLine
 
-    msg1 = f"""**Legendary Armors** *(1 of 3)*\n
-            **Cloth Armors**\n```{cloth}```\n
-            **Leather Armors**\n```{leather}```"""
-    msg2 = f"""**Legendary Armors** *(2 of 3)*\n
-            **Mail Armor**\n```{mail}```\n
-            **Plate Armor**\n```{plate}```"""
-    msg3 = f"""**Legendary Armors** *(3 of 3)*\n
-            **Miscellaneous**\n```{misc}```"""
+    msg1 = f"**Legendary Armors**\n"
+    if armorType in ("ALL", "CLOTH"):
+        msg1 += f"**Cloth Armors**\n```{cloth}```\n"
+    if armorType in ("ALL", "LEATHER"):
+        msg1 += f"**Leather Armors**\n```{leather}```"
+    msg2 = f"**Legendary Armors**\n"
+    if armorType in ("ALL", "MAIL"):
+        msg2 += f"**Mail Armor**\n```{mail}```\n"
+    if armorType in ("ALL", "PLATE"):
+        msg2 += f"**Plate Armor**\n```{plate}```"
+    msg3 = f"**Legendary Armors**\n"
+    if armorType in ("ALL", "MISC"):
+        msg3 += f"**Miscellaneous**\n```{misc}```"
 
-    # print(len(msg1), msg1)
-    # print(len(msg2), msg2)
-    # print(len(msg3), msg3)
-    await ctx.send(msg1)
-    await ctx.send(msg2)
-    await ctx.send(msg3)
+    if armorType in ("ALL", "CLOTH", "LEATHER"):
+        await ctx.send(msg1)
+    if armorType in ("ALL", "MAIL", "PLATE"):
+        await ctx.send(msg2)
+    if armorType in ("ALL", "MISC"):
+        await ctx.send(msg3)
     await msgId.delete()
 
 
@@ -672,7 +672,7 @@ async def status(ctx):
     await ctx.send(msg)
 
 
-### get_table_structure (hidden)
+### get_table_structure
 @bot.command()
 @commands.is_owner()
 async def get_table_structure(ctx, table):
@@ -685,7 +685,7 @@ async def get_table_structure(ctx, table):
     await ctx.send(msg)
 
 
-### get_table_contents (hidden)
+### get_table_contents
 @bot.command()
 @commands.is_owner()
 async def get_table_contents(ctx, table):
@@ -755,7 +755,12 @@ def localTimeStr(utcTime):
 @bot.command()
 async def changelog(ctx):
     msg = """
-```## 0.1.40 - 2021-01-18
+```## 0.1.41 - 2021-01-22
+ - Changed .lpc to accept armorType as argument, ie .lpc plate.
+ - Changed .lpc getLegendaryArmorsList() to avoid lengthy item lookups.
+ - Changed .help to show all current commands.
+
+## 0.1.40 - 2021-01-18
  - Added .lpc (.legendaries) command
  - Added automatic hourly background updates of member data.
 
