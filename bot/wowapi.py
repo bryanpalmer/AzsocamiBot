@@ -879,6 +879,48 @@ def getRaidMats():
     return retList
 
 
+# def getItemById(conn, itemId):
+#         retVal = wowclasses.Item(record)
+
+
+def addItemIdToDB(itemId):
+    devmode(f"Adding new wow item {itemId}")
+    umjconn = umj.create_connection()
+    item = umj.getItemById(umjconn, itemId)
+    itemData = (itemId, item.name)
+    umjconn.close()
+    conn = create_connection()
+    cursor = conn.cursor()
+    statusMsg = ""
+    try:
+        cursor.execute("insert into raidmats (id, name) values (%s, %s);", itemData)
+        conn.commit()
+        statusMsg = f"Added {itemId} - {item.name} to raidmats."
+    except mysql.Error as e:
+        print("Error: " + e.args[0])
+        statusMsg = f"Error adding {itemId}, ERROR: {e}"
+    finally:
+        conn.close()
+    return statusMsg
+
+
+def deleteItemFromDB(itemId):
+    print(f"Removing item {itemId}")
+    conn = create_connection()
+    cursor = conn.cursor()
+    statusMsg = ""
+    try:
+        cursor.execute("delete from raidmats where id=%s;", (itemId,))
+        conn.commit()
+        statusMsg = f"Successfully removed {itemId}."
+    except mysql.Error as e:
+        print("Error: " + e)
+        statusMsg = f"Error removing {itemId}, ERROR: {e}"
+    finally:
+        conn.close()
+    return statusMsg
+
+
 def getTableStructure(tableName):
     conn = create_connection()
     cur = conn.cursor()

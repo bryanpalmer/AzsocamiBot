@@ -1,7 +1,7 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.41"
+VERSION = "0.1.42"
 VERSIONDATE = "2021-01-22"
 
 from os.path import dirname, join, os
@@ -78,6 +78,7 @@ async def on_ready():
         status=discord.Status.idle, activity=discord.Game(f"{actMsg}")
     )
     print(f"AzsocamiBot version {VERSION} is now online.")
+    print(f"Bot name is {bot.user.name}, ID={bot.user.id}")
     print(f"Using {ENVVERSION}")
     print(f"Command prefix is:  {COMMAND_PREFIX}")
 
@@ -107,6 +108,8 @@ async def on_command_error(ctx, exc):
     if isinstance(exc, CommandNotFound):
         # We just want to ignore Command Not Found errors
         pass
+    else:
+        print(exc)
 
 
 ###############################################################
@@ -273,7 +276,59 @@ async def remove_member(ctx, playerName):
         await msg.delete()
         await msgId.delete()
     except asyncio.TimeoutError:
-        await ctx.send("You didn't reply in time!  Cancelling player add.")
+        await ctx.send("You didn't reply in time!  Cancelling player deletion.")
+        await msgId.delete()
+
+
+@bot.command()
+@commands.has_any_role("RAID LEAD", "ADMIN", "MEMBER")
+async def add_item(ctx, itemId):
+    msgId = await ctx.send(f"Are you sure?  **Y**es or **N**o.")
+    # This will make sure that the response will only be registered if the following
+    # conditions are met:
+    def check(msg):
+        return (
+            msg.author == ctx.author
+            and msg.channel == ctx.channel
+            and msg.content.lower() in ["y", "n"]
+        )
+
+    try:
+        msg = await bot.wait_for(
+            "message", check=check, timeout=20
+        )  # 20 seconds to reply
+        if msg.content.lower() == "y":
+            await ctx.send(wowapi.addItemIdToDB(itemId))
+        await msg.delete()
+        await msgId.delete()
+    except asyncio.TimeoutError:
+        await ctx.send("You didn't reply in time!  Cancelling item add.")
+        await msgId.delete()
+
+
+@bot.command()
+@commands.has_any_role("RAID LEAD", "ADMIN", "MEMBER")
+async def remove_item(ctx, itemId):
+    msgId = await ctx.send(f"Are you sure?  **Y**es or **N**o.")
+    # This will make sure that the response will only be registered if the following
+    # conditions are met:
+    def check(msg):
+        return (
+            msg.author == ctx.author
+            and msg.channel == ctx.channel
+            and msg.content.lower() in ["y", "n"]
+        )
+
+    try:
+        msg = await bot.wait_for(
+            "message", check=check, timeout=20
+        )  # 20 seconds to reply
+        if msg.content.lower() == "y":
+            await ctx.send(wowapi.deleteItemFromDB(itemId))
+        await msg.delete()
+        await msgId.delete()
+    except asyncio.TimeoutError:
+        await ctx.send("You didn't reply in time!  Cancelling item delete.")
         await msgId.delete()
 
 
@@ -319,18 +374,18 @@ async def whoami(ctx):
     await ctx.send(f"You are {ctx.message.author.name}, using {ENVVERSION}")
 
 
-@bot.command()
-async def clean(ctx, limit: int = 20):
-    passed = 0
-    failed = 0
-    async for msg in ctx.message.channel.history(limit=limit):
-        if msg.author.id == bot.user.id or msg.content[0] == COMMAND_PREFIX:
-            try:
-                await msg.delete()
-                passed += 1
-            except:
-                failed += 1
-    devmode(f"[Complete] Removed {passed} messages with {failed} fails")
+# @bot.command()
+# async def clean(ctx, limit: int = 20):
+#     passed = 0
+#     failed = 0
+#     async for msg in ctx.message.channel.history(limit=limit):
+#         if msg.author.id == bot.user.id or msg.content[0] == COMMAND_PREFIX:
+#             try:
+#                 await msg.delete()
+#                 passed += 1
+#             except:
+#                 failed += 1
+#     devmode(f"[Complete] Removed {passed} messages with {failed} fails")
 
 
 @bot.command(aliases=["team"])
@@ -748,6 +803,22 @@ async def version(ctx):
     await ctx.send(f"AzsocamiBot version {VERSION}, released {VERSIONDATE}.")
 
 
+@bot.command()
+@commands.is_owner()
+async def clean(ctx, number=50):
+    mgs = []
+    number = int(number)
+
+    async for x in ctx.message.channel.history(limit=number):
+        if x.author.id == bot.user.id:
+            mgs.append(x)
+            # print(x)
+        if x.content[:1] == COMMAND_PREFIX:
+            mgs.append(x)
+            # print(x.content[:1])
+    await ctx.message.channel.delete_messages(mgs)
+
+
 def localTimeStr(utcTime):
     return utcTime.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)
 
@@ -755,7 +826,11 @@ def localTimeStr(utcTime):
 @bot.command()
 async def changelog(ctx):
     msg = """
-```## 0.1.41 - 2021-01-22
+```## 0.1.42 - 2021-01-25
+ - Added commands to add and remove raidmats items.
+ - Changed clean to handle bulk messages without rate-limiting.
+
+## 0.1.41 - 2021-01-22
  - Changed .lpc to accept armorType as argument, ie .lpc plate.
  - Changed .lpc getLegendaryArmorsList() to avoid lengthy item lookups.
  - Changed .help to show all current commands.
