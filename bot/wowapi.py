@@ -1203,6 +1203,7 @@ def initRaidmatsTable():
             (173034, "Silvergill Pike"),
             (173036, "Spinefin Piranha"),
             (173037, "Elysian Thade"),
+            (171266, "Potion of the Hidden Spirit"),
             (171267, "Spiritual Healing Potion"),
             (171270, "Potion of Spectral Agility"),
             (171273, "Potion of Spectral Intellect"),
