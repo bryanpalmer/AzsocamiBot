@@ -1,0 +1,389 @@
+{
+  "name": "Aaryn",
+  "race": "Human",
+  "class": "Warrior",
+  "active_spec_name": "Arms",
+  "active_spec_role": "DPS",
+  "gender": "male",
+  "faction": "alliance",
+  "achievement_points": 14620,
+  "honorable_kills": 0,
+  "thumbnail_url": "https://render-us.worldofwarcraft.com/character/silver-hand/130/186224258-avatar.jpg?alt=wow/static/images/2d/avatar/1-0.jpg",
+  "region": "us",
+  "realm": "Silver Hand",
+  "last_crawled_at": "2021-01-26T06:57:56.000Z",
+  "profile_url": "https://raider.io/characters/us/silver-hand/Aaryn",
+  "profile_banner": "alliancebanner1",
+  "mythic_plus_recent_runs": [
+    {
+      "dungeon": "Theater of Pain",
+      "short_name": "TOP",
+      "mythic_level": 10,
+      "completed_at": "2021-01-25T03:58:27.000Z",
+      "clear_time_ms": 2072662,
+      "num_keystone_upgrades": 1,
+      "map_challenge_mode_id": 382,
+      "score": 100.6,
+      "affixes": [
+        {
+          "id": 10,
+          "name": "Fortified",
+          "description": "Non-boss enemies have 20% more health and inflict up to 30% increased damage.",
+          "wowhead_url": "https://wowhead.com/affix=10"
+        },
+        {
+          "id": 123,
+          "name": "Spiteful",
+          "description": "Fiends rise from the corpses of non-boss enemies and pursue random players.",
+          "wowhead_url": "https://wowhead.com/affix=123"
+        },
+        {
+          "id": 3,
+          "name": "Volcanic",
+          "description": "While in combat, enemies periodically cause gouts of flame to erupt beneath the feet of distant players.",
+          "wowhead_url": "https://wowhead.com/affix=3"
+        },
+        {
+          "id": 121,
+          "name": "Prideful",
+          "description": "Players overflow with pride as they defeat non-boss enemies, eventually forming a Manifestation of Pride. Defeating this Manifestation greatly empowers players.",
+          "wowhead_url": "https://wowhead.com/affix=121"
+        }
+      ],
+      "url": "https://raider.io/mythic-plus-runs/season-sl-1/14042885-10-theater-of-pain"
+    },
+    {
+      "dungeon": "The Necrotic Wake",
+      "short_name": "NW",
+      "mythic_level": 10,
+      "completed_at": "2021-01-25T03:08:16.000Z",
+      "clear_time_ms": 2523760,
+      "num_keystone_upgrades": 0,
+      "map_challenge_mode_id": 376,
+      "score": 83.1,
+      "affixes": [
+        {
+          "id": 10,
+          "name": "Fortified",
+          "description": "Non-boss enemies have 20% more health and inflict up to 30% increased damage.",
+          "wowhead_url": "https://wowhead.com/affix=10"
+        },
+        {
+          "id": 123,
+          "name": "Spiteful",
+          "description": "Fiends rise from the corpses of non-boss enemies and pursue random players.",
+          "wowhead_url": "https://wowhead.com/affix=123"
+        },
+        {
+          "id": 3,
+          "name": "Volcanic",
+          "description": "While in combat, enemies periodically cause gouts of flame to erupt beneath the feet of distant players.",
+          "wowhead_url": "https://wowhead.com/affix=3"
+        },
+        {
+          "id": 121,
+          "name": "Prideful",
+          "description": "Players overflow with pride as they defeat non-boss enemies, eventually forming a Manifestation of Pride. Defeating this Manifestation greatly empowers players.",
+          "wowhead_url": "https://wowhead.com/affix=121"
+        }
+      ],
+      "url": "https://raider.io/mythic-plus-runs/season-sl-1/14037222-10-the-necrotic-wake"
+    },
+    {
+      "dungeon": "Plaguefall",
+      "short_name": "PF",
+      "mythic_level": 9,
+      "completed_at": "2021-01-24T06:16:53.000Z",
+      "clear_time_ms": 2686327,
+      "num_keystone_upgrades": 0,
+      "map_challenge_mode_id": 379,
+      "score": 72.7,
+      "affixes": [
+        {
+          "id": 10,
+          "name": "Fortified",
+          "description": "Non-boss enemies have 20% more health and inflict up to 30% increased damage.",
+          "wowhead_url": "https://wowhead.com/affix=10"
+        },
+        {
+          "id": 123,
+          "name": "Spiteful",
+          "description": "Fiends rise from the corpses of non-boss enemies and pursue random players.",
+          "wowhead_url": "https://wowhead.com/affix=123"
+        },
+        {
+          "id": 3,
+          "name": "Volcanic",
+          "description": "While in combat, enemies periodically cause gouts of flame to erupt beneath the feet of distant players.",
+          "wowhead_url": "https://wowhead.com/affix=3"
+        },
+        {
+          "id": 121,
+          "name": "Prideful",
+          "description": "Players overflow with pride as they defeat non-boss enemies, eventually forming a Manifestation of Pride. Defeating this Manifestation greatly empowers players.",
+          "wowhead_url": "https://wowhead.com/affix=121"
+        }
+      ],
+      "url": "https://raider.io/mythic-plus-runs/season-sl-1/13794251-9-plaguefall"
+    },
+    {
+      "dungeon": "De Other Side",
+      "short_name": "DOS",
+      "mythic_level": 7,
+      "completed_at": "2021-01-24T05:20:13.000Z",
+      "clear_time_ms": 2532472,
+      "num_keystone_upgrades": 0,
+      "map_challenge_mode_id": 377,
+      "score": 58.7,
+      "affixes": [
+        {
+          "id": 10,
+          "name": "Fortified",
+          "description": "Non-boss enemies have 20% more health and inflict up to 30% increased damage.",
+          "wowhead_url": "https://wowhead.com/affix=10"
+        },
+        {
+          "id": 123,
+          "name": "Spiteful",
+          "description": "Fiends rise from the corpses of non-boss enemies and pursue random players.",
+          "wowhead_url": "https://wowhead.com/affix=123"
+        },
+        {
+          "id": 3,
+          "name": "Volcanic",
+          "description": "While in combat, enemies periodically cause gouts of flame to erupt beneath the feet of distant players.",
+          "wowhead_url": "https://wowhead.com/affix=3"
+        },
+        {
+          "id": 121,
+          "name": "Prideful",
+          "description": "Players overflow with pride as they defeat non-boss enemies, eventually forming a Manifestation of Pride. Defeating this Manifestation greatly empowers players.",
+          "wowhead_url": "https://wowhead.com/affix=121"
+        }
+      ],
+      "url": "https://raider.io/mythic-plus-runs/season-sl-1/13788706-7-de-other-side"
+    },
+    {
+      "dungeon": "Sanguine Depths",
+      "short_name": "SD",
+      "mythic_level": 8,
+      "completed_at": "2021-01-24T03:29:47.000Z",
+      "clear_time_ms": 2202892,
+      "num_keystone_upgrades": 1,
+      "map_challenge_mode_id": 380,
+      "score": 80.9,
+      "affixes": [
+        {
+          "id": 10,
+          "name": "Fortified",
+          "description": "Non-boss enemies have 20% more health and inflict up to 30% increased damage.",
+          "wowhead_url": "https://wowhead.com/affix=10"
+        },
+        {
+          "id": 123,
+          "name": "Spiteful",
+          "description": "Fiends rise from the corpses of non-boss enemies and pursue random players.",
+          "wowhead_url": "https://wowhead.com/affix=123"
+        },
+        {
+          "id": 3,
+          "name": "Volcanic",
+          "description": "While in combat, enemies periodically cause gouts of flame to erupt beneath the feet of distant players.",
+          "wowhead_url": "https://wowhead.com/affix=3"
+        },
+        {
+          "id": 121,
+          "name": "Prideful",
+          "description": "Players overflow with pride as they defeat non-boss enemies, eventually forming a Manifestation of Pride. Defeating this Manifestation greatly empowers players.",
+          "wowhead_url": "https://wowhead.com/affix=121"
+        }
+      ],
+      "url": "https://raider.io/mythic-plus-runs/season-sl-1/13769691-8-sanguine-depths"
+    },
+    {
+      "dungeon": "Theater of Pain",
+      "short_name": "TOP",
+      "mythic_level": 8,
+      "completed_at": "2021-01-23T04:24:13.000Z",
+      "clear_time_ms": 2131634,
+      "num_keystone_upgrades": 1,
+      "map_challenge_mode_id": 382,
+      "score": 80.4,
+      "affixes": [
+        {
+          "id": 10,
+          "name": "Fortified",
+          "description": "Non-boss enemies have 20% more health and inflict up to 30% increased damage.",
+          "wowhead_url": "https://wowhead.com/affix=10"
+        },
+        {
+          "id": 123,
+          "name": "Spiteful",
+          "description": "Fiends rise from the corpses of non-boss enemies and pursue random players.",
+          "wowhead_url": "https://wowhead.com/affix=123"
+        },
+        {
+          "id": 3,
+          "name": "Volcanic",
+          "description": "While in combat, enemies periodically cause gouts of flame to erupt beneath the feet of distant players.",
+          "wowhead_url": "https://wowhead.com/affix=3"
+        },
+        {
+          "id": 121,
+          "name": "Prideful",
+          "description": "Players overflow with pride as they defeat non-boss enemies, eventually forming a Manifestation of Pride. Defeating this Manifestation greatly empowers players.",
+          "wowhead_url": "https://wowhead.com/affix=121"
+        }
+      ],
+      "url": "https://raider.io/mythic-plus-runs/season-sl-1/13482733-8-theater-of-pain"
+    },
+    {
+      "dungeon": "Mists of Tirna Scithe",
+      "short_name": "MISTS",
+      "mythic_level": 8,
+      "completed_at": "2021-01-23T03:35:38.000Z",
+      "clear_time_ms": 1456967,
+      "num_keystone_upgrades": 1,
+      "map_challenge_mode_id": 375,
+      "score": 81.7,
+      "affixes": [
+        {
+          "id": 10,
+          "name": "Fortified",
+          "description": "Non-boss enemies have 20% more health and inflict up to 30% increased damage.",
+          "wowhead_url": "https://wowhead.com/affix=10"
+        },
+        {
+          "id": 123,
+          "name": "Spiteful",
+          "description": "Fiends rise from the corpses of non-boss enemies and pursue random players.",
+          "wowhead_url": "https://wowhead.com/affix=123"
+        },
+        {
+          "id": 3,
+          "name": "Volcanic",
+          "description": "While in combat, enemies periodically cause gouts of flame to erupt beneath the feet of distant players.",
+          "wowhead_url": "https://wowhead.com/affix=3"
+        },
+        {
+          "id": 121,
+          "name": "Prideful",
+          "description": "Players overflow with pride as they defeat non-boss enemies, eventually forming a Manifestation of Pride. Defeating this Manifestation greatly empowers players.",
+          "wowhead_url": "https://wowhead.com/affix=121"
+        }
+      ],
+      "url": "https://raider.io/mythic-plus-runs/season-sl-1/13474185-8-mists-of-tirna-scithe"
+    },
+    {
+      "dungeon": "Mists of Tirna Scithe",
+      "short_name": "MISTS",
+      "mythic_level": 9,
+      "completed_at": "2021-01-19T04:19:01.000Z",
+      "clear_time_ms": 7369942,
+      "num_keystone_upgrades": 0,
+      "map_challenge_mode_id": 375,
+      "score": 26.3,
+      "affixes": [
+        {
+          "id": 9,
+          "name": "Tyrannical",
+          "description": "Bosses have 40% more health. Bosses and their minions inflict up to 15% increased damage.",
+          "wowhead_url": "https://wowhead.com/affix=9"
+        },
+        {
+          "id": 6,
+          "name": "Raging",
+          "description": "Non-boss enemies enrage at 30% health remaining, dealing 100% increased damage until defeated.",
+          "wowhead_url": "https://wowhead.com/affix=6"
+        },
+        {
+          "id": 13,
+          "name": "Explosive",
+          "description": "While in combat, enemies periodically summon Explosive Orbs that will detonate if not destroyed.",
+          "wowhead_url": "https://wowhead.com/affix=13"
+        },
+        {
+          "id": 121,
+          "name": "Prideful",
+          "description": "Players overflow with pride as they defeat non-boss enemies, eventually forming a Manifestation of Pride. Defeating this Manifestation greatly empowers players.",
+          "wowhead_url": "https://wowhead.com/affix=121"
+        }
+      ],
+      "url": "https://raider.io/mythic-plus-runs/season-sl-1/12649124-9-mists-of-tirna-scithe"
+    },
+    {
+      "dungeon": "De Other Side",
+      "short_name": "DOS",
+      "mythic_level": 7,
+      "completed_at": "2021-01-16T02:59:04.000Z",
+      "clear_time_ms": 2772092,
+      "num_keystone_upgrades": 0,
+      "map_challenge_mode_id": 377,
+      "score": 54.7,
+      "affixes": [
+        {
+          "id": 9,
+          "name": "Tyrannical",
+          "description": "Bosses have 40% more health. Bosses and their minions inflict up to 15% increased damage.",
+          "wowhead_url": "https://wowhead.com/affix=9"
+        },
+        {
+          "id": 6,
+          "name": "Raging",
+          "description": "Non-boss enemies enrage at 30% health remaining, dealing 100% increased damage until defeated.",
+          "wowhead_url": "https://wowhead.com/affix=6"
+        },
+        {
+          "id": 13,
+          "name": "Explosive",
+          "description": "While in combat, enemies periodically summon Explosive Orbs that will detonate if not destroyed.",
+          "wowhead_url": "https://wowhead.com/affix=13"
+        },
+        {
+          "id": 121,
+          "name": "Prideful",
+          "description": "Players overflow with pride as they defeat non-boss enemies, eventually forming a Manifestation of Pride. Defeating this Manifestation greatly empowers players.",
+          "wowhead_url": "https://wowhead.com/affix=121"
+        }
+      ],
+      "url": "https://raider.io/mythic-plus-runs/season-sl-1/11987138-7-de-other-side"
+    },
+    {
+      "dungeon": "Mists of Tirna Scithe",
+      "short_name": "MISTS",
+      "mythic_level": 7,
+      "completed_at": "2021-01-16T02:02:32.000Z",
+      "clear_time_ms": 2546481,
+      "num_keystone_upgrades": 0,
+      "map_challenge_mode_id": 375,
+      "score": 44.4,
+      "affixes": [
+        {
+          "id": 9,
+          "name": "Tyrannical",
+          "description": "Bosses have 40% more health. Bosses and their minions inflict up to 15% increased damage.",
+          "wowhead_url": "https://wowhead.com/affix=9"
+        },
+        {
+          "id": 6,
+          "name": "Raging",
+          "description": "Non-boss enemies enrage at 30% health remaining, dealing 100% increased damage until defeated.",
+          "wowhead_url": "https://wowhead.com/affix=6"
+        },
+        {
+          "id": 13,
+          "name": "Explosive",
+          "description": "While in combat, enemies periodically summon Explosive Orbs that will detonate if not destroyed.",
+          "wowhead_url": "https://wowhead.com/affix=13"
+        },
+        {
+          "id": 121,
+          "name": "Prideful",
+          "description": "Players overflow with pride as they defeat non-boss enemies, eventually forming a Manifestation of Pride. Defeating this Manifestation greatly empowers players.",
+          "wowhead_url": "https://wowhead.com/affix=121"
+        }
+      ],
+      "url": "https://raider.io/mythic-plus-runs/season-sl-1/11983716-7-mists-of-tirna-scithe"
+    }
+  ]
+}

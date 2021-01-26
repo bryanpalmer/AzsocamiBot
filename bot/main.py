@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.43"
-VERSIONDATE = "2021-01-25"
+VERSION = "0.1.44"
+VERSIONDATE = "2021-01-26"
 
 from os.path import dirname, join, os
 
@@ -722,6 +722,44 @@ async def raidmats(ctx):
     await ctx.send(embed=response)
 
 
+@bot.command(aliases=["gv"])
+async def gvault(ctx):
+    ## id, name, realmslug, role, expires FROM members ORDER BY name
+    teamList = wowapi.getMembersList()
+    gvList = []
+    lastReset = wowapi.getLastResetDateTime()
+    for member in teamList:
+        keysRun = []
+        runsData = wowapi.api_raiderio_char_mplus_recent_runs(member[1], member[2])
+        for run in runsData["mythic_plus_recent_runs"]:
+            keyLvl = run["mythic_level"]
+            rt = datetime.datetime.fromisoformat(
+                run["completed_at"].replace("Z", "+00:00")
+            )
+            if rt > lastReset:
+                keysRun.append(keyLvl)
+        keysRun.sort(reverse=True)
+        gvList.append((member[1].title(), keysRun))
+
+    msg = """```
+| Name                 | M+ Vault | Raid Vault |
+|----------------------+----------+------------|\n"""
+    for member in gvList:
+        # print(member)
+        m1 = 0
+        m4 = 0
+        m10 = 0
+        if len(member[1]) > 0:
+            m1 = member[1][0]
+        if len(member[1]) > 3:
+            m4 = member[1][3]
+        if len(member[1]) > 9:
+            m10 = member[1][9]
+        msg += f"| {member[0].ljust(20,' ')} | {(str(m1) + '/' + str(m4) + '/' + str(m10)).rjust(8,' ') } |            |\n"
+    msg += "```"
+    await ctx.send(msg)
+
+
 ###############################################################
 ###############################################################
 ###                                                         ###
@@ -862,7 +900,10 @@ def localTimeStr(utcTime):
 @bot.command()
 async def changelog(ctx):
     msg = """
-```## 0.1.43 - 2021-01-25
+```## 0.1.44 - 2021-01-26
+ - Added .gvault command to track weekly m+ runs for vault.
+
+## 0.1.43 - 2021-01-25
  - Added .tc command to track Twisting Corridors runs.
 
 ## 0.1.42 - 2021-01-25

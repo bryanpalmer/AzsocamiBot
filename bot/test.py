@@ -1,32 +1,31 @@
-from os.path import dirname, join, os
-from dotenv import load_dotenv
-import json
-
-dotenv_path = join(dirname(__file__), "../.env")
-print("Env vars in:", dotenv_path)
-load_dotenv(
-    dotenv_path,
-    verbose=True,
-)
-
 import wowapi
-from operator import itemgetter
+
+import datetime
+import pytz
 
 
-charData = wowapi.getCharacterAchievements("Aaryn", "silver-hand")
-# data = json.dumps(charData, indent=4)
+lastReset = wowapi.getLastResetDateTime()
 
-# with open("achieves.txt", "w") as outfile:
-#     json.dump(charData, outfile)
+# fin1 = "2021-01-25T03:58:27.000Z"
+# fin2 = "2021-01-25T03:58:27.000+00:00"
 
-highestCompleted = 0
-completed = [(0, "None")]
-for item in charData["achievements"]:
-    if item["id"] in (14468, 14469, 14470, 14471, 14472, 14568, 14569, 14570):
-        if item["id"] > highestCompleted:
-            highestCompleted = item["id"]
-            completed.append((item["id"], item["achievement"]["name"]))
+# print(parser.isoparse(fin1))
+# print(datetime.datetime.fromisoformat(fin2))
 
-# print(f"{item['id']} - {item['achievement']['name']}")
+keysRun = []
+runsData = wowapi.api_raiderio_char_mplus_recent_runs("aaryn", "silver-hand")
+for run in runsData["mythic_plus_recent_runs"]:
+    keyLvl = run["mythic_level"]
+    rt = datetime.datetime.fromisoformat(run["completed_at"].replace("Z", "+00:00"))
+    if rt > lastReset:
+        # print(f"{rt} comes after {lastReset}")
+        keysRun.append(keyLvl)
+#    else:
+# print(f"{rt} comes before {lastReset}")
 
-HighestFinished = max(completed, key=itemgetter(1))[1]
+keysRun.sort(reverse=True)
+
+for key in keysRun:
+    print(key)
+
+print("All done.")

@@ -4,6 +4,7 @@ from urllib.parse import urlparse
 import datetime
 import json
 import os
+import pytz
 
 # import mariadb
 import mysql.connector as mysql
@@ -45,6 +46,28 @@ def calcExpiresDateTime(expires_in):
     return retVal + datetime.timedelta(0, expires_in)
 
 
+def getLastResetDateTime():
+    utc = pytz.UTC
+    today = datetime.date.today()
+    last_tue = today - datetime.timedelta(days=today.weekday() - 1)
+    lastReset = datetime.datetime(last_tue.year, last_tue.month, last_tue.day, 10, 0, 0)
+    # print(lastReset)
+    return utc.localize(lastReset)
+
+
+def getPrevResetDateTime():
+    utc = pytz.UTC
+    today = datetime.date.today()
+    last_tue = (
+        today
+        - datetime.timedelta(days=today.weekday() - 1)
+        - datetime.timedelta(days=7)
+    )
+    lastReset = datetime.datetime(last_tue.year, last_tue.month, last_tue.day, 10, 0, 0)
+    # print(lastReset)
+    return utc.localize(lastReset)
+
+
 def getAccessToken():
     """ Get current access token from db or generate new on from API."""
     token, expires = getAccessTokenFromDB()
@@ -73,6 +96,75 @@ def getRole(charEntered):
     elif charEntered == "a":
         role = "Alt"
     return role
+
+
+###############################################################
+###############################################################
+###                                                         ###
+###                RAIDER.IO API CALLS                      ###
+###                                                         ###
+###############################################################
+###############################################################
+
+# https://raider.io/api/v1/characters/profile?region=us&realm=silver-hand&name=aaryn&fields=mythic_plus_recent_runs
+def api_raiderio_char_mplus_recent_runs(playerName, playerRealm):
+    raiderio_uri = "https://raider.io/api/v1/characters/profile"
+    parameters = {
+        "region": "us",
+        "realm": playerRealm,
+        "name": playerName,
+        "fields": "mythic_plus_recent_runs",
+    }
+    response = requests.get(raiderio_uri, params=parameters)
+    # print( response.text )
+    dataJson = json.loads(response.text)
+    return dataJson
+
+
+def api_raiderio_char_mplus_score(playerName, playerRealm):
+    raiderio_uri = "https://raider.io/api/v1/characters/profile"
+    parameters = {
+        "region": "us",
+        "realm": playerRealm,
+        "name": playerName,
+        "fields": "mythic_plus_scores_by_season:current",
+    }
+    response = requests.get(raiderio_uri, params=parameters)
+    # print( response.text )
+    dataJson = json.loads(response.text)
+    return dataJson
+
+
+def api_raiderio_char_mplus_rank(playerName, playerRealm):
+    raiderio_uri = "https://raider.io/api/v1/characters/profile"
+    parameters = {
+        "region": "us",
+        "realm": playerRealm,
+        "name": playerName,
+        "fields": "mythic_plus_ranks",
+    }
+    response = requests.get(raiderio_uri, params=parameters)
+    # print( response.text )
+    dataJson = json.loads(response.text)
+    return dataJson
+
+
+def api_raiderio_char_raid_progress(playerName, playerRealm):
+    raiderio_uri = "https://raider.io/api/v1/characters/profile"
+    parameters = {
+        "region": "us",
+        "realm": playerRealm,
+        "name": playerName,
+        "fields": "raid_progression",
+    }
+    response = requests.get(raiderio_uri, params=parameters)
+    # print( response.text )
+    dataJson = json.loads(response.text)
+    return dataJson
+
+
+###############################################################
+###############################################################
 
 
 def getLegendaryArmorsList():
