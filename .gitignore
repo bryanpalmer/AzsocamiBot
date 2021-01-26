@@ -1,6 +1,7 @@
 # ignoring this as it's a 15mb json file
 # only needed when I want to examine wow api AH output
 devstuff/ahdata.json
+devstuff/gvault.png
 
 
 # Byte-compiled / optimized / DLL files
