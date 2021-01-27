@@ -920,7 +920,7 @@ async def cleanbot(ctx, number=50):
             mgs.append(x)
             cleaned += 1
             # print(x)
-        if x.content[:1] in prefixList:
+        elif x.content[:1] in prefixList:
             mgs.append(x)
             cleaned += 1
             # print(x.content[:1])
