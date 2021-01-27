@@ -179,6 +179,11 @@ async def help(ctx):
         inline=False,
     )
     embed.add_field(
+        name=".cleanbot",
+        value="Cleans certain bot messages and commands from channel.",
+        inline=False,
+    )
+    embed.add_field(
         name=".changelog",
         value="AzsocamiBot change log.",
         inline=False,
@@ -894,6 +899,28 @@ async def clean(ctx, number=50):
             cleaned += 1
             # print(x)
         if x.content[:1] == COMMAND_PREFIX:
+            mgs.append(x)
+            cleaned += 1
+            # print(x.content[:1])
+    await ctx.message.channel.delete_messages(mgs)
+    print(f"Removed {cleaned} messages and commands.")
+
+
+@bot.command()
+@commands.is_owner()
+async def cleanbot(ctx, number=50):
+    mgs = []
+    number = int(number)
+    cleaned = 0
+    # M+ bot, this bot,
+    botsList = [378005927493763074, bot.user.id]
+    prefixList = [".", "*", "!", ";"]
+    async for x in ctx.message.channel.history(limit=number):
+        if x.author.id in botsList:
+            mgs.append(x)
+            cleaned += 1
+            # print(x)
+        if x.content[:1] in prefixList:
             mgs.append(x)
             cleaned += 1
             # print(x.content[:1])
