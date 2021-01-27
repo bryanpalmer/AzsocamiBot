@@ -141,6 +141,16 @@ async def help(ctx):
         inline=False,
     )
     embed.add_field(
+        name=".tc",
+        value=".tc - Shows current Twisting Corridors achievement for team.",
+        inline=False,
+    )
+    embed.add_field(
+        name=".gvault or .gv",
+        value="Shows current Great Vault loot from M+ keys.",
+        inline=False,
+    )
+    embed.add_field(
         name=".team or .raidteam",
         value="team [update] - List current team members data. Update is Optional.",
         inline=False,
@@ -178,7 +188,6 @@ async def help(ctx):
         value="AzsocamiBot version info.",
         inline=False,
     )
-
     await ctx.send(embed=embed)
     if author.name.lower() == "aaryn":
         embed2 = discord.Embed(color=discord.Color.orange())
@@ -196,7 +205,6 @@ async def help(ctx):
             value="ADMIN: get_table_structure <tablename> List table structure.",
             inline=False,
         )
-
         await ctx.send(embed=embed2)
 
 
@@ -742,7 +750,7 @@ async def gvault(ctx):
         gvList.append((member[1].title(), keysRun))
 
     msg = """```
-| Name                 | M+ Vault | Raid Vault |
+| Name                 | M+ Vault |  Rewards   |
 |----------------------+----------+------------|\n"""
     for member in gvList:
         # print(member)
