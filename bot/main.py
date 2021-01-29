@@ -753,10 +753,8 @@ async def gvault(ctx):
                 keysRun.append(keyLvl)
         keysRun.sort(reverse=True)
         gvList.append((member[1].title(), keysRun))
-
-    msg = """```
-| Name                 | M+ Vault |  Rewards   |
-|----------------------+----------+------------|\n"""
+    msg = "```| Name                 | M+ Vault |  Rewards   |\n"
+    msg += "|----------------------+----------+------------|\n"
     for member in gvList:
         # print(member)
         m1 = 0
@@ -887,7 +885,6 @@ async def version(ctx):
 
 
 @bot.command()
-@commands.is_owner()
 async def clean(ctx, number=50):
     mgs = []
     number = int(number)
@@ -907,7 +904,6 @@ async def clean(ctx, number=50):
 
 
 @bot.command()
-@commands.is_owner()
 async def cleanbot(ctx, number=50):
     mgs = []
     number = int(number)
