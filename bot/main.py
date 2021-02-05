@@ -753,8 +753,8 @@ async def gvault(ctx):
                 keysRun.append(keyLvl)
         keysRun.sort(reverse=True)
         gvList.append((member[1].title(), keysRun))
-    msg = "```| Name                 | M+ Vault |   Count    |\n"
-    msg += "|----------------------+----------+------------|\n"
+    msg = "```| Name            | M+ Vault |   Count    |\n"
+    msg += "|-----------------+----------+------------|\n"
     for member in gvList:
         # print(member)
         m1 = 0
@@ -766,8 +766,9 @@ async def gvault(ctx):
             m4 = member[1][3]
         if len(member[1]) > 9:
             m10 = member[1][9]
-        msg += f"| {member[0].ljust(20,' ')} | {(str(m1) + '/' + str(m4) + '/' + str(m10)).rjust(8,' ') } |  {str(len(member[1])).rjust(2,' ')} runs   |\n"
+        msg += f"| {member[0].ljust(15,' ')} | {(str(m1) + '/' + str(m4) + '/' + str(m10)).rjust(8,' ') } |  {str(len(member[1])).rjust(2,' ')} {'run ' if len(member[1])==1 else 'runs'}   |\n"
     msg += "```"
+    print(f"Msg length: {len(msg)}")
     await ctx.send(msg)
 
 
