@@ -924,6 +924,11 @@ async def cleanbot(ctx, number=50):
     print(f"Removed {cleaned} messages and commands.")
 
 
+@bot.command()
+async def getlastreset(ctx):
+    await ctx.send(f"The last reset datetime was {wowapi.getLastResetDateTime()}")
+
+
 def localTimeStr(utcTime):
     return utcTime.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)
 
