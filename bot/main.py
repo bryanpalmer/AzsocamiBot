@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.44"
-VERSIONDATE = "2021-01-26"
+VERSION = "0.1.46"
+VERSIONDATE = "2021-02-05"
 
 from os.path import dirname, join, os
 
@@ -926,7 +926,9 @@ async def cleanbot(ctx, number=50):
 
 @bot.command()
 async def getlastreset(ctx):
-    await ctx.send(f"The last reset datetime was {wowapi.getLastResetDateTime()}")
+    await ctx.send(
+        f"The last reset datetime was {wowapi.getLastResetDateTime()} Local ({localTimeStr(wowapi.getLastResetDateTime())})"
+    )
 
 
 def localTimeStr(utcTime):
@@ -936,7 +938,10 @@ def localTimeStr(utcTime):
 @bot.command()
 async def changelog(ctx):
     msg = """
-```## 0.1.44 - 2021-01-26
+```## 0.1.46 - 2021-02-05
+ - Fixed LastReset datetime variables to Tuesday, 15:00 UTC.
+
+## 0.1.44 - 2021-01-26
  - Added .gvault command to track weekly m+ runs for vault.
 
 ## 0.1.43 - 2021-01-25
