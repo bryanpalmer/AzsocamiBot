@@ -749,6 +749,7 @@ async def gvault(ctx):
             rt = datetime.datetime.fromisoformat(
                 run["completed_at"].replace("Z", "+00:00")
             )
+            print(rt, lastReset)
             if rt > lastReset:
                 keysRun.append(keyLvl)
         keysRun.sort(reverse=True)
