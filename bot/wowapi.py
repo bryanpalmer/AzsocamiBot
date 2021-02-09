@@ -47,6 +47,7 @@ def calcExpiresDateTime(expires_in):
 
 
 def getLastResetDateTime():
+    # https://www.w3resource.com/python-exercises/date-time-exercise/python-date-time-exercise-19.php
     utc = pytz.UTC
     today = datetime.date.today()
     offset = (today.weekday() - 1) % 7
