@@ -49,20 +49,19 @@ def calcExpiresDateTime(expires_in):
 def getLastResetDateTime():
     utc = pytz.UTC
     today = datetime.date.today()
-    last_tue = today - datetime.timedelta(days=today.weekday() - 1)
+    offset = (today.weekday() - 1) % 7
+    last_tue = today - datetime.timedelta(days=offset)
     lastReset = datetime.datetime(last_tue.year, last_tue.month, last_tue.day, 15, 0, 0)
-    # print(lastReset)
+    print(lastReset)
     return utc.localize(lastReset)
 
 
 def getPrevResetDateTime():
     utc = pytz.UTC
     today = datetime.date.today()
-    last_tue = (
-        today
-        - datetime.timedelta(days=today.weekday() - 1)
-        - datetime.timedelta(days=7)
-    )
+    last_tue = today - datetime.timedelta(days=offset)
+
+    last_tue = today - datetime.timedelta(days=offset) - datetime.timedelta(days=7)
     lastReset = datetime.datetime(last_tue.year, last_tue.month, last_tue.day, 15, 0, 0)
     # print(lastReset)
     return utc.localize(lastReset)
