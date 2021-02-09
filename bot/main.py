@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.44"
-VERSIONDATE = "2021-01-26"
+VERSION = "0.1.46"
+VERSIONDATE = "2021-02-05"
 
 from os.path import dirname, join, os
 
@@ -754,8 +754,8 @@ async def gvault(ctx):
                 keysRun.append(keyLvl)
         keysRun.sort(reverse=True)
         gvList.append((member[1].title(), keysRun))
-    msg = "```| Name                 | M+ Vault |   Count    |\n"
-    msg += "|----------------------+----------+------------|\n"
+    msg = "```| Name            | M+ Vault |   Count    |\n"
+    msg += "|-----------------+----------+------------|\n"
     for member in gvList:
         # print(member)
         m1 = 0
@@ -767,8 +767,9 @@ async def gvault(ctx):
             m4 = member[1][3]
         if len(member[1]) > 9:
             m10 = member[1][9]
-        msg += f"| {member[0].ljust(20,' ')} | {(str(m1) + '/' + str(m4) + '/' + str(m10)).rjust(8,' ') } |  {str(len(member[1])).rjust(2,' ')} runs   |\n"
+        msg += f"| {member[0].ljust(15,' ')} | {(str(m1) + '/' + str(m4) + '/' + str(m10)).rjust(8,' ') } |  {str(len(member[1])).rjust(2,' ')} {'run ' if len(member[1])==1 else 'runs'}   |\n"
     msg += "```"
+    print(f"Msg length: {len(msg)}")
     await ctx.send(msg)
 
 
@@ -925,6 +926,13 @@ async def cleanbot(ctx, number=50):
     print(f"Removed {cleaned} messages and commands.")
 
 
+@bot.command()
+async def getlastreset(ctx):
+    await ctx.send(
+        f"The last reset datetime was {wowapi.getLastResetDateTime()} Local ({localTimeStr(wowapi.getLastResetDateTime())})"
+    )
+
+
 def localTimeStr(utcTime):
     return utcTime.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)
 
@@ -932,7 +940,10 @@ def localTimeStr(utcTime):
 @bot.command()
 async def changelog(ctx):
     msg = """
-```## 0.1.44 - 2021-01-26
+```## 0.1.46 - 2021-02-05
+ - Fixed LastReset datetime variables to Tuesday, 15:00 UTC.
+
+## 0.1.44 - 2021-01-26
  - Added .gvault command to track weekly m+ runs for vault.
 
 ## 0.1.43 - 2021-01-25

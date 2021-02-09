@@ -50,7 +50,7 @@ def getLastResetDateTime():
     utc = pytz.UTC
     today = datetime.date.today()
     last_tue = today - datetime.timedelta(days=today.weekday() - 1)
-    lastReset = datetime.datetime(last_tue.year, last_tue.month, last_tue.day, 10, 0, 0)
+    lastReset = datetime.datetime(last_tue.year, last_tue.month, last_tue.day, 15, 0, 0)
     # print(lastReset)
     return utc.localize(lastReset)
 
@@ -63,7 +63,7 @@ def getPrevResetDateTime():
         - datetime.timedelta(days=today.weekday() - 1)
         - datetime.timedelta(days=7)
     )
-    lastReset = datetime.datetime(last_tue.year, last_tue.month, last_tue.day, 10, 0, 0)
+    lastReset = datetime.datetime(last_tue.year, last_tue.month, last_tue.day, 15, 0, 0)
     # print(lastReset)
     return utc.localize(lastReset)
 
