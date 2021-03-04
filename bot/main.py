@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.46"
-VERSIONDATE = "2021-02-05"
+VERSION = "0.1.48"
+VERSIONDATE = "2021-03-04"
 
 from os.path import dirname, join, os
 
@@ -148,6 +148,11 @@ async def help(ctx):
     embed.add_field(
         name=".gvault or .gv",
         value="Shows current Great Vault loot from M+ keys.",
+        inline=False,
+    )
+    embed.add_field(
+        name=".bestruns or .br",
+        value="Shows best timed mythic runs for season, all members.",
         inline=False,
     )
     embed.add_field(
@@ -771,6 +776,67 @@ async def gvault(ctx):
     await ctx.send(msg)
 
 
+@bot.command(aliases=["br"])
+async def bestruns(ctx, seasonId=5):
+    ## id, name, realmslug, role, expires FROM members ORDER BY name
+    teamList = wowapi.getMembersList()
+    # teamRuns = []
+    dungeons = {
+        "Mists of Tirna Scithe": 0,
+        "Sanguine Depths": 0,
+        "De Other Side": 0,
+        "The Necrotic Wake": 0,
+        "Theater of Pain": 0,
+        "Halls of Atonement": 0,
+        "Spires of Ascension": 0,
+        "Plaguefall": 0,
+    }
+    teamRuns = {}
+    for member in teamList:
+        cName = member[1]
+        cRealm = member[2]
+        teamRuns[cName] = {
+            "Name": cName,
+            "Mists of Tirna Scithe": 0,
+            "Sanguine Depths": 0,
+            "De Other Side": 0,
+            "The Necrotic Wake": 0,
+            "Theater of Pain": 0,
+            "Halls of Atonement": 0,
+            "Spires of Ascension": 0,
+            "Plaguefall": 0,
+        }
+        runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, 5)
+        if bool(runsData):
+            print(f"Runs data for {cName}")
+            # print(runsData)
+            for run in runsData["best_runs"]:
+                if run["is_completed_within_time"] == True:
+                    dName = run["dungeon"]["name"]
+                    teamRuns[cName][dName] = run["keystone_level"]
+                    # print(f"{dName} - {run['keystone_level']}")
+        # print("")
+
+    # print(teamRuns)
+    msg = "```| Name                | DOS | HOA | MST | NW  | PF  | SD  | SOA | TOP |\n"
+    msg += "|---------------------+-----+-----+-----+-----+-----+-----+-----+-----|\n"
+    for member in teamRuns:
+        print(teamRuns[member])
+        lineval = ""
+        lineval += f"| {teamRuns[member]['Name'].ljust(19,' ')} "
+        lineval += f"| {str(teamRuns[member]['De Other Side']).rjust(3,' ')} "
+        lineval += f"| {str(teamRuns[member]['Halls of Atonement']).rjust(3,' ')} "
+        lineval += f"| {str(teamRuns[member]['Mists of Tirna Scithe']).rjust(3,' ')} "
+        lineval += f"| {str(teamRuns[member]['The Necrotic Wake']).rjust(3,' ')} "
+        lineval += f"| {str(teamRuns[member]['Plaguefall']).rjust(3,' ')} "
+        lineval += f"| {str(teamRuns[member]['Sanguine Depths']).rjust(3,' ')} "
+        lineval += f"| {str(teamRuns[member]['Spires of Ascension']).rjust(3,' ')} "
+        lineval += f"| {str(teamRuns[member]['Theater of Pain']).rjust(3,' ')} |\n"
+        msg += lineval
+    msg += "```"
+    await ctx.send(msg)
+
+
 ###############################################################
 ###############################################################
 ###                                                         ###
@@ -938,7 +1004,10 @@ def localTimeStr(utcTime):
 @bot.command()
 async def changelog(ctx):
     msg = """
-```## 0.1.46 - 2021-02-05
+```## 0.1.48 - 2021-03-04
+ - Added .bestruns command to track Mythic+ Season best runs.
+
+## 0.1.46 - 2021-02-05
  - Fixed LastReset datetime variables to Tuesday, 15:00 UTC.
 
 ## 0.1.44 - 2021-01-26
