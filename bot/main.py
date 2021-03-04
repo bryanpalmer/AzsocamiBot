@@ -780,6 +780,7 @@ async def gvault(ctx):
 
 @bot.command(aliases=["br"])
 async def bestruns(ctx, seasonId=5):
+    msgId = await ctx.send("Gathering members mythic+ data, please wait...")
     ## id, name, realmslug, role, expires FROM members ORDER BY name
     teamList = wowapi.getMembersList()
     # teamRuns = []
@@ -820,7 +821,7 @@ async def bestruns(ctx, seasonId=5):
         # print("")
 
     # print(teamRuns)
-    msg = "```| Name                | DOS | HOA | MST | NW  | PF  | SD  | SOA | TOP |\n"
+    msg = "```| Name                | DOS | HOA | MST |  NW |  PF |  SD | SOA | TOP |\n"
     msg += "|---------------------+-----+-----+-----+-----+-----+-----+-----+-----|\n"
     for member in teamRuns:
         print(teamRuns[member])
@@ -837,6 +838,7 @@ async def bestruns(ctx, seasonId=5):
         msg += lineval
     msg += "```"
     await ctx.send(msg)
+    await msgId.delete()
 
 
 ###############################################################
