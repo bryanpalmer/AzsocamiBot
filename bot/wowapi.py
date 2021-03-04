@@ -1151,6 +1151,27 @@ def getCharacterEquipment(charName, charRealm):
     return charData
 
 
+def getCharacterSeasonDetails(charName, charRealm, seasonId):
+    token = getAccessToken()
+    profile_uri = f"https://us.api.blizzard.com/profile/wow/character/{charRealm.lower()}/{charName.lower()}/mythic-keystone-profile/season/{seasonId}"
+    try:
+        response = requests.get(
+            profile_uri,
+            params={
+                "namespace": "profile-us",
+                "locale": "en_US",
+                "access_token": token,
+            },
+        )
+        response.raise_for_status()
+        charData = json.loads(response.text)
+    except requests.exceptions.HTTPError as err:
+        print(err)
+        charData = {}
+    finally:
+        return charData
+
+
 def getAuctionHouseData():
     # returns json for all auction house data
     print("getAuctionHouseData()...")
