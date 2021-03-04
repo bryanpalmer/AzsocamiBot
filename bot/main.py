@@ -821,10 +821,31 @@ async def bestruns(ctx, seasonId=5):
         # print("")
 
     # print(teamRuns)
-    msg = "```| Name                | DOS | HOA | MST |  NW |  PF |  SD | SOA | TOP |\n"
-    msg += "|---------------------+-----+-----+-----+-----+-----+-----+-----+-----|\n"
+    msg = "```| Name                | DOS | HOA | MST |  NW |  PF |  SD | SOA | TOP |10s|15s|\n"
+    msg += "|---------------------+-----+-----+-----+-----+-----+-----+-----+-----+---+---|\n"
     for member in teamRuns:
         print(teamRuns[member])
+        mbr10s = (
+            teamRuns[member]["De Other Side"] > 9
+            and teamRuns[member]["Halls of Atonement"] > 9
+            and teamRuns[member]["Mists of Tirna Scithe"] > 9
+            and teamRuns[member]["The Necrotic Wake"] > 9
+            and teamRuns[member]["Plaguefall"] > 9
+            and teamRuns[member]["Sanguine Depths"] > 9
+            and teamRuns[member]["Spires of Ascension"] > 9
+            and teamRuns[member]["Theater of Pain"] > 9
+        )
+        mbr15s = (
+            teamRuns[member]["De Other Side"] > 14
+            and teamRuns[member]["Halls of Atonement"] > 14
+            and teamRuns[member]["Mists of Tirna Scithe"] > 14
+            and teamRuns[member]["The Necrotic Wake"] > 14
+            and teamRuns[member]["Plaguefall"] > 14
+            and teamRuns[member]["Sanguine Depths"] > 14
+            and teamRuns[member]["Spires of Ascension"] > 14
+            and teamRuns[member]["Theater of Pain"] > 14
+        )
+
         lineval = ""
         lineval += f"| {teamRuns[member]['Name'].ljust(19,' ')} "
         lineval += f"| {str(teamRuns[member]['De Other Side']).rjust(3,' ')} "
@@ -834,9 +855,11 @@ async def bestruns(ctx, seasonId=5):
         lineval += f"| {str(teamRuns[member]['Plaguefall']).rjust(3,' ')} "
         lineval += f"| {str(teamRuns[member]['Sanguine Depths']).rjust(3,' ')} "
         lineval += f"| {str(teamRuns[member]['Spires of Ascension']).rjust(3,' ')} "
-        lineval += f"| {str(teamRuns[member]['Theater of Pain']).rjust(3,' ')} |\n"
+        lineval += f"| {str(teamRuns[member]['Theater of Pain']).rjust(3,' ')} "
+        lineval += f"| {'*' if mbr10s else ' '} | {'*' if mbr15s else ' '} |\n"
         msg += lineval
     msg += "```"
+    print(f"BestRuns msg length is: {len(msg)}")
     await ctx.send(msg)
     await msgId.delete()
 
