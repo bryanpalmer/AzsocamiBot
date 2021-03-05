@@ -796,28 +796,29 @@ async def bestruns(ctx, seasonId=5):
     }
     teamRuns = {}
     for member in teamList:
-        cName = member[1]
-        cRealm = member[2]
-        teamRuns[cName] = {
-            "Name": cName,
-            "Mists of Tirna Scithe": 0,
-            "Sanguine Depths": 0,
-            "De Other Side": 0,
-            "The Necrotic Wake": 0,
-            "Theater of Pain": 0,
-            "Halls of Atonement": 0,
-            "Spires of Ascension": 0,
-            "Plaguefall": 0,
-        }
-        runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, 5)
-        if bool(runsData):
-            print(f"Runs data for {cName}")
-            # print(runsData)
-            for run in runsData["best_runs"]:
-                if run["is_completed_within_time"] == True:
-                    dName = run["dungeon"]["name"]
-                    teamRuns[cName][dName] = run["keystone_level"]
-                    # print(f"{dName} - {run['keystone_level']}")
+        if member[3] != "Alt":
+            cName = member[1]
+            cRealm = member[2]
+            teamRuns[cName] = {
+                "Name": cName,
+                "Mists of Tirna Scithe": 0,
+                "Sanguine Depths": 0,
+                "De Other Side": 0,
+                "The Necrotic Wake": 0,
+                "Theater of Pain": 0,
+                "Halls of Atonement": 0,
+                "Spires of Ascension": 0,
+                "Plaguefall": 0,
+            }
+            runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, 5)
+            if bool(runsData):
+                print(f"Runs data for {cName}")
+                # print(runsData)
+                for run in runsData["best_runs"]:
+                    if run["is_completed_within_time"] == True:
+                        dName = run["dungeon"]["name"]
+                        teamRuns[cName][dName] = run["keystone_level"]
+                        # print(f"{dName} - {run['keystone_level']}")
         # print("")
 
     # print(teamRuns)
