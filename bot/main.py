@@ -780,6 +780,9 @@ async def gvault(ctx):
 
 @bot.command(aliases=["br"])
 async def bestruns(ctx, seasonId=5):
+    # await ctx.send(
+    #     "The manually updated guild progress sheet is [online here](<https://docs.google.com/spreadsheets/d/1SULr3J7G2TkHbzHhJQJZUGYFk9LPAfX44s499NA01tw/edit#gid=0>)."
+    # )
     msgId = await ctx.send("Gathering members mythic+ data, please wait...")
     ## id, name, realmslug, role, expires FROM members ORDER BY name
     teamList = wowapi.getMembersList()
@@ -872,6 +875,12 @@ async def bestruns(ctx, seasonId=5):
     msg += "```"
     print(f"BestRuns msg length is: {len(msg)}")
     await ctx.send(msg)
+    response = discord.Embed(
+        title="Mythic+ Spreadsheet",
+        description="Online manually-updated spreadsheet for mythic+ tracking is [found here](https://docs.google.com/spreadsheets/d/1SULr3J7G2TkHbzHhJQJZUGYFk9LPAfX44s499NA01tw/edit#gid=0).",
+        color=discord.Color.blue(),
+    )
+    await ctx.send(embed=response)
     await msgId.delete()
 
 
