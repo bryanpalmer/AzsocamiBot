@@ -215,6 +215,17 @@ async def help(ctx):
             value="ADMIN: get_table_structure <tablename> List table structure.",
             inline=False,
         )
+        embed2.add_field(
+            name=".add_item",
+            value="ADMIN: add_item <ItemID> Add itemid to raidmats.",
+            inline=False,
+        )
+        embed2.add_field(
+            name=".remove_item",
+            value="ADMIN: remove_item <ItemID> Remove itemid from raidmats.",
+            inline=False,
+        )
+
         await ctx.send(embed=embed2)
 
 
