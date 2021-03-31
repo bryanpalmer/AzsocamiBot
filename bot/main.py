@@ -29,6 +29,7 @@ import discord
 from discord.ext import commands, tasks
 from discord.ext.commands import CommandNotFound
 
+import botlib
 import wowapi
 import wowclasses
 import umj
@@ -742,10 +743,25 @@ async def raidmats(ctx):
         description="Current auction house prices for common raid mats on our server.",
         color=discord.Color.blue(),
     )
-    response.add_field(name="Alchemy Mats", value=alchTxt, inline=True)
-    response.add_field(name="Cooking Mats", value=foodTxt, inline=True)
-    response.add_field(name="Skin/Cloth/Mine Mats", value=lwTxt, inline=False)
-    response.add_field(name="Finished Goods", value=goodsTxt, inline=False)
+    aLines = botlib.str2embedarray(alchTxt)
+    for line in aLines:
+        response.add_field(name="Alchemy Mats", value=line, inline=True)
+
+    aLines = botlib.str2embedarray(foodTxt)
+    for line in aLines:
+        response.add_field(name="Cooking Mats", value=line, inline=True)
+    # response.add_field(name="Cooking Mats", value=foodTxt, inline=True)
+
+    aLines = botlib.str2embedarray(lwTxt)
+    for line in aLines:
+        response.add_field(name="Skin/Cloth/Mine Mats", value=line, inline=False)
+    # response.add_field(name="Skin/Cloth/Mine Mats", value=lwTxt, inline=False)
+
+    aLines = botlib.str2embedarray(goodsTxt)
+    for line in aLines:
+        response.add_field(name="Finished Goods", value=line, inline=False)
+    # response.add_field(name="Finished Goods", value=goodsTxt, inline=False)
+
     response.set_footer(
         text=f"Auction house data last collected at {localTimeStr(lastRun)}"
     )
