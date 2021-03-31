@@ -688,7 +688,9 @@ async def raidmats(ctx):
     foodTxt = ""
     alchTxt = ""
     lwTxt = ""
+    oreTxt = ""
     goodsTxt = ""
+    miscTxt = ""
 
     for key in raidMats:
         name = raidMats[key]["name"]
@@ -709,9 +711,13 @@ async def raidmats(ctx):
             else:
                 foodTxt += f"{ name }: None Available\n"
 
-        elif matclass == "Tradeskill" and (
-            mattype == "Leather" or mattype == "Cloth" or mattype == "Metal & Stone"
-        ):
+        elif matclass == "Tradeskill" and mattype == "Metal & Stone":
+            if qty > 0:
+                oreTxt += f"{ name }: {qty} - *{round(ttlcost,2)}g*\n"
+            else:
+                oreTxt += f"{ name }: None Available\n"
+
+        elif matclass == "Tradeskill" and (mattype == "Leather" or mattype == "Cloth"):
             if qty > 0:
                 lwTxt += f"{ name }: {qty} - *{round(ttlcost,2)}g*\n"
             else:
@@ -735,6 +741,10 @@ async def raidmats(ctx):
                 )
 
         else:
+            if qty > 0:
+                miscTxt += f"{ name }: {qty} - *{round(ttlcost,2)}g*\n"
+            else:
+                miscTxt += f"{ name }: None Available\n"
             print(f"{key} - {name} missing category:  {matclass} | {mattype}")
 
     response = discord.Embed(
@@ -744,23 +754,42 @@ async def raidmats(ctx):
         color=discord.Color.blue(),
     )
     aLines = botlib.str2embedarray(alchTxt)
-    for line in aLines:
-        response.add_field(name="Alchemy Mats", value=line, inline=True)
+    for i, line in enumerate(aLines):
+        if len(line) > 0:
+            fieldName = f"Alchemy Mats{'' if i==0 else ' cont.'}"
+            response.add_field(name="Alchemy Mats", value=line, inline=False)
 
     aLines = botlib.str2embedarray(foodTxt)
-    for line in aLines:
-        response.add_field(name="Cooking Mats", value=line, inline=True)
-    # response.add_field(name="Cooking Mats", value=foodTxt, inline=True)
+    for i, line in enumerate(aLines):
+        if len(line) > 0:
+            fieldName = f"Cooking Mats{'' if i==0 else ' cont.'}"
+            response.add_field(name=fieldName, value=line, inline=False)
+
+    # response.add_field(name="\u200b", value="\u200b", inline=False)
 
     aLines = botlib.str2embedarray(lwTxt)
-    for line in aLines:
-        response.add_field(name="Skin/Cloth/Mine Mats", value=line, inline=False)
-    # response.add_field(name="Skin/Cloth/Mine Mats", value=lwTxt, inline=False)
+    for i, line in enumerate(aLines):
+        if len(line) > 0:
+            fieldName = f"LW / Cloth Mats{'' if i==0 else ' cont.'}"
+            response.add_field(name=fieldName, value=line, inline=False)
+
+    aLines = botlib.str2embedarray(oreTxt)
+    for i, line in enumerate(aLines):
+        if len(line) > 0:
+            fieldName = f"Smithing Mats{'' if i==0 else ' cont.'}"
+            response.add_field(name=fieldName, value=line, inline=False)
 
     aLines = botlib.str2embedarray(goodsTxt)
-    for line in aLines:
-        response.add_field(name="Finished Goods", value=line, inline=False)
-    # response.add_field(name="Finished Goods", value=goodsTxt, inline=False)
+    for i, line in enumerate(aLines):
+        if len(line) > 0:
+            fieldName = f"Finished Goods{'' if i==0 else ' cont.'}"
+            response.add_field(name=fieldName, value=line, inline=False)
+
+    aLines = botlib.str2embedarray(miscTxt)
+    for i, line in enumerate(aLines):
+        if len(line) > 0:
+            fieldName = f"Uncategorized Items{'' if i==0 else ' cont.'}"
+            response.add_field(name=fieldName, value=line, inline=False)
 
     response.set_footer(
         text=f"Auction house data last collected at {localTimeStr(lastRun)}"
