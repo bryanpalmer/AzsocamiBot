@@ -1309,19 +1309,12 @@ def initMembersTable():
             ("Nethershade", "silver-hand", "Ranged DPS"),
             ("Winteros", "silver-hand", "Ranged DPS"),
             ("Agaviss", "silver-hand", "Ranged DPS"),
-            ("Isage", "silver-hand", "Melee DPS"),
             ("Murinn", "silver-hand", "Tank"),
             ("Antigen", "silver-hand", "Healer"),
             ("Kaitaa", "silver-hand", "Healer"),
-            ("Innestra", "silver-hand", "Tank"),
             ("Nixena", "silver-hand", "Alt"),
             ("Aresda", "silver-hand", "Healer"),
             ("Cradon", "silver-hand", "Ranged DPS"),
-            ("Tesbasara", "silver-hand", "Ranged DPS"),
-            ("Arrya", "silver-hand", "Alt"),
-            ("Peek", "silver-hand", "Alt"),
-            ("Tomoyo", "silver-hand", "Alt"),
-            ("Däeris", "silver-hand", "Alt"),
         ]
         cursor.executemany(
             "insert into members (name, realmslug, role) values (%s,%s,%s);", memberList
@@ -1381,6 +1374,7 @@ def initRaidmatsTable():
             (171437, "Shaded Sharpening Stone"),
             (171439, "Shaded Weightstone"),
             (181468, "Veiled Augment Rune"),
+            (173167, "Vantus Rune: Castle Nathria"),
         ]
         cursor.executemany("insert into raidmats (id, name) values (%s,%s);", matList)
         conn.commit()

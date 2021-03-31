@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.49"
-VERSIONDATE = "2021-03-04"
+VERSION = "0.1.50"
+VERSIONDATE = "2021-03-31"
 
 from os.path import dirname, join, os
 
@@ -712,6 +712,7 @@ async def raidmats(ctx):
                 or mattype == "Flask"
                 or mattype == "Other"
                 or mattype == "Food & Drink"
+                or mattype == "Vantus Runes"
             )
         ) or (matclass == "Item Enhancement" and mattype == "Misc"):
             if qty > 0:
@@ -1051,7 +1052,10 @@ def localTimeStr(utcTime):
 @bot.command()
 async def changelog(ctx):
     msg = """
-```## 0.1.48 - 2021-03-04
+```## 0.1.50 - 2021-03-31
+ - Fixed .mats to include Vantus runes.
+
+## 0.1.48 - 2021-03-04
  - Added .bestruns command to track Mythic+ Season best runs.
 
 ## 0.1.46 - 2021-02-05
