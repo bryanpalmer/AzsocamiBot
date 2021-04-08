@@ -797,6 +797,65 @@ async def raidmats(ctx):
     await ctx.send(embed=response)
 
 
+####################
+####################
+
+
+@bot.command(aliases=["mats2"])
+async def raidmats2(ctx):
+    raidMats = wowapi.getRaidMats()
+    ahData = wowapi.getAuctionHouseData()
+    # umjConn = umj.create_connection()
+
+    # for mat in raidMats:
+    #     # fill out class/subclass info from items db
+    #     curId = raidMats[mat]["id"]
+    #     # item = umj.getItemById(umjConn, curId)
+    #     # raidMats[mat]["classname"] = item.classname
+    #     # raidMats[mat]["subclass"] = item.subclass
+
+    for auction in ahData["auctions"]:
+        # check auction data for raw mats
+        if auction["item"]["id"] in raidMats:
+            curID = auction["item"]["id"]
+            raidMats[curID]["quantity"] += auction["quantity"]
+            if (
+                raidMats[curID]["unitcost"] == 0
+                or auction["unit_price"] / 10000 < raidMats[curID]["unitcost"]
+            ):
+                raidMats[curID]["unitcost"] = auction["unit_price"] / 10000
+
+    # umjConn.close()
+    wowapi.setLastRun("AUCTION_HOUSE")
+    lastRun = datetime.datetime.now()
+
+    # print(raidMats)
+
+    ingNightShade = raidMats[171315]["unitcost"]  # 3
+    ingRisingGlory = raidMats[168586]["unitcost"]  # 4
+    ingMarrowRoot = raidMats[168589]["unitcost"]  # 4
+    ingWidowBloom = raidMats[168583]["unitcost"]  # 4
+    ingVigilsTorch = raidMats[170554]["unitcost"]  # 4
+    ingFlask = raidMats[171276]["unitcost"]
+    flaskCost = (
+        (ingNightShade * 3)
+        + (ingRisingGlory * 4)
+        + (ingMarrowRoot * 4)
+        + (ingWidowBloom * 4)
+        + (ingVigilsTorch * 4)
+    )
+
+    msg = f"{raidMats[171276]['name']} AH Price - {ingFlask}\n"
+    msg += f"{raidMats[171276]['name']} Crafted Cost - {flaskCost}\n"
+    msg += f"{'Cheaper to craft your own,' if flaskCost<ingFlask else 'Cheaper to buy on AH,'} {round(ingFlask-flaskCost,2) if flaskCost<ingFlask else round(flaskCost-ingFlask,2)} savings."
+
+    await ctx.send(msg)
+
+
+####################
+####################
+
+
 @bot.command(aliases=["gv"])
 async def gvault(ctx):
     ## id, name, realmslug, role, expires FROM members ORDER BY name
