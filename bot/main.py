@@ -1033,7 +1033,9 @@ async def status(ctx):
         msg += "PRODUCTION BOT.\n"
     msg += f"Server Timezone:  {time.tzname}\n"
     msg += f"Server Time:  {datetime.datetime.now().strftime(TIMEFORMAT)}\n"
-    msg += f"Bot Local Time:  {localTimeStr(datetime.datetime.now())}"
+    msg += f"Bot Local Time:  {localTimeStr(datetime.datetime.now())}\n"
+    msg += f"Bot source is at https://github.com/bryanpalmer/AzsocamiBot\n"
+    msg += f"Bot running on heroku.com\n"
     await ctx.send(msg)
 
 
