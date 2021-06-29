@@ -929,7 +929,7 @@ async def bestruns(ctx, seasonId=5):
                 "Spires of Ascension": 0,
                 "Plaguefall": 0,
             }
-            runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, 5)
+            runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, seasonId)
             if bool(runsData):
                 print(f"Runs data for {cName}")
                 # print(runsData)
