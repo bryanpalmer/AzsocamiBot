@@ -1002,30 +1002,16 @@ async def bestruns(ctx, seasonId=5):
 
 @bot.command(aliases=["br4"])
 async def bestrunsfor(ctx, charName, seasonId=5):
-    # await ctx.send(
-    #     "The manually updated guild progress sheet is [online here](<https://docs.google.com/spreadsheets/d/1SULr3J7G2TkHbzHhJQJZUGYFk9LPAfX44s499NA01tw/edit#gid=0>)."
-    # )
     msgId = await ctx.send(f"Gathering mythic+ data for {charName}, please wait...")
     ## id, name, realmslug, role, expires FROM members ORDER BY name
     teamList = wowapi.getMembersList()
-
-    # dungeons = {
-    #     "Mists of Tirna Scithe": 0,
-    #     "Sanguine Depths": 0,
-    #     "De Other Side": 0,
-    #     "The Necrotic Wake": 0,
-    #     "Theater of Pain": 0,
-    #     "Halls of Atonement": 0,
-    #     "Spires of Ascension": 0,
-    #     "Plaguefall": 0,
-    # }
-
+    runsList = []
     msg = ""
     for member in teamList:
         cName = member[1]
         cRealm = member[2]
         if cName.upper() == charName.upper():
-            msg += f"**Best runs for {cName}:**\n"
+            msg += f"Best runs for **{cName}:** (SeasonId {seasonId})\n"
             runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, seasonId)
             if bool(runsData):
                 # print(f"Runs data for {cName}")
@@ -1041,7 +1027,60 @@ async def bestrunsfor(ctx, charName, seasonId=5):
                     for affix in run["keystone_affixes"]:
                         keyAffixes.append(affix["name"])
                         msg += f"{affix['name']} "
+                    runsList.append(
+                        {
+                            "name": keyName,
+                            "level": keyLvl,
+                            "timed": keyTimed,
+                            "duration": keyDuration,
+                            "affixes": keyAffixes,
+                        }
+                    )
                     msg += f"\n"
+
+    await ctx.send(msg)
+    await msgId.delete()
+
+
+@bot.command()
+async def br4test(ctx, charName, seasonId=5):
+    msgId = await ctx.send(f"Gathering mythic+ data for {charName}, please wait...")
+    ## id, name, realmslug, role, expires FROM members ORDER BY name
+    teamList = wowapi.getMembersList()
+    runsList = []
+    for member in teamList:
+        cName = member[1]
+        cRealm = member[2]
+        if cName.upper() == charName.upper():
+            runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, seasonId)
+            if bool(runsData):
+                for run in runsData["best_runs"]:
+                    keyLvl = run["keystone_level"]
+                    keyTimed = run["is_completed_within_time"] == True
+                    kT = "**" if keyTimed else ""
+                    keyName = run["dungeon"]["name"]
+                    keyDuration = int(run["duration"] / 1000)
+                    keyAffixes = []
+                    for affix in run["keystone_affixes"]:
+                        keyAffixes.append(affix["name"])
+                    runsList.append(
+                        {
+                            "name": keyName,
+                            "level": keyLvl,
+                            "timed": keyTimed,
+                            "duration": keyDuration,
+                            "affixes": keyAffixes,
+                        }
+                    )
+
+    msg = f"Best runs for **{cName}:** (SeasonId {seasonId})\n"
+    sortedList = sorted(runsList, key=lambda k: k["name"])
+    for run in sortedList:
+        kT = "**" if run["timed"] else ""
+        msg += f"{kT}{run['level']} {run['name']} - {wowapi.format_duration(run['duration'])}{kT} - "
+        for affix in run["affixes"]:
+            msg += f"{affix['name']} "
+        msg += f"\n"
 
     await ctx.send(msg)
     await msgId.delete()
