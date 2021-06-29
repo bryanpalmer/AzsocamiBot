@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.50"
-VERSIONDATE = "2021-03-31"
+VERSION = "0.1.60"
+VERSIONDATE = "2021-06-29"
 
 from os.path import dirname, join, os
 
@@ -1000,6 +1000,53 @@ async def bestruns(ctx, seasonId=5):
     await msgId.delete()
 
 
+@bot.command(aliases=["br4"])
+async def bestrunsfor(ctx, charName, seasonId=5):
+    # await ctx.send(
+    #     "The manually updated guild progress sheet is [online here](<https://docs.google.com/spreadsheets/d/1SULr3J7G2TkHbzHhJQJZUGYFk9LPAfX44s499NA01tw/edit#gid=0>)."
+    # )
+    msgId = await ctx.send(f"Gathering mythic+ data for {charName}, please wait...")
+    ## id, name, realmslug, role, expires FROM members ORDER BY name
+    teamList = wowapi.getMembersList()
+
+    # dungeons = {
+    #     "Mists of Tirna Scithe": 0,
+    #     "Sanguine Depths": 0,
+    #     "De Other Side": 0,
+    #     "The Necrotic Wake": 0,
+    #     "Theater of Pain": 0,
+    #     "Halls of Atonement": 0,
+    #     "Spires of Ascension": 0,
+    #     "Plaguefall": 0,
+    # }
+
+    msg = ""
+    for member in teamList:
+        cName = member[1]
+        cRealm = member[2]
+        if cName.upper() == charName.upper():
+            msg += f"**Best runs for {cName}:**\n"
+            runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, seasonId)
+            if bool(runsData):
+                # print(f"Runs data for {cName}")
+                # print(runsData)
+                for run in runsData["best_runs"]:
+                    keyLvl = run["keystone_level"]
+                    keyTimed = run["is_completed_within_time"] == True
+                    kT = "**" if keyTimed else ""
+                    keyName = run["dungeon"]["name"]
+                    keyDuration = int(run["duration"] / 1000)
+                    msg += f"{kT}{keyLvl} {keyName} - {wowapi.format_duration(keyDuration)}{kT} - "
+                    keyAffixes = []
+                    for affix in run["keystone_affixes"]:
+                        keyAffixes.append(affix["name"])
+                        msg += f"{affix['name']} "
+                    msg += f"\n"
+
+    await ctx.send(msg)
+    await msgId.delete()
+
+
 ###############################################################
 ###############################################################
 ###                                                         ###
@@ -1169,7 +1216,10 @@ def localTimeStr(utcTime):
 @bot.command()
 async def changelog(ctx):
     msg = """
-```## 0.1.50 - 2021-03-31
+```## 0.1.60 - 2021-06-29
+ - Added .br4 <charname> <seasonId> command.
+
+## 0.1.50 - 2021-03-31
  - Fixed .mats to include Vantus runes.
 
 ## 0.1.48 - 2021-03-04

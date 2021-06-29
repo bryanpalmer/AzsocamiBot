@@ -46,6 +46,12 @@ def calcExpiresDateTime(expires_in):
     return retVal + datetime.timedelta(0, expires_in)
 
 
+def format_duration(seconds):
+    minutes, seconds = divmod(seconds, 60)
+    hours, minutes = divmod(minutes, 60)
+    return "{:02d}:{:02d}:{:02d}".format(hours, minutes, seconds)
+
+
 def getLastResetDateTime():
     # https://www.w3resource.com/python-exercises/date-time-exercise/python-date-time-exercise-19.php
     utc = pytz.UTC
