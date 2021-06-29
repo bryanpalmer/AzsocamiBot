@@ -1,15 +1,14 @@
 # AzsocamiBot
-Discord bot for Azsocami guild
+Custom Discord bot for Azsocami guild on Silver Hand.  Bot maintains list of current guild team mains for raid, as well as alts and/or non-raiding members.  Primary functions are to easily grab current AH pricing for common mats, as well as track seasonal mythic+ progression for members wanting to complete achievement requirements.
 
 ## Current Commands
 
-### Common guild commands
 **Command** | **Description**
 ----------- | ---------------
 .mats | Gather current auction house data for commonly used mats
 .br | Best mythic run for current season for all non-alt team members
 .team | Gather current wow info for all team members
-.lpc _plate/mail/leather/cloth_ | Gets current pricing and availability for rank 1-4 of legendary base items.
+.lpc [_plate \| mail \| leather \| cloth_] | Gets current pricing and availability for rank 1-4 of legendary base items.
 .tc | Current twisting corridors achievement for team
 .clean | Cleans up AzsocamiBot commands and messages from channel
 .cleanbot | Same as .clean, but also works on several other bots in channel
