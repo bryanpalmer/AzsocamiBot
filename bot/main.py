@@ -1000,6 +1000,48 @@ async def bestruns(ctx, seasonId=5):
     await msgId.delete()
 
 
+# @bot.command(aliases=["br4"])
+# async def bestrunsfor(ctx, charName, seasonId=5):
+#     msgId = await ctx.send(f"Gathering mythic+ data for {charName}, please wait...")
+#     ## id, name, realmslug, role, expires FROM members ORDER BY name
+#     teamList = wowapi.getMembersList()
+#     runsList = []
+#     msg = ""
+#     for member in teamList:
+#         cName = member[1]
+#         cRealm = member[2]
+#         if cName.upper() == charName.upper():
+#             msg += f"Best runs for **{cName}:** (SeasonId {seasonId})\n"
+#             runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, seasonId)
+#             if bool(runsData):
+#                 # print(f"Runs data for {cName}")
+#                 # print(runsData)
+#                 for run in runsData["best_runs"]:
+#                     keyLvl = run["keystone_level"]
+#                     keyTimed = run["is_completed_within_time"] == True
+#                     kT = "**" if keyTimed else ""
+#                     keyName = run["dungeon"]["name"]
+#                     keyDuration = int(run["duration"] / 1000)
+#                     msg += f"{kT}{keyLvl} {keyName} - {wowapi.format_duration(keyDuration)}{kT} - "
+#                     keyAffixes = []
+#                     for affix in run["keystone_affixes"]:
+#                         keyAffixes.append(affix["name"])
+#                         msg += f"{affix['name']} "
+#                     runsList.append(
+#                         {
+#                             "name": keyName,
+#                             "level": keyLvl,
+#                             "timed": keyTimed,
+#                             "duration": keyDuration,
+#                             "affixes": keyAffixes,
+#                         }
+#                     )
+#                     msg += f"\n"
+
+#     await ctx.send(msg)
+#     await msgId.delete()
+
+
 @bot.command(aliases=["br4"])
 async def bestrunsfor(ctx, charName, seasonId=5):
     msgId = await ctx.send(f"Gathering mythic+ data for {charName}, please wait...")
@@ -1014,46 +1056,6 @@ async def bestrunsfor(ctx, charName, seasonId=5):
             msg += f"Best runs for **{cName}:** (SeasonId {seasonId})\n"
             runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, seasonId)
             if bool(runsData):
-                # print(f"Runs data for {cName}")
-                # print(runsData)
-                for run in runsData["best_runs"]:
-                    keyLvl = run["keystone_level"]
-                    keyTimed = run["is_completed_within_time"] == True
-                    kT = "**" if keyTimed else ""
-                    keyName = run["dungeon"]["name"]
-                    keyDuration = int(run["duration"] / 1000)
-                    msg += f"{kT}{keyLvl} {keyName} - {wowapi.format_duration(keyDuration)}{kT} - "
-                    keyAffixes = []
-                    for affix in run["keystone_affixes"]:
-                        keyAffixes.append(affix["name"])
-                        msg += f"{affix['name']} "
-                    runsList.append(
-                        {
-                            "name": keyName,
-                            "level": keyLvl,
-                            "timed": keyTimed,
-                            "duration": keyDuration,
-                            "affixes": keyAffixes,
-                        }
-                    )
-                    msg += f"\n"
-
-    await ctx.send(msg)
-    await msgId.delete()
-
-
-@bot.command()
-async def br4test(ctx, charName, seasonId=5):
-    msgId = await ctx.send(f"Gathering mythic+ data for {charName}, please wait...")
-    ## id, name, realmslug, role, expires FROM members ORDER BY name
-    teamList = wowapi.getMembersList()
-    runsList = []
-    for member in teamList:
-        cName = member[1]
-        cRealm = member[2]
-        if cName.upper() == charName.upper():
-            runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, seasonId)
-            if bool(runsData):
                 for run in runsData["best_runs"]:
                     keyLvl = run["keystone_level"]
                     keyTimed = run["is_completed_within_time"] == True
@@ -1072,14 +1074,18 @@ async def br4test(ctx, charName, seasonId=5):
                             "affixes": keyAffixes,
                         }
                     )
-
-    msg = f"Best runs for **{cName}:** (SeasonId {seasonId})\n"
     sortedList = sorted(runsList, key=lambda k: k["name"])
-    for run in sortedList:
-        kT = "**" if run["timed"] else ""
-        msg += f"{kT}{run['level']} {run['name']} - {wowapi.format_duration(run['duration'])}{kT} - "
-        for affix in run["affixes"]:
-            msg += f"{affix['name']} "
+    for item in sortedList:
+        # print(item)
+        iName = item["name"]
+        iLvl = item["level"]
+        iTimed = item["timed"]
+        iDuration = item["duration"]
+        iAffixes = item["affixes"]
+        kT = "**" if iTimed else ""
+        msg += f"{kT}{iLvl} {iName} - {wowapi.format_duration(iDuration)}{kT} - "
+        for affix in iAffixes:
+            msg += f"{affix} "
         msg += f"\n"
 
     await ctx.send(msg)
