@@ -173,6 +173,23 @@ def api_raiderio_char_raid_progress(playerName, playerRealm):
 ###############################################################
 
 
+def getClassesList():
+    return {
+        1: "Warrior",
+        2: "Paladin",
+        3: "Hunter",
+        4: "Rogue",
+        5: "Priest",
+        6: "Death Knight",
+        7: "Shaman",
+        8: "Mage",
+        9: "Warlock",
+        10: "Monk",
+        11: "Druid",
+        12: "Demon Hunter",
+    }
+
+
 def getLegendaryArmorsList():
     return {
         173241: {
@@ -1176,6 +1193,29 @@ def getCharacterSeasonDetails(charName, charRealm, seasonId):
         charData = {}
     finally:
         return charData
+
+
+def getGuildRoster(realmName, guildName):
+    token = getAccessToken()
+    profile_uri = (
+        f"https://us.api.blizzard.com/data/wow/guild/{realmName}/{guildName}/roster"
+    )
+    try:
+        response = requests.get(
+            profile_uri,
+            params={
+                "namespace": "profile-us",
+                "locale": "en_US",
+                "access_token": token,
+            },
+        )
+        response.raise_for_status()
+        rosterData = json.loads(response.text)
+    except requests.exceptions.HTTPError as err:
+        print(err)
+        rosterData = {}
+    finally:
+        return rosterData
 
 
 def getAuctionHouseData():

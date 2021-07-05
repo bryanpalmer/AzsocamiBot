@@ -1100,6 +1100,41 @@ async def bestrunsfor(ctx, charName, seasonId=6):
     await msgId.delete()
 
 
+@bot.command()
+async def roster(ctx):
+    rosterJson = wowapi.getGuildRoster("silver-hand", "azsocami")
+    rosterList = []
+
+    # for member in roster["members"]:
+    #     if member["character"]["level"] == 60:
+    #         nPlayers += 1
+    #         nClassId = member["character"]["playable_class"]["id"]
+    #         print(f"{member['character']['name']} - {classes[nClassId]}")
+    classes = wowapi.getClassesList()
+
+    for member in rosterJson["members"]:
+        if member["character"]["level"] == 60:
+            playerName = member["character"]["name"]
+            playerRealm = member["character"]["realm"]["slug"]
+            playerClass = classes[member["character"]["playable_class"]["id"]]
+            rosterList.append(
+                {"name": playerName, "realm": playerRealm, "class": playerClass}
+            )
+        else:
+            # Player not lvl 60, so skip
+            pass
+    # print(rosterList)
+
+    sortedRoster = sorted(rosterList, key=lambda i: i["name"])
+
+    msg = ""
+
+    for member in sortedRoster:
+        msg += f"{member['name']} ({member['realm']}) - {member['class']}\n"
+
+    await ctx.send(msg)
+
+
 ###############################################################
 ###############################################################
 ###                                                         ###
