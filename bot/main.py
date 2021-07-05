@@ -1079,6 +1079,9 @@ async def bestrunsfor(ctx, charName, seasonId=6):
                             "affixes": keyAffixes,
                         }
                     )
+            else:
+                msg = "No data found."
+
     sortedList = sorted(runsList, key=lambda k: k["name"])
     for item in sortedList:
         # print(item)
