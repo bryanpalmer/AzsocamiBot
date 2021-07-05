@@ -1045,14 +1045,10 @@ async def bestruns(ctx, seasonId=6):
 
 
 @bot.command(aliases=["br4"])
-<<<<<<< HEAD
-async def bestrunsfor(ctx, charName, seasonId=5):
-=======
 async def bestrunsfor(ctx, charName, seasonId=6):
     # await ctx.send(
     #     "The manually updated guild progress sheet is [online here](<https://docs.google.com/spreadsheets/d/1SULr3J7G2TkHbzHhJQJZUGYFk9LPAfX44s499NA01tw/edit#gid=0>)."
     # )
->>>>>>> dev
     msgId = await ctx.send(f"Gathering mythic+ data for {charName}, please wait...")
     ## id, name, realmslug, role, expires FROM members ORDER BY name
     teamList = wowapi.getMembersList()
@@ -1062,11 +1058,7 @@ async def bestrunsfor(ctx, charName, seasonId=6):
         cName = member[1]
         cRealm = member[2]
         if cName.upper() == charName.upper():
-<<<<<<< HEAD
             msg += f"Best runs for **{cName}:** (SeasonId {seasonId})\n"
-=======
-            msg += f"**Best runs for {cName}:** (Season {seasonId})\n"
->>>>>>> dev
             runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, seasonId)
             if bool(runsData):
                 for run in runsData["best_runs"]:
@@ -1078,7 +1070,6 @@ async def bestrunsfor(ctx, charName, seasonId=6):
                     keyAffixes = []
                     for affix in run["keystone_affixes"]:
                         keyAffixes.append(affix["name"])
-<<<<<<< HEAD
                     runsList.append(
                         {
                             "name": keyName,
@@ -1101,12 +1092,6 @@ async def bestrunsfor(ctx, charName, seasonId=6):
         for affix in iAffixes:
             msg += f"{affix} "
         msg += f"\n"
-=======
-                        msg += f"{affix['name']} "
-                    msg += f"\n"
-            else:
-                msg += "No data found."
->>>>>>> dev
 
     await ctx.send(msg)
     await msgId.delete()
