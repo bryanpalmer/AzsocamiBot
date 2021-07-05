@@ -7,6 +7,7 @@ Custom Discord bot for Azsocami guild on Silver Hand.  Bot maintains list of cur
 ----------- | ---------------
 .mats | Gather current auction house data for commonly used mats
 .br | Best mythic run for current season for all non-alt team members
+.br4 \<playername> | Best timed and untimed runs of all dungeons for \<playername>
 .team | Gather current wow info for all team members
 .lpc [_plate \| mail \| leather \| cloth_] | Gets current pricing and availability for rank 1-4 of legendary base items.
 .tc | Current twisting corridors achievement for team
