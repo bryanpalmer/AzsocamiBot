@@ -895,11 +895,13 @@ async def gvault(ctx):
 
 
 @bot.command(aliases=["br"])
-async def bestruns(ctx, seasonId=5):
+async def bestruns(ctx, seasonId=6):
     # await ctx.send(
     #     "The manually updated guild progress sheet is [online here](<https://docs.google.com/spreadsheets/d/1SULr3J7G2TkHbzHhJQJZUGYFk9LPAfX44s499NA01tw/edit#gid=0>)."
     # )
-    msgId = await ctx.send("Gathering members mythic+ data, please wait...")
+    msgId = await ctx.send(
+        f"Gathering members mythic+ data for Season {seasonId}, please wait..."
+    )
     ## id, name, realmslug, role, expires FROM members ORDER BY name
     teamList = wowapi.getMembersList()
     # teamRuns = []
@@ -1001,7 +1003,7 @@ async def bestruns(ctx, seasonId=5):
 
 
 @bot.command(aliases=["br4"])
-async def bestrunsfor(ctx, charName, seasonId=5):
+async def bestrunsfor(ctx, charName, seasonId=6):
     # await ctx.send(
     #     "The manually updated guild progress sheet is [online here](<https://docs.google.com/spreadsheets/d/1SULr3J7G2TkHbzHhJQJZUGYFk9LPAfX44s499NA01tw/edit#gid=0>)."
     # )
@@ -1025,7 +1027,7 @@ async def bestrunsfor(ctx, charName, seasonId=5):
         cName = member[1]
         cRealm = member[2]
         if cName.upper() == charName.upper():
-            msg += f"**Best runs for {cName}:**\n"
+            msg += f"**Best runs for {cName}:** (Season {seasonId})\n"
             runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, seasonId)
             if bool(runsData):
                 # print(f"Runs data for {cName}")
@@ -1042,6 +1044,8 @@ async def bestrunsfor(ctx, charName, seasonId=5):
                         keyAffixes.append(affix["name"])
                         msg += f"{affix['name']} "
                     msg += f"\n"
+            else:
+                msg += "No data found."
 
     await ctx.send(msg)
     await msgId.delete()
