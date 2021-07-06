@@ -1166,7 +1166,149 @@ async def compare(ctx, player1, player2):
 ## score <playername>
 @bot.command()
 async def score(ctx, playerName):
-    pass
+    playerRow = wowapi.getMythicPlusByName(playerName)
+    print(playerRow)
+    if playerRow != "":
+        realm = playerRow[2]
+        player = playerRow[1]
+        rioScore = wowapi.api_raiderio_char_mplus_score(player, realm)
+        rioPrev = wowapi.api_raiderio_char_mplus_previous(player, realm)
+        rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
+        rioRecent = wowapi.api_raiderio_char_mplus_recent_runs(player, realm)
+        # rioRank = wowapi.api_raiderio_char_mplus_rank(player, realm)
+
+        playerClass = rioBest["class"]
+        classIcon = wowapi.getClassIconUrl(playerClass)
+        playerThumb = rioBest["thumbnail_url"]
+        playerSpec = rioScore["active_spec_name"]
+        lastCrawled = rioScore["last_crawled_at"]
+        profileUrl = rioScore["profile_url"]
+        playerScoreAll = rioScore["mythic_plus_scores_by_season"][0]["scores"]["all"]
+        playerScorePrev = rioPrev["mythic_plus_scores_by_season"][0]["scores"]["all"]
+        playerScoreTank = 0
+        if "tank" in rioScore["mythic_plus_scores_by_season"][0]["scores"]:
+            playerScoreTank = rioScore["mythic_plus_scores_by_season"][0]["scores"][
+                "tank"
+            ]
+
+        playerScoreDps = 0
+        if "dps" in rioScore["mythic_plus_scores_by_season"][0]["scores"]:
+            playerScoreDps = rioScore["mythic_plus_scores_by_season"][0]["scores"][
+                "dps"
+            ]
+
+        playerScoreHeals = 0
+        if "healer" in rioScore["mythic_plus_scores_by_season"][0]["scores"]:
+            playerScoreHeals = rioScore["mythic_plus_scores_by_season"][0]["scores"][
+                "healer"
+            ]
+
+        # playerRankOverall = rioRank["mythic_plus_ranks"]["overall"]["realm"]
+        # playerRankClass = rioRank["mythic_plus_ranks"]["class"]["realm"]
+
+        # playerRankTank = rioRank["mythic_plus_ranks"]["tank"]["realm"]
+        # playerRankDps = rioRank["mythic_plus_ranks"]["dps"]["realm"]
+        # ##playerRankHeals = rioRank["mythic_plus_ranks"]["healer"]["realm"]
+
+        # playerRankClassTank = rioRank["mythic_plus_ranks"]["class_tank"]["realm"]
+        # playerRankClassDps = rioRank["mythic_plus_ranks"]["class_dps"]["realm"]
+        # ##playerRankClassHeals = rioRank["mythic_plus_ranks"]["class_healer"]["realm"]
+
+        # recentDungeon = rioRecent["mythic_plus_recent_runs"][0]["dungeon"]
+        # recentLevel = rioRecent["mythic_plus_recent_runs"][0]["mythic_level"]
+        # recentResult = rioRecent["mythic_plus_recent_runs"][0]["num_keystone_upgrades"]
+        # recentScore = rioRecent["mythic_plus_recent_runs"][0]["score"]
+        # recentUrl = rioRecent["mythic_plus_recent_runs"][0]["url"]
+
+        dungeons = []
+        for run in rioBest["mythic_plus_best_runs"]:
+            print(run)
+            # print(run["short_name"])
+            # print(run["mythic_level"])
+            # print(run["num_keystone_upgrades"])
+            # print(run["score"])
+            dungeons.append(
+                {
+                    "short_name": run["short_name"],
+                    "mythic_level": run["mythic_level"],
+                    "num_keystone_upgrades": run["num_keystone_upgrades"],
+                    "score": run["score"],
+                }
+            )
+        dSorted = sorted(dungeons, key=lambda i: i["short_name"])
+
+        response = discord.Embed(
+            title=f"{playerScoreAll} Mythic+ Score",
+            description=f"**Tank Score:** {playerScoreTank}\n**Healer Score:** {playerScoreHeals}\n**DPS Score:** {playerScoreDps}\n**Last Season Score:** {playerScorePrev}",
+            color=discord.Color.red(),
+        )
+        classIconUrl = classIcon
+        response.set_author(
+            name=f"{player}, {playerSpec} {playerClass}",
+            icon_url=classIconUrl,
+        )
+        response.set_thumbnail(url=playerThumb)
+
+        dMsg = ""
+        sMsg = ""
+        for dungeon in dSorted:
+            dName = dungeon["short_name"]
+            dLevel = dungeon["mythic_level"]
+            dScore = dungeon["score"]
+            dUpgrades = dungeon["num_keystone_upgrades"]
+            affix = (
+                "***"
+                if dUpgrades == 3
+                else "**"
+                if dUpgrades == 2
+                else "*"
+                if dUpgrades == 1
+                else ""
+            )
+
+            dMsg += f"{dName.upper()}\n"
+            sMsg += f"+{dLevel}{affix} ({dScore})\n"
+        dMsg += "Highest This Week: --"
+
+        if len(dungeons) > 0:
+            response.add_field(name="Dungeon", value=dMsg, inline=True)
+            response.add_field(name="Best Result (Points)", value=sMsg, inline=True)
+        else:
+            response.add_field(name="Dungeon", value="None", inline=True)
+            response.add_field(name="Best Result (Points)", value="0 (0)", inline=True)
+
+        if (
+            not "mythic_plus_recent_runs" in rioRecent
+            or len(rioRecent["mythic_plus_recent_runs"]) == 0
+        ):
+            recentDungeon = "None"
+            recentLevel = 0
+            recentResult = 0
+            recentScore = 0
+            recentUrl = "https://raider.io/mythic-plus-runs/season-sl-1/14042885-10-theater-of-pain"
+        else:
+            recentDungeon = rioRecent["mythic_plus_recent_runs"][0]["dungeon"]
+            recentLevel = rioRecent["mythic_plus_recent_runs"][0]["mythic_level"]
+            recentResult = rioRecent["mythic_plus_recent_runs"][0][
+                "num_keystone_upgrades"
+            ]
+            recentScore = rioRecent["mythic_plus_recent_runs"][0]["score"]
+            recentUrl = rioRecent["mythic_plus_recent_runs"][0]["url"]
+
+        lrMsg = f"**Dungeon:** {recentDungeon}\n"
+        lrMsg += f"**Level:** +{recentLevel}\n"
+        lrMsg += f"**Result:** +{recentResult}\n"
+        lrMsg += f"**Points:** {recentScore}\n"
+        lrMsg += f"[Group Info]({recentUrl})"
+        response.add_field(name="Last Run", value=lrMsg, inline=False)
+
+        response.set_footer(
+            text=f"AzsocamiBot w/ Raider.IO Data | Last crawled at {lastCrawled}",
+        )
+        await ctx.send(embed=response)
+
+    else:
+        ctx.send("Player not found.")
 
 
 ## scores

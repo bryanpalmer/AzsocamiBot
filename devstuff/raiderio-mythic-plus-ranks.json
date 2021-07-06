@@ -1,0 +1,129 @@
+{
+  "name": "Murinn",
+  "race": "Dwarf",
+  "class": "Paladin",
+  "active_spec_name": "Protection",
+  "active_spec_role": "TANK",
+  "gender": "male",
+  "faction": "alliance",
+  "achievement_points": 13005,
+  "honorable_kills": 0,
+  "thumbnail_url": "https://render-us.worldofwarcraft.com/character/silver-hand/103/28342887-avatar.jpg?alt=wow/static/images/2d/avatar/3-0.jpg",
+  "region": "us",
+  "realm": "Silver Hand",
+  "last_crawled_at": "2021-07-06T12:40:11.000Z",
+  "profile_url": "https://raider.io/characters/us/silver-hand/Murinn",
+  "profile_banner": "alliancebanner5",
+  "mythic_plus_ranks": {
+    "overall": {
+      "world": 318138,
+      "region": 92434,
+      "realm": 80
+    },
+    "class": {
+      "world": 31261,
+      "region": 9101,
+      "realm": 7
+    },
+    "faction_overall": {
+      "world": 86338,
+      "region": 28035,
+      "realm": 45
+    },
+    "faction_class": {
+      "world": 8782,
+      "region": 2788,
+      "realm": 3
+    },
+    "tank": {
+      "world": 64512,
+      "region": 19031,
+      "realm": 17
+    },
+    "class_tank": {
+      "world": 11632,
+      "region": 3247,
+      "realm": 3
+    },
+    "faction_tank": {
+      "world": 17863,
+      "region": 5901,
+      "realm": 11
+    },
+    "faction_class_tank": {
+      "world": 3716,
+      "region": 1129,
+      "realm": 2
+    },
+    "healer": {
+      "world": 0,
+      "region": 0,
+      "realm": 0
+    },
+    "class_healer": {
+      "world": 0,
+      "region": 0,
+      "realm": 0
+    },
+    "faction_healer": {
+      "world": 0,
+      "region": 0,
+      "realm": 0
+    },
+    "faction_class_healer": {
+      "world": 0,
+      "region": 0,
+      "realm": 0
+    },
+    "dps": {
+      "world": 1617472,
+      "region": 577540,
+      "realm": 1439
+    },
+    "class_dps": {
+      "world": 87780,
+      "region": 34122,
+      "realm": 107
+    },
+    "faction_dps": {
+      "world": 532035,
+      "region": 203323,
+      "realm": 845
+    },
+    "faction_class_dps": {
+      "world": 33687,
+      "region": 13475,
+      "realm": 63
+    },
+    "spec_65": {
+      "world": 0,
+      "region": 0,
+      "realm": 0
+    },
+    "faction_spec_65": {
+      "world": 0,
+      "region": 0,
+      "realm": 0
+    },
+    "spec_66": {
+      "world": 10413,
+      "region": 2847,
+      "realm": 3
+    },
+    "faction_spec_66": {
+      "world": 3302,
+      "region": 982,
+      "realm": 2
+    },
+    "spec_70": {
+      "world": 88263,
+      "region": 34358,
+      "realm": 108
+    },
+    "faction_spec_70": {
+      "world": 33891,
+      "region": 13580,
+      "realm": 64
+    }
+  }
+}
