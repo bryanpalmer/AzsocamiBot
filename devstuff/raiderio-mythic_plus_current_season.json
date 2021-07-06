@@ -1,0 +1,32 @@
+{
+    "name": "Aaryn",
+    "race": "Human",
+    "class": "Warrior",
+    "active_spec_name": "Arms",
+    "active_spec_role": "DPS",
+    "gender": "male",
+    "faction": "alliance",
+    "achievement_points": 15055,
+    "honorable_kills": 0,
+    "thumbnail_url": "https://render-us.worldofwarcraft.com/character/silver-hand/130/186224258-avatar.jpg?alt=wow/static/images/2d/avatar/1-0.jpg",
+    "region": "us",
+    "realm": "Silver Hand",
+    "last_crawled_at": "2021-07-04T12:01:29.000Z",
+    "profile_url": "https://raider.io/characters/us/silver-hand/Aaryn",
+    "profile_banner": "alliancebanner1",
+    "mythic_plus_scores_by_season": [
+        {
+            "season": "season-sl-1-post",
+            "scores": {
+                "all": 1987.2,
+                "dps": 1987.2,
+                "healer": 0,
+                "tank": 0,
+                "spec_0": 1816.3,
+                "spec_1": 1778.8,
+                "spec_2": 0,
+                "spec_3": 0
+            }
+        }
+    ]
+}

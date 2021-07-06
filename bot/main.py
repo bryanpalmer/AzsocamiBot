@@ -1199,6 +1199,13 @@ async def scores(ctx):
     await ctx.send(embed=response)
 
 
+@bot.command()
+async def update_scores(ctx):
+    wowapi.updateMythicPlusScores()
+    msg = "Running update."
+    await ctx.send(msg)
+
+
 ###############################################################
 ###############################################################
 ###                                                         ###

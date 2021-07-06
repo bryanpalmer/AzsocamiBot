@@ -1155,7 +1155,44 @@ def getMythicPlusScores():
 
 
 def updateMythicPlusScores():
-    pass
+    devmode(f"Retrieving mythic plus players list")
+    conn = create_connection()
+    cursor = conn.cursor()
+    retList = []
+    cursor.execute(
+        "select id, name, realmslug, highscore from mythicplus where active=1;"
+    )
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
+        playerName = row[1].title()
+        playerRealm = row[2].lower()
+        resultData = api_raiderio_char_mplus_score(playerName, playerRealm)
+        currentScore = resultData["mythic_plus_scores_by_season"][0]["scores"]["all"]
+        # print(f"{playerName} {playerRealm} {currentScore}")
+        # retList.append(
+        #     {
+        #         "id": row[0],
+        #         "name": playerName,
+        #         "realm": playerRealm,
+        #         "highscore": currentScore,
+        #     }
+        # )
+        updateMythicPlusById(conn, row[0], currentScore)
+
+    # print(retList)
+    # return retList
+
+
+def updateMythicPlusById(conn, recId, highScore):
+    sql = "UPDATE mythicplus SET highscore = %s WHERE id = %s;"
+    mbr = (highScore, recId)
+    try:
+        cur = conn.cursor()
+        cur.execute(sql, mbr)
+        conn.commit()
+    except mysql.Error as e:
+        print(f"Error:  {e}")
 
 
 ###############################################################
