@@ -1169,6 +1169,7 @@ def updateMythicPlusScores():
         playerRealm = row[2].lower()
         resultData = api_raiderio_char_mplus_score(playerName, playerRealm)
         currentScore = resultData["mythic_plus_scores_by_season"][0]["scores"]["all"]
+        thumbnail = resultData["thumbnail_url"]
         # print(f"{playerName} {playerRealm} {currentScore}")
         # retList.append(
         #     {
@@ -1178,15 +1179,15 @@ def updateMythicPlusScores():
         #         "highscore": currentScore,
         #     }
         # )
-        updateMythicPlusById(conn, row[0], currentScore)
+        updateMythicPlusById(conn, row[0], currentScore, thumbnail)
 
     # print(retList)
     # return retList
 
 
-def updateMythicPlusById(conn, recId, highScore):
-    sql = "UPDATE mythicplus SET highscore = %s WHERE id = %s;"
-    mbr = (highScore, recId)
+def updateMythicPlusById(conn, recId, highScore, thumbnail):
+    sql = "UPDATE mythicplus SET highscore = %s, thumbnail_url = %s WHERE id = %s;"
+    mbr = (highScore, thumbnail, recId)
     try:
         cur = conn.cursor()
         cur.execute(sql, mbr)
@@ -1437,24 +1438,27 @@ def initMythicPlusTable():
         # drop existing table
         cursor.execute("DROP TABLE IF EXISTS mythicplus;")
         sql = """CREATE TABLE mythicplus (
-                id          INTEGER   PRIMARY KEY AUTO_INCREMENT,
-                name        VARCHAR (30) UNIQUE,
-                realmslug   VARCHAR (25) DEFAULT ('silver-hand'),
-                highscore   INTEGER,
-                active      TINYINT(1) DEFAULT (1)
+                id              INTEGER   PRIMARY KEY AUTO_INCREMENT,
+                name            VARCHAR (30) UNIQUE,
+                realmslug       VARCHAR (25) DEFAULT ('silver-hand'),
+                highscore       INTEGER,
+                thumbnail_url   VARCHAR (255) DEFAULT(''),
+                active          TINYINT(1) DEFAULT (1)
             );"""
         cursor.execute(sql)
         conn.commit()
         memberList = [
-            ("Aaryn", "silver-hand", 1092, 1),
-            ("Murinn", "silver-hand", 1094, 1),
-            ("Kaitaa", "silver-hand", 1121, 1),
-            ("Razzlectria", "silver-hand", 836, 1),
-            ("Cradon", "silver-hand", 1092, 1),
-            ("Ragebear", "silver-hand", 866, 1),
-            ("Agaviss", "silver-hand", 837, 1),
-            ("Frenchie", "silver-hand", 832, 1),
-            ("Aresda", "silver-hand", 810, 1),
+            ("Aaryn", "silver-hand", 0, 1),
+            ("Murinn", "silver-hand", 0, 1),
+            ("Kaitaa", "silver-hand", 0, 1),
+            ("Razzlectria", "silver-hand", 0, 1),
+            ("Cradon", "silver-hand", 0, 1),
+            ("Ragebear", "silver-hand", 0, 1),
+            ("Agaviss", "silver-hand", 0, 1),
+            ("Frenchie", "silver-hand", 0, 1),
+            ("Areisda", "silver-hand", 0, 1),
+            ("Aryxi", "silver-hand", 0, 1),
+            ("Velalda", "silver-hand", 0, 1),
         ]
         cursor.executemany(
             "insert into mythicplus (name, realmslug, highscore, active) values (%s,%s,%s,%s);",
