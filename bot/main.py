@@ -1138,6 +1138,70 @@ async def roster(ctx):
 ###############################################################
 ###############################################################
 ###                                                         ###
+###               MYTHIC BOT COMMANDS                       ###
+###                                                         ###
+###############################################################
+###############################################################
+
+## FOLLOW <PLAYERNAME>
+@bot.command()
+async def follow(ctx, playerName, realmName="silver-hand"):
+    msg = wowapi.addPlayerToMythicPlus(playerName, realmName)
+    await ctx.send(msg)
+
+
+## UnFollow <playername>
+@bot.command()
+async def unfollow(ctx, playerName):
+    msg = wowapi.removePlayerFromMythicPlus(playerName)
+    await ctx.send(msg)
+
+
+## Compare <playername> and <playername>
+@bot.command()
+async def compare(ctx, player1, player2):
+    pass
+
+
+## score <playername>
+@bot.command()
+async def score(ctx, playerName):
+    pass
+
+
+## scores
+@bot.command()
+async def scores(ctx):
+
+    scores = wowapi.getMythicPlusScores()
+    scoreNames = ""
+    scoreValues = ""
+    currentRow = 0
+
+    for row in scores:
+        currentRow += 1
+        scoreNames += f"{currentRow}) [{ row[1] }](https://raider.io/characters/us/{row[2].lower()}/{row[1]})\n"
+        scoreValues += f"{row[3]}\n"
+
+    response = discord.Embed(
+        title="Followed Characters for Azsocami",
+        description="Sorted by Score",
+        color=discord.Color.blue(),
+    )
+
+    response.add_field(name="Character", value=scoreNames, inline=True)
+    response.add_field(name="Score", value=scoreValues, inline=True)
+
+    response.set_footer(
+        text=f"AzsocamiBot w/ Raider.IO Data | Last crawled at {localTimeStr(datetime.datetime.now())}",
+    )
+
+    await ctx.send(embed=response)
+
+
+###############################################################
+###############################################################
+###                                                         ###
 ###            ADMIN ONLY BOT COMMANDS                      ###
 ###                                                         ###
 ###############################################################
@@ -1235,6 +1299,13 @@ async def recreate_full_database(ctx):
     wowapi.initDTCacheTable()
     # wowapi.updateAllMemberData()
     await ctx.send("Fresh database initialized.")
+
+
+@bot.command()
+@commands.is_owner()
+async def recreate_mythicplus_database(ctx):
+    wowapi.initMythicPlusTable()
+    await ctx.send("Mythic Plus database initialized.")
 
 
 @bot.command()

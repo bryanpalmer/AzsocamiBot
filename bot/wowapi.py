@@ -837,7 +837,7 @@ def addMemberToDB(playerName, playerRealm, playerRole):
             f"Added {playerName.title()}, ({playerRealm.lower()}) as {playerRole}"
         )
     except mysql.Error as e:
-        print("Error: " + e.args[0])
+        print(f"Error:  {e.args[0]}")
         statusMsg = f"Error adding {playerName.title()}, ERROR: {e.args[0]}"
     finally:
         conn.close()
@@ -854,7 +854,7 @@ def deleteMemberFromDB(playerName):
         conn.commit()
         statusMsg = f"Successfully removed {playerName.title()}."
     except mysql.Error as e:
-        print("Error: " + e.args[0])
+        print(f"Error: {e.args[0]}")
         statusMsg = f"Error removing {playerName.title()}, ERROR: {e.args[0]}"
     finally:
         conn.close()
@@ -873,7 +873,7 @@ def changeMemberRole(playerName, playerRole):
         statusMsg = f"{playerName.title()} changed to {playerRole}."
 
     except mysql.Error as e:
-        print("Error: " + e.args[0])
+        print(f"Error:  {e.args[0]}")
 
     finally:
         conn.close()
@@ -942,7 +942,7 @@ def updateMemberById(conn, recId, charObj):
         cur.execute(sql, mbr)
         conn.commit()
     except mysql.Error as e:
-        print("Error: " + e.args[0])
+        print(f"Error:  {e.args[0]}")
 
 
 def getAllTableRows(tableName):
@@ -1012,7 +1012,7 @@ def addItemIdToDB(itemId):
         conn.commit()
         statusMsg = f"Added {itemId} - {item.name} to raidmats."
     except mysql.Error as e:
-        print("Error: " + e.args[0])
+        print(f"Error:  {e.args[0]}")
         statusMsg = f"Error adding {itemId}, ERROR: {e}"
     finally:
         conn.close()
@@ -1029,7 +1029,7 @@ def deleteItemFromDB(itemId):
         conn.commit()
         statusMsg = f"Successfully removed {itemId}."
     except mysql.Error as e:
-        print("Error: " + e)
+        print(f"Error:  {e.args[0]}")
         statusMsg = f"Error removing {itemId}, ERROR: {e}"
     finally:
         conn.close()
@@ -1071,7 +1071,7 @@ def getLastRun(procName):
         conn.close()
 
     except mysql.Error as e:
-        print("Error: " + e)
+        print(f"Error:  {e.args[0]}")
 
     return retVal
 
@@ -1087,7 +1087,75 @@ def setLastRun(procName):
         conn.commit()
         conn.close()
     except mysql.Error as e:
-        print("Error: " + e)
+        print(f"Error:  {e.args[0]}")
+
+
+def addPlayerToMythicPlus(playerName, playerRealm):
+    devmode(f"Adding new member {playerName.title()} | {playerRealm.title()}")
+    conn = create_connection()
+    cursor = conn.cursor()
+    memberData = (playerName.title(), playerRealm.lower(), 0, 1)
+    statusMsg = ""
+    try:
+        cursor.execute(
+            "INSERT INTO mythicplus (name, realmslug, highscore, active) VALUES (%s,%s,%s,%s) ON DUPLICATE KEY UPDATE active=%s",
+            (playerName.title(), playerRealm.lower(), 0, 1, 1),
+        )
+        conn.commit()
+        statusMsg = f"Added {playerName.title()}, ({playerRealm.lower()})"
+    except mysql.Error as e:
+        print(e.args[0])
+        print(f"Error:  {e.args[0]}")
+        statusMsg = f"{e}"
+    finally:
+        conn.close()
+    return statusMsg
+
+
+def removePlayerFromMythicPlus(playerName):
+    devmode(f"Removing {playerName.title()}")
+    conn = create_connection()
+    cursor = conn.cursor()
+    memberData = playerName.title()
+    statusMsg = ""
+    try:
+        cursor.execute(
+            cursor.execute(
+                "update mythicplus set active=0 where name=%s;", (playerName.title(),)
+            )
+        )
+        conn.commit()
+        statusMsg = f"Unfollowed {playerName.title()}"
+    except mysql.Error as e:
+        print(f"Error:  {e.args[0]}")
+        statusMsg = f"Error unfollowing {playerName.title()}, ERROR: {e.args[0]}"
+    finally:
+        conn.close()
+    return statusMsg
+
+
+def getMythicPlusScores():
+    devmode(f"Retrieving mythic plus scores")
+    conn = create_connection()
+    cursor = conn.cursor()
+    retList = []
+    try:
+        cursor.execute(
+            "select id, name, realmslug, highscore from mythicplus where active=1 ORDER BY highscore desc;"
+        )
+        rows = cursor.fetchall()
+        for row in rows:
+            retList.append(row)
+    except mysql.Error as e:
+        print(e)
+        print(f"Error:  {e.args[0]}")
+    finally:
+        conn.close()
+    return retList
+
+
+def updateMythicPlusScores():
+    pass
 
 
 ###############################################################
@@ -1310,6 +1378,50 @@ def initDTCacheTable():
         ]
         cursor.executemany(
             "insert into dtcache (process, lastrun) values (%s,%s);", activitiesList
+        )
+        conn.commit()
+        conn.close()
+    except mysql.Error as e:
+        print(e)
+
+
+# █   █ █   █ █████ █   █ █████  ████ ████  █     █   █ █████
+# ██ ██  █ █    █   █   █   █   █     █   █ █     █   █ █
+# █ █ █   █     █   █████   █   █     ████  █     █   █ █████
+# █   █   █     █   █   █   █   █     █     █     █   █     █
+# █   █   █     █   █   █ █████  ████ █     █████ █████ █████
+
+
+def initMythicPlusTable():
+    print("Reinitializing MythicPlus Table")
+    try:
+        conn = create_connection()
+        cursor = conn.cursor()
+        # drop existing table
+        cursor.execute("DROP TABLE IF EXISTS mythicplus;")
+        sql = """CREATE TABLE mythicplus (
+                id          INTEGER   PRIMARY KEY AUTO_INCREMENT,
+                name        VARCHAR (30) UNIQUE,
+                realmslug   VARCHAR (25) DEFAULT ('silver-hand'),
+                highscore   INTEGER,
+                active      TINYINT(1) DEFAULT (1)
+            );"""
+        cursor.execute(sql)
+        conn.commit()
+        memberList = [
+            ("Aaryn", "silver-hand", 1092, 1),
+            ("Murinn", "silver-hand", 1094, 1),
+            ("Kaitaa", "silver-hand", 1121, 1),
+            ("Razzlectria", "silver-hand", 836, 1),
+            ("Cradon", "silver-hand", 1092, 1),
+            ("Ragebear", "silver-hand", 866, 1),
+            ("Agaviss", "silver-hand", 837, 1),
+            ("Frenchie", "silver-hand", 832, 1),
+            ("Aresda", "silver-hand", 810, 1),
+        ]
+        cursor.executemany(
+            "insert into mythicplus (name, realmslug, highscore, active) values (%s,%s,%s,%s);",
+            memberList,
         )
         conn.commit()
         conn.close()
