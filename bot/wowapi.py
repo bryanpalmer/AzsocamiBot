@@ -1214,7 +1214,7 @@ def getMythicPlusScores():
     retList = []
     try:
         cursor.execute(
-            "select id, name, realmslug, highscore from mythicplus where active=1 ORDER BY highscore desc;"
+            "select id, name, realmslug, highscore from mythicplus where active=1 ORDER BY highscore desc, name asc;"
         )
         rows = cursor.fetchall()
         for row in rows:
