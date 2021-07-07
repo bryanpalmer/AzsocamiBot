@@ -1,7 +1,7 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.64"
+VERSION = "0.1.65"
 VERSIONDATE = "2021-07-07"
 
 from os.path import dirname, join, os
