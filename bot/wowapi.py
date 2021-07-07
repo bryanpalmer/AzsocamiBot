@@ -127,6 +127,19 @@ def api_raiderio_char_mplus_recent_runs(playerName, playerRealm):
     return dataJson
 
 
+def api_raiderio_char_mplus_best_runs(playerName, playerRealm):
+    raiderio_uri = "https://raider.io/api/v1/characters/profile"
+    parameters = {
+        "region": "us",
+        "realm": playerRealm,
+        "name": playerName,
+        "fields": "mythic_plus_best_runs",
+    }
+    response = requests.get(raiderio_uri, params=parameters)
+    dataJson = json.loads(response.text)
+    return dataJson
+
+
 def api_raiderio_char_mplus_score(playerName, playerRealm):
     raiderio_uri = "https://raider.io/api/v1/characters/profile"
     parameters = {
@@ -134,6 +147,20 @@ def api_raiderio_char_mplus_score(playerName, playerRealm):
         "realm": playerRealm,
         "name": playerName,
         "fields": "mythic_plus_scores_by_season:current",
+    }
+    response = requests.get(raiderio_uri, params=parameters)
+    # print( response.text )
+    dataJson = json.loads(response.text)
+    return dataJson
+
+
+def api_raiderio_char_mplus_previous(playerName, playerRealm):
+    raiderio_uri = "https://raider.io/api/v1/characters/profile"
+    parameters = {
+        "region": "us",
+        "realm": playerRealm,
+        "name": playerName,
+        "fields": "mythic_plus_scores_by_season:previous",
     }
     response = requests.get(raiderio_uri, params=parameters)
     # print( response.text )
@@ -169,6 +196,19 @@ def api_raiderio_char_raid_progress(playerName, playerRealm):
     return dataJson
 
 
+def api_raiderio_mythicplus_ranks(playerName, playerRealm="silver-hand"):
+    raiderio_uri = "https://raider.io/api/v1/characters/profile"
+    parameters = {
+        "region": "us",
+        "realm": playerRealm,
+        "name": playerName,
+        "fields": "mythic_plus_ranks",
+    }
+    response = requests.get(raiderio_uri, params=parameters)
+    dataJson = json.loads(response.text)
+    return dataJson
+
+
 ###############################################################
 ###############################################################
 
@@ -188,6 +228,39 @@ def getClassesList():
         11: "Druid",
         12: "Demon Hunter",
     }
+
+
+def getClassIconUrl(className):
+    retVal = ""
+    if className == "Warrior":
+        retVal = "https://render.worldofwarcraft.com/us/icons/56/classicon_warrior.jpg"
+    elif className == "Paladin":
+        retVal = "https://render.worldofwarcraft.com/us/icons/56/classicon_paladin.jpg"
+    elif className == "Hunter":
+        retVal = "https://render.worldofwarcraft.com/us/icons/56/classicon_hunter.jpg"
+    elif className == "Rogue":
+        retVal = "https://render.worldofwarcraft.com/us/icons/56/classicon_rogue.jpg"
+    elif className == "Priest":
+        retVal = "https://render.worldofwarcraft.com/us/icons/56/classicon_priest.jpg"
+    elif className == "Death Knight":
+        retVal = (
+            "https://render.worldofwarcraft.com/us/icons/56/classicon_deathknight.jpg"
+        )
+    elif className == "Shaman":
+        retVal = "https://render.worldofwarcraft.com/us/icons/56/classicon_shaman.jpg"
+    elif className == "Mage":
+        retVal = "https://render.worldofwarcraft.com/us/icons/56/classicon_mage.jpg"
+    elif className == "Warlock":
+        retVal = "https://render.worldofwarcraft.com/us/icons/56/classicon_warlock.jpg"
+    elif className == "Monk":
+        retVal = "https://render.worldofwarcraft.com/us/icons/56/classicon_monk.jpg"
+    elif className == "Druid":
+        retVal = "https://render.worldofwarcraft.com/us/icons/56/classicon_druid.jpg"
+    elif className == "Demon Hunter":
+        retVal = (
+            "https://render.worldofwarcraft.com/us/icons/56/classicon_demonhunter.jpg"
+        )
+    return retVal
 
 
 def getLegendaryArmorsList():
@@ -1194,6 +1267,25 @@ def updateMythicPlusById(conn, recId, highScore, thumbnail):
         conn.commit()
     except mysql.Error as e:
         print(f"Error:  {e}")
+
+
+def getMythicPlusByName(playerName):
+    playerName = playerName.title()
+    retVal = None
+    try:
+        conn = create_connection()
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT id, name, realmslug, highscore, active FROM mythicplus WHERE name=%s;",
+            (playerName,),
+        )
+        row = cur.fetchone()
+        print(row)
+        retVal = row
+        conn.close()
+    except mysql.Error as e:
+        print(f"Error:  {e.args[0]}")
+    return retVal
 
 
 ###############################################################
