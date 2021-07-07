@@ -1175,7 +1175,7 @@ async def compare(ctx, player1, player2):
 async def score(ctx, playerName):
     playerRow = wowapi.getMythicPlusByName(playerName)
     # print(playerRow)
-    if playerRow != "":
+    if playerRow != None:
         realm = playerRow[2]
         player = playerRow[1]
         dbplayerScore = playerRow[3]
@@ -1439,7 +1439,7 @@ async def score(ctx, playerName):
         await ctx.send(embed=response)
 
     else:
-        ctx.send(
+        await ctx.send(
             f"{playerName.title()} not being followed.  Type **{COMMAND_PREFIX}follow {playerName}** to add to the tracking list."
         )
 

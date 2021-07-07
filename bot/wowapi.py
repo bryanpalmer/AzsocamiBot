@@ -1304,7 +1304,7 @@ def getMythicPlusByName(playerName):
             (playerName,),
         )
         row = cur.fetchone()
-        print(row)
+        # print(row)
         retVal = row
         conn.close()
     except mysql.Error as e:
