@@ -1,7 +1,7 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.65"
+VERSION = "0.1.67"
 VERSIONDATE = "2021-07-07"
 
 from os.path import dirname, join, os
@@ -1182,8 +1182,9 @@ async def score(ctx, playerName):
         rioPrev = wowapi.api_raiderio_char_mplus_previous(player, realm)
         rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
         rioRecent = wowapi.api_raiderio_char_mplus_recent_runs(player, realm)
-        # rioRank = wowapi.api_raiderio_char_mplus_rank(player, realm)
-
+        rioRank = wowapi.api_raiderio_char_mplus_rank(player, realm)
+        serverRealm = rioRank["realm"]
+        playerFaction = rioRank["faction"]
         playerClass = rioBest["class"]
         classIcon = wowapi.getClassIconUrl(playerClass)
         playerThumb = rioBest["thumbnail_url"]
@@ -1209,22 +1210,8 @@ async def score(ctx, playerName):
             playerScoreHeals = rioScore["mythic_plus_scores_by_season"][0]["scores"][
                 "healer"
             ]
-        # playerRankOverall = rioRank["mythic_plus_ranks"]["overall"]["realm"]
-        # playerRankClass = rioRank["mythic_plus_ranks"]["class"]["realm"]
-
-        # playerRankTank = rioRank["mythic_plus_ranks"]["tank"]["realm"]
-        # playerRankDps = rioRank["mythic_plus_ranks"]["dps"]["realm"]
-        # ##playerRankHeals = rioRank["mythic_plus_ranks"]["healer"]["realm"]
-
-        # playerRankClassTank = rioRank["mythic_plus_ranks"]["class_tank"]["realm"]
-        # playerRankClassDps = rioRank["mythic_plus_ranks"]["class_dps"]["realm"]
-        # ##playerRankClassHeals = rioRank["mythic_plus_ranks"]["class_healer"]["realm"]
-
-        # recentDungeon = rioRecent["mythic_plus_recent_runs"][0]["dungeon"]
-        # recentLevel = rioRecent["mythic_plus_recent_runs"][0]["mythic_level"]
-        # recentResult = rioRecent["mythic_plus_recent_runs"][0]["num_keystone_upgrades"]
-        # recentScore = rioRecent["mythic_plus_recent_runs"][0]["score"]
-        # recentUrl = rioRecent["mythic_plus_recent_runs"][0]["url"]
+        playerRankOverall = rioRank["mythic_plus_ranks"]["overall"]["realm"]
+        playerRankClass = rioRank["mythic_plus_ranks"]["class"]["realm"]
 
         dDict = {
             "DOS": {
@@ -1330,7 +1317,7 @@ async def score(ctx, playerName):
         response = discord.Embed(
             title=f"{playerScoreAll} Mythic+ Score",
             description=f"**Tank Score:** {int(playerScoreTank)}\n**Healer Score:** {int(playerScoreHeals)}\n**DPS Score:** {int(playerScoreDps)}\n**Last Season Score:** {int(playerScorePrev)}",
-            color=discord.Color.red(),
+            color=0x990000,
         )
         classIconUrl = classIcon
         response.set_author(
@@ -1339,6 +1326,29 @@ async def score(ctx, playerName):
         )
         response.set_thumbnail(url=playerThumb)
 
+        ## Rankings
+        ranksValue = ""
+        if "faction_tank" in rioRank["mythic_plus_ranks"]:
+            ranksValue += f"**Tank Rank:** #{rioRank['mythic_plus_ranks']['faction_tank']['realm']} "
+            ranksValue += f"(#{rioRank['mythic_plus_ranks']['faction_class_tank']['realm']} {playerClass})\n"
+
+        if "faction_dps" in rioRank["mythic_plus_ranks"]:
+            ranksValue += f"**DPS Rank:** #{rioRank['mythic_plus_ranks']['faction_dps']['realm']} "
+            ranksValue += f"(#{rioRank['mythic_plus_ranks']['faction_class_dps']['realm']} {playerClass})\n"
+
+        if "faction_healer" in rioRank["mythic_plus_ranks"]:
+            ranksValue += f"**Healer Rank:** #{rioRank['mythic_plus_ranks']['faction_healer']['realm']} "
+            ranksValue += f"(#{rioRank['mythic_plus_ranks']['faction_class_healer']['realm']} {playerClass})\n"
+
+        ranksValue += f"[Character Info]({profileUrl})\n*All ranks are {serverRealm} {playerFaction}.*"
+
+        response.add_field(
+            name=f"#{playerRankOverall} on {serverRealm} (#{playerRankClass} {playerClass})",
+            value=ranksValue,
+            inline=False,
+        )
+
+        ## Dungeons
         dMsg = ""
         sMsg = ""
         aMsg = ""
@@ -1484,20 +1494,36 @@ async def update_scores(ctx):
     await msgId.delete()
 
 
+@bot.command()
+@commands.is_owner()
+async def fakeupdate(ctx):
+    rec = {"name": "Bubblebutt", "realm": "bloodhoof", "high": 1511, "prev": 0}
+    await announceUpdate(rec)
+    await hiddenAnnouncedScoreUpdate("Bubblebutt")
+
+
 async def announceUpdate(rec):
-    botChannel = bot.get_channel(742388489038987374)
+    if DEVMODE == False:
+        botChannel = bot.get_channel(742388489038987374)
+    if DEVMODE == True:
+        botChannel = bot.get_channel(790667200197296138)
+    # botChannel = bot.get_channel(742388489038987374)
     # "name": playerName,
     # "realm": playerRealm,
     # "high": highScore,
     # "prev": previousScore,
-
     await botChannel.send(
         f"{rec['name']}'s score has increased from {rec['prev']} to {rec['high']}!"
     )
 
 
 async def hiddenAnnouncedScoreUpdate(playerName):
-    botChannel = bot.get_channel(742388489038987374)
+    if DEVMODE == False:
+        botChannel = bot.get_channel(742388489038987374)
+    if DEVMODE == True:
+        botChannel = bot.get_channel(790667200197296138)
+
+    # botChannel = bot.get_channel(742388489038987374)
     playerRow = wowapi.getMythicPlusByName(playerName)
     if playerRow != "":
         realm = playerRow[2]
@@ -1511,7 +1537,7 @@ async def hiddenAnnouncedScoreUpdate(playerName):
         playerFaction = rioRank["faction"]
         playerClass = rioRank["class"]
         classIcon = wowapi.getClassIconUrl(playerClass)
-        # playerThumb = rioRank["thumbnail_url"]
+        playerThumb = rioRank["thumbnail_url"]
         playerSpec = rioScore["active_spec_name"]
         lastCrawled = rioScore["last_crawled_at"]
         profileUrl = rioScore["profile_url"]
@@ -1539,7 +1565,7 @@ async def hiddenAnnouncedScoreUpdate(playerName):
 
         response = discord.Embed(
             title=f"{int(playerScoreAll)} Mythic+ Score",
-            description=f"**Tank Score:** {int(playerScoreTank)}\n**Healer Score:** {int(playerScoreHeals)}\n**DPS Score:** {int(playerScoreDps)}\n**Last Season Score:** {int(playerScorePrev)}",
+            description=f"**Tank Score:** {int(playerScoreTank)}\n**Healer Score:** {int(playerScoreHeals)}\n**DPS Score:** {int(playerScoreDps)}\n",
             color=0x990000,
         )
         classIconUrl = classIcon
@@ -1547,7 +1573,7 @@ async def hiddenAnnouncedScoreUpdate(playerName):
             name=f"{player}, {playerSpec} {playerClass}",
             icon_url=classIconUrl,
         )
-        # response.set_thumbnail(url=playerThumb)
+        response.set_thumbnail(url=playerThumb)
         ranksValue = ""
         if "faction_tank" in rioRank["mythic_plus_ranks"]:
             ranksValue += f"**Tank Rank:** #{rioRank['mythic_plus_ranks']['faction_tank']['realm']} "
@@ -1559,7 +1585,7 @@ async def hiddenAnnouncedScoreUpdate(playerName):
 
         if "faction_healer" in rioRank["mythic_plus_ranks"]:
             ranksValue += f"**Healer Rank:** #{rioRank['mythic_plus_ranks']['faction_healer']['realm']} "
-            ranksValue += f"(#{rioRank['mythic_plus_ranks']['faction_healer_dps']['realm']} {playerClass})\n"
+            ranksValue += f"(#{rioRank['mythic_plus_ranks']['faction_class_healer']['realm']} {playerClass})\n"
 
         ranksValue += f"[Character Info]({profileUrl})\n*All ranks are {serverRealm} {playerFaction}.*"
 
