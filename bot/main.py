@@ -701,25 +701,25 @@ async def raidmats(ctx):
         # assign each mat to a specific embed field
         if matclass == "Tradeskill" and (mattype == "Herb" or mattype == "Other"):
             if qty > 0:
-                alchTxt += f"{ name }: {qty} - *{round(ttlcost,2)}g*\n"
+                alchTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
             else:
                 alchTxt += f"{ name }: None Available\n"
 
         elif matclass == "Tradeskill" and mattype == "Cooking":
             if qty > 0:
-                foodTxt += f"{ name }: {qty} - *{round(ttlcost,2)}g*\n"
+                foodTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
             else:
                 foodTxt += f"{ name }: None Available\n"
 
         elif matclass == "Tradeskill" and mattype == "Metal & Stone":
             if qty > 0:
-                oreTxt += f"{ name }: {qty} - *{round(ttlcost,2)}g*\n"
+                oreTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
             else:
                 oreTxt += f"{ name }: None Available\n"
 
         elif matclass == "Tradeskill" and (mattype == "Leather" or mattype == "Cloth"):
             if qty > 0:
-                lwTxt += f"{ name }: {qty} - *{round(ttlcost,2)}g*\n"
+                lwTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
             else:
                 lwTxt += f"{ name }: None Available\n"
 
@@ -734,7 +734,7 @@ async def raidmats(ctx):
             )
         ) or (matclass == "Item Enhancement" and mattype == "Misc"):
             if qty > 0:
-                goodsTxt += f"[{ name }](https://www.wowhead.com/item={key}): {qty} - *{round(ttlcost,2)}g*\n"
+                goodsTxt += f"[{ name }](https://www.wowhead.com/item={key}): {qty} - *{round(ttlcost,0)}g*\n"
             else:
                 goodsTxt += (
                     f"[{ name }](https://www.wowhead.com/item={key}): None Available\n"
@@ -742,7 +742,7 @@ async def raidmats(ctx):
 
         else:
             if qty > 0:
-                miscTxt += f"{ name }: {qty} - *{round(ttlcost,2)}g*\n"
+                miscTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
             else:
                 miscTxt += f"{ name }: None Available\n"
             print(f"{key} - {name} missing category:  {matclass} | {mattype}")
@@ -1202,7 +1202,6 @@ async def score(ctx, playerName):
             playerScoreHeals = rioScore["mythic_plus_scores_by_season"][0]["scores"][
                 "healer"
             ]
-
         # playerRankOverall = rioRank["mythic_plus_ranks"]["overall"]["realm"]
         # playerRankClass = rioRank["mythic_plus_ranks"]["class"]["realm"]
 
@@ -1220,23 +1219,124 @@ async def score(ctx, playerName):
         # recentScore = rioRecent["mythic_plus_recent_runs"][0]["score"]
         # recentUrl = rioRecent["mythic_plus_recent_runs"][0]["url"]
 
-        dungeons = []
+        dDict = {
+            "DOS": {
+                "shortname": "DOS",
+                "best_level": 0,
+                "best_result": 0,
+                "best_score": 0,
+                "alt_level": 0,
+                "alt_result": 0,
+                "alt_score": 0,
+            },
+            "HOA": {
+                "shortname": "HOA",
+                "best_level": 0,
+                "best_result": 0,
+                "best_score": 0,
+                "alt_level": 0,
+                "alt_result": 0,
+                "alt_score": 0,
+            },
+            "MISTS": {
+                "shortname": "MISTS",
+                "best_level": 0,
+                "best_result": 0,
+                "best_score": 0,
+                "alt_level": 0,
+                "alt_result": 0,
+                "alt_score": 0,
+            },
+            "NW": {
+                "shortname": "NM",
+                "best_level": 0,
+                "best_result": 0,
+                "best_score": 0,
+                "alt_level": 0,
+                "alt_result": 0,
+                "alt_score": 0,
+            },
+            "PF": {
+                "shortname": "PF",
+                "best_level": 0,
+                "best_result": 0,
+                "best_score": 0,
+                "alt_level": 0,
+                "alt_result": 0,
+                "alt_score": 0,
+            },
+            "SD": {
+                "shortname": "SD",
+                "best_level": 0,
+                "best_result": 0,
+                "best_score": 0,
+                "alt_level": 0,
+                "alt_result": 0,
+                "alt_score": 0,
+            },
+            "SOA": {
+                "shortname": "SOA",
+                "best_level": 0,
+                "best_result": 0,
+                "best_score": 0,
+                "alt_level": 0,
+                "alt_result": 0,
+                "alt_score": 0,
+            },
+            "TOP": {
+                "shortname": "TOP",
+                "best_level": 0,
+                "best_result": 0,
+                "best_score": 0,
+                "alt_level": 0,
+                "alt_result": 0,
+                "alt_score": 0,
+            },
+        }
+
+        # dungeons = []
         for run in rioBest["mythic_plus_best_runs"]:
             print(run)
+            dung = run["short_name"]
+            mlvl = run["mythic_level"]
+            result = run["num_keystone_upgrades"]
+            score = run["score"]
+
+            ## first dungeon entry, all zeros
+            if dDict[dung]["best_score"] == 0:
+                dDict[dung]["best_score"] = score
+                dDict[dung]["best_level"] = mlvl
+                dDict[dung]["best_result"] = result
+            ## something in best_score, let's check to see
+            ## if current best needs to move to alt_ slots
+            elif dDict[dung]["best_score"] < score:
+                dDict[dung]["alt_score"] = dDict[dung]["best_score"]
+                dDict[dung]["alt_level"] = dDict[dung]["best_level"]
+                dDict[dung]["alt_result"] = dDict[dung]["best_result"]
+                dDict[dung]["best_score"] = score
+                dDict[dung]["best_level"] = mlvl
+                dDict[dung]["best_result"] = result
+            ## new score is less than recorded best score
+            elif dDict[dung]["best_score"] > score:
+                dDict[dung]["alt_score"] = score
+                dDict[dung]["alt_level"] = mlvl
+                dDict[dung]["alt_result"] = result
+
             # print(run["short_name"])
             # print(run["mythic_level"])
             # print(run["num_keystone_upgrades"])
             # print(run["score"])
-            dungeons.append(
-                {
-                    "short_name": run["short_name"],
-                    "mythic_level": run["mythic_level"],
-                    "num_keystone_upgrades": run["num_keystone_upgrades"],
-                    "score": run["score"],
-                }
-            )
-        dSorted = sorted(dungeons, key=lambda i: i["short_name"])
+        #     dungeons.append(
+        #         {
+        #             "short_name": run["short_name"],
+        #             "mythic_level": run["mythic_level"],
+        #             "num_keystone_upgrades": run["num_keystone_upgrades"],
+        #             "score": run["score"],
+        #         }
+        #     )
+        # dSorted = sorted(dungeons, key=lambda i: i["short_name"])
 
+        print("made this far 1")
         response = discord.Embed(
             title=f"{playerScoreAll} Mythic+ Score",
             description=f"**Tank Score:** {playerScoreTank}\n**Healer Score:** {playerScoreHeals}\n**DPS Score:** {playerScoreDps}\n**Last Season Score:** {playerScorePrev}",
@@ -1251,31 +1351,43 @@ async def score(ctx, playerName):
 
         dMsg = ""
         sMsg = ""
-        for dungeon in dSorted:
-            dName = dungeon["short_name"]
-            dLevel = dungeon["mythic_level"]
-            dScore = dungeon["score"]
-            dUpgrades = dungeon["num_keystone_upgrades"]
-            affix = (
-                "***"
-                if dUpgrades == 3
-                else "**"
-                if dUpgrades == 2
-                else "*"
-                if dUpgrades == 1
+        for dungeon in dDict:
+            # print(dungeon)
+            dName = dDict[dungeon]["shortname"]
+            bestLvl = dDict[dungeon]["best_level"]
+            bestScore = dDict[dungeon]["best_score"]
+            bestResult = dDict[dungeon]["best_result"]
+            altLvl = dDict[dungeon]["alt_level"]
+            altScore = dDict[dungeon]["alt_score"]
+            altResult = dDict[dungeon]["alt_result"]
+
+            baffix = (
+                "\*\*\*"
+                if bestResult == 3
+                else "\*\*"
+                if bestResult == 2
+                else "\*"
+                if bestResult == 1
+                else ""
+            )
+
+            aaffix = (
+                "\*\*\*"
+                if altResult == 3
+                else "\*\*"
+                if altResult == 2
+                else "\*"
+                if altResult == 1
                 else ""
             )
 
             dMsg += f"{dName.upper()}\n"
-            sMsg += f"+{dLevel}{affix} ({dScore})\n"
+            sMsg += f"**{'--' if bestLvl==0 else '+'+str(bestLvl)}{baffix} ({round(bestScore,0)})** | "
+            sMsg += f"*{'--' if altLvl==0 else '+'+str(altLvl)}{aaffix} ({round(altScore,0)})*\n"
         dMsg += "Highest This Week: --"
 
-        if len(dungeons) > 0:
-            response.add_field(name="Dungeon", value=dMsg, inline=True)
-            response.add_field(name="Best Result (Points)", value=sMsg, inline=True)
-        else:
-            response.add_field(name="Dungeon", value="None", inline=True)
-            response.add_field(name="Best Result (Points)", value="0 (0)", inline=True)
+        response.add_field(name="Dungeon", value=dMsg, inline=True)
+        response.add_field(name="Best Result (Points)", value=sMsg, inline=True)
 
         if (
             not "mythic_plus_recent_runs" in rioRecent
@@ -1285,7 +1397,7 @@ async def score(ctx, playerName):
             recentLevel = 0
             recentResult = 0
             recentScore = 0
-            recentUrl = "https://raider.io/mythic-plus-runs/season-sl-1/14042885-10-theater-of-pain"
+            recentUrl = "#"
         else:
             recentDungeon = rioRecent["mythic_plus_recent_runs"][0]["dungeon"]
             recentLevel = rioRecent["mythic_plus_recent_runs"][0]["mythic_level"]
