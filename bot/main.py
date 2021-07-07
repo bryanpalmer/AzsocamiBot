@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.60"
-VERSIONDATE = "2021-06-29"
+VERSION = "0.1.61"
+VERSIONDATE = "2021-07-07"
 
 from os.path import dirname, join, os
 
@@ -1296,7 +1296,7 @@ async def score(ctx, playerName):
 
         # dungeons = []
         for run in rioBest["mythic_plus_best_runs"]:
-            print(run)
+            # print(run)
             dung = run["short_name"]
             mlvl = run["mythic_level"]
             result = run["num_keystone_upgrades"]
@@ -1322,25 +1322,10 @@ async def score(ctx, playerName):
                 dDict[dung]["alt_level"] = mlvl
                 dDict[dung]["alt_result"] = result
 
-            # print(run["short_name"])
-            # print(run["mythic_level"])
-            # print(run["num_keystone_upgrades"])
-            # print(run["score"])
-        #     dungeons.append(
-        #         {
-        #             "short_name": run["short_name"],
-        #             "mythic_level": run["mythic_level"],
-        #             "num_keystone_upgrades": run["num_keystone_upgrades"],
-        #             "score": run["score"],
-        #         }
-        #     )
-        # dSorted = sorted(dungeons, key=lambda i: i["short_name"])
-
-        print("made this far 1")
         response = discord.Embed(
             title=f"{playerScoreAll} Mythic+ Score",
             description=f"**Tank Score:** {playerScoreTank}\n**Healer Score:** {playerScoreHeals}\n**DPS Score:** {playerScoreDps}\n**Last Season Score:** {playerScorePrev}",
-            color=discord.Color.red(),
+            color=0x990000,
         )
         classIconUrl = classIcon
         response.set_author(
@@ -1431,20 +1416,46 @@ async def scores(ctx):
     scoreNames = ""
     scoreValues = ""
     currentRow = 0
-
+    curSet = 0
+    sNames = []
+    sValues = []
     for row in scores:
+        curSet += 1
+        if curSet > 10:
+            ## Exceeded 10 rows, time to reset
+            sNames.append(scoreNames)
+            sValues.append(scoreValues)
+            scoreNames = ""
+            scoreValues = ""
+            curSet = 1
+        ## Set values for the strings
         currentRow += 1
         scoreNames += f"{currentRow}) [{ row[1] }](https://raider.io/characters/us/{row[2].lower()}/{row[1]})\n"
         scoreValues += f"{row[3]}\n"
+    ## all rows processed, add strings to the lists
+    sNames.append(scoreNames)
+    sValues.append(scoreValues)
 
     response = discord.Embed(
         title="Followed Characters for Azsocami",
         description="Sorted by Score",
-        color=discord.Color.blue(),
+        color=0x990000
+        # discord.Color.blue(),
     )
 
-    response.add_field(name="Character", value=scoreNames, inline=True)
-    response.add_field(name="Score", value=scoreValues, inline=True)
+    j = len(sNames)
+    i = 0
+    for nam, scor in zip(sNames, sValues):
+        fieldName = f"Character{'' if i==0 else ' cont.'}"
+        response.add_field(name=fieldName, value=nam, inline=True)
+        response.add_field(name="Score", value=scor, inline=True)
+        ## this is an ugly fix to keep inline fields from appearing 3 wide
+        i += 1
+        if i < j:
+            response.add_field(name=".", value=".", inline=False)
+
+    # response.add_field(name="Character", value=scoreNames, inline=True)
+    # response.add_field(name="Score", value=scoreValues, inline=True)
 
     response.set_footer(
         text=f"AzsocamiBot w/ Raider.IO Data | Last crawled at {localTimeStr(datetime.datetime.now())}",
