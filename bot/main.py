@@ -1383,7 +1383,7 @@ async def score(ctx, playerName):
             )
 
             dMsg += f"{dName.upper()}\n"
-            sMsg += f"**{'--' if bestLvl==0 else '+'+str(bestLvl)}{baffix} ({round(bestScore,0)})**\n"
+            sMsg += f"{'--' if bestLvl==0 else '+'+str(bestLvl)}{baffix} ({round(bestScore,0)})\n"
             aMsg += f"*{'--' if altLvl==0 else '+'+str(altLvl)}{aaffix} ({round(altScore,0)})*\n"
         dMsg += "Highest This Week: --"
 
