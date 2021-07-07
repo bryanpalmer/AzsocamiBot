@@ -1,7 +1,7 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.67"
+VERSION = "0.1.68"
 VERSIONDATE = "2021-07-07"
 
 from os.path import dirname, join, os
@@ -73,6 +73,7 @@ async def on_ready():
     actMsg = "Let's Blame Ben"
     if DEVMODE == False:
         updateTeamDataBG.start()
+        updateMythicPlusDataBG.start()
     if DEVMODE == True:
         actMsg = "DEVMODE"
 
@@ -91,11 +92,10 @@ async def updateTeamDataBG():
     wowapi.updateAllMemberData()
 
 
-# @tasks.loop(hours=1)
-# async def updateMythicPlusDataBG():
-#     botChannel = 742388489038987374
-#     print("Updating M+ data in background.")
-#     wowapi.updateMythicPlusData()
+@tasks.loop(hours=1)
+async def updateMythicPlusDataBG():
+    print("Updating M+ data in background.")
+    await hiddenMythicPlusUpdate()
 
 
 @bot.event
@@ -1385,7 +1385,7 @@ async def score(ctx, playerName):
             dMsg += f"{dName.upper()}\n"
             sMsg += f"{'--' if bestLvl==0 else '+'+str(bestLvl)}{baffix} ({int(bestScore)})\n"
             aMsg += f"*{'--' if altLvl==0 else '+'+str(altLvl)}{aaffix} ({int(altScore)})*\n"
-        dMsg += "Highest This Week: --"
+        # dMsg += "Highest This Week: --"
 
         response.add_field(name="Dungeon", value=dMsg, inline=True)
         response.add_field(name="Best (Points)", value=sMsg, inline=True)
@@ -1492,6 +1492,18 @@ async def update_scores(ctx):
             await hiddenAnnouncedScoreUpdate(rec["name"])
     await ctx.send("Mythic+ scores updated.")
     await msgId.delete()
+
+
+async def hiddenMythicPlusUpdate():
+    # msgId = await ctx.send("Running update.")
+    updates = wowapi.updateMythicPlusScores()
+    if len(updates) > 0:
+        for rec in updates:
+            # print(rec)
+            await announceUpdate(rec)
+            await hiddenAnnouncedScoreUpdate(rec["name"])
+    # await ctx.send("Mythic+ scores updated.")
+    # await msgId.delete()
 
 
 @bot.command()
