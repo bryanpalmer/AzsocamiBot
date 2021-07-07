@@ -1,7 +1,7 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.62"
+VERSION = "0.1.63"
 VERSIONDATE = "2021-07-07"
 
 from os.path import dirname, join, os
@@ -91,11 +91,11 @@ async def updateTeamDataBG():
     wowapi.updateAllMemberData()
 
 
-@tasks.loop(hours=1)
-async def updateMythicPlusDataBG():
-    botChannel = 742388489038987374
-    print("Updating M+ data in background.")
-    wowapi.updateMythicPlusData()
+# @tasks.loop(hours=1)
+# async def updateMythicPlusDataBG():
+#     botChannel = 742388489038987374
+#     print("Updating M+ data in background.")
+#     wowapi.updateMythicPlusData()
 
 
 @bot.event
