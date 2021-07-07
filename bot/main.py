@@ -1351,6 +1351,7 @@ async def score(ctx, playerName):
 
         dMsg = ""
         sMsg = ""
+        aMsg = ""
         for dungeon in dDict:
             # print(dungeon)
             dName = dDict[dungeon]["shortname"]
@@ -1382,12 +1383,13 @@ async def score(ctx, playerName):
             )
 
             dMsg += f"{dName.upper()}\n"
-            sMsg += f"**{'--' if bestLvl==0 else '+'+str(bestLvl)}{baffix} ({round(bestScore,0)})** | "
-            sMsg += f"*{'--' if altLvl==0 else '+'+str(altLvl)}{aaffix} ({round(altScore,0)})*\n"
+            sMsg += f"**{'--' if bestLvl==0 else '+'+str(bestLvl)}{baffix} ({round(bestScore,0)})**\n"
+            aMsg += f"*{'--' if altLvl==0 else '+'+str(altLvl)}{aaffix} ({round(altScore,0)})*\n"
         dMsg += "Highest This Week: --"
 
         response.add_field(name="Dungeon", value=dMsg, inline=True)
-        response.add_field(name="Best Result (Points)", value=sMsg, inline=True)
+        response.add_field(name="Best (Points)", value=sMsg, inline=True)
+        response.add_field(name="Alt (Points)", value=aMsg, inline=True)
 
         if (
             not "mythic_plus_recent_runs" in rioRecent
