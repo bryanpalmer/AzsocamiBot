@@ -1,7 +1,7 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.63"
+VERSION = "0.1.64"
 VERSIONDATE = "2021-07-07"
 
 from os.path import dirname, join, os
@@ -1478,12 +1478,12 @@ async def update_scores(ctx):
     if len(updates) > 0:
         for rec in updates:
             print(rec)
-            announceUpdate(rec)
+            await announceUpdate(rec)
     await ctx.send("Mythic+ scores updated.")
     await msgId.delete()
 
 
-async def announceUpdate(ctx, rec):
+async def announceUpdate(rec):
     botChannel = bot.get_channel(742388489038987374)
     # "name": playerName,
     # "realm": playerRealm,
