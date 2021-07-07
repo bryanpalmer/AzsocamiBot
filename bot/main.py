@@ -1339,7 +1339,7 @@ async def score(ctx, playerName):
         print("made this far 1")
         response = discord.Embed(
             title=f"{playerScoreAll} Mythic+ Score",
-            description=f"**Tank Score:** {playerScoreTank}\n**Healer Score:** {playerScoreHeals}\n**DPS Score:** {playerScoreDps}\n**Last Season Score:** {playerScorePrev}",
+            description=f"**Tank Score:** {int(playerScoreTank)}\n**Healer Score:** {int(playerScoreHeals)}\n**DPS Score:** {int(playerScoreDps)}\n**Last Season Score:** {int(playerScorePrev)}",
             color=discord.Color.red(),
         )
         classIconUrl = classIcon
@@ -1383,8 +1383,8 @@ async def score(ctx, playerName):
             )
 
             dMsg += f"{dName.upper()}\n"
-            sMsg += f"{'--' if bestLvl==0 else '+'+str(bestLvl)}{baffix} ({round(bestScore,0)})\n"
-            aMsg += f"*{'--' if altLvl==0 else '+'+str(altLvl)}{aaffix} ({round(altScore,0)})*\n"
+            sMsg += f"{'--' if bestLvl==0 else '+'+str(bestLvl)}{baffix} ({int(bestScore)})\n"
+            aMsg += f"*{'--' if altLvl==0 else '+'+str(altLvl)}{aaffix} ({int(altScore)})*\n"
         dMsg += "Highest This Week: --"
 
         response.add_field(name="Dungeon", value=dMsg, inline=True)
