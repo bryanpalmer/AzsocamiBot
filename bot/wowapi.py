@@ -1280,6 +1280,19 @@ def updateMythicPlusById(conn, recId, highScore, prevScore, thumbnail):
         print(f"Error:  {e}")
 
 
+def updateMythicPlusScoreById(recId, highScore, prevScore):
+    mbr = (highScore, prevScore, recId)
+    sql = "UPDATE mythicplus SET highscore = %s, prevscore = %s WHERE id = %s;"
+    try:
+        conn = create_connection()
+        cur = conn.cursor()
+        cur.execute(sql, mbr)
+        conn.commit()
+        conn.close()
+    except mysql.Error as e:
+        print(f"Error:  {e}")
+
+
 def getMythicPlusByName(playerName):
     playerName = playerName.title()
     retVal = None
@@ -1287,7 +1300,7 @@ def getMythicPlusByName(playerName):
         conn = create_connection()
         cur = conn.cursor()
         cur.execute(
-            "SELECT id, name, realmslug, highscore, active FROM mythicplus WHERE name=%s;",
+            "SELECT id, name, realmslug, highscore, prevscore, active FROM mythicplus WHERE name=%s;",
             (playerName,),
         )
         row = cur.fetchone()

@@ -1174,10 +1174,14 @@ async def compare(ctx, player1, player2):
 @bot.command()
 async def score(ctx, playerName):
     playerRow = wowapi.getMythicPlusByName(playerName)
-    print(playerRow)
+    # print(playerRow)
     if playerRow != "":
         realm = playerRow[2]
         player = playerRow[1]
+        dbplayerScore = playerRow[3]
+        dbplayerPrev = playerRow[4]
+        dbplayerId = playerRow[0]
+
         rioScore = wowapi.api_raiderio_char_mplus_score(player, realm)
         rioPrev = wowapi.api_raiderio_char_mplus_previous(player, realm)
         rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
@@ -1193,6 +1197,19 @@ async def score(ctx, playerName):
         profileUrl = rioScore["profile_url"]
         playerScoreAll = rioScore["mythic_plus_scores_by_season"][0]["scores"]["all"]
         playerScorePrev = rioPrev["mythic_plus_scores_by_season"][0]["scores"]["all"]
+        ## Major values all collected, let's sort out highest/previous scores
+        ## and update our database.
+        ## New high score incoming
+        if dbplayerScore < playerScoreAll:
+            prevScore = dbplayerScore
+            highScore = playerScoreAll
+        else:
+            prevScore = dbplayerPrev
+            highScore = playerScoreAll
+
+        wowapi.updateMythicPlusScoreById(dbplayerId, highScore, prevScore)
+        ## Done with updating db
+
         playerScoreTank = 0
         if "tank" in rioScore["mythic_plus_scores_by_season"][0]["scores"]:
             playerScoreTank = rioScore["mythic_plus_scores_by_season"][0]["scores"][
@@ -1422,7 +1439,9 @@ async def score(ctx, playerName):
         await ctx.send(embed=response)
 
     else:
-        ctx.send("Player not found.")
+        ctx.send(
+            f"{playerName.title()} not being followed.  Type **{COMMAND_PREFIX}follow {playerName}** to add to the tracking list."
+        )
 
 
 ## scores
