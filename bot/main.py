@@ -1477,8 +1477,9 @@ async def update_scores(ctx):
     updates = wowapi.updateMythicPlusScores()
     if len(updates) > 0:
         for rec in updates:
-            print(rec)
+            # print(rec)
             await announceUpdate(rec)
+            await hiddenAnnouncedScoreUpdate(rec["name"])
     await ctx.send("Mythic+ scores updated.")
     await msgId.delete()
 
@@ -1489,9 +1490,117 @@ async def announceUpdate(rec):
     # "realm": playerRealm,
     # "high": highScore,
     # "prev": previousScore,
+
     await botChannel.send(
         f"{rec['name']}'s score has increased from {rec['prev']} to {rec['high']}!"
     )
+
+
+async def hiddenAnnouncedScoreUpdate(playerName):
+    botChannel = bot.get_channel(742388489038987374)
+    playerRow = wowapi.getMythicPlusByName(playerName)
+    if playerRow != "":
+        realm = playerRow[2]
+        player = playerRow[1]
+        rioScore = wowapi.api_raiderio_char_mplus_score(player, realm)
+        # rioPrev = wowapi.api_raiderio_char_mplus_previous(player, realm)
+        # rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
+        rioRecent = wowapi.api_raiderio_char_mplus_recent_runs(player, realm)
+        rioRank = wowapi.api_raiderio_char_mplus_rank(player, realm)
+        serverRealm = rioRank["realm"]
+        playerFaction = rioRank["faction"]
+        playerClass = rioRank["class"]
+        classIcon = wowapi.getClassIconUrl(playerClass)
+        # playerThumb = rioRank["thumbnail_url"]
+        playerSpec = rioScore["active_spec_name"]
+        lastCrawled = rioScore["last_crawled_at"]
+        profileUrl = rioScore["profile_url"]
+        playerScoreAll = rioScore["mythic_plus_scores_by_season"][0]["scores"]["all"]
+        playerScoreTank = 0
+        if "tank" in rioScore["mythic_plus_scores_by_season"][0]["scores"]:
+            playerScoreTank = rioScore["mythic_plus_scores_by_season"][0]["scores"][
+                "tank"
+            ]
+
+        playerScoreDps = 0
+        if "dps" in rioScore["mythic_plus_scores_by_season"][0]["scores"]:
+            playerScoreDps = rioScore["mythic_plus_scores_by_season"][0]["scores"][
+                "dps"
+            ]
+
+        playerScoreHeals = 0
+        if "healer" in rioScore["mythic_plus_scores_by_season"][0]["scores"]:
+            playerScoreHeals = rioScore["mythic_plus_scores_by_season"][0]["scores"][
+                "healer"
+            ]
+
+        playerRankOverall = rioRank["mythic_plus_ranks"]["overall"]["realm"]
+        playerRankClass = rioRank["mythic_plus_ranks"]["class"]["realm"]
+
+        response = discord.Embed(
+            title=f"{int(playerScoreAll)} Mythic+ Score",
+            description=f"**Tank Score:** {int(playerScoreTank)}\n**Healer Score:** {int(playerScoreHeals)}\n**DPS Score:** {int(playerScoreDps)}\n**Last Season Score:** {int(playerScorePrev)}",
+            color=0x990000,
+        )
+        classIconUrl = classIcon
+        response.set_author(
+            name=f"{player}, {playerSpec} {playerClass}",
+            icon_url=classIconUrl,
+        )
+        # response.set_thumbnail(url=playerThumb)
+        ranksValue = ""
+        if "faction_tank" in rioRank["mythic_plus_ranks"]:
+            ranksValue += f"**Tank Rank:** #{rioRank['mythic_plus_ranks']['faction_tank']['realm']} "
+            ranksValue += f"(#{rioRank['mythic_plus_ranks']['faction_class_tank']['realm']} {playerClass})\n"
+
+        if "faction_dps" in rioRank["mythic_plus_ranks"]:
+            ranksValue += f"**DPS Rank:** #{rioRank['mythic_plus_ranks']['faction_dps']['realm']} "
+            ranksValue += f"(#{rioRank['mythic_plus_ranks']['faction_class_dps']['realm']} {playerClass})\n"
+
+        if "faction_healer" in rioRank["mythic_plus_ranks"]:
+            ranksValue += f"**Healer Rank:** #{rioRank['mythic_plus_ranks']['faction_healer']['realm']} "
+            ranksValue += f"(#{rioRank['mythic_plus_ranks']['faction_healer_dps']['realm']} {playerClass})\n"
+
+        ranksValue += f"[Character Info]({profileUrl})\n*All ranks are {serverRealm} {playerFaction}.*"
+
+        response.add_field(
+            name=f"#{playerRankOverall} on {serverRealm} (#{playerRankClass} {playerClass})",
+            value=ranksValue,
+            inline=False,
+        )
+
+        if (
+            not "mythic_plus_recent_runs" in rioRecent
+            or len(rioRecent["mythic_plus_recent_runs"]) == 0
+        ):
+            recentDungeon = "None"
+            recentLevel = 0
+            recentResult = 0
+            recentScore = 0
+            recentUrl = "#"
+        else:
+            recentDungeon = rioRecent["mythic_plus_recent_runs"][0]["dungeon"]
+            recentLevel = rioRecent["mythic_plus_recent_runs"][0]["mythic_level"]
+            recentResult = rioRecent["mythic_plus_recent_runs"][0][
+                "num_keystone_upgrades"
+            ]
+            recentScore = rioRecent["mythic_plus_recent_runs"][0]["score"]
+            recentUrl = rioRecent["mythic_plus_recent_runs"][0]["url"]
+
+        lrMsg = f"**Dungeon:** {recentDungeon}\n"
+        lrMsg += f"**Level:** +{recentLevel}\n"
+        lrMsg += f"**Result:** +{recentResult}\n"
+        lrMsg += f"**Points:** {recentScore}\n"
+        lrMsg += f"[Group Info]({recentUrl})"
+        response.add_field(name="Last Run", value=lrMsg, inline=False)
+
+        response.set_footer(
+            text=f"AzsocamiBot w/ Raider.IO Data | Last crawled at {lastCrawled}",
+        )
+        await botChannel.send(embed=response)
+
+    else:
+        botChannel.send("Player not found.")
 
 
 ###############################################################
