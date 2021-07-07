@@ -91,6 +91,13 @@ async def updateTeamDataBG():
     wowapi.updateAllMemberData()
 
 
+@tasks.loop(hours=1)
+async def updateMythicPlusDataBG():
+    botChannel = 742388489038987374
+    print("Updating M+ data in background.")
+    wowapi.updateMythicPlusData()
+
+
 @bot.event
 async def on_message(message):
     # channel = bot.get_channel(799290844862480445)
@@ -1294,9 +1301,7 @@ async def score(ctx, playerName):
             },
         }
 
-        # dungeons = []
         for run in rioBest["mythic_plus_best_runs"]:
-            # print(run)
             dung = run["short_name"]
             mlvl = run["mythic_level"]
             result = run["num_keystone_upgrades"]
@@ -1469,9 +1474,24 @@ async def scores(ctx):
 @bot.command(aliases=["update"])
 async def update_scores(ctx):
     msgId = await ctx.send("Running update.")
-    wowapi.updateMythicPlusScores()
+    updates = wowapi.updateMythicPlusScores()
+    if len(updates) > 0:
+        for rec in updates:
+            print(rec)
+            announceUpdate(rec)
     await ctx.send("Mythic+ scores updated.")
     await msgId.delete()
+
+
+async def announceUpdate(ctx, rec):
+    botChannel = bot.get_channel(742388489038987374)
+    # "name": playerName,
+    # "realm": playerRealm,
+    # "high": highScore,
+    # "prev": previousScore,
+    await botChannel.send(
+        f"{rec['name']}'s score has increased from {rec['prev']} to {rec['high']}!"
+    )
 
 
 ###############################################################

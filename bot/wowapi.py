@@ -1233,34 +1233,45 @@ def updateMythicPlusScores():
     cursor = conn.cursor()
     retList = []
     cursor.execute(
-        "select id, name, realmslug, highscore from mythicplus where active=1;"
+        "select id, name, realmslug, highscore, prevscore from mythicplus where active=1;"
     )
     rows = cursor.fetchall()
     for row in rows:
-        print(row)
+        # print(row)
         playerName = row[1].title()
         playerRealm = row[2].lower()
+        playerScore = row[3]
+        playerPrev = row[4]
         resultData = api_raiderio_char_mplus_score(playerName, playerRealm)
         currentScore = resultData["mythic_plus_scores_by_season"][0]["scores"]["all"]
+
+        ## New high score incoming
+        if playerScore < currentScore:
+            previousScore = playerScore
+            highScore = currentScore
+            ## also add player data to return list for processing messages
+            mbr = {
+                "name": playerName,
+                "realm": playerRealm,
+                "high": highScore,
+                "prev": previousScore,
+            }
+            retList.append(mbr)
+        else:
+            previousScore = playerPrev
+            highScore = currentScore
+
         thumbnail = resultData["thumbnail_url"]
-        # print(f"{playerName} {playerRealm} {currentScore}")
-        # retList.append(
-        #     {
-        #         "id": row[0],
-        #         "name": playerName,
-        #         "realm": playerRealm,
-        #         "highscore": currentScore,
-        #     }
-        # )
-        updateMythicPlusById(conn, row[0], currentScore, thumbnail)
 
-    # print(retList)
-    # return retList
+        updateMythicPlusById(conn, row[0], highScore, previousScore, thumbnail)
+
+    print(retList)
+    return retList
 
 
-def updateMythicPlusById(conn, recId, highScore, thumbnail):
-    sql = "UPDATE mythicplus SET highscore = %s, thumbnail_url = %s WHERE id = %s;"
-    mbr = (highScore, thumbnail, recId)
+def updateMythicPlusById(conn, recId, highScore, prevScore, thumbnail):
+    sql = "UPDATE mythicplus SET highscore = %s, prevscore = %s, thumbnail_url = %s WHERE id = %s;"
+    mbr = (highScore, prevScore, thumbnail, recId)
     try:
         cur = conn.cursor()
         cur.execute(sql, mbr)
@@ -1533,7 +1544,8 @@ def initMythicPlusTable():
                 id              INTEGER   PRIMARY KEY AUTO_INCREMENT,
                 name            VARCHAR (30) UNIQUE,
                 realmslug       VARCHAR (25) DEFAULT ('silver-hand'),
-                highscore       INTEGER,
+                highscore       INTEGER DEFAULT (0),
+                prevscore       INTEGER DEFAULT (0),
                 thumbnail_url   VARCHAR (255) DEFAULT(''),
                 active          TINYINT(1) DEFAULT (1)
             );"""
@@ -1551,6 +1563,7 @@ def initMythicPlusTable():
             ("Areisda", "silver-hand", 0, 1),
             ("Aryxi", "silver-hand", 0, 1),
             ("Velalda", "silver-hand", 0, 1),
+            ("Bubblebutt", "bloodhoof", 0, 1),
         ]
         cursor.executemany(
             "insert into mythicplus (name, realmslug, highscore, active) values (%s,%s,%s,%s);",
