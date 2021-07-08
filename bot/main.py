@@ -616,14 +616,30 @@ async def legendaries(ctx, armortype="All"):
                 ):
                     armors[curID]["lvl4cost"] = auction["buyout"] / 10000
 
-    heading = f"{'Name'.ljust(25,' ')}\t{'iLvl 190'.rjust(10,' ')}\t{'iLvl 210'.rjust(10,' ')}\t{'iLvl 225'.rjust(10,' ')}\t{'iLvl 235'.rjust(10,' ')}\n"
+            if context == 67:
+                armors[curID]["lvl5qty"] += auction["quantity"]
+                if (
+                    armors[curID]["lvl5cost"] == 0
+                    or auction["buyout"] / 10000 < armors[curID]["lvl5cost"]
+                ):
+                    armors[curID]["lvl5cost"] = auction["buyout"] / 10000
+
+            if context == 68:
+                armors[curID]["lvl6qty"] += auction["quantity"]
+                if (
+                    armors[curID]["lvl6cost"] == 0
+                    or auction["buyout"] / 10000 < armors[curID]["lvl6cost"]
+                ):
+                    armors[curID]["lvl6cost"] = auction["buyout"] / 10000
+
+    heading = f"{'Name'.ljust(25,' ')}\t{'iLvl 225'.rjust(10,' ')}\t{'iLvl 235'.rjust(10,' ')}\t{'iLvl 249'.rjust(10,' ')}\t{'iLvl 262'.rjust(10,' ')}\n"
     cloth = heading
     leather = heading
     mail = heading
     plate = heading
     misc = heading
     for armorId in armors:
-        msgLine = f"{armors[armorId]['name'].ljust(25,' ')}\t{armors[armorId]['lvl1cost']:>10,.2f}\t{armors[armorId]['lvl2cost']:>10,.2f}\t{armors[armorId]['lvl3cost']:>10,.2f}\t{armors[armorId]['lvl4cost']:>10,.2f}\n"
+        msgLine = f"{armors[armorId]['name'].ljust(25,' ')}\t{armors[armorId]['lvl3cost']:>10,.2f}\t{armors[armorId]['lvl4cost']:>10,.2f}\t{armors[armorId]['lvl5cost']:>10,.2f}\t{armors[armorId]['lvl6cost']:>10,.2f}\n"
         if (
             armors[armorId]["subclass"] == "Cloth"
             and "Cape" not in armors[armorId]["name"]
