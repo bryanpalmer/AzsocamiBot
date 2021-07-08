@@ -1243,7 +1243,9 @@ def updateMythicPlusScores():
         playerScore = row[3]
         playerPrev = row[4]
         resultData = api_raiderio_char_mplus_score(playerName, playerRealm)
-        currentScore = resultData["mythic_plus_scores_by_season"][0]["scores"]["all"]
+        currentScore = int(
+            resultData["mythic_plus_scores_by_season"][0]["scores"]["all"]
+        )
 
         ## New high score incoming
         if playerScore < currentScore:
