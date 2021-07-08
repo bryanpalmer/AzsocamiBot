@@ -1275,7 +1275,7 @@ async def score(ctx, playerName):
                 "alt_score": 0,
             },
             "NW": {
-                "shortname": "NM",
+                "shortname": "NW",
                 "best_level": 0,
                 "best_result": 0,
                 "best_score": 0,
