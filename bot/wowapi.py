@@ -1106,7 +1106,7 @@ def updateAllMemberData():
     print("Updating Members Data from WoW API")
     conn = create_connection()
     cursor = conn.cursor()
-    sql = "SELECT id, name, realmslug FROM members;"
+    sql = "SELECT id, name, realmslug FROM members ORDER BY name;"
     cursor.execute(sql)
     rows = cursor.fetchall()
     for member in rows:
