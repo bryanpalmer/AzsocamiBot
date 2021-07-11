@@ -1414,8 +1414,8 @@ def updateMythicPlusScores():
         thumbnail = resultData["thumbnail_url"]
 
         updateMythicPlusById(conn, row[0], highScore, previousScore, thumbnail)
-
-    print(retList)
+    if len(retList) > 0:
+        print(f"M+ Updates: {retList}")
     return retList
 
 
