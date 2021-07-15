@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.70"
-VERSIONDATE = "2021-07-11"
+VERSION = "0.1.71"
+VERSIONDATE = "2021-07-15"
 
 from os.path import dirname, join, os
 
@@ -1201,6 +1201,7 @@ async def score(ctx, playerName):
         rioScore = wowapi.api_raiderio_char_mplus_score(player, realm)
         rioPrev = wowapi.api_raiderio_char_mplus_previous(player, realm)
         rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
+        rioAlts = wowapi.api_raiderio_char_mplus_alternate_runs(player, realm)
         rioRecent = wowapi.api_raiderio_char_mplus_recent_runs(player, realm)
         rioRank = wowapi.api_raiderio_char_mplus_rank(player, realm)
         serverRealm = rioRank["realm"]
@@ -1327,25 +1328,41 @@ async def score(ctx, playerName):
             result = run["num_keystone_upgrades"]
             score = run["score"]
 
-            ## first dungeon entry, all zeros
-            if dDict[dung]["best_score"] == 0:
-                dDict[dung]["best_score"] = score
-                dDict[dung]["best_level"] = mlvl
-                dDict[dung]["best_result"] = result
-            ## something in best_score, let's check to see
-            ## if current best needs to move to alt_ slots
-            elif dDict[dung]["best_score"] < score:
-                dDict[dung]["alt_score"] = dDict[dung]["best_score"]
-                dDict[dung]["alt_level"] = dDict[dung]["best_level"]
-                dDict[dung]["alt_result"] = dDict[dung]["best_result"]
-                dDict[dung]["best_score"] = score
-                dDict[dung]["best_level"] = mlvl
-                dDict[dung]["best_result"] = result
-            ## new score is less than recorded best score
-            elif dDict[dung]["best_score"] > score:
-                dDict[dung]["alt_score"] = score
-                dDict[dung]["alt_level"] = mlvl
-                dDict[dung]["alt_result"] = result
+            dDict[dung]["best_score"] = score
+            dDict[dung]["best_level"] = mlvl
+            dDict[dung]["best_result"] = result
+
+            ## Changed raiderio api to support best and alt runs
+            ## 7-15-2021
+            # ## first dungeon entry, all zeros
+            # if dDict[dung]["best_score"] == 0:
+            #     dDict[dung]["best_score"] = score
+            #     dDict[dung]["best_level"] = mlvl
+            #     dDict[dung]["best_result"] = result
+            # ## something in best_score, let's check to see
+            # ## if current best needs to move to alt_ slots
+            # elif dDict[dung]["best_score"] < score:
+            #     dDict[dung]["alt_score"] = dDict[dung]["best_score"]
+            #     dDict[dung]["alt_level"] = dDict[dung]["best_level"]
+            #     dDict[dung]["alt_result"] = dDict[dung]["best_result"]
+            #     dDict[dung]["best_score"] = score
+            #     dDict[dung]["best_level"] = mlvl
+            #     dDict[dung]["best_result"] = result
+            # ## new score is less than recorded best score
+            # elif dDict[dung]["best_score"] > score:
+            #     dDict[dung]["alt_score"] = score
+            #     dDict[dung]["alt_level"] = mlvl
+            #     dDict[dung]["alt_result"] = result
+
+        for run in rioAlts["mythic_plus_alternate_runs"]:
+            dung = run["short_name"]
+            mlvl = run["mythic_level"]
+            result = run["num_keystone_upgrades"]
+            score = run["score"]
+            ## Only recording alternate run scores here
+            dDict[dung]["alt_score"] = score
+            dDict[dung]["alt_level"] = mlvl
+            dDict[dung]["alt_result"] = result
 
         response = discord.Embed(
             title=f"{playerScoreAll} Mythic+ Score",
@@ -1389,10 +1406,10 @@ async def score(ctx, playerName):
             # print(dungeon)
             dName = dDict[dungeon]["shortname"]
             bestLvl = dDict[dungeon]["best_level"]
-            bestScore = dDict[dungeon]["best_score"]
+            bestScore = dDict[dungeon]["best_score"] * 1.5
             bestResult = dDict[dungeon]["best_result"]
             altLvl = dDict[dungeon]["alt_level"]
-            altScore = dDict[dungeon]["alt_score"]
+            altScore = dDict[dungeon]["alt_score"] * 0.5
             altResult = dDict[dungeon]["alt_result"]
 
             baffix = (

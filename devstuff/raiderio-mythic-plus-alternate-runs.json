@@ -1,0 +1,93 @@
+{
+  "name": "Kaitaa",
+  "race": "Night Elf",
+  "class": "Druid",
+  "active_spec_name": "Restoration",
+  "active_spec_role": "HEALING",
+  "gender": "female",
+  "faction": "alliance",
+  "achievement_points": 15510,
+  "honorable_kills": 0,
+  "thumbnail_url": "https://render-us.worldofwarcraft.com/character/silver-hand/37/33462309-avatar.jpg?alt=wow/static/images/2d/avatar/4-1.jpg",
+  "region": "us",
+  "realm": "Silver Hand",
+  "last_crawled_at": "2021-07-15T12:46:10.000Z",
+  "profile_url": "https://raider.io/characters/us/silver-hand/Kaitaa",
+  "profile_banner": "alliancebanner1",
+  "mythic_plus_alternate_runs": [
+    {
+      "dungeon": "The Necrotic Wake",
+      "short_name": "NW",
+      "mythic_level": 10,
+      "completed_at": "2021-07-11T04:05:57.000Z",
+      "clear_time_ms": 1728571,
+      "num_keystone_upgrades": 2,
+      "map_challenge_mode_id": 376,
+      "score": 102.5,
+      "affixes": [
+        {
+          "id": 9,
+          "name": "Tyrannical",
+          "description": "Bosses have 30% more health. Bosses and their minions inflict up to 15% increased damage.",
+          "wowhead_url": "https://wowhead.com/affix=9"
+        },
+        {
+          "id": 6,
+          "name": "Raging",
+          "description": "Non-boss enemies enrage at 30% health remaining, dealing 75% increased damage until defeated.",
+          "wowhead_url": "https://wowhead.com/affix=6"
+        },
+        {
+          "id": 3,
+          "name": "Volcanic",
+          "description": "While in combat, enemies periodically cause gouts of flame to erupt beneath the feet of distant players.",
+          "wowhead_url": "https://wowhead.com/affix=3"
+        },
+        {
+          "id": 128,
+          "name": "Tormented",
+          "description": "Servants of the Jailer can be found throughout the dungeon and grant powerful boons when defeated. If a servant is not dealt with, they empower the final boss.",
+          "wowhead_url": "https://wowhead.com/affix=128"
+        }
+      ],
+      "url": "https://raider.io/mythic-plus-runs/season-sl-2/614832-10-the-necrotic-wake"
+    },
+    {
+      "dungeon": "Halls of Atonement",
+      "short_name": "HOA",
+      "mythic_level": 10,
+      "completed_at": "2021-07-11T04:46:58.000Z",
+      "clear_time_ms": 1719471,
+      "num_keystone_upgrades": 1,
+      "map_challenge_mode_id": 378,
+      "score": 101,
+      "affixes": [
+        {
+          "id": 9,
+          "name": "Tyrannical",
+          "description": "Bosses have 30% more health. Bosses and their minions inflict up to 15% increased damage.",
+          "wowhead_url": "https://wowhead.com/affix=9"
+        },
+        {
+          "id": 6,
+          "name": "Raging",
+          "description": "Non-boss enemies enrage at 30% health remaining, dealing 75% increased damage until defeated.",
+          "wowhead_url": "https://wowhead.com/affix=6"
+        },
+        {
+          "id": 3,
+          "name": "Volcanic",
+          "description": "While in combat, enemies periodically cause gouts of flame to erupt beneath the feet of distant players.",
+          "wowhead_url": "https://wowhead.com/affix=3"
+        },
+        {
+          "id": 128,
+          "name": "Tormented",
+          "description": "Servants of the Jailer can be found throughout the dungeon and grant powerful boons when defeated. If a servant is not dealt with, they empower the final boss.",
+          "wowhead_url": "https://wowhead.com/affix=128"
+        }
+      ],
+      "url": "https://raider.io/mythic-plus-runs/season-sl-2/618919-10-halls-of-atonement"
+    }
+  ]
+}

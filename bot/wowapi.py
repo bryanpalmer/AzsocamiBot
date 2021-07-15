@@ -140,6 +140,19 @@ def api_raiderio_char_mplus_best_runs(playerName, playerRealm):
     return dataJson
 
 
+def api_raiderio_char_mplus_alternate_runs(playerName, playerRealm):
+    raiderio_uri = "https://raider.io/api/v1/characters/profile"
+    parameters = {
+        "region": "us",
+        "realm": playerRealm,
+        "name": playerName,
+        "fields": "mythic_plus_alternate_runs",
+    }
+    response = requests.get(raiderio_uri, params=parameters)
+    dataJson = json.loads(response.text)
+    return dataJson
+
+
 def api_raiderio_char_mplus_score(playerName, playerRealm):
     raiderio_uri = "https://raider.io/api/v1/characters/profile"
     parameters = {
