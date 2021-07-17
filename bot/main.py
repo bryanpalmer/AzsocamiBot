@@ -86,8 +86,6 @@ async def on_ready():
     print(f"Command prefix is:  {COMMAND_PREFIX}")
 
 
-
-
 @bot.event
 async def on_message(message):
     # channel = bot.get_channel(799290844862480445)
@@ -109,7 +107,6 @@ async def on_command_error(ctx, exc):
         pass
     else:
         print(exc)
-
 
 
 ###############################################################
@@ -1857,14 +1854,12 @@ def localTimeStr(utcTime):
     return utcTime.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)
 
 
-async def botAliveCheckBG():
+async def botAliveCheck():
     if DEVMODE == False:
         botChannel = bot.get_channel(799290844862480445)
     if DEVMODE == True:
         botChannel = bot.get_channel(790667200197296138)
-    await botChannel.send(
-        f"botAliveCheckBG: {localTimeStr(datetime.datetime.now())}"
-    )
+    await botChannel.send(f"botAliveCheckBG: {localTimeStr(datetime.datetime.now())}")
 
 
 @bot.command()
@@ -1930,12 +1925,17 @@ async def updateTeamDataBG():
     print("Updating Team data in background.")
     wowapi.updateAllMemberData()
 
+
 @tasks.loop(minutes=15)
 async def botAliveCheckBG():
+    print("Running AliveCheck process.")
+    await botAliveCheck()
+
 
 @tasks.loop(hours=1)
 async def updateMythicPlusDataBG():
     print("Updating M+ data in background.")
     await hiddenMythicPlusUpdate()
+
 
 bot.run(DISCORD_BOT_TOKEN)
