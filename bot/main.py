@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.71"
-VERSIONDATE = "2021-07-15"
+VERSION = "0.1.72"
+VERSIONDATE = "2021-07-17"
 
 from os.path import dirname, join, os
 
@@ -86,16 +86,6 @@ async def on_ready():
     print(f"Command prefix is:  {COMMAND_PREFIX}")
 
 
-@tasks.loop(hours=1)
-async def updateTeamDataBG():
-    print("Updating Team data in background.")
-    wowapi.updateAllMemberData()
-
-
-@tasks.loop(hours=1)
-async def updateMythicPlusDataBG():
-    print("Updating M+ data in background.")
-    await hiddenMythicPlusUpdate()
 
 
 @bot.event
@@ -119,6 +109,9 @@ async def on_command_error(ctx, exc):
         pass
     else:
         print(exc)
+
+
+async def botAliveCheckBG():
 
 
 ###############################################################
@@ -1558,12 +1551,12 @@ async def hiddenMythicPlusUpdate():
     # await msgId.delete()
 
 
-@bot.command()
-@commands.is_owner()
-async def fakeupdate(ctx):
-    rec = {"name": "Bubblebutt", "realm": "bloodhoof", "high": 1511, "prev": 0}
-    await announceUpdate(rec)
-    await hiddenAnnouncedScoreUpdate("Bubblebutt")
+# @bot.command()
+# @commands.is_owner()
+# async def fakeupdate(ctx):
+#     rec = {"name": "Bubblebutt", "realm": "bloodhoof", "high": 1511, "prev": 0}
+#     await announceUpdate(rec)
+#     await hiddenAnnouncedScoreUpdate("Bubblebutt")
 
 
 async def announceUpdate(rec):
@@ -1866,6 +1859,16 @@ def localTimeStr(utcTime):
     return utcTime.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)
 
 
+async def botAliveCheckBG():
+    if DEVMODE == False:
+        botChannel = bot.get_channel(799290844862480445)
+    if DEVMODE == True:
+        botChannel = bot.get_channel(790667200197296138)
+    await botChannel.send(
+        f"botAliveCheckBG: {localTimeStr(datetime.datetime.now())}"
+    )
+
+
 @bot.command()
 async def changelog(ctx):
     msg = """
@@ -1923,5 +1926,18 @@ def devmode(msg):
     if DEVMODE:
         print(msg)
 
+
+@tasks.loop(hours=1)
+async def updateTeamDataBG():
+    print("Updating Team data in background.")
+    wowapi.updateAllMemberData()
+
+@tasks.loop(minutes=15)
+async def botAliveCheckBG():
+
+@tasks.loop(hours=1)
+async def updateMythicPlusDataBG():
+    print("Updating M+ data in background.")
+    await hiddenMythicPlusUpdate()
 
 bot.run(DISCORD_BOT_TOKEN)
