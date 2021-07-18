@@ -74,8 +74,10 @@ async def on_ready():
     if DEVMODE == False:
         updateTeamDataBG.start()
         updateMythicPlusDataBG.start()
+        botAliveCheckBG.start()
     if DEVMODE == True:
         actMsg = "DEVMODE"
+        botAliveCheckBG.start()
 
     await bot.change_presence(
         status=discord.Status.idle, activity=discord.Game(f"{actMsg}")
@@ -1926,16 +1928,24 @@ async def updateTeamDataBG():
     wowapi.updateAllMemberData()
 
 
+# @tasks.loop(seconds=5)
 @tasks.loop(minutes=15)
 async def botAliveCheckBG():
     print("Running AliveCheck process.")
+    # botChannel = bot.get_channel(790667200197296138)
+    # await botChannel.send(f"botAliveCheckBG: {localTimeStr(datetime.datetime.now())}")
     await botAliveCheck()
 
 
 @tasks.loop(hours=1)
 async def updateMythicPlusDataBG():
     print("Updating M+ data in background.")
-    await hiddenMythicPlusUpdate()
+    updates = wowapi.updateMythicPlusScores()
+    if len(updates) > 0:
+        for rec in updates:
+            await announceUpdate(rec)
+            await hiddenAnnouncedScoreUpdate(rec["name"])
+    # await hiddenMythicPlusUpdate()
 
 
 bot.run(DISCORD_BOT_TOKEN)
