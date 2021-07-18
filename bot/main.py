@@ -75,6 +75,10 @@ async def on_ready():
         updateTeamDataBG.start()
         updateMythicPlusDataBG.start()
         botAliveCheckBG.start()
+        logsChannel = bot.get_channel(799290844862480445)
+        await logsChannel.send(
+            f"AzsocamiBot starting up: {localTimeStr(datetime.datetime.now())}"
+        )
     if DEVMODE == True:
         actMsg = "DEVMODE"
         botAliveCheckBG.start()
