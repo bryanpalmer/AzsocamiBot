@@ -1922,9 +1922,15 @@ def devmode(msg):
         print(msg)
 
 
-@tasks.loop(hours=1)
+@tasks.loop(hours=2)
 async def updateTeamDataBG():
     print("Updating Team data in background.")
+    if DEVMODE == False:
+        # bot-logs channel 799290844862480445
+        botLogs = bot.get_channel(799290844862480445)
+    if DEVMODE == True:
+        botLogs = bot.get_channel(790667200197296138)
+    await botLogs.send(f"UpdateTeamDataBG: {localTimeStr(datetime.datetime.now())}")
     wowapi.updateAllMemberData()
 
 
@@ -1932,20 +1938,25 @@ async def updateTeamDataBG():
 @tasks.loop(minutes=15)
 async def botAliveCheckBG():
     print("Running AliveCheck process.")
-    # botChannel = bot.get_channel(790667200197296138)
-    # await botChannel.send(f"botAliveCheckBG: {localTimeStr(datetime.datetime.now())}")
     await botAliveCheck()
 
 
 @tasks.loop(hours=1)
 async def updateMythicPlusDataBG():
     print("Updating M+ data in background.")
+    if DEVMODE == False:
+        # bot-logs channel 799290844862480445
+        botLogs = bot.get_channel(799290844862480445)
+    if DEVMODE == True:
+        botLogs = bot.get_channel(790667200197296138)
+    await botLogs.send(
+        f"UpdateMythicPlusDataBG: {localTimeStr(datetime.datetime.now())}"
+    )
     updates = wowapi.updateMythicPlusScores()
     if len(updates) > 0:
         for rec in updates:
             await announceUpdate(rec)
             await hiddenAnnouncedScoreUpdate(rec["name"])
-    # await hiddenMythicPlusUpdate()
 
 
 bot.run(DISCORD_BOT_TOKEN)
