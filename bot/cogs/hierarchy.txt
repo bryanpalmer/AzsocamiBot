@@ -1,0 +1,47 @@
+MythicPlus -
+    score
+    scores
+    update
+    compare
+    affixes
+    follow
+    unfollow
+
+AuctionHouse - 
+    mats
+    add_item
+    remove_item
+    lpc
+
+Members - 
+    add_member
+    remove_member
+    change_member_role
+    roster
+    tc
+    gv
+
+Core - 
+    @on_ready
+    help
+    rules
+    clean
+    cleanbot
+    changelog
+    version
+    status
+
+Database -
+    get_table_contents
+    get_table_structure
+    dbinit_<tablename>
+    db_members
+    db_items
+    db_mythicplus
+        
+Events (maybe?) -
+    on_ready
+    on_member_join
+    on_member_remove
+
+BGTasks (maybe) -     

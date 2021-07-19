@@ -1,0 +1,27 @@
+import discord
+from discord.ext import commands
+import os, sys, inspect
+
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
+import wowapi
+
+
+class ClassName(commands.Cog):
+    def __init__(self, client):
+        self.client = client
+
+    ## On_Ready event for cog
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print("<classname> is initialized.")
+
+    @commands.command()
+    async def follow(self, ctx, playerName, realmName="silver-hand"):
+        pass
+
+
+## Initialize cog
+def setup(client):
+    client.add_cog(MythicPlus(client))

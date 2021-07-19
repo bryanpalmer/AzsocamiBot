@@ -1,6 +1,13 @@
 #  botlib
 
 # Generic functions for the discord bot
+import datetime
+from pytz import timezone
+
+# import time
+
+TIMEZONE = "US/Central"  # Timezone for bot responses
+TIMEFORMAT = "%Y-%m-%d %H:%M:%S %Z"
 
 
 def str2embedarray(origString, maxlen=1024):
@@ -17,3 +24,11 @@ def str2embedarray(origString, maxlen=1024):
             tempStr = line
     retArray.append(tempStr)
     return retArray
+
+
+def localTimeStr(utcTime):
+    return utcTime.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)
+
+
+def localNow():
+    return localTimeStr(datetime.datetime.now())
