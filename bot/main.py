@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.1.72"
-VERSIONDATE = "2021-07-17"
+VERSION = "0.2.01"
+VERSIONDATE = "2021-07-19"
 
 from os.path import dirname, join, os
 
@@ -33,11 +33,6 @@ import botlib
 import wowapi
 import wowclasses
 import umj
-
-# TODO: Set up logging for bot
-# import logging
-
-# logging.basicConfig(level=logging.INFO)
 
 # Critical Vars and Settings
 COMMAND_PREFIX = os.getenv("COMMAND_PREFIX")  # Bot command prefix
@@ -78,15 +73,12 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    # channel = bot.get_channel(799290844862480445)
-    # await channel.send(message.content)
     await bot.process_commands(message)
 
 
 @bot.event
 async def on_command_error(ctx, exc):
     if isinstance(exc, CommandNotFound):
-        # We just want to ignore Command Not Found errors
         pass
     else:
         print(exc)
@@ -144,14 +136,6 @@ async def getlastreset(ctx):
 
 def localTimeStr(utcTime):
     return utcTime.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)
-
-
-async def botAliveCheck():
-    if DEVMODE == False:
-        botChannel = bot.get_channel(799290844862480445)
-    if DEVMODE == True:
-        botChannel = bot.get_channel(790667200197296138)
-    await botChannel.send(f"botAliveCheckBG: {localTimeStr(datetime.datetime.now())}")
 
 
 @bot.command()
@@ -222,13 +206,6 @@ def devmode(msg):
 #         botLogs = bot.get_channel(790667200197296138)
 #     await botLogs.send(f"UpdateTeamDataBG: {localTimeStr(datetime.datetime.now())}")
 #     wowapi.updateAllMemberData()
-
-
-# # @tasks.loop(seconds=5)
-# @tasks.loop(minutes=15)
-# async def botAliveCheckBG():
-#     print("Running AliveCheck process.")
-#     await botAliveCheck()
 
 
 # @tasks.loop(hours=1)

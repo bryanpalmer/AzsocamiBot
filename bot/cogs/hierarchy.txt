@@ -14,9 +14,9 @@ AuctionHouse -
     lpc
 
 Members - 
-    add_member
-    remove_member
-    change_member_role
+    add_member *
+    remove_member *
+    change_member_role 
     roster
     tc
     gv
@@ -39,9 +39,6 @@ Database -
     db_items
     db_mythicplus
         
-Events (maybe?) -
-    on_ready
-    on_member_join
-    on_member_remove
 
-BGTasks (maybe) -     
+
+    

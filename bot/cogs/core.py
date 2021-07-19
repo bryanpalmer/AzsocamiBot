@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import os, sys, inspect
 import asyncio
 
@@ -7,7 +7,8 @@ current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfra
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 import botlib
-import wowapi
+
+# import wowapi
 
 DEVMODE = os.getenv("DEVMODE") == "TRUE"  # Boolean flag for devmode
 ENVVERSION = os.getenv("ENV_VERSION")  # Local .env or server vars
@@ -26,12 +27,14 @@ class Core(commands.Cog):
         if DEVMODE == False:
             # updateTeamDataBG.start()
             # updateMythicPlusDataBG.start()
-            # botAliveCheckBG.start()
+            self.botAliveCheckBG.start()
             logsChannel = self.client.get_channel(799290844862480445)
             await logsChannel.send(f"AzsocamiBot starting up: {botlib.localNow()}")
         if DEVMODE == True:
             actMsg = "DEVMODE"
-            # botAliveCheckBG.start()
+            self.botAliveCheckBG.start()
+            logsChannel = self.client.get_channel(790667200197296138)
+            await logsChannel.send(f"AzsocamiBot starting up: {botlib.localNow()}")
 
         await self.client.change_presence(
             status=discord.Status.idle, activity=discord.Game(f"{actMsg}")
@@ -210,6 +213,26 @@ class Core(commands.Cog):
                 # print(x.content[:1])
         await ctx.message.channel.delete_messages(mgs)
         print(f"Removed {cleaned} messages and commands.")
+
+    async def botAliveCheck(self):
+        if DEVMODE == False:
+            botChannel = self.client.get_channel(799290844862480445)
+        if DEVMODE == True:
+            botChannel = self.client.get_channel(790667200197296138)
+        await botChannel.send(f"botAliveCheckBG: {botlib.localNow()}")
+
+    ###################################################################
+    ###################################################################
+    ##                                                               ##
+    ##                       BACKGROUND TASKS                        ##
+    ##                                                               ##
+    ###################################################################
+    ###################################################################
+
+    @tasks.loop(minutes=15)
+    async def botAliveCheckBG(self):
+        print("Core:AliveCheckBG process")
+        await self.botAliveCheck()
 
     ###################################################################
     ###################################################################
