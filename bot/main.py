@@ -238,6 +238,7 @@ bot.load_extension(f"cogs.members")
 bot.load_extension(f"cogs.mythicplus")
 bot.load_extension(f"cogs.auctionhouse")
 bot.load_extension(f"cogs.database")
+# bot.load_extension(f"cogs.customhelp")
 # bot.load_extension(f"cogs.events")
 
 bot.run(DISCORD_BOT_TOKEN)

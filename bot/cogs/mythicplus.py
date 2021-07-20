@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import os, sys, inspect
 
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -9,11 +9,16 @@ import botlib
 import wowapi
 
 DEVMODE = os.getenv("DEVMODE") == "TRUE"  # Boolean flag for devmode
+COMMAND_PREFIX = os.getenv("COMMAND_PREFIX")  # Bot command prefix
 # TIMEZONE = "US/Central"  # Timezone for bot responses
 # TIMEFORMAT = "%Y-%m-%d %H:%M:%S %Z"
 
 
 class MythicPlus(commands.Cog):
+    """
+    Commands related to Mythic Plus results and tracking
+    """
+
     def __init__(self, client):
         self.client = client
 
@@ -21,6 +26,8 @@ class MythicPlus(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print("MythicPlus is initialized.")
+        if DEVMODE == False:
+            self.updateMythicPlusDataBG.start()
 
     ## NON-COMMAND FUNCTIONS
     async def announceUpdate(self, rec):
@@ -145,16 +152,16 @@ class MythicPlus(commands.Cog):
         else:
             botChannel.send("Player not found.")
 
-    async def hiddenMythicPlusUpdate(self):
-        # msgId = await ctx.send("Running update.")
-        updates = wowapi.updateMythicPlusScores()
-        if len(updates) > 0:
-            for rec in updates:
-                # print(rec)
-                await self.announceUpdate(rec)
-                await self.hiddenAnnouncedScoreUpdate(rec["name"])
-        # await ctx.send("Mythic+ scores updated.")
-        # await msgId.delete()
+    # async def hiddenMythicPlusUpdate(self):
+    #     # msgId = await ctx.send("Running update.")
+    #     updates = wowapi.updateMythicPlusScores()
+    #     if len(updates) > 0:
+    #         for rec in updates:
+    #             # print(rec)
+    #             await self.announceUpdate(rec)
+    #             await self.hiddenAnnouncedScoreUpdate(rec["name"])
+    #     # await ctx.send("Mythic+ scores updated.")
+    #     # await msgId.delete()
 
     ## COMMANDS
     # follow
@@ -674,6 +681,29 @@ class MythicPlus(commands.Cog):
 
         await ctx.send(msg)
         await msgId.delete()
+
+    ###################################################################
+    ###################################################################
+    ##                                                               ##
+    ##                       BACKGROUND TASKS                        ##
+    ##                                                               ##
+    ###################################################################
+    ###################################################################
+
+    @tasks.loop(hours=1)
+    async def updateMythicPlusDataBG(self):
+        print("MythicPlus:updateMythicPlusDataBG process")
+        if DEVMODE == False:
+            # bot-logs channel 799290844862480445
+            botLogs = self.client.get_channel(799290844862480445)
+        if DEVMODE == True:
+            botLogs = self.client.get_channel(790667200197296138)
+        await botLogs.send(f"UpdateMythicPlusDataBG: {botlib.localNow()}")
+        updates = wowapi.updateMythicPlusScores()
+        if len(updates) > 0:
+            for rec in updates:
+                await self.announceUpdate(rec)
+                await self.hiddenAnnouncedScoreUpdate(rec["name"])
 
 
 def setup(client):

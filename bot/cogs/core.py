@@ -16,6 +16,10 @@ COMMAND_PREFIX = os.getenv("COMMAND_PREFIX")  # Bot command prefix
 
 
 class Core(commands.Cog):
+    """
+    Core bot discord functions
+    """
+
     def __init__(self, client):
         self.client = client
 
@@ -32,7 +36,7 @@ class Core(commands.Cog):
             await logsChannel.send(f"AzsocamiBot starting up: {botlib.localNow()}")
         if DEVMODE == True:
             actMsg = "DEVMODE"
-            self.botAliveCheckBG.start()
+            # self.botAliveCheckBG.start()
             logsChannel = self.client.get_channel(790667200197296138)
             await logsChannel.send(f"AzsocamiBot starting up: {botlib.localNow()}")
 

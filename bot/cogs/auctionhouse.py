@@ -15,6 +15,10 @@ DEVMODE = os.getenv("DEVMODE") == "TRUE"  # Boolean flag for devmode
 
 
 class AuctionHouse(commands.Cog):
+    """
+    Commands relating to Auction House data
+    """
+
     def __init__(self, client):
         self.client = client
 
@@ -196,6 +200,9 @@ class AuctionHouse(commands.Cog):
     @commands.command(name="mats", aliases=["raidmats"])
     async def mats(self, ctx):
         """ Lookup common raid mats prices and availability in Auction House """
+        # resp = wowapi.cmdRaidMats()
+        # await botlib.send_embed(ctx, resp)
+
         raidMats = wowapi.getRaidMats()
         ahData = wowapi.getAuctionHouseData()
         umjConn = umj.create_connection()
@@ -331,7 +338,9 @@ class AuctionHouse(commands.Cog):
         response.set_footer(
             text=f"Auction house data last collected at {botlib.localTimeStr(lastRun)}"
         )
-        await ctx.send(embed=response)
+
+        await botlib.send_embed(ctx, response)
+        # # await ctx.send(embed=response)
 
     @commands.command(aliases=["mats2"], hidden=True)
     async def raidmats2(self, ctx):

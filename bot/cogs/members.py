@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import os, sys, inspect
 import asyncio
 import datetime
@@ -16,6 +16,10 @@ COMMAND_PREFIX = os.getenv("COMMAND_PREFIX")  # Bot command prefix
 
 
 class Members(commands.Cog):
+    """
+    Guild Member commands
+    """
+
     def __init__(self, client):
         self.client = client
 
@@ -23,6 +27,8 @@ class Members(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print("Members is initialized.")
+        if DEVMODE == False:
+            self.updateTeamDataBG.start()
 
     @commands.command()
     async def add_member(self, ctx, playerName, realmName="silver-hand"):
@@ -221,6 +227,25 @@ class Members(commands.Cog):
         msgId = await ctx.send(msg)
         wowapi.updateAllMemberData()
         await msgId.edit(content="Members database is updated.")
+
+    ###################################################################
+    ###################################################################
+    ##                                                               ##
+    ##                       BACKGROUND TASKS                        ##
+    ##                                                               ##
+    ###################################################################
+    ###################################################################
+
+    @tasks.loop(hours=2)
+    async def updateTeamDataBG(self):
+        print("Members:updateTeamDataBG process (2 hours)")
+        if DEVMODE == False:
+            # bot-logs channel 799290844862480445
+            botLogs = self.client.get_channel(799290844862480445)
+        if DEVMODE == True:
+            botLogs = self.client.get_channel(790667200197296138)
+        await botLogs.send(f"UpdateTeamDataBG: {botlib.localNow()}")
+        wowapi.updateAllMemberData()
 
 
 ## Initialize cog
