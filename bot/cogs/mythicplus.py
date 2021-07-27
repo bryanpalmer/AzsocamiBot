@@ -493,8 +493,8 @@ class MythicPlus(commands.Cog):
                 )
 
                 dMsg += f"{dName.upper()}\n"
-                sMsg += f"{'--' if bestLvl==0 else '+'+str(bestLvl)}{baffix} ({int(bestScore)})\n"
-                aMsg += f"*{'--' if altLvl==0 else '+'+str(altLvl)}{aaffix} ({int(altScore)})*\n"
+                sMsg += f"{'**' if fortBest else ''}{'--' if bestLvl==0 else '+'+str(bestLvl)}{baffix} ({int(bestScore)}){'**' if fortBest else ''}\n"
+                aMsg += f"*{'' if fortBest else '**'}{'--' if altLvl==0 else '+'+str(altLvl)}{aaffix} ({int(altScore)})*{'' if fortBest else '**'}\n"
             # dMsg += "Highest This Week: --"
 
             response.add_field(name="Dungeon", value=dMsg, inline=True)
