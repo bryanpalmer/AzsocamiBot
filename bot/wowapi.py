@@ -1230,145 +1230,145 @@ def getRaidMats():
     return retList
 
 
-def cmdRaidMats():
-    raidMats = getRaidMats()
-    ahData = getAuctionHouseData()
-    umjConn = umj.create_connection()
+# def cmdRaidMats():
+#     raidMats = getRaidMats()
+#     ahData = getAuctionHouseData()
+#     umjConn = umj.create_connection()
 
-    for mat in raidMats:
-        # fill out class/subclass info from items db
-        curId = raidMats[mat]["id"]
-        item = umj.getItemById(umjConn, curId)
-        raidMats[mat]["classname"] = item.classname
-        raidMats[mat]["subclass"] = item.subclass
+#     for mat in raidMats:
+#         # fill out class/subclass info from items db
+#         curId = raidMats[mat]["id"]
+#         item = umj.getItemById(umjConn, curId)
+#         raidMats[mat]["classname"] = item.classname
+#         raidMats[mat]["subclass"] = item.subclass
 
-    for auction in ahData["auctions"]:
-        # check auction data for raw mats
-        if auction["item"]["id"] in raidMats:
-            curID = auction["item"]["id"]
-            raidMats[curID]["quantity"] += auction["quantity"]
-            if (
-                raidMats[curID]["unitcost"] == 0
-                or auction["unit_price"] / 10000 < raidMats[curID]["unitcost"]
-            ):
-                raidMats[curID]["unitcost"] = auction["unit_price"] / 10000
+#     for auction in ahData["auctions"]:
+#         # check auction data for raw mats
+#         if auction["item"]["id"] in raidMats:
+#             curID = auction["item"]["id"]
+#             raidMats[curID]["quantity"] += auction["quantity"]
+#             if (
+#                 raidMats[curID]["unitcost"] == 0
+#                 or auction["unit_price"] / 10000 < raidMats[curID]["unitcost"]
+#             ):
+#                 raidMats[curID]["unitcost"] = auction["unit_price"] / 10000
 
-    umjConn.close()
-    setLastRun("AUCTION_HOUSE")
-    lastRun = datetime.datetime.now()
+#     umjConn.close()
+#     setLastRun("AUCTION_HOUSE")
+#     lastRun = datetime.datetime.now()
 
-    foodTxt = ""
-    alchTxt = ""
-    lwTxt = ""
-    oreTxt = ""
-    goodsTxt = ""
-    miscTxt = ""
+#     foodTxt = ""
+#     alchTxt = ""
+#     lwTxt = ""
+#     oreTxt = ""
+#     goodsTxt = ""
+#     miscTxt = ""
 
-    for key in raidMats:
-        name = raidMats[key]["name"]
-        qty = raidMats[key]["quantity"]
-        ttlcost = raidMats[key]["unitcost"]
-        mattype = raidMats[key]["subclass"]
-        matclass = raidMats[key]["classname"]
-        # assign each mat to a specific embed field
-        if matclass == "Tradeskill" and (mattype == "Herb" or mattype == "Other"):
-            if qty > 0:
-                alchTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
-            else:
-                alchTxt += f"{ name }: None Available\n"
+#     for key in raidMats:
+#         name = raidMats[key]["name"]
+#         qty = raidMats[key]["quantity"]
+#         ttlcost = raidMats[key]["unitcost"]
+#         mattype = raidMats[key]["subclass"]
+#         matclass = raidMats[key]["classname"]
+#         # assign each mat to a specific embed field
+#         if matclass == "Tradeskill" and (mattype == "Herb" or mattype == "Other"):
+#             if qty > 0:
+#                 alchTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
+#             else:
+#                 alchTxt += f"{ name }: None Available\n"
 
-        elif matclass == "Tradeskill" and mattype == "Cooking":
-            if qty > 0:
-                foodTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
-            else:
-                foodTxt += f"{ name }: None Available\n"
+#         elif matclass == "Tradeskill" and mattype == "Cooking":
+#             if qty > 0:
+#                 foodTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
+#             else:
+#                 foodTxt += f"{ name }: None Available\n"
 
-        elif matclass == "Tradeskill" and mattype == "Metal & Stone":
-            if qty > 0:
-                oreTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
-            else:
-                oreTxt += f"{ name }: None Available\n"
+#         elif matclass == "Tradeskill" and mattype == "Metal & Stone":
+#             if qty > 0:
+#                 oreTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
+#             else:
+#                 oreTxt += f"{ name }: None Available\n"
 
-        elif matclass == "Tradeskill" and (mattype == "Leather" or mattype == "Cloth"):
-            if qty > 0:
-                lwTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
-            else:
-                lwTxt += f"{ name }: None Available\n"
+#         elif matclass == "Tradeskill" and (mattype == "Leather" or mattype == "Cloth"):
+#             if qty > 0:
+#                 lwTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
+#             else:
+#                 lwTxt += f"{ name }: None Available\n"
 
-        elif (
-            matclass == "Consumable"
-            and (
-                mattype == "Potion"
-                or mattype == "Flask"
-                or mattype == "Other"
-                or mattype == "Food & Drink"
-                or mattype == "Vantus Runes"
-            )
-        ) or (matclass == "Item Enhancement" and mattype == "Misc"):
-            if qty > 0:
-                goodsTxt += f"[{ name }](https://www.wowhead.com/item={key}): {qty} - *{round(ttlcost,0)}g*\n"
-            else:
-                goodsTxt += (
-                    f"[{ name }](https://www.wowhead.com/item={key}): None Available\n"
-                )
+#         elif (
+#             matclass == "Consumable"
+#             and (
+#                 mattype == "Potion"
+#                 or mattype == "Flask"
+#                 or mattype == "Other"
+#                 or mattype == "Food & Drink"
+#                 or mattype == "Vantus Runes"
+#             )
+#         ) or (matclass == "Item Enhancement" and mattype == "Misc"):
+#             if qty > 0:
+#                 goodsTxt += f"[{ name }](https://www.wowhead.com/item={key}): {qty} - *{round(ttlcost,0)}g*\n"
+#             else:
+#                 goodsTxt += (
+#                     f"[{ name }](https://www.wowhead.com/item={key}): None Available\n"
+#                 )
 
-        else:
-            if qty > 0:
-                miscTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
-            else:
-                miscTxt += f"{ name }: None Available\n"
-            print(f"{key} - {name} missing category:  {matclass} | {mattype}")
+#         else:
+#             if qty > 0:
+#                 miscTxt += f"{ name }: {qty} - *{round(ttlcost,0)}g*\n"
+#             else:
+#                 miscTxt += f"{ name }: None Available\n"
+#             print(f"{key} - {name} missing category:  {matclass} | {mattype}")
 
-    response = discord.Embed(
-        title="Raid Mats",
-        url="https://www.wowhead.com/",
-        description="Current auction house prices for common raid mats on our server.",
-        color=discord.Color.blue(),
-    )
-    aLines = botlib.str2embedarray(alchTxt)
-    for i, line in enumerate(aLines):
-        if len(line) > 0:
-            fieldName = f"Alchemy Mats{'' if i==0 else ' cont.'}"
-            response.add_field(name="Alchemy Mats", value=line, inline=False)
+#     response = discord.Embed(
+#         title="Raid Mats",
+#         url="https://www.wowhead.com/",
+#         description="Current auction house prices for common raid mats on our server.",
+#         color=discord.Color.blue(),
+#     )
+#     aLines = botlib.str2embedarray(alchTxt)
+#     for i, line in enumerate(aLines):
+#         if len(line) > 0:
+#             fieldName = f"Alchemy Mats{'' if i==0 else ' cont.'}"
+#             response.add_field(name="Alchemy Mats", value=line, inline=False)
 
-    aLines = botlib.str2embedarray(foodTxt)
-    for i, line in enumerate(aLines):
-        if len(line) > 0:
-            fieldName = f"Cooking Mats{'' if i==0 else ' cont.'}"
-            response.add_field(name=fieldName, value=line, inline=False)
+#     aLines = botlib.str2embedarray(foodTxt)
+#     for i, line in enumerate(aLines):
+#         if len(line) > 0:
+#             fieldName = f"Cooking Mats{'' if i==0 else ' cont.'}"
+#             response.add_field(name=fieldName, value=line, inline=False)
 
-    # response.add_field(name="\u200b", value="\u200b", inline=False)
+#     # response.add_field(name="\u200b", value="\u200b", inline=False)
 
-    aLines = botlib.str2embedarray(lwTxt)
-    for i, line in enumerate(aLines):
-        if len(line) > 0:
-            fieldName = f"LW / Cloth Mats{'' if i==0 else ' cont.'}"
-            response.add_field(name=fieldName, value=line, inline=False)
+#     aLines = botlib.str2embedarray(lwTxt)
+#     for i, line in enumerate(aLines):
+#         if len(line) > 0:
+#             fieldName = f"LW / Cloth Mats{'' if i==0 else ' cont.'}"
+#             response.add_field(name=fieldName, value=line, inline=False)
 
-    aLines = botlib.str2embedarray(oreTxt)
-    for i, line in enumerate(aLines):
-        if len(line) > 0:
-            fieldName = f"Smithing Mats{'' if i==0 else ' cont.'}"
-            response.add_field(name=fieldName, value=line, inline=False)
+#     aLines = botlib.str2embedarray(oreTxt)
+#     for i, line in enumerate(aLines):
+#         if len(line) > 0:
+#             fieldName = f"Smithing Mats{'' if i==0 else ' cont.'}"
+#             response.add_field(name=fieldName, value=line, inline=False)
 
-    aLines = botlib.str2embedarray(goodsTxt)
-    for i, line in enumerate(aLines):
-        if len(line) > 0:
-            fieldName = f"Finished Goods{'' if i==0 else ' cont.'}"
-            response.add_field(name=fieldName, value=line, inline=False)
+#     aLines = botlib.str2embedarray(goodsTxt)
+#     for i, line in enumerate(aLines):
+#         if len(line) > 0:
+#             fieldName = f"Finished Goods{'' if i==0 else ' cont.'}"
+#             response.add_field(name=fieldName, value=line, inline=False)
 
-    aLines = botlib.str2embedarray(miscTxt)
-    for i, line in enumerate(aLines):
-        if len(line) > 0:
-            fieldName = f"Uncategorized Items{'' if i==0 else ' cont.'}"
-            response.add_field(name=fieldName, value=line, inline=False)
+#     aLines = botlib.str2embedarray(miscTxt)
+#     for i, line in enumerate(aLines):
+#         if len(line) > 0:
+#             fieldName = f"Uncategorized Items{'' if i==0 else ' cont.'}"
+#             response.add_field(name=fieldName, value=line, inline=False)
 
-    response.set_footer(
-        text=f"Auction house data last collected at {botlib.localTimeStr(lastRun)}"
-    )
+#     response.set_footer(
+#         text=f"Auction house data last collected at {botlib.localTimeStr(lastRun)}"
+#     )
 
-    return response
-    # await botlib.send_embed(ctx, response)
+#     return response
+#     # await botlib.send_embed(ctx, response)
 
 
 # def getItemById(conn, itemId):
@@ -1886,6 +1886,50 @@ def initMythicPlusTable():
         ]
         cursor.executemany(
             "insert into mythicplus (name, realmslug, highscore, active) values (%s,%s,%s,%s);",
+            memberList,
+        )
+        conn.commit()
+        conn.close()
+    except mysql.Error as e:
+        print(e)
+
+
+## WIP - NOT ACTIVE YET
+def initMythicPlusRanksTable():
+    print("Reinitializing MythicRanks Table")
+    try:
+        conn = create_connection()
+        cursor = conn.cursor()
+        # drop existing table
+        cursor.execute("DROP TABLE IF EXISTS mythicranks;")
+        sql = """CREATE TABLE mythicranks (
+                id              INTEGER   PRIMARY KEY AUTO_INCREMENT,
+                name            VARCHAR (30) UNIQUE,
+                realmslug       VARCHAR (25) DEFAULT ('silver-hand'),
+                tankrank        INTEGER DEFAULT (0),
+                dpsrank         INTEGER DEFAULT (0),
+                healsrank       INTEGER DEFAULT (0),
+                tankurl         VARCHAR (255) DEFAULT(''),
+                dpsurl          VARCHAR (255) DEFAULT(''),
+                healsurl        DEFAULT('')
+            );"""
+        cursor.execute(sql)
+        conn.commit()
+        memberList = [
+            ("Aaryn", "silver-hand"),
+            ("Murinn", "silver-hand"),
+            ("Kaitaa", "silver-hand"),
+            ("Razzlectria", "silver-hand"),
+            ("Cradon", "silver-hand"),
+            ("Ragebear", "silver-hand"),
+            ("Agaviss", "silver-hand"),
+            ("Frenchie", "silver-hand"),
+            ("Areisda", "silver-hand"),
+            ("Aryxi", "silver-hand"),
+            ("Velalda", "silver-hand"),
+        ]
+        cursor.executemany(
+            "insert into mythicplus (name, realmslug) values (%s,%s);",
             memberList,
         )
         conn.commit()

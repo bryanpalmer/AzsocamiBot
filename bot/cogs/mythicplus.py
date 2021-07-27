@@ -315,6 +315,293 @@ class MythicPlus(commands.Cog):
             playerRankOverall = rioRank["mythic_plus_ranks"]["overall"]["realm"]
             playerRankClass = rioRank["mythic_plus_ranks"]["class"]["realm"]
 
+            ## best = fortified, alt = tyrannical
+            dDict = {
+                "DOS": {
+                    "shortname": "DOS",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "HOA": {
+                    "shortname": "HOA",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "MISTS": {
+                    "shortname": "MISTS",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "NW": {
+                    "shortname": "NW",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "PF": {
+                    "shortname": "PF",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "SD": {
+                    "shortname": "SD",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "SOA": {
+                    "shortname": "SOA",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "TOP": {
+                    "shortname": "TOP",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+            }
+
+            for run in rioBest["mythic_plus_best_runs"]:
+                affix = run["affixes"][0]["name"]
+                dung = run["short_name"]
+                mlvl = run["mythic_level"]
+                result = run["num_keystone_upgrades"]
+                score = run["score"]
+
+                if affix == "Fortified" and dDict[dung]["best_score"] == 0:
+                    dDict[dung]["best_score"] = score
+                    dDict[dung]["best_level"] = mlvl
+                    dDict[dung]["best_result"] = result
+                elif affix == "Tyrannical" and dDict[dung]["alt_score"] == 0:
+                    dDict[dung]["alt_score"] = score
+                    dDict[dung]["alt_level"] = mlvl
+                    dDict[dung]["alt_result"] = result
+
+            for run in rioAlts["mythic_plus_alternate_runs"]:
+                affix = run["affixes"][0]["name"]
+                dung = run["short_name"]
+                mlvl = run["mythic_level"]
+                result = run["num_keystone_upgrades"]
+                score = run["score"]
+                if affix == "Fortified" and dDict[dung]["best_score"] == 0:
+                    dDict[dung]["best_score"] = score
+                    dDict[dung]["best_level"] = mlvl
+                    dDict[dung]["best_result"] = result
+                elif affix == "Tyrannical" and dDict[dung]["alt_score"] == 0:
+                    ## Only recording alternate run scores here
+                    dDict[dung]["alt_score"] = score
+                    dDict[dung]["alt_level"] = mlvl
+                    dDict[dung]["alt_result"] = result
+
+            response = discord.Embed(
+                title=f"{playerScoreAll} Mythic+ Score",
+                description=f"**Tank Score:** {int(playerScoreTank)}\n**Healer Score:** {int(playerScoreHeals)}\n**DPS Score:** {int(playerScoreDps)}\n**Last Season Score:** {int(playerScorePrev)}",
+                color=0x990000,
+            )
+            classIconUrl = classIcon
+            response.set_author(
+                name=f"{player}, {playerSpec} {playerClass}",
+                icon_url=classIconUrl,
+            )
+            response.set_thumbnail(url=playerThumb)
+
+            ## Rankings
+            ranksValue = ""
+            if "faction_tank" in rioRank["mythic_plus_ranks"]:
+                ranksValue += f"**Tank Rank:** #{rioRank['mythic_plus_ranks']['faction_tank']['realm']} "
+                ranksValue += f"(#{rioRank['mythic_plus_ranks']['faction_class_tank']['realm']} {playerClass})\n"
+
+            if "faction_dps" in rioRank["mythic_plus_ranks"]:
+                ranksValue += f"**DPS Rank:** #{rioRank['mythic_plus_ranks']['faction_dps']['realm']} "
+                ranksValue += f"(#{rioRank['mythic_plus_ranks']['faction_class_dps']['realm']} {playerClass})\n"
+
+            if "faction_healer" in rioRank["mythic_plus_ranks"]:
+                ranksValue += f"**Healer Rank:** #{rioRank['mythic_plus_ranks']['faction_healer']['realm']} "
+                ranksValue += f"(#{rioRank['mythic_plus_ranks']['faction_class_healer']['realm']} {playerClass})\n"
+
+            ranksValue += f"[Character Info]({profileUrl})\n*All ranks are {serverRealm} {playerFaction}.*"
+
+            response.add_field(
+                name=f"#{playerRankOverall} on {serverRealm} (#{playerRankClass} {playerClass})",
+                value=ranksValue,
+                inline=False,
+            )
+
+            ## Dungeons
+            dMsg = ""
+            sMsg = ""
+            aMsg = ""
+            for dungeon in dDict:
+                fortBest = dDict[dungeon]["best_score"] > dDict[dungeon]["alt_score"]
+                # print(dungeon)
+                dName = dDict[dungeon]["shortname"]
+                bestLvl = dDict[dungeon]["best_level"]
+                bestScore = dDict[dungeon]["best_score"] * (1.5 if fortBest else 0.5)
+                bestResult = dDict[dungeon]["best_result"]
+                altLvl = dDict[dungeon]["alt_level"]
+                altScore = dDict[dungeon]["alt_score"] * (0.5 if fortBest else 1.5)
+                altResult = dDict[dungeon]["alt_result"]
+
+                baffix = (
+                    "\*\*\*"
+                    if bestResult == 3
+                    else "\*\*"
+                    if bestResult == 2
+                    else "\*"
+                    if bestResult == 1
+                    else ""
+                )
+
+                aaffix = (
+                    "\*\*\*"
+                    if altResult == 3
+                    else "\*\*"
+                    if altResult == 2
+                    else "\*"
+                    if altResult == 1
+                    else ""
+                )
+
+                dMsg += f"{dName.upper()}\n"
+                sMsg += f"{'--' if bestLvl==0 else '+'+str(bestLvl)}{baffix} ({int(bestScore)})\n"
+                aMsg += f"*{'--' if altLvl==0 else '+'+str(altLvl)}{aaffix} ({int(altScore)})*\n"
+            # dMsg += "Highest This Week: --"
+
+            response.add_field(name="Dungeon", value=dMsg, inline=True)
+            response.add_field(name="Fortified", value=sMsg, inline=True)
+            response.add_field(name="Tyrannical", value=aMsg, inline=True)
+
+            if (
+                not "mythic_plus_recent_runs" in rioRecent
+                or len(rioRecent["mythic_plus_recent_runs"]) == 0
+            ):
+                recentDungeon = "None"
+                recentLevel = 0
+                recentResult = 0
+                recentScore = 0
+                recentUrl = "#"
+            else:
+                recentDungeon = rioRecent["mythic_plus_recent_runs"][0]["dungeon"]
+                recentLevel = rioRecent["mythic_plus_recent_runs"][0]["mythic_level"]
+                recentResult = rioRecent["mythic_plus_recent_runs"][0][
+                    "num_keystone_upgrades"
+                ]
+                recentScore = rioRecent["mythic_plus_recent_runs"][0]["score"]
+                recentUrl = rioRecent["mythic_plus_recent_runs"][0]["url"]
+
+            lrMsg = f"**Dungeon:** {recentDungeon}\n"
+            lrMsg += f"**Level:** +{recentLevel}\n"
+            lrMsg += f"**Result:** +{recentResult}\n"
+            lrMsg += f"**Points:** {recentScore}\n"
+            lrMsg += f"[Group Info]({recentUrl})"
+            response.add_field(name="Last Run", value=lrMsg, inline=False)
+
+            response.set_footer(
+                text=f"AzsocamiBot w/ Raider.IO Data | Last crawled at {lastCrawled}",
+            )
+            await ctx.send(embed=response)
+
+        else:
+            await ctx.send(
+                f"{playerName.title()} not being followed.  Type **{COMMAND_PREFIX}follow {playerName}** to add to the tracking list."
+            )
+
+    # score <playername>
+    @commands.command()
+    async def score2(self, ctx, playerName):
+        """ Reports current Mythic Plus dungeon scores and rankings """
+        playerRow = wowapi.getMythicPlusByName(playerName)
+        # print(playerRow)
+        if playerRow != None:
+            realm = playerRow[2]
+            player = playerRow[1]
+            dbplayerScore = playerRow[3]
+            dbplayerPrev = playerRow[4]
+            dbplayerId = playerRow[0]
+
+            rioScore = wowapi.api_raiderio_char_mplus_score(player, realm)
+            rioPrev = wowapi.api_raiderio_char_mplus_previous(player, realm)
+            rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
+            rioAlts = wowapi.api_raiderio_char_mplus_alternate_runs(player, realm)
+            rioRecent = wowapi.api_raiderio_char_mplus_recent_runs(player, realm)
+            rioRank = wowapi.api_raiderio_char_mplus_rank(player, realm)
+            serverRealm = rioRank["realm"]
+            playerFaction = rioRank["faction"]
+            playerClass = rioBest["class"]
+            classIcon = wowapi.getClassIconUrl(playerClass)
+            playerThumb = rioBest["thumbnail_url"]
+            playerSpec = rioScore["active_spec_name"]
+            lastCrawled = rioScore["last_crawled_at"]
+            profileUrl = rioScore["profile_url"]
+            playerScoreAll = rioScore["mythic_plus_scores_by_season"][0]["scores"][
+                "all"
+            ]
+            playerScorePrev = rioPrev["mythic_plus_scores_by_season"][0]["scores"][
+                "all"
+            ]
+            ## Major values all collected, let's sort out highest/previous scores
+            ## and update our database.
+            ## New high score incoming
+            if dbplayerScore < playerScoreAll:
+                prevScore = dbplayerScore
+                highScore = playerScoreAll
+            else:
+                prevScore = dbplayerPrev
+                highScore = playerScoreAll
+
+            wowapi.updateMythicPlusScoreById(dbplayerId, highScore, prevScore)
+            ## Done with updating db
+
+            playerScoreTank = 0
+            if "tank" in rioScore["mythic_plus_scores_by_season"][0]["scores"]:
+                playerScoreTank = rioScore["mythic_plus_scores_by_season"][0]["scores"][
+                    "tank"
+                ]
+
+            playerScoreDps = 0
+            if "dps" in rioScore["mythic_plus_scores_by_season"][0]["scores"]:
+                playerScoreDps = rioScore["mythic_plus_scores_by_season"][0]["scores"][
+                    "dps"
+                ]
+
+            playerScoreHeals = 0
+            if "healer" in rioScore["mythic_plus_scores_by_season"][0]["scores"]:
+                playerScoreHeals = rioScore["mythic_plus_scores_by_season"][0][
+                    "scores"
+                ]["healer"]
+            playerRankOverall = rioRank["mythic_plus_ranks"]["overall"]["realm"]
+            playerRankClass = rioRank["mythic_plus_ranks"]["class"]["realm"]
+
             dDict = {
                 "DOS": {
                     "shortname": "DOS",
