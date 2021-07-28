@@ -463,13 +463,14 @@ class MythicPlus(commands.Cog):
             aMsg = ""
             for dungeon in dDict:
                 fortBest = dDict[dungeon]["best_score"] > dDict[dungeon]["alt_score"]
+                tyrBest = dDict[dungeon]["alt_score"] > dDict[dungeon]["best_score"]
                 # print(dungeon)
                 dName = dDict[dungeon]["shortname"]
                 bestLvl = dDict[dungeon]["best_level"]
                 bestScore = dDict[dungeon]["best_score"] * (1.5 if fortBest else 0.5)
                 bestResult = dDict[dungeon]["best_result"]
                 altLvl = dDict[dungeon]["alt_level"]
-                altScore = dDict[dungeon]["alt_score"] * (0.5 if fortBest else 1.5)
+                altScore = dDict[dungeon]["alt_score"] * (1.5 if tyrBest else 0.5)
                 altResult = dDict[dungeon]["alt_result"]
 
                 baffix = (
@@ -494,7 +495,7 @@ class MythicPlus(commands.Cog):
 
                 dMsg += f"{dName.upper()}\n"
                 sMsg += f"{'**' if fortBest else ''}{'--' if bestLvl==0 else '+'+str(bestLvl)}{baffix} ({int(bestScore)}){'**' if fortBest else ''}\n"
-                aMsg += f"*{'' if fortBest else '**'}{'--' if altLvl==0 else '+'+str(altLvl)}{aaffix} ({int(altScore)})*{'' if fortBest else '**'}\n"
+                aMsg += f"*{'**' if tyrBest else ''}{'--' if altLvl==0 else '+'+str(altLvl)}{aaffix} ({int(altScore)})*{'**' if tyrBest else ''}\n"
             # dMsg += "Highest This Week: --"
 
             response.add_field(name="Dungeon", value=dMsg, inline=True)
