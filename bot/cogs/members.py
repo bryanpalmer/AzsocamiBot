@@ -31,15 +31,56 @@ class Members(commands.Cog):
             self.updateTeamDataBG.start()
 
     @commands.command()
-    async def add_member(self, ctx, playerName, realmName="silver-hand"):
-        pass
+    async def add_member(self, ctx, playerName, playerRealm="silver-hand"):
+        msgId = await ctx.send(
+            f"**T**ank or **H**ealer or **M**elee DPS or **R**anged DPS (or **A**lt)?"
+        )
+        # This will make sure that the response will only be registered if the following
+        # conditions are met:
+        def check(msg):
+            return (
+                msg.author == ctx.author
+                and msg.channel == ctx.channel
+                and msg.content.lower() in ["t", "h", "m", "r", "a"]
+            )
+
+        try:
+            msg = await self.client.wait_for(
+                "message", check=check, timeout=20
+            )  # 20 seconds to reply
+            role = wowapi.getRole(msg.content.lower())
+            await ctx.send(wowapi.addMemberToDB(playerName, playerRealm, role))
+            await msg.delete()
+            await msgId.delete()
+        except asyncio.TimeoutError:
+            await ctx.send("You didn't reply in time!  Cancelling player add.")
+            await msgId.delete()
 
     @commands.command()
-    async def remove_member(self, ctx, playerName, realmName="silver-hand"):
-        pass
+    async def remove_member(self, ctx, playerName):
+        msgId = await ctx.send(f"Are you sure?  **Y**es or **N**o.")
+        # This will make sure that the response will only be registered if the following
+        # conditions are met:
+        def check(msg):
+            return (
+                msg.author == ctx.author
+                and msg.channel == ctx.channel
+                and msg.content.lower() in ["y", "n"]
+            )
+
+        try:
+            msg = await self.client.wait_for(
+                "message", check=check, timeout=20
+            )  # 20 seconds to reply
+            if msg.content.lower() == "y":
+                await ctx.send(wowapi.deleteMemberFromDB(playerName))
+            await msg.delete()
+            await msgId.delete()
+        except asyncio.TimeoutError:
+            await ctx.send("You didn't reply in time!  Cancelling player deletion.")
+            await msgId.delete()
 
     @commands.command()
-    @commands.has_any_role("MEMBER")
     async def change_member_role(self, ctx, playerName):
         """ Change <playerName> current role """
         msgId = await ctx.send(
