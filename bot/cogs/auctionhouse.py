@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import os, sys, inspect
 import asyncio
-import datetime
+from datetime import datetime
 
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
@@ -377,6 +377,14 @@ class AuctionHouse(commands.Cog):
         msg += f"{raidMats[171276]['name']} Crafted Cost - {flaskCost}\n"
         msg += f"{'Cheaper to craft your own,' if flaskCost<ingFlask else 'Cheaper to buy on AH,'} {round(ingFlask-flaskCost,2) if flaskCost<ingFlask else round(flaskCost-ingFlask,2)} savings."
 
+        await ctx.send(msg)
+
+    @commands.command(aliases=["wowtoken"])
+    async def token(self, ctx):
+        tokenData = wowapi.getTokenInfo()
+        goldValue = tokenData["price"] / 10000
+        dts = int(tokenData["last_updated_timestamp"] / 1000)
+        msg = f"WoW Token Price:  {int(goldValue)}g as of {datetime.fromtimestamp(dts)}"
         await ctx.send(msg)
 
 

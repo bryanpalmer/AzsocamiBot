@@ -1680,6 +1680,24 @@ def getCharacterInfo(charName, charRealm):
     return charData
 
 
+def getTokenInfo():
+    token = getAccessToken()
+    # https://us.api.blizzard.com/data/wow/token/index?namespace=dynamic-us&locale=en_US&access_token=
+    profile_uri = f"https://us.api.blizzard.com/data/wow/token/index"
+    response = requests.get(
+        profile_uri,
+        params={
+            "namespace": "dynamic-us",
+            "locale": "en_US",
+            "region": "us",
+            "access_token": token,
+        },
+    )
+    tokenData = json.loads(response.text)
+    print(tokenData)
+    return tokenData
+
+
 def getCharacterAchievements(charName, charRealm):
     token = getAccessToken()
     profile_uri = f"https://us.api.blizzard.com/profile/wow/character/{charRealm}/{charName.lower()}/achievements"

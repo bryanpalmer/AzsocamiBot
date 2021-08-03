@@ -1,0 +1,9 @@
+{
+    "_links": {
+        "self": {
+            "href": "https://us.api.blizzard.com/data/wow/token/?namespace=dynamic-us"
+        }
+    },
+    "last_updated_timestamp": 1627998859000,
+    "price": 1839280000
+}

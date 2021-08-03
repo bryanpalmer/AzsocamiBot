@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.2.11"
-VERSIONDATE = "2021-07-28"
+VERSION = "0.2.24"
+VERSIONDATE = "2021-08-03"
 
 from os.path import dirname, join, os
 
@@ -194,36 +194,6 @@ async def changelog(ctx):
 def devmode(msg):
     if DEVMODE:
         print(msg)
-
-
-# @tasks.loop(hours=2)
-# async def updateTeamDataBG():
-#     print("Updating Team data in background.")
-#     if DEVMODE == False:
-#         # bot-logs channel 799290844862480445
-#         botLogs = bot.get_channel(799290844862480445)
-#     if DEVMODE == True:
-#         botLogs = bot.get_channel(790667200197296138)
-#     await botLogs.send(f"UpdateTeamDataBG: {localTimeStr(datetime.datetime.now())}")
-#     wowapi.updateAllMemberData()
-
-
-# @tasks.loop(hours=1)
-# async def updateMythicPlusDataBG():
-#     print("Updating M+ data in background.")
-#     if DEVMODE == False:
-#         # bot-logs channel 799290844862480445
-#         botLogs = bot.get_channel(799290844862480445)
-#     if DEVMODE == True:
-#         botLogs = bot.get_channel(790667200197296138)
-#     await botLogs.send(
-#         f"UpdateMythicPlusDataBG: {localTimeStr(datetime.datetime.now())}"
-#     )
-#     updates = wowapi.updateMythicPlusScores()
-#     if len(updates) > 0:
-#         for rec in updates:
-#             await announceUpdate(rec)
-#             await hiddenAnnouncedScoreUpdate(rec["name"])
 
 
 print(os.getcwd())
