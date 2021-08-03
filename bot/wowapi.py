@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 
 import discord
 
-import datetime
+from datetime import datetime
 import json
 import os
 import pytz
@@ -44,7 +44,7 @@ def devmode(msg):
 
 
 def calcExpiresDateTime(expires_in):
-    retVal = datetime.datetime.now()
+    retVal = datetime.now()
     return retVal + datetime.timedelta(0, expires_in)
 
 
@@ -60,7 +60,7 @@ def getLastResetDateTime():
     today = datetime.date.today()
     offset = (today.weekday() - 1) % 7
     last_tue = today - datetime.timedelta(days=offset)
-    lastReset = datetime.datetime(last_tue.year, last_tue.month, last_tue.day, 15, 0, 0)
+    lastReset = datetime(last_tue.year, last_tue.month, last_tue.day, 15, 0, 0)
     print(lastReset)
     return utc.localize(lastReset)
 
@@ -71,7 +71,7 @@ def getPrevResetDateTime():
     last_tue = today - datetime.timedelta(days=offset)
 
     last_tue = today - datetime.timedelta(days=offset) - datetime.timedelta(days=7)
-    lastReset = datetime.datetime(last_tue.year, last_tue.month, last_tue.day, 15, 0, 0)
+    lastReset = datetime(last_tue.year, last_tue.month, last_tue.day, 15, 0, 0)
     # print(lastReset)
     return utc.localize(lastReset)
 
@@ -80,8 +80,8 @@ def getAccessToken():
     """ Get current access token from db or generate new on from API."""
     token, expires = getAccessTokenFromDB()
     # devmode(f"Token: {token}, Expires: {expires}")
-    # devmode(f"Current datetime: {datetime.datetime.now()}")
-    if expires > datetime.datetime.now():
+    # devmode(f"Current datetime: {datetime.now()}")
+    if expires > datetime.now():
         # devmode("Using token from database.")
         return token
     else:
@@ -1170,7 +1170,7 @@ def updateMemberById(conn, recId, charObj):
         charObj.race,
         charObj.covenant,
         charObj.ilvl,
-        datetime.datetime.now(),
+        datetime.now(),
         recId,
     )
     try:
@@ -1255,7 +1255,7 @@ def getRaidMats():
 
 #     umjConn.close()
 #     setLastRun("AUCTION_HOUSE")
-#     lastRun = datetime.datetime.now()
+#     lastRun = datetime.now()
 
 #     foodTxt = ""
 #     alchTxt = ""
@@ -1459,7 +1459,7 @@ def setLastRun(procName):
         cur = conn.cursor()
         cur.execute(
             "UPDATE dtcache SET lastrun = %s WHERE process=%s;",
-            (datetime.datetime.now(), procName.upper()),
+            (datetime.now(), procName.upper()),
         )
         conn.commit()
         conn.close()
@@ -1820,7 +1820,7 @@ def initConfigTable():
         cursor.execute(sql)
         conn.commit()
         initialRecordsList = [
-            ("access_token", "Invalid", datetime.datetime.now()),
+            ("access_token", "Invalid", datetime.now()),
         ]
         cursor.executemany(
             "insert into config (id, value, expires) values (%s,%s,%s);",
@@ -1851,8 +1851,8 @@ def initDTCacheTable():
         cursor.execute(sql)
         conn.commit()
         activitiesList = [
-            ("UPDATE_MEMBERS", datetime.datetime.now()),
-            ("AUCTION_HOUSE", datetime.datetime.now()),
+            ("UPDATE_MEMBERS", datetime.now()),
+            ("AUCTION_HOUSE", datetime.now()),
         ]
         cursor.executemany(
             "insert into dtcache (process, lastrun) values (%s,%s);", activitiesList

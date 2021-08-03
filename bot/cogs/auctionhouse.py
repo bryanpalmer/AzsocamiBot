@@ -227,7 +227,7 @@ class AuctionHouse(commands.Cog):
 
         umjConn.close()
         wowapi.setLastRun("AUCTION_HOUSE")
-        lastRun = datetime.datetime.now()
+        lastRun = datetime.now()
 
         foodTxt = ""
         alchTxt = ""
@@ -357,7 +357,7 @@ class AuctionHouse(commands.Cog):
                 ):
                     raidMats[curID]["unitcost"] = auction["unit_price"] / 10000
         wowapi.setLastRun("AUCTION_HOUSE")
-        lastRun = datetime.datetime.now()
+        lastRun = datetime.now()
 
         ingNightShade = raidMats[171315]["unitcost"]  # 3
         ingRisingGlory = raidMats[168586]["unitcost"]  # 4
