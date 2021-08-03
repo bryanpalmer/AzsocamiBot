@@ -62,4 +62,4 @@ def localTimeFromUTC(utcTime):
 
 
 def localNow():
-    return localTimeStr(datetime.datetime.now())
+    return localTimeStr(datetime.now())
