@@ -384,7 +384,7 @@ class AuctionHouse(commands.Cog):
         tokenData = wowapi.getTokenInfo()
         goldValue = tokenData["price"] / 10000
         dts = int(tokenData["last_updated_timestamp"] / 1000)
-        msg = f"WoW Token Price:  {int(goldValue)}g as of {datetime.fromtimestamp(dts)}"
+        msg = f"WoW Token Price:  {int(goldValue)}g as of {botlib.localTimeFromUTC(datetime.fromtimestamp(dts))}"
         await ctx.send(msg)
 
 

@@ -5,7 +5,7 @@ import discord
 from discord.errors import Forbidden
 
 # Generic functions for the discord bot
-import datetime
+from datetime import datetime
 from pytz import timezone
 
 # import time
@@ -55,6 +55,10 @@ def str2embedarray(origString, maxlen=1024):
 
 def localTimeStr(utcTime):
     return utcTime.astimezone(timezone(TIMEZONE)).strftime(TIMEFORMAT)
+
+
+def localTimeFromUTC(utcTime):
+    return utcTime.astimezone(timezone(TIMEZONE))
 
 
 def localNow():
