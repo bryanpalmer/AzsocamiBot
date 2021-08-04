@@ -382,6 +382,7 @@ class AuctionHouse(commands.Cog):
     @commands.command(aliases=["wowtoken"])
     async def token(self, ctx):
         tokenData = wowapi.getTokenInfo()
+        print(tokenData)
         goldValue = tokenData["price"] / 10000
         dts = int(tokenData["last_updated_timestamp"] / 1000)
         msg = f"WoW Token Price:  {int(goldValue)}g as of {botlib.localTimeFromUTC(datetime.fromtimestamp(dts))}"
