@@ -12,7 +12,8 @@ load_dotenv(
 )
 
 import asyncio
-import datetime
+import datetime as dt
+from datetime import datetime
 from pytz import timezone
 from operator import itemgetter
 import time
@@ -23,16 +24,19 @@ import wowapi
 import wowclasses
 
 
-roster = wowapi.getGuildRoster("silver-hand", "azsocami")
+print(wowapi.getAccessToken())
 
-# print(roster)
-nPlayers = 0
-classes = wowapi.getClassesList()
 
-for member in roster["members"]:
-    if member["character"]["level"] == 60:
-        nPlayers += 1
-        nClassId = member["character"]["playable_class"]["id"]
-        print(f"{member['character']['name']} - {classes[nClassId]}")
+# roster = wowapi.getGuildRoster("silver-hand", "azsocami")
 
-print(f"{nPlayers} members found.")
+# # print(roster)
+# nPlayers = 0
+# classes = wowapi.getClassesList()
+
+# for member in roster["members"]:
+#     if member["character"]["level"] == 60:
+#         nPlayers += 1
+#         nClassId = member["character"]["playable_class"]["id"]
+#         print(f"{member['character']['name']} - {classes[nClassId]}")
+
+# print(f"{nPlayers} members found.")

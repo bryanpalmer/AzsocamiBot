@@ -97,6 +97,13 @@ class Database(commands.Cog):
         # wowapi.updateAllMemberData()
         await ctx.send("Raidmats table is created and set to initial values.")
 
+    @commands.command()
+    @commands.is_owner()
+    async def recreate_config_table(self, ctx):
+        wowapi.initConfigTable()
+        # wowapi.updateAllMemberData()
+        await ctx.send("Config table is created and set to initial values.")
+
 
 ## Initialize cog
 def setup(client):

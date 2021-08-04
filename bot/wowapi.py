@@ -3,7 +3,9 @@ from urllib.parse import urlparse
 
 import discord
 
-from datetime import datetime
+import datetime
+
+# from datetime import datetime
 import json
 import os
 import pytz
@@ -44,7 +46,7 @@ def devmode(msg):
 
 
 def calcExpiresDateTime(expires_in):
-    retVal = datetime.now()
+    retVal = datetime.datetime.now()
     return retVal + datetime.timedelta(0, expires_in)
 
 
@@ -61,7 +63,7 @@ def getLastResetDateTime():
     offset = (today.weekday() - 1) % 7
     last_tue = today - datetime.timedelta(days=offset)
     lastReset = datetime(last_tue.year, last_tue.month, last_tue.day, 15, 0, 0)
-    print(lastReset)
+    # print(lastReset)
     return utc.localize(lastReset)
 
 
@@ -81,11 +83,13 @@ def getAccessToken():
     token, expires = getAccessTokenFromDB()
     # devmode(f"Token: {token}, Expires: {expires}")
     # devmode(f"Current datetime: {datetime.now()}")
-    if expires > datetime.now():
-        # devmode("Using token from database.")
+    # print(f"getAccessToken: expires={expires}")
+    # print(f"getAccessToken: datetime.datetime.now={datetime.datetime.now()}")
+    if expires > datetime.datetime.now():
+        # print("Using token from database.")
         return token
     else:
-        # devmode("Generating new token.")
+        # print("Generating new token.")
         generateAccessToken()
         token = getAccessTokenFromDB()
     return token
@@ -1003,8 +1007,27 @@ def getAccessTokenFromDB():
 
 
 def updateAccessToken(accessToken, expires_in):
-    """Update access token in wowapi database."""
+    conn = create_connection()
+    cur = conn.cursor()
+    expiresDT = calcExpiresDateTime(expires_in)
+    # print(f"updateAccessToken: token={accessToken} expires_in={expiresDT}")
+    try:
+        cur.execute(
+            """UPDATE config
+            SET value = %s, expires=%s
+            WHERE id = 'access_token';""",
+            (accessToken, expiresDT),
+        )
+        conn.commit()
+        print(f"Updating access token to: {accessToken} and expiration to: {expiresDT}")
+    except mysql.Error as e:
+        print(e.args[0])
 
+    conn.close()
+
+
+def updateAccessTokenInDB(accessToken, expires_in):
+    # print(f"updateAccessTokenInDB: token={accessToken} expires_in={expires_in}")
     conn = create_connection()
     cur = conn.cursor()
     expiresDT = calcExpiresDateTime(expires_in)
@@ -1016,9 +1039,7 @@ def updateAccessToken(accessToken, expires_in):
             (accessToken, expiresDT),
         )
         conn.commit()
-        devmode(
-            f"Updating access token to: {accessToken} and expiration to: {expiresDT}"
-        )
+        print(f"Updating access token to: {accessToken} and expiration to: {expiresDT}")
     except mysql.Error as e:
         print(e.args[0])
 
@@ -1643,16 +1664,20 @@ def generateAccessToken():
             },
         )
         resp.raise_for_status()
+        # print(resp.text)
         accessTokenResponse = json.loads(resp.text)
+        # print(accessTokenResponse)
         if accessTokenResponse.get("access_token") is None:
             # no access token
             status = "fail"
             message = "Something went wrong trying to get an access token."
+            # print(message)
         else:
             # access token returned
+            # print(f"New access token generated: {accessTokenResponse}")
             status = "ok"
             message = "New access token save and ready for use."
-            updateAccessToken(
+            updateAccessTokenInDB(
                 accessTokenResponse["access_token"], accessTokenResponse["expires_in"]
             )
 
@@ -1694,7 +1719,7 @@ def getTokenInfo():
         },
     )
     tokenData = json.loads(response.text)
-    print(tokenData)
+    # print(tokenData)
     return tokenData
 
 
