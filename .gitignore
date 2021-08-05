@@ -136,3 +136,4 @@ dmypy.json
 
 # VSCode settings
 .vscode/
+/token.json
