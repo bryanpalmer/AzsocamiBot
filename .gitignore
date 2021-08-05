@@ -136,4 +136,8 @@ dmypy.json
 
 # VSCode settings
 .vscode/
+<<<<<<< HEAD
 /azsocamibotsvc-5a9660ce8dd3.json
+=======
+/token.json
+>>>>>>> cogs

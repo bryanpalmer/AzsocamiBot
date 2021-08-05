@@ -823,7 +823,7 @@ class MythicPlus(commands.Cog):
         for playerRow in playersList:
             realm = playerRow[2]
             player = playerRow[1].title()
-            print(f"Retrieving {player} {realm}")
+            # print(f"Retrieving {player} {realm}")
             rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
             rioAlts = wowapi.api_raiderio_char_mplus_alternate_runs(player, realm)
             dDict = {
@@ -975,6 +975,335 @@ class MythicPlus(commands.Cog):
 
         msg += "```\n"
         msg += "*All dungeons shown are Fortified Tyrannical, and only show positive values if the score>0 for the run.*"
+
+        await ctx.send(msg)
+
+    @commands.command(aliases=["brf"])
+    async def bestrunsf(self, ctx):
+        """ Reports current Mythic Plus dungeon scores and rankings """
+        playersList = wowapi.getMythicPlusPlayers()
+        results = []
+        for playerRow in playersList:
+            realm = playerRow[2]
+            player = playerRow[1].title()
+            # print(f"Retrieving {player} {realm}")
+            rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
+            rioAlts = wowapi.api_raiderio_char_mplus_alternate_runs(player, realm)
+            dDict = {
+                "DOS": {
+                    "shortname": "DOS",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "HOA": {
+                    "shortname": "HOA",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "MISTS": {
+                    "shortname": "MISTS",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "NW": {
+                    "shortname": "NW",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "PF": {
+                    "shortname": "PF",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "SD": {
+                    "shortname": "SD",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "SOA": {
+                    "shortname": "SOA",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "TOP": {
+                    "shortname": "TOP",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+            }
+
+            for run in rioBest["mythic_plus_best_runs"]:
+                affix = run["affixes"][0]["name"]
+                dung = run["short_name"]
+                mlvl = run["mythic_level"]
+                result = run["num_keystone_upgrades"]
+                score = run["score"]
+
+                if affix == "Fortified" and dDict[dung]["best_score"] == 0:
+                    dDict[dung]["best_score"] = score
+                    dDict[dung]["best_level"] = mlvl
+                    dDict[dung]["best_result"] = result
+                elif affix == "Tyrannical" and dDict[dung]["alt_score"] == 0:
+                    dDict[dung]["alt_score"] = score
+                    dDict[dung]["alt_level"] = mlvl
+                    dDict[dung]["alt_result"] = result
+
+            for run in rioAlts["mythic_plus_alternate_runs"]:
+                affix = run["affixes"][0]["name"]
+                dung = run["short_name"]
+                mlvl = run["mythic_level"]
+                result = run["num_keystone_upgrades"]
+                score = run["score"]
+                if affix == "Fortified" and dDict[dung]["best_score"] == 0:
+                    dDict[dung]["best_score"] = score
+                    dDict[dung]["best_level"] = mlvl
+                    dDict[dung]["best_result"] = result
+                elif affix == "Tyrannical" and dDict[dung]["alt_score"] == 0:
+                    ## Only recording alternate run scores here
+                    dDict[dung]["alt_score"] = score
+                    dDict[dung]["alt_level"] = mlvl
+                    dDict[dung]["alt_result"] = result
+
+            results.append((player, dDict))
+
+        # print(results)
+
+        msg = "**Best FORTIFIED Runs**\n"
+        msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(4)} {'HOA'.ljust(4)} {'MST'.ljust(4)} {'NW'.ljust(4)} {'PF'.ljust(4)} {'SD'.ljust(4)} {'SOA'.ljust(4)} {'TOP'.ljust(4)}\n"
+        # msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(7)} {'HOA'.ljust(7)} {'MST'.ljust(7)} {'NW'.ljust(7)} {'PF'.ljust(7)} {'SD'.ljust(7)} {'SOA'.ljust(7)} {'TOP'.ljust(7)}\n"
+        for player in results:
+            playerName = player[0]
+            dDict = player[1]
+            # print(player[0])
+            fDOS = dDict["DOS"]["best_level"] if dDict["DOS"]["best_score"] > 0 else 0
+            tDOS = dDict["DOS"]["alt_level"] if dDict["DOS"]["alt_score"] > 0 else 0
+            fHOA = dDict["HOA"]["best_level"] if dDict["HOA"]["best_score"] > 0 else 0
+            tHOA = dDict["HOA"]["alt_level"] if dDict["HOA"]["alt_score"] > 0 else 0
+            fMISTS = (
+                dDict["MISTS"]["best_level"] if dDict["MISTS"]["best_score"] > 0 else 0
+            )
+            tMISTS = (
+                dDict["MISTS"]["alt_level"] if dDict["MISTS"]["alt_score"] > 0 else 0
+            )
+            fNW = dDict["NW"]["best_level"] if dDict["NW"]["best_score"] > 0 else 0
+            tNW = dDict["NW"]["alt_level"] if dDict["NW"]["alt_score"] > 0 else 0
+            fPF = dDict["PF"]["best_level"] if dDict["PF"]["best_score"] > 0 else 0
+            tPF = dDict["PF"]["alt_level"] if dDict["PF"]["alt_score"] > 0 else 0
+            fSD = dDict["SD"]["best_level"] if dDict["SD"]["best_score"] > 0 else 0
+            tSD = dDict["SD"]["alt_level"] if dDict["SD"]["alt_score"] > 0 else 0
+            fSOA = dDict["SOA"]["best_level"] if dDict["SOA"]["best_score"] > 0 else 0
+            tSOA = dDict["SOA"]["alt_level"] if dDict["SOA"]["alt_score"] > 0 else 0
+            fTOP = dDict["TOP"]["best_level"] if dDict["TOP"]["best_score"] > 0 else 0
+            tTOP = dDict["TOP"]["alt_level"] if dDict["TOP"]["alt_score"] > 0 else 0
+
+            msg += f"{playerName.ljust(13)} "
+            msg += f"{fDOS:>2} | "
+            msg += f"{fHOA:>2} | "
+            msg += f"{fMISTS:>2} | "
+            msg += f"{fNW:>2} | "
+            msg += f"{fPF:>2} | "
+            msg += f"{fSD:>2} | "
+            msg += f"{fSOA:>2} | "
+            msg += f"{fTOP:>2}\n"
+
+        msg += "```\n"
+        msg += "*All dungeons shown are Fortified, and only show positive values if the score>0 for the run.*"
+
+        await ctx.send(msg)
+
+    @commands.command(aliases=["brt"])
+    async def bestrunst(self, ctx):
+        """ Reports current Mythic Plus dungeon scores and rankings """
+        playersList = wowapi.getMythicPlusPlayers()
+        results = []
+        for playerRow in playersList:
+            realm = playerRow[2]
+            player = playerRow[1].title()
+            # print(f"Retrieving {player} {realm}")
+            rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
+            rioAlts = wowapi.api_raiderio_char_mplus_alternate_runs(player, realm)
+            dDict = {
+                "DOS": {
+                    "shortname": "DOS",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "HOA": {
+                    "shortname": "HOA",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "MISTS": {
+                    "shortname": "MISTS",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "NW": {
+                    "shortname": "NW",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "PF": {
+                    "shortname": "PF",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "SD": {
+                    "shortname": "SD",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "SOA": {
+                    "shortname": "SOA",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "TOP": {
+                    "shortname": "TOP",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+            }
+
+            for run in rioBest["mythic_plus_best_runs"]:
+                affix = run["affixes"][0]["name"]
+                dung = run["short_name"]
+                mlvl = run["mythic_level"]
+                result = run["num_keystone_upgrades"]
+                score = run["score"]
+
+                if affix == "Fortified" and dDict[dung]["best_score"] == 0:
+                    dDict[dung]["best_score"] = score
+                    dDict[dung]["best_level"] = mlvl
+                    dDict[dung]["best_result"] = result
+                elif affix == "Tyrannical" and dDict[dung]["alt_score"] == 0:
+                    dDict[dung]["alt_score"] = score
+                    dDict[dung]["alt_level"] = mlvl
+                    dDict[dung]["alt_result"] = result
+
+            for run in rioAlts["mythic_plus_alternate_runs"]:
+                affix = run["affixes"][0]["name"]
+                dung = run["short_name"]
+                mlvl = run["mythic_level"]
+                result = run["num_keystone_upgrades"]
+                score = run["score"]
+                if affix == "Fortified" and dDict[dung]["best_score"] == 0:
+                    dDict[dung]["best_score"] = score
+                    dDict[dung]["best_level"] = mlvl
+                    dDict[dung]["best_result"] = result
+                elif affix == "Tyrannical" and dDict[dung]["alt_score"] == 0:
+                    ## Only recording alternate run scores here
+                    dDict[dung]["alt_score"] = score
+                    dDict[dung]["alt_level"] = mlvl
+                    dDict[dung]["alt_result"] = result
+
+            results.append((player, dDict))
+
+        # print(results)
+
+        msg = "**Best TYRANNICAL Runs**\n"
+        msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(4)} {'HOA'.ljust(4)} {'MST'.ljust(4)} {'NW'.ljust(4)} {'PF'.ljust(4)} {'SD'.ljust(4)} {'SOA'.ljust(4)} {'TOP'.ljust(4)}\n"
+        for player in results:
+            playerName = player[0]
+            dDict = player[1]
+            # print(player[0])
+            fDOS = dDict["DOS"]["best_level"] if dDict["DOS"]["best_score"] > 0 else 0
+            tDOS = dDict["DOS"]["alt_level"] if dDict["DOS"]["alt_score"] > 0 else 0
+            fHOA = dDict["HOA"]["best_level"] if dDict["HOA"]["best_score"] > 0 else 0
+            tHOA = dDict["HOA"]["alt_level"] if dDict["HOA"]["alt_score"] > 0 else 0
+            fMISTS = (
+                dDict["MISTS"]["best_level"] if dDict["MISTS"]["best_score"] > 0 else 0
+            )
+            tMISTS = (
+                dDict["MISTS"]["alt_level"] if dDict["MISTS"]["alt_score"] > 0 else 0
+            )
+            fNW = dDict["NW"]["best_level"] if dDict["NW"]["best_score"] > 0 else 0
+            tNW = dDict["NW"]["alt_level"] if dDict["NW"]["alt_score"] > 0 else 0
+            fPF = dDict["PF"]["best_level"] if dDict["PF"]["best_score"] > 0 else 0
+            tPF = dDict["PF"]["alt_level"] if dDict["PF"]["alt_score"] > 0 else 0
+            fSD = dDict["SD"]["best_level"] if dDict["SD"]["best_score"] > 0 else 0
+            tSD = dDict["SD"]["alt_level"] if dDict["SD"]["alt_score"] > 0 else 0
+            fSOA = dDict["SOA"]["best_level"] if dDict["SOA"]["best_score"] > 0 else 0
+            tSOA = dDict["SOA"]["alt_level"] if dDict["SOA"]["alt_score"] > 0 else 0
+            fTOP = dDict["TOP"]["best_level"] if dDict["TOP"]["best_score"] > 0 else 0
+            tTOP = dDict["TOP"]["alt_level"] if dDict["TOP"]["alt_score"] > 0 else 0
+
+            msg += f"{playerName.ljust(13)} "
+            msg += f"{tDOS:>2} | "
+            msg += f"{tHOA:>2} | "
+            msg += f"{tMISTS:>2} | "
+            msg += f"{tNW:>2} | "
+            msg += f"{tPF:>2} | "
+            msg += f"{tSD:>2} | "
+            msg += f"{tSOA:>2} | "
+            msg += f"{tTOP:>2}\n"
+
+        msg += "```\n"
+        msg += "*All dungeons shown are Tyrannical, and only show positive values if the score>0 for the run.*"
 
         await ctx.send(msg)
 
