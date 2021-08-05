@@ -1128,18 +1128,98 @@ class MythicPlus(commands.Cog):
             fTOP = dDict["TOP"]["best_level"] if dDict["TOP"]["best_score"] > 0 else 0
             tTOP = dDict["TOP"]["alt_level"] if dDict["TOP"]["alt_score"] > 0 else 0
 
+            t1affix = (
+                ";"
+                if dDict["DOS"]["best_result"] == 3
+                else ":"
+                if dDict["DOS"]["best_result"] == 2
+                else "."
+                if dDict["DOS"]["best_result"] == 1
+                else " "
+            )
+
+            t2affix = (
+                ";"
+                if dDict["HOA"]["best_result"] == 3
+                else ":"
+                if dDict["HOA"]["best_result"] == 2
+                else "."
+                if dDict["HOA"]["best_result"] == 1
+                else " "
+            )
+
+            t3affix = (
+                ";"
+                if dDict["MISTS"]["best_result"] == 3
+                else ":"
+                if dDict["MISTS"]["best_result"] == 2
+                else "."
+                if dDict["MISTS"]["best_result"] == 1
+                else " "
+            )
+
+            t4affix = (
+                ";"
+                if dDict["NW"]["best_result"] == 3
+                else ":"
+                if dDict["NW"]["best_result"] == 2
+                else "."
+                if dDict["NW"]["best_result"] == 1
+                else " "
+            )
+
+            t5affix = (
+                ";"
+                if dDict["PF"]["best_result"] == 3
+                else ":"
+                if dDict["PF"]["best_result"] == 2
+                else "."
+                if dDict["PF"]["best_result"] == 1
+                else " "
+            )
+
+            t6affix = (
+                ";"
+                if dDict["SD"]["best_result"] == 3
+                else ":"
+                if dDict["SD"]["best_result"] == 2
+                else "."
+                if dDict["SD"]["best_result"] == 1
+                else " "
+            )
+
+            t7affix = (
+                ";"
+                if dDict["SOA"]["best_result"] == 3
+                else ":"
+                if dDict["SOA"]["best_result"] == 2
+                else "."
+                if dDict["SOA"]["best_result"] == 1
+                else " "
+            )
+
+            t8affix = (
+                ";"
+                if dDict["TOP"]["best_result"] == 3
+                else ":"
+                if dDict["TOP"]["best_result"] == 2
+                else "."
+                if dDict["TOP"]["best_result"] == 1
+                else " "
+            )
+
             msg += f"{playerName.ljust(13)} "
-            msg += f"{fDOS:>2} | "
-            msg += f"{fHOA:>2} | "
-            msg += f"{fMISTS:>2} | "
-            msg += f"{fNW:>2} | "
-            msg += f"{fPF:>2} | "
-            msg += f"{fSD:>2} | "
-            msg += f"{fSOA:>2} | "
-            msg += f"{fTOP:>2}\n"
+            msg += f"{fDOS:>2}{t1affix}| "
+            msg += f"{fHOA:>2}{t2affix}| "
+            msg += f"{fMISTS:>2}{t3affix}| "
+            msg += f"{fNW:>2}{t4affix}| "
+            msg += f"{fPF:>2}{t5affix}| "
+            msg += f"{fSD:>2}{t6affix}| "
+            msg += f"{fSOA:>2}{t7affix}| "
+            msg += f"{fTOP:>2}{t8affix}\n"
 
         msg += "```\n"
-        msg += "*All dungeons shown are Fortified, and only show positive values if the score>0 for the run.*"
+        msg += "*All dungeons shown are Fortified, and only show positive values if the score>0 for the run. (Results ;=3 key  :=2 key  .=1 key)*"
 
         await ctx.send(msg)
 
@@ -1292,18 +1372,98 @@ class MythicPlus(commands.Cog):
             fTOP = dDict["TOP"]["best_level"] if dDict["TOP"]["best_score"] > 0 else 0
             tTOP = dDict["TOP"]["alt_level"] if dDict["TOP"]["alt_score"] > 0 else 0
 
+            t1affix = (
+                ";"
+                if dDict["DOS"]["alt_result"] == 3
+                else ":"
+                if dDict["DOS"]["alt_result"] == 2
+                else "."
+                if dDict["DOS"]["alt_result"] == 1
+                else " "
+            )
+
+            t2affix = (
+                ";"
+                if dDict["HOA"]["alt_result"] == 3
+                else ":"
+                if dDict["HOA"]["alt_result"] == 2
+                else "."
+                if dDict["HOA"]["alt_result"] == 1
+                else " "
+            )
+
+            t3affix = (
+                ";"
+                if dDict["MISTS"]["alt_result"] == 3
+                else ":"
+                if dDict["MISTS"]["alt_result"] == 2
+                else "."
+                if dDict["MISTS"]["alt_result"] == 1
+                else " "
+            )
+
+            t4affix = (
+                ";"
+                if dDict["NW"]["alt_result"] == 3
+                else ":"
+                if dDict["NW"]["alt_result"] == 2
+                else "."
+                if dDict["NW"]["alt_result"] == 1
+                else " "
+            )
+
+            t5affix = (
+                ";"
+                if dDict["PF"]["alt_result"] == 3
+                else ":"
+                if dDict["PF"]["alt_result"] == 2
+                else "."
+                if dDict["PF"]["alt_result"] == 1
+                else " "
+            )
+
+            t6affix = (
+                ";"
+                if dDict["SD"]["alt_result"] == 3
+                else ":"
+                if dDict["SD"]["alt_result"] == 2
+                else "."
+                if dDict["SD"]["alt_result"] == 1
+                else " "
+            )
+
+            t7affix = (
+                ";"
+                if dDict["SOA"]["alt_result"] == 3
+                else ":"
+                if dDict["SOA"]["alt_result"] == 2
+                else "."
+                if dDict["SOA"]["alt_result"] == 1
+                else " "
+            )
+
+            t8affix = (
+                ";"
+                if dDict["TOP"]["alt_result"] == 3
+                else ":"
+                if dDict["TOP"]["alt_result"] == 2
+                else "."
+                if dDict["TOP"]["alt_result"] == 1
+                else " "
+            )
+
             msg += f"{playerName.ljust(13)} "
-            msg += f"{tDOS:>2} | "
-            msg += f"{tHOA:>2} | "
-            msg += f"{tMISTS:>2} | "
-            msg += f"{tNW:>2} | "
-            msg += f"{tPF:>2} | "
-            msg += f"{tSD:>2} | "
-            msg += f"{tSOA:>2} | "
-            msg += f"{tTOP:>2}\n"
+            msg += f"{tDOS:>2}{t1affix}| "
+            msg += f"{tHOA:>2}{t2affix}| "
+            msg += f"{tMISTS:>2}{t3affix}| "
+            msg += f"{tNW:>2}{t4affix}| "
+            msg += f"{tPF:>2}{t5affix}| "
+            msg += f"{tSD:>2}{t6affix}| "
+            msg += f"{tSOA:>2}{t7affix}| "
+            msg += f"{tTOP:>2}{t8affix}\n"
 
         msg += "```\n"
-        msg += "*All dungeons shown are Tyrannical, and only show positive values if the score>0 for the run.*"
+        msg += "*All dungeons shown are Tyrannical, and only show positive values if the score>0 for the run. (Results ;=3 key  :=2 key  .=1 key)*"
 
         await ctx.send(msg)
 
