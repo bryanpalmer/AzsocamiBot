@@ -1552,6 +1552,26 @@ def getMythicPlusScores():
     return retList
 
 
+def getMythicPlusPlayers():
+    devmode(f"Retrieving mythic plus scores")
+    conn = create_connection()
+    cursor = conn.cursor()
+    retList = []
+    try:
+        cursor.execute(
+            "select id, name, realmslug, highscore from mythicplus where active=1 ORDER BY name asc;"
+        )
+        rows = cursor.fetchall()
+        for row in rows:
+            retList.append(row)
+    except mysql.Error as e:
+        print(e)
+        print(f"Error:  {e.args[0]}")
+    finally:
+        conn.close()
+    return retList
+
+
 def updateMythicPlusScores():
     devmode(f"Retrieving mythic plus players list")
     conn = create_connection()

@@ -1,0 +1,134 @@
+[
+    {'Aaryn': {'DOS': {'shortname': 'DOS', 'best_level': 10, 'best_result': 0, 'best_score': 90.4, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'HOA': {'shortname': 'HOA', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 1, 'alt_score': 101.3
+            }, 'MISTS': {'shortname': 'MISTS', 'best_level': 10, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 0, 'alt_score': 0
+            }, 'NW': {'shortname': 'NW', 'best_level': 14, 'best_result': 1, 'best_score': 120.7, 'alt_level': 12, 'alt_result': 2, 'alt_score': 113.5
+            }, 'PF': {'shortname': 'PF', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SD': {'shortname': 'SD', 'best_level': 10, 'best_result': 1, 'best_score': 101.7, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SOA': {'shortname': 'SOA', 'best_level': 14, 'best_result': 0, 'best_score': 114, 'alt_level': 10, 'alt_result': 1, 'alt_score': 101.7
+            }, 'TOP': {'shortname': 'TOP', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 0, 'alt_score': 94.9
+            }
+        }
+    },
+    {'Agaviss': {'DOS': {'shortname': 'DOS', 'best_level': 10, 'best_result': 0, 'best_score': 90.4, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'HOA': {'shortname': 'HOA', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 1, 'alt_score': 101.3
+            }, 'MISTS': {'shortname': 'MISTS', 'best_level': 10, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 0, 'alt_score': 0
+            }, 'NW': {'shortname': 'NW', 'best_level': 14, 'best_result': 1, 'best_score': 120.7, 'alt_level': 10, 'alt_result': 2, 'alt_score': 102.5
+            }, 'PF': {'shortname': 'PF', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SD': {'shortname': 'SD', 'best_level': 10, 'best_result': 1, 'best_score': 101.7, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SOA': {'shortname': 'SOA', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 1, 'alt_score': 101.7
+            }, 'TOP': {'shortname': 'TOP', 'best_level': 11, 'best_result': 0, 'best_score': 97, 'alt_level': 10, 'alt_result': 0, 'alt_score': 94.9
+            }
+        }
+    },
+    {'Antigen': {'DOS': {'shortname': 'DOS', 'best_level': 10, 'best_result': 0, 'best_score': 90.4, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'HOA': {'shortname': 'HOA', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'MISTS': {'shortname': 'MISTS', 'best_level': 10, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 0, 'alt_score': 0
+            }, 'NW': {'shortname': 'NW', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'PF': {'shortname': 'PF', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SD': {'shortname': 'SD', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SOA': {'shortname': 'SOA', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'TOP': {'shortname': 'TOP', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }
+        }
+    },
+    {'Areisda': {'DOS': {'shortname': 'DOS', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 12, 'alt_result': 1, 'alt_score': 110.6
+            }, 'HOA': {'shortname': 'HOA', 'best_level': 15, 'best_result': 0, 'best_score': 117.8, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'MISTS': {'shortname': 'MISTS', 'best_level': 14, 'best_result': 1, 'best_score': 120.7, 'alt_level': 14, 'alt_result': 0, 'alt_score': 113.5
+            }, 'NW': {'shortname': 'NW', 'best_level': 15, 'best_result': 1, 'best_score': 125.8, 'alt_level': 12, 'alt_result': 2, 'alt_score': 113.5
+            }, 'PF': {'shortname': 'PF', 'best_level': 10, 'best_result': 1, 'best_score': 102.3, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SD': {'shortname': 'SD', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SOA': {'shortname': 'SOA', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'TOP': {'shortname': 'TOP', 'best_level': 15, 'best_result': 0, 'best_score': 117.7, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }
+        }
+    },
+    {'Aryxi': {'DOS': {'shortname': 'DOS', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'HOA': {'shortname': 'HOA', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 1, 'alt_score': 101.3
+            }, 'MISTS': {'shortname': 'MISTS', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 0, 'alt_score': 0
+            }, 'NW': {'shortname': 'NW', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 1, 'alt_score': 102.4
+            }, 'PF': {'shortname': 'PF', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SD': {'shortname': 'SD', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SOA': {'shortname': 'SOA', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 1, 'alt_score': 100.5
+            }, 'TOP': {'shortname': 'TOP', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 0, 'alt_score': 94.9
+            }
+        }
+    },
+    {'Cradon': {'DOS': {'shortname': 'DOS', 'best_level': 11, 'best_result': 1, 'best_score': 106.5, 'alt_level': 12, 'alt_result': 1, 'alt_score': 110.6
+            }, 'HOA': {'shortname': 'HOA', 'best_level': 15, 'best_result': 0, 'best_score': 117.8, 'alt_level': 10, 'alt_result': 1, 'alt_score': 100.8
+            }, 'MISTS': {'shortname': 'MISTS', 'best_level': 14, 'best_result': 1, 'best_score': 120.7, 'alt_level': 14, 'alt_result': 0, 'alt_score': 113.5
+            }, 'NW': {'shortname': 'NW', 'best_level': 15, 'best_result': 1, 'best_score': 125.8, 'alt_level': 15, 'alt_result': 0, 'alt_score': 120
+            }, 'PF': {'shortname': 'PF', 'best_level': 10, 'best_result': 1, 'best_score': 102.3, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SD': {'shortname': 'SD', 'best_level': 12, 'best_result': 1, 'best_score': 111, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SOA': {'shortname': 'SOA', 'best_level': 14, 'best_result': 0, 'best_score': 114, 'alt_level': 12, 'alt_result': 1, 'alt_score': 110.9
+            }, 'TOP': {'shortname': 'TOP', 'best_level': 15, 'best_result': 0, 'best_score': 117.7, 'alt_level': 12, 'alt_result': 0, 'alt_score': 104.5
+            }
+        }
+    },
+    {'Ekkoe': {'DOS': {'shortname': 'DOS', 'best_level': 12, 'best_result': 0, 'best_score': 104.8, 'alt_level': 5, 'alt_result': 1, 'alt_score': 61.4
+            }, 'HOA': {'shortname': 'HOA', 'best_level': 8, 'best_result': 1, 'best_score': 82.1, 'alt_level': 4, 'alt_result': 2, 'alt_score': 57.8
+            }, 'MISTS': {'shortname': 'MISTS', 'best_level': 11, 'best_result': 0, 'best_score': 98.3, 'alt_level': 14, 'alt_result': 0, 'alt_score': 114.9
+            }, 'NW': {'shortname': 'NW', 'best_level': 11, 'best_result': 1, 'best_score': 105.2, 'alt_level': 11, 'alt_result': 1, 'alt_score': 107.2
+            }, 'PF': {'shortname': 'PF', 'best_level': 6, 'best_result': 2, 'best_score': 69.1, 'alt_level': 11, 'alt_result': 1, 'alt_score': 105.5
+            }, 'SD': {'shortname': 'SD', 'best_level': 14, 'best_result': 1, 'best_score': 121.2, 'alt_level': 10, 'alt_result': 1, 'alt_score': 101
+            }, 'SOA': {'shortname': 'SOA', 'best_level': 15, 'best_result': 1, 'best_score': 126, 'alt_level': 12, 'alt_result': 1, 'alt_score': 110.9
+            }, 'TOP': {'shortname': 'TOP', 'best_level': 16, 'best_result': 0, 'best_score': 122.6, 'alt_level': 10, 'alt_result': 0, 'alt_score': 94.6
+            }
+        }
+    },
+    {'Kaitaa': {'DOS': {'shortname': 'DOS', 'best_level': 11, 'best_result': 1, 'best_score': 106.5, 'alt_level': 12, 'alt_result': 1, 'alt_score': 110.6
+            }, 'HOA': {'shortname': 'HOA', 'best_level': 15, 'best_result': 0, 'best_score': 117.8, 'alt_level': 10, 'alt_result': 1, 'alt_score': 101
+            }, 'MISTS': {'shortname': 'MISTS', 'best_level': 14, 'best_result': 1, 'best_score': 120.7, 'alt_level': 14, 'alt_result': 0, 'alt_score': 113.5
+            }, 'NW': {'shortname': 'NW', 'best_level': 15, 'best_result': 1, 'best_score': 125.8, 'alt_level': 15, 'alt_result': 0, 'alt_score': 120
+            }, 'PF': {'shortname': 'PF', 'best_level': 10, 'best_result': 1, 'best_score': 102.3, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SD': {'shortname': 'SD', 'best_level': 12, 'best_result': 1, 'best_score': 111, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SOA': {'shortname': 'SOA', 'best_level': 14, 'best_result': 0, 'best_score': 114, 'alt_level': 12, 'alt_result': 1, 'alt_score': 110.9
+            }, 'TOP': {'shortname': 'TOP', 'best_level': 15, 'best_result': 0, 'best_score': 117.7, 'alt_level': 12, 'alt_result': 0, 'alt_score': 104.5
+            }
+        }
+    },
+    {'Murinn': {'DOS': {'shortname': 'DOS', 'best_level': 11, 'best_result': 1, 'best_score': 106.5, 'alt_level': 12, 'alt_result': 1, 'alt_score': 110.6
+            }, 'HOA': {'shortname': 'HOA', 'best_level': 15, 'best_result': 0, 'best_score': 117.8, 'alt_level': 10, 'alt_result': 1, 'alt_score': 101
+            }, 'MISTS': {'shortname': 'MISTS', 'best_level': 14, 'best_result': 1, 'best_score': 120.7, 'alt_level': 14, 'alt_result': 0, 'alt_score': 113.5
+            }, 'NW': {'shortname': 'NW', 'best_level': 15, 'best_result': 1, 'best_score': 125.8, 'alt_level': 15, 'alt_result': 0, 'alt_score': 120
+            }, 'PF': {'shortname': 'PF', 'best_level': 10, 'best_result': 1, 'best_score': 102.3, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SD': {'shortname': 'SD', 'best_level': 12, 'best_result': 1, 'best_score': 111, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SOA': {'shortname': 'SOA', 'best_level': 14, 'best_result': 0, 'best_score': 114, 'alt_level': 12, 'alt_result': 1, 'alt_score': 110.9
+            }, 'TOP': {'shortname': 'TOP', 'best_level': 15, 'best_result': 0, 'best_score': 117.7, 'alt_level': 12, 'alt_result': 0, 'alt_score': 104.5
+            }
+        }
+    },
+    {'Pert': {'DOS': {'shortname': 'DOS', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 12, 'alt_result': 1, 'alt_score': 110.6
+            }, 'HOA': {'shortname': 'HOA', 'best_level': 8, 'best_result': 1, 'best_score': 82.1, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'MISTS': {'shortname': 'MISTS', 'best_level': 11, 'best_result': 0, 'best_score': 98.3, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'NW': {'shortname': 'NW', 'best_level': 10, 'best_result': 1, 'best_score': 102.2, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'PF': {'shortname': 'PF', 'best_level': 5, 'best_result': 2, 'best_score': 64.4, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SD': {'shortname': 'SD', 'best_level': 12, 'best_result': 1, 'best_score': 111, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SOA': {'shortname': 'SOA', 'best_level': 9, 'best_result': 0, 'best_score': 77.3, 'alt_level': 2, 'alt_result': 1, 'alt_score': 42.3
+            }, 'TOP': {'shortname': 'TOP', 'best_level': 8, 'best_result': 1, 'best_score': 82.2, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }
+        }
+    },
+    {'Ragebear': {'DOS': {'shortname': 'DOS', 'best_level': 10, 'best_result': 0, 'best_score': 90.4, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'HOA': {'shortname': 'HOA', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 1, 'alt_score': 101.3
+            }, 'MISTS': {'shortname': 'MISTS', 'best_level': 10, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 0, 'alt_score': 0
+            }, 'NW': {'shortname': 'NW', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'PF': {'shortname': 'PF', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SD': {'shortname': 'SD', 'best_level': 10, 'best_result': 1, 'best_score': 101.7, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SOA': {'shortname': 'SOA', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 12, 'alt_result': 1, 'alt_score': 110.9
+            }, 'TOP': {'shortname': 'TOP', 'best_level': 11, 'best_result': 0, 'best_score': 97, 'alt_level': 12, 'alt_result': 0, 'alt_score': 104.5
+            }
+        }
+    },
+    {'Razzlectria': {'DOS': {'shortname': 'DOS', 'best_level': 11, 'best_result': 1, 'best_score': 106.5, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'HOA': {'shortname': 'HOA', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 1, 'alt_score': 101.3
+            }, 'MISTS': {'shortname': 'MISTS', 'best_level': 10, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'NW': {'shortname': 'NW', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 10, 'alt_result': 2, 'alt_score': 102.5
+            }, 'PF': {'shortname': 'PF', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SD': {'shortname': 'SD', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'SOA': {'shortname': 'SOA', 'best_level': 0, 'best_result': 0, 'best_score': 0, 'alt_level': 0, 'alt_result': 0, 'alt_score': 0
+            }, 'TOP': {'shortname': 'TOP', 'best_level': 11, 'best_result': 0, 'best_score': 97, 'alt_level': 12, 'alt_result': 0, 'alt_score': 104.5
+            }
+        }
+    }
+]
