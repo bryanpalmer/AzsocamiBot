@@ -5,7 +5,7 @@ import discord
 from discord.errors import Forbidden
 
 # Generic functions for the discord bot
-from datetime import datetime
+import datetime
 from pytz import timezone
 
 # import time
@@ -62,4 +62,4 @@ def localTimeFromUTC(utcTime):
 
 
 def localNow():
-    return localTimeStr(datetime.now())
+    return localTimeStr(datetime.datetime.now())

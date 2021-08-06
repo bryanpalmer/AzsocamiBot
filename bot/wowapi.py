@@ -1191,7 +1191,7 @@ def updateMemberById(conn, recId, charObj):
         charObj.race,
         charObj.covenant,
         charObj.ilvl,
-        datetime.now(),
+        datetime.datetime.now(),
         recId,
     )
     try:
@@ -1480,7 +1480,7 @@ def setLastRun(procName):
         cur = conn.cursor()
         cur.execute(
             "UPDATE dtcache SET lastrun = %s WHERE process=%s;",
-            (datetime.now(), procName.upper()),
+            (datetime.datetime.now(), procName.upper()),
         )
         conn.commit()
         conn.close()
@@ -1865,7 +1865,7 @@ def initConfigTable():
         cursor.execute(sql)
         conn.commit()
         initialRecordsList = [
-            ("access_token", "Invalid", datetime.now()),
+            ("access_token", "Invalid", datetime.datetime.now()),
         ]
         cursor.executemany(
             "insert into config (id, value, expires) values (%s,%s,%s);",
@@ -1896,8 +1896,8 @@ def initDTCacheTable():
         cursor.execute(sql)
         conn.commit()
         activitiesList = [
-            ("UPDATE_MEMBERS", datetime.now()),
-            ("AUCTION_HOUSE", datetime.now()),
+            ("UPDATE_MEMBERS", datetime.datetime.now()),
+            ("AUCTION_HOUSE", datetime.datetime.now()),
         ]
         cursor.executemany(
             "insert into dtcache (process, lastrun) values (%s,%s);", activitiesList

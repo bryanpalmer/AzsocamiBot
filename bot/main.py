@@ -19,7 +19,7 @@ load_dotenv(
 )
 
 import asyncio
-from datetime import datetime
+import datetime
 from pytz import timezone
 from operator import itemgetter
 import time
@@ -103,7 +103,7 @@ async def status(ctx):
     else:
         msg += "PRODUCTION BOT.\n"
     msg += f"Server Timezone:  {time.tzname}\n"
-    msg += f"Server Time:  {datetime.now().strftime(TIMEFORMAT)}\n"
+    msg += f"Server Time:  {datetime.datetime.now().strftime(TIMEFORMAT)}\n"
     msg += f"Bot Local Time:  {botlib.localNow()}\n"
     msg += f"Bot source is at https://github.com/bryanpalmer/AzsocamiBot\n"
     msg += f"Bot running on heroku.com\n"
