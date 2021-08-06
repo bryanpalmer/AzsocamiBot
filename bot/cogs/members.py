@@ -3,6 +3,7 @@ from discord.ext import commands, tasks
 import os, sys, inspect
 import asyncio
 from datetime import datetime
+import datetime
 
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
@@ -139,7 +140,7 @@ class Members(commands.Cog):
 
         if teamMode == "API":
             wowapi.setLastRun("UPDATE_MEMBERS")
-            lastRun = datetime.now()
+            lastRun = datetime.datetime.now()
         else:
             lastRun = wowapi.getLastRun("UPDATE_MEMBERS")
 
