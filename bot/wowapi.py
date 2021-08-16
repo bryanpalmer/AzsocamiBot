@@ -62,7 +62,7 @@ def getLastResetDateTime():
     today = datetime.date.today()
     offset = (today.weekday() - 1) % 7
     last_tue = today - datetime.timedelta(days=offset)
-    lastReset = datetime(last_tue.year, last_tue.month, last_tue.day, 15, 0, 0)
+    lastReset = datetime.datetime(last_tue.year, last_tue.month, last_tue.day, 15, 0, 0)
     # print(lastReset)
     return utc.localize(lastReset)
 

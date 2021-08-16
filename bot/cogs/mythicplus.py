@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands, tasks
 import os, sys, inspect
+import datetime
 
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
@@ -193,6 +194,44 @@ class MythicPlus(commands.Cog):
                 await self.hiddenAnnouncedScoreUpdate(rec["name"])
         await ctx.send("Mythic+ scores updated.")
         await msgId.delete()
+
+    @commands.command(aliases=["gv"])
+    async def gvault(self, ctx):
+        ## id, name, realmslug, role, expires FROM members ORDER BY name
+        teamList = wowapi.getMembersList()
+        gvList = []
+        lastReset = wowapi.getLastResetDateTime()
+        print(lastReset)
+        for member in teamList:
+            keysRun = []
+            runsData = wowapi.api_raiderio_char_mplus_recent_runs(member[1], member[2])
+            for run in runsData["mythic_plus_recent_runs"]:
+                keyLvl = run["mythic_level"]
+                rt = datetime.datetime.fromisoformat(
+                    run["completed_at"].replace("Z", "+00:00")
+                )
+                print(rt, lastReset)
+                if rt > lastReset:
+                    keysRun.append(keyLvl)
+            keysRun.sort(reverse=True)
+            gvList.append((member[1].title(), keysRun))
+        msg = "```| Name            | M+ Vault |   Count    |\n"
+        msg += "|-----------------+----------+------------|\n"
+        for member in gvList:
+            # print(member)
+            m1 = 0
+            m4 = 0
+            m10 = 0
+            if len(member[1]) > 0:
+                m1 = member[1][0]
+            if len(member[1]) > 3:
+                m4 = member[1][3]
+            if len(member[1]) > 9:
+                m10 = member[1][9]
+            msg += f"| {member[0].ljust(15,' ')} | {(str(m1) + '/' + str(m4) + '/' + str(m10)).rjust(8,' ') } |  {str(len(member[1])).rjust(2,' ')} {'run ' if len(member[1])==1 else 'runs'}   |\n"
+        msg += "```"
+        print(f"Msg length: {len(msg)}")
+        await ctx.send(msg)
 
     # scores
     @commands.command()
