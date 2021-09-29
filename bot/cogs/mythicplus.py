@@ -1020,7 +1020,11 @@ class MythicPlus(commands.Cog):
     @commands.command(aliases=["brf"])
     async def bestrunsf(self, ctx):
         """ Reports current Mythic Plus dungeon scores and rankings """
+<<<<<<< HEAD
         msgId = await ctx.send("Gathering BRF data, please wait...")
+=======
+        msgId = ctx.send("Gathering BRF data, please wait...")
+>>>>>>> 095092ea5b642dcd828c27be98409d9ec1810978
         playersList = wowapi.getMythicPlusPlayers()
         results = []
         for playerRow in playersList:
@@ -1267,7 +1271,11 @@ class MythicPlus(commands.Cog):
     @commands.command(aliases=["brt"])
     async def bestrunst(self, ctx):
         """ Reports current Mythic Plus dungeon scores and rankings """
+<<<<<<< HEAD
         msgId = await ctx.send("Gathering BRT data, please wait...")
+=======
+        msgId = ctx.send("Gathering BRT data, please wait...")
+>>>>>>> 095092ea5b642dcd828c27be98409d9ec1810978
         playersList = wowapi.getMythicPlusPlayers()
         results = []
         for playerRow in playersList:
