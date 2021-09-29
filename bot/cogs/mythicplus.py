@@ -1020,6 +1020,7 @@ class MythicPlus(commands.Cog):
     @commands.command(aliases=["brf"])
     async def bestrunsf(self, ctx):
         """ Reports current Mythic Plus dungeon scores and rankings """
+        msgId = ctx.send("Gathering BRF data, please wait...")
         playersList = wowapi.getMythicPlusPlayers()
         results = []
         for playerRow in playersList:
@@ -1261,10 +1262,12 @@ class MythicPlus(commands.Cog):
         msg += "*All dungeons shown are Fortified, and only show positive values if the score>0 for the run. (Results ;=3 key  :=2 key  .=1 key)*"
 
         await ctx.send(msg)
+        await msgId.delete()
 
     @commands.command(aliases=["brt"])
     async def bestrunst(self, ctx):
         """ Reports current Mythic Plus dungeon scores and rankings """
+        msgId = ctx.send("Gathering BRT data, please wait...")
         playersList = wowapi.getMythicPlusPlayers()
         results = []
         for playerRow in playersList:
@@ -1505,6 +1508,7 @@ class MythicPlus(commands.Cog):
         msg += "*All dungeons shown are Tyrannical, and only show positive values if the score>0 for the run. (Results ;=3 key  :=2 key  .=1 key)*"
 
         await ctx.send(msg)
+        await msgId.delete()
 
     @commands.command(aliases=["brold"])
     async def bestrunsold(self, ctx, seasonId=6):
