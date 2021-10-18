@@ -431,7 +431,7 @@ class MythicPlus(commands.Cog):
             }
 
             for run in rioBest["mythic_plus_best_runs"]:
-                print(run)
+                # print(run)
                 affix = run["affixes"][0]["name"]
                 dung = run["short_name"]
                 mlvl = run["mythic_level"]
