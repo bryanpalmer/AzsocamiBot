@@ -431,6 +431,7 @@ class MythicPlus(commands.Cog):
             }
 
             for run in rioBest["mythic_plus_best_runs"]:
+                print(run)
                 affix = run["affixes"][0]["name"]
                 dung = run["short_name"]
                 mlvl = run["mythic_level"]
@@ -1026,7 +1027,7 @@ class MythicPlus(commands.Cog):
         for playerRow in playersList:
             realm = playerRow[2]
             player = playerRow[1].title()
-            # print(f"Retrieving {player} {realm}")
+            print(f"Retrieving {player} {realm}")
             rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
             rioAlts = wowapi.api_raiderio_char_mplus_alternate_runs(player, realm)
             dDict = {
@@ -1105,6 +1106,7 @@ class MythicPlus(commands.Cog):
             }
 
             for run in rioBest["mythic_plus_best_runs"]:
+                # print(run)
                 affix = run["affixes"][0]["name"]
                 dung = run["short_name"]
                 mlvl = run["mythic_level"]

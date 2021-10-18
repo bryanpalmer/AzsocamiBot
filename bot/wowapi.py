@@ -142,8 +142,15 @@ def api_raiderio_char_mplus_best_runs(playerName, playerRealm):
         "fields": "mythic_plus_best_runs",
     }
     response = requests.get(raiderio_uri, params=parameters)
-    dataJson = json.loads(response.text)
-    return dataJson
+    if response.status_code != 200:
+        print(f"Error retrieving {playerName} {playerRealm}")
+        dataJson = (
+            f"{'{'}" f'"name":"{playerName}",' f'"mythic_plus_best_runs": []' f"{'}'}"
+        )
+        return dataJson
+    else:
+        dataJson = json.loads(response.text)
+        return dataJson
 
 
 def api_raiderio_char_mplus_alternate_runs(playerName, playerRealm):
@@ -155,8 +162,18 @@ def api_raiderio_char_mplus_alternate_runs(playerName, playerRealm):
         "fields": "mythic_plus_alternate_runs",
     }
     response = requests.get(raiderio_uri, params=parameters)
-    dataJson = json.loads(response.text)
-    return dataJson
+    if response.status_code != 200:
+        print(f"Error retrieving {playerName} {playerRealm}")
+        dataJson = (
+            f"{'{'}"
+            f'"name":"{playerName}",'
+            f'"mythic_plus_alternate_runs": []'
+            f"{'}'}"
+        )
+        return dataJson
+    else:
+        dataJson = json.loads(response.text)
+        return dataJson
 
 
 def api_raiderio_char_mplus_score(playerName, playerRealm):
@@ -1924,7 +1941,7 @@ def initMythicPlusTable():
         cursor.execute("DROP TABLE IF EXISTS mythicplus;")
         sql = """CREATE TABLE mythicplus (
                 id              INTEGER   PRIMARY KEY AUTO_INCREMENT,
-                name            VARCHAR (30) UNIQUE,
+                name            NVARCHAR (30) UNIQUE,
                 realmslug       VARCHAR (25) DEFAULT ('silver-hand'),
                 highscore       INTEGER DEFAULT (0),
                 prevscore       INTEGER DEFAULT (0),
@@ -1941,11 +1958,14 @@ def initMythicPlusTable():
             ("Cradon", "silver-hand", 0, 1),
             ("Ragebear", "silver-hand", 0, 1),
             ("Agaviss", "silver-hand", 0, 1),
-            ("Frenchie", "silver-hand", 0, 1),
+            ("Frënchie", "silver-hand", 0, 1),
             ("Areisda", "silver-hand", 0, 1),
             ("Aryxi", "silver-hand", 0, 1),
-            ("Velalda", "silver-hand", 0, 1),
-            ("Bubblebutt", "bloodhoof", 0, 1),
+            ("Ekkoe", "farstriders", 0, 1),
+            ("Pert", "farstriders", 0, 1),
+            ("Pertnok", "farstriders", 0, 1),
+            ("Antigen", "silver-hand", 0, 1)
+            # ,("Bubblebutt", "bloodhoof", 0, 1),
         ]
         cursor.executemany(
             "insert into mythicplus (name, realmslug, highscore, active) values (%s,%s,%s,%s);",
@@ -1967,7 +1987,7 @@ def initMythicPlusRanksTable():
         cursor.execute("DROP TABLE IF EXISTS mythicranks;")
         sql = """CREATE TABLE mythicranks (
                 id              INTEGER   PRIMARY KEY AUTO_INCREMENT,
-                name            VARCHAR (30) UNIQUE,
+                name            NVARCHAR (30) UNIQUE,
                 realmslug       VARCHAR (25) DEFAULT ('silver-hand'),
                 tankrank        INTEGER DEFAULT (0),
                 dpsrank         INTEGER DEFAULT (0),
@@ -1986,7 +2006,7 @@ def initMythicPlusRanksTable():
             ("Cradon", "silver-hand"),
             ("Ragebear", "silver-hand"),
             ("Agaviss", "silver-hand"),
-            ("Frenchie", "silver-hand"),
+            ("Frënchie", "silver-hand"),
             ("Areisda", "silver-hand"),
             ("Aryxi", "silver-hand"),
             ("Velalda", "silver-hand"),
@@ -2016,7 +2036,7 @@ def initMembersTable():
         sql = """CREATE TABLE members (
                 id          INTEGER   PRIMARY KEY AUTO_INCREMENT,
                 wowid       INTEGER,
-                name        VARCHAR (30) UNIQUE,
+                name        NVARCHAR (30) UNIQUE,
                 class       VARCHAR (20),
                 spec        VARCHAR (25),
                 level       INTEGER,
