@@ -205,7 +205,11 @@ class AuctionHouse(commands.Cog):
 
         raidMats = wowapi.getRaidMats()
         ahData = wowapi.getAuctionHouseData()
-        umjConn = umj.create_connection()
+        try:
+            umjConn = umj.create_connection()
+        except Exception:
+            print("UMJ connection error")
+            await ctx.send("UndermineJournal database API is currently offline.")
 
         for mat in raidMats:
             # fill out class/subclass info from items db

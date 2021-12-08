@@ -55,7 +55,7 @@ def umj_connector(func):
             rv = func(cnn, *args, **kwargs)
         except Exception:
             cnn.rollback()
-            # logging.error("Database connection error")
+            print("UMJ database connection error")
             raise
         else:
             cnn.commit()

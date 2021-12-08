@@ -1536,7 +1536,7 @@ def removePlayerFromMythicPlus(playerName):
     try:
         cursor.execute(
             cursor.execute(
-                "update mythicplus set active=0 where name=%s;", (playerName.title(),)
+                "delete from mythicplus where name=%s;", (playerName.title(),)
             )
         )
         conn.commit()
