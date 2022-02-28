@@ -428,6 +428,24 @@ class MythicPlus(commands.Cog):
                     "alt_result": 0,
                     "alt_score": 0,
                 },
+                "GMBT": {
+                    "shortname": "GMBT",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "STRT": {
+                    "shortname": "STRT",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
             }
 
             for run in rioBest["mythic_plus_best_runs"]:
@@ -1103,6 +1121,24 @@ class MythicPlus(commands.Cog):
                     "alt_result": 0,
                     "alt_score": 0,
                 },
+                "GMBT": {
+                    "shortname": "GMBT",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "STRT": {
+                    "shortname": "STRT",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
             }
 
             for run in rioBest["mythic_plus_best_runs"]:
@@ -1143,7 +1179,9 @@ class MythicPlus(commands.Cog):
         # print(results)
 
         msg = "**Best FORTIFIED Runs**\n"
-        msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(4)} {'HOA'.ljust(4)} {'MST'.ljust(4)} {'NW'.ljust(4)} {'PF'.ljust(4)} {'SD'.ljust(4)} {'SOA'.ljust(4)} {'TOP'.ljust(4)}\n"
+        # Modified header for 9.2
+        msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(4)} {'HOA'.ljust(4)} {'MST'.ljust(4)} {'NW'.ljust(4)} {'PF'.ljust(4)} {'SD'.ljust(4)} {'SOA'.ljust(4)} {'TOP'.ljust(4)} {'TZG'.ljust(4)} {'TZS'.ljust(4)}\n"
+        # msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(4)} {'HOA'.ljust(4)} {'MST'.ljust(4)} {'NW'.ljust(4)} {'PF'.ljust(4)} {'SD'.ljust(4)} {'SOA'.ljust(4)} {'TOP'.ljust(4)}\n"
         # msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(7)} {'HOA'.ljust(7)} {'MST'.ljust(7)} {'NW'.ljust(7)} {'PF'.ljust(7)} {'SD'.ljust(7)} {'SOA'.ljust(7)} {'TOP'.ljust(7)}\n"
         for player in results:
             playerName = player[0]
@@ -1169,6 +1207,15 @@ class MythicPlus(commands.Cog):
             tSOA = dDict["SOA"]["alt_level"] if dDict["SOA"]["alt_score"] > 0 else 0
             fTOP = dDict["TOP"]["best_level"] if dDict["TOP"]["best_score"] > 0 else 0
             tTOP = dDict["TOP"]["alt_level"] if dDict["TOP"]["alt_score"] > 0 else 0
+            # Added for 9.2 - 2 new dungeons
+            fGMBT = (
+                dDict["GMBT"]["best_level"] if dDict["GMBT"]["best_score"] > 0 else 0
+            )
+            tGMBT = dDict["GMBT"]["alt_level"] if dDict["GMBT"]["alt_score"] > 0 else 0
+            fSTRT = (
+                dDict["STRT"]["best_level"] if dDict["STRT"]["best_score"] > 0 else 0
+            )
+            tSTRT = dDict["STRT"]["alt_level"] if dDict["STRT"]["alt_score"] > 0 else 0
 
             t1affix = (
                 ";"
@@ -1250,6 +1297,26 @@ class MythicPlus(commands.Cog):
                 else " "
             )
 
+            t9affix = (
+                ";"
+                if dDict["GMBT"]["best_result"] == 3
+                else ":"
+                if dDict["GMBT"]["best_result"] == 2
+                else "."
+                if dDict["GMBT"]["best_result"] == 1
+                else " "
+            )
+
+            t10affix = (
+                ";"
+                if dDict["STRT"]["best_result"] == 3
+                else ":"
+                if dDict["STRT"]["best_result"] == 2
+                else "."
+                if dDict["STRT"]["best_result"] == 1
+                else " "
+            )
+
             msg += f"{playerName.ljust(13)} "
             msg += f"{fDOS:>2}{t1affix}| "
             msg += f"{fHOA:>2}{t2affix}| "
@@ -1258,7 +1325,9 @@ class MythicPlus(commands.Cog):
             msg += f"{fPF:>2}{t5affix}| "
             msg += f"{fSD:>2}{t6affix}| "
             msg += f"{fSOA:>2}{t7affix}| "
-            msg += f"{fTOP:>2}{t8affix}\n"
+            msg += f"{fTOP:>2}{t8affix}| "
+            msg += f"{fGMBT:>2}{t9affix}| "
+            msg += f"{fSTRT:>2}{t10affix}\n"
 
         msg += "```\n"
         msg += "*All dungeons shown are Fortified, and only show positive values if the score>0 for the run. (Results ;=3 key  :=2 key  .=1 key)*"
@@ -1351,6 +1420,24 @@ class MythicPlus(commands.Cog):
                     "alt_result": 0,
                     "alt_score": 0,
                 },
+                "GMBT": {
+                    "shortname": "GMBT",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
+                "STRT": {
+                    "shortname": "STRT",
+                    "best_level": 0,
+                    "best_result": 0,
+                    "best_score": 0,
+                    "alt_level": 0,
+                    "alt_result": 0,
+                    "alt_score": 0,
+                },
             }
 
             for run in rioBest["mythic_plus_best_runs"]:
@@ -1390,7 +1477,9 @@ class MythicPlus(commands.Cog):
         # print(results)
 
         msg = "**Best TYRANNICAL Runs**\n"
-        msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(4)} {'HOA'.ljust(4)} {'MST'.ljust(4)} {'NW'.ljust(4)} {'PF'.ljust(4)} {'SD'.ljust(4)} {'SOA'.ljust(4)} {'TOP'.ljust(4)}\n"
+        # Modified header for 9.2
+        msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(4)} {'HOA'.ljust(4)} {'MST'.ljust(4)} {'NW'.ljust(4)} {'PF'.ljust(4)} {'SD'.ljust(4)} {'SOA'.ljust(4)} {'TOP'.ljust(4)} {'TZG'.ljust(4)} {'TZS'.ljust(4)}\n"
+        # msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(4)} {'HOA'.ljust(4)} {'MST'.ljust(4)} {'NW'.ljust(4)} {'PF'.ljust(4)} {'SD'.ljust(4)} {'SOA'.ljust(4)} {'TOP'.ljust(4)}\n"
         for player in results:
             playerName = player[0]
             dDict = player[1]
@@ -1415,6 +1504,15 @@ class MythicPlus(commands.Cog):
             tSOA = dDict["SOA"]["alt_level"] if dDict["SOA"]["alt_score"] > 0 else 0
             fTOP = dDict["TOP"]["best_level"] if dDict["TOP"]["best_score"] > 0 else 0
             tTOP = dDict["TOP"]["alt_level"] if dDict["TOP"]["alt_score"] > 0 else 0
+            # Added for 9.2 - 2 new dungeons
+            fGMBT = (
+                dDict["GMBT"]["best_level"] if dDict["GMBT"]["best_score"] > 0 else 0
+            )
+            tGMBT = dDict["GMBT"]["alt_level"] if dDict["GMBT"]["alt_score"] > 0 else 0
+            fSTRT = (
+                dDict["STRT"]["best_level"] if dDict["STRT"]["best_score"] > 0 else 0
+            )
+            tSTRT = dDict["STRT"]["alt_level"] if dDict["STRT"]["alt_score"] > 0 else 0
 
             t1affix = (
                 ";"
@@ -1496,6 +1594,26 @@ class MythicPlus(commands.Cog):
                 else " "
             )
 
+            t9affix = (
+                ";"
+                if dDict["GMBT"]["best_result"] == 3
+                else ":"
+                if dDict["GMBT"]["best_result"] == 2
+                else "."
+                if dDict["GMBT"]["best_result"] == 1
+                else " "
+            )
+
+            t10affix = (
+                ";"
+                if dDict["STRT"]["best_result"] == 3
+                else ":"
+                if dDict["STRT"]["best_result"] == 2
+                else "."
+                if dDict["STRT"]["best_result"] == 1
+                else " "
+            )
+
             msg += f"{playerName.ljust(13)} "
             msg += f"{tDOS:>2}{t1affix}| "
             msg += f"{tHOA:>2}{t2affix}| "
@@ -1504,7 +1622,9 @@ class MythicPlus(commands.Cog):
             msg += f"{tPF:>2}{t5affix}| "
             msg += f"{tSD:>2}{t6affix}| "
             msg += f"{tSOA:>2}{t7affix}| "
-            msg += f"{tTOP:>2}{t8affix}\n"
+            msg += f"{tTOP:>2}{t8affix}| "
+            msg += f"{fGMBT:>2}{t9affix}| "
+            msg += f"{fSTRT:>2}{t10affix}\n"
 
         msg += "```\n"
         msg += "*All dungeons shown are Tyrannical, and only show positive values if the score>0 for the run. (Results ;=3 key  :=2 key  .=1 key)*"
@@ -1618,7 +1738,7 @@ class MythicPlus(commands.Cog):
         await msgId.delete()
 
     @commands.command(aliases=["br4"])
-    async def bestrunsfor(self, ctx, charName, seasonId=6):
+    async def bestrunsfor(self, ctx, charName, seasonId=7):
         msgId = await ctx.send(f"Gathering mythic+ data for {charName}, please wait...")
         ## id, name, realmslug, role, expires FROM members ORDER BY name
         teamList = wowapi.getMembersList()
