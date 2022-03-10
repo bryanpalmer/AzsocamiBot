@@ -92,6 +92,12 @@ class Database(commands.Cog):
 
     @commands.command()
     @commands.is_owner()
+    async def reset_all_mythicplus_scores(self, ctx):
+        # wowapi.resetMythicPlusScores()
+        await ctx.send("Run .update instead to grab zeroed scores from raider.io.")
+
+    @commands.command()
+    @commands.is_owner()
     async def recreate_raidmats_table(self, ctx):
         wowapi.initRaidmatsTable()
         # wowapi.updateAllMemberData()

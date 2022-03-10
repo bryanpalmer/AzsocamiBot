@@ -319,6 +319,10 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         173243: {
             "id": 173243,
@@ -338,10 +342,14 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
             "lvl5qty": 0,
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         173244: {
             "id": 173244,
@@ -361,10 +369,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
-            "lvl5qty": 0,
-            "lvl5cost": 0,
-            "lvl6qty": 0,
-            "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         173245: {
             "id": 173245,
@@ -384,6 +390,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         173246: {
             "id": 173246,
@@ -403,6 +411,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         173247: {
             "id": 173247,
@@ -422,6 +432,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         173248: {
             "id": 173248,
@@ -441,6 +453,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         173249: {
             "id": 173249,
@@ -460,6 +474,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172314: {
             "id": 172314,
@@ -479,6 +495,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172315: {
             "id": 172315,
@@ -498,6 +516,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172316: {
             "id": 172316,
@@ -517,6 +537,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172317: {
             "id": 172317,
@@ -536,6 +558,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172318: {
             "id": 172318,
@@ -555,6 +579,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172319: {
             "id": 172319,
@@ -574,6 +600,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172320: {
             "id": 172320,
@@ -593,6 +621,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172321: {
             "id": 172321,
@@ -612,6 +642,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172322: {
             "id": 172322,
@@ -631,6 +663,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172323: {
             "id": 172323,
@@ -650,6 +684,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172324: {
             "id": 172324,
@@ -669,6 +705,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172325: {
             "id": 172325,
@@ -688,6 +726,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172326: {
             "id": 172326,
@@ -707,6 +747,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172327: {
             "id": 172327,
@@ -726,6 +768,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172328: {
             "id": 172328,
@@ -745,6 +789,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         172329: {
             "id": 172329,
@@ -764,6 +810,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         171412: {
             "id": 171412,
@@ -783,6 +831,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         171413: {
             "id": 171413,
@@ -802,6 +852,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         171414: {
             "id": 171414,
@@ -821,6 +873,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         171415: {
             "id": 171415,
@@ -840,6 +894,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         171416: {
             "id": 171416,
@@ -859,6 +915,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         171417: {
             "id": 171417,
@@ -878,6 +936,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         171418: {
             "id": 171418,
@@ -897,6 +957,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         171419: {
             "id": 171419,
@@ -916,6 +978,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         178926: {
             "id": 178926,
@@ -935,6 +999,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         178927: {
             "id": 178927,
@@ -954,6 +1020,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
         173242: {
             "id": 173242,
@@ -973,6 +1041,8 @@ def getLegendaryArmorsList():
             "lvl5cost": 0,
             "lvl6qty": 0,
             "lvl6cost": 0,
+            "lvl7qty": 0,
+            "lvl7cost": 0,
         },
     }
 

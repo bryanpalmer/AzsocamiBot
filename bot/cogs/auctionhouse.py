@@ -150,14 +150,22 @@ class AuctionHouse(commands.Cog):
                     ):
                         armors[curID]["lvl6cost"] = auction["buyout"] / 10000
 
-        heading = f"{'Name'.ljust(25,' ')}\t{'iLvl 225'.rjust(10,' ')}\t{'iLvl 235'.rjust(10,' ')}\t{'iLvl 249'.rjust(10,' ')}\t{'iLvl 262'.rjust(10,' ')}\n"
+                if context == 69:
+                    armors[curID]["lvl7qty"] += auction["quantity"]
+                    if (
+                        armors[curID]["lvl7cost"] == 0
+                        or auction["buyout"] / 10000 < armors[curID]["lvl7cost"]
+                    ):
+                        armors[curID]["lvl7cost"] = auction["buyout"] / 10000
+
+        heading = f"{'Name'.ljust(25,' ')}\t{'iLvl 235'.rjust(10,' ')}\t{'iLvl 249'.rjust(10,' ')}\t{'iLvl 262'.rjust(10,' ')}\t{'iLvl 291'.rjust(10,' ')}\n"
         cloth = heading
         leather = heading
         mail = heading
         plate = heading
         misc = heading
         for armorId in armors:
-            msgLine = f"{armors[armorId]['name'].ljust(25,' ')}\t{armors[armorId]['lvl3cost']:>10,.2f}\t{armors[armorId]['lvl4cost']:>10,.2f}\t{armors[armorId]['lvl5cost']:>10,.2f}\t{armors[armorId]['lvl6cost']:>10,.2f}\n"
+            msgLine = f"{armors[armorId]['name'].ljust(25,' ')}\t{armors[armorId]['lvl4cost']:>10,.2f}\t{armors[armorId]['lvl5cost']:>10,.2f}\t{armors[armorId]['lvl6cost']:>10,.2f}\t{armors[armorId]['lvl7cost']:>10,.2f}\n"
             if (
                 armors[armorId]["subclass"] == "Cloth"
                 and "Cape" not in armors[armorId]["name"]
