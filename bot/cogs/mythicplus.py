@@ -1623,8 +1623,8 @@ class MythicPlus(commands.Cog):
             msg += f"{tSD:>2}{t6affix}| "
             msg += f"{tSOA:>2}{t7affix}| "
             msg += f"{tTOP:>2}{t8affix}| "
-            msg += f"{fGMBT:>2}{t9affix}| "
-            msg += f"{fSTRT:>2}{t10affix}\n"
+            msg += f"{tGMBT:>2}{t9affix}| "
+            msg += f"{tSTRT:>2}{t10affix}\n"
 
         msg += "```\n"
         msg += "*All dungeons shown are Tyrannical, and only show positive values if the score>0 for the run. (Results ;=3 key  :=2 key  .=1 key)*"
