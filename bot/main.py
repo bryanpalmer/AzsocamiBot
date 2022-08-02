@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.2.35"
-VERSIONDATE = "2022-06-24"
+VERSION = "0.2.40"
+VERSIONDATE = "2022-08-02"
 
 from os.path import dirname, join, os
 
@@ -141,7 +141,11 @@ def localTimeStr(utcTime):
 @bot.command()
 async def changelog(ctx):
     msg = """
-```## 0.1.60 - 2021-06-29
+```## 0.2.40 - 2022-08-02
+ - Updates for Season 4
+
+
+## 0.1.60 - 2021-06-29
  - Added .br4 <charname> <seasonId> command.
 
 ## 0.1.50 - 2021-03-31

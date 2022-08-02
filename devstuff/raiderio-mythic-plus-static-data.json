@@ -1,0 +1,978 @@
+{
+    "seasons": [
+        {
+            "slug": "season-sl-4",
+            "name": "SL Season 4",
+            "short_name": "SL4",
+            "seasonal_affix": {
+                "id": 131,
+                "name": "Shrouded",
+                "icon": "spell_shadow_nethercloak"
+            },
+            "starts": {
+                "us": "2022-08-02T15:00:00Z",
+                "eu": "2022-08-03T07:00:00Z",
+                "tw": "2022-08-03T23:00:00Z",
+                "kr": "2022-08-03T23:00:00Z",
+                "cn": "2022-08-03T23:00:00Z"
+            },
+            "ends": {
+                "us": null,
+                "eu": null,
+                "tw": null,
+                "kr": null,
+                "cn": null
+            },
+            "dungeons": [
+                {
+                    "id": 6984,
+                    "challenge_mode_id": 166,
+                    "slug": "grimrail-depot",
+                    "name": "Grimrail Depot",
+                    "short_name": "GD"
+                },
+                {
+                    "id": 6951,
+                    "challenge_mode_id": 169,
+                    "slug": "iron-docks",
+                    "name": "Iron Docks",
+                    "short_name": "ID"
+                },
+                {
+                    "id": 800001,
+                    "challenge_mode_id": 369,
+                    "slug": "operation-mechagon-junkyard",
+                    "name": "Mechagon Junkyard",
+                    "short_name": "YARD"
+                },
+                {
+                    "id": 800002,
+                    "challenge_mode_id": 370,
+                    "slug": "operation-mechagon-workshop",
+                    "name": "Mechagon Workshop",
+                    "short_name": "WORK"
+                },
+                {
+                    "id": 999998,
+                    "challenge_mode_id": 227,
+                    "slug": "return-to-karazhan-lower",
+                    "name": "Return to Karazhan: Lower",
+                    "short_name": "LOWR"
+                },
+                {
+                    "id": 999999,
+                    "challenge_mode_id": 234,
+                    "slug": "return-to-karazhan-upper",
+                    "name": "Return to Karazhan: Upper",
+                    "short_name": "UPPR"
+                },
+                {
+                    "id": 1000001,
+                    "challenge_mode_id": 392,
+                    "slug": "tazavesh-soleahs-gambit",
+                    "name": "Tazavesh: So'leah's Gambit",
+                    "short_name": "GMBT"
+                },
+                {
+                    "id": 1000000,
+                    "challenge_mode_id": 391,
+                    "slug": "tazavesh-streets-of-wonder",
+                    "name": "Tazavesh: Streets of Wonder",
+                    "short_name": "STRT"
+                }
+            ]
+        },
+        {
+            "slug": "season-sl-3",
+            "name": "SL Season 3",
+            "short_name": "SL3",
+            "seasonal_affix": {
+                "id": 130,
+                "name": "Encrypted",
+                "icon": "spell_progenitor_orb"
+            },
+            "starts": {
+                "us": "2022-03-01T15:00:00Z",
+                "eu": "2022-03-02T07:00:00Z",
+                "tw": "2022-03-02T23:00:00Z",
+                "kr": "2022-03-02T23:00:00Z",
+                "cn": "2022-03-02T23:00:00Z"
+            },
+            "ends": {
+                "us": "2022-08-02T15:00:00Z",
+                "eu": "2022-08-03T07:00:00Z",
+                "tw": "2022-08-03T23:00:00Z",
+                "kr": "2022-08-03T23:00:00Z",
+                "cn": "2022-08-03T23:00:00Z"
+            },
+            "dungeons": [
+                {
+                    "id": 13309,
+                    "challenge_mode_id": 377,
+                    "slug": "de-other-side",
+                    "name": "De Other Side",
+                    "short_name": "DOS"
+                },
+                {
+                    "id": 12831,
+                    "challenge_mode_id": 378,
+                    "slug": "halls-of-atonement",
+                    "name": "Halls of Atonement",
+                    "short_name": "HOA"
+                },
+                {
+                    "id": 13334,
+                    "challenge_mode_id": 375,
+                    "slug": "mists-of-tirna-scithe",
+                    "name": "Mists of Tirna Scithe",
+                    "short_name": "MISTS"
+                },
+                {
+                    "id": 13228,
+                    "challenge_mode_id": 379,
+                    "slug": "plaguefall",
+                    "name": "Plaguefall",
+                    "short_name": "PF"
+                },
+                {
+                    "id": 12842,
+                    "challenge_mode_id": 380,
+                    "slug": "sanguine-depths",
+                    "name": "Sanguine Depths",
+                    "short_name": "SD"
+                },
+                {
+                    "id": 12837,
+                    "challenge_mode_id": 381,
+                    "slug": "spires-of-ascension",
+                    "name": "Spires of Ascension",
+                    "short_name": "SOA"
+                },
+                {
+                    "id": 1000001,
+                    "challenge_mode_id": 392,
+                    "slug": "tazavesh-soleahs-gambit",
+                    "name": "Tazavesh: So'leah's Gambit",
+                    "short_name": "GMBT"
+                },
+                {
+                    "id": 1000000,
+                    "challenge_mode_id": 391,
+                    "slug": "tazavesh-streets-of-wonder",
+                    "name": "Tazavesh: Streets of Wonder",
+                    "short_name": "STRT"
+                },
+                {
+                    "id": 12916,
+                    "challenge_mode_id": 376,
+                    "slug": "the-necrotic-wake",
+                    "name": "The Necrotic Wake",
+                    "short_name": "NW"
+                },
+                {
+                    "id": 12841,
+                    "challenge_mode_id": 382,
+                    "slug": "theater-of-pain",
+                    "name": "Theater of Pain",
+                    "short_name": "TOP"
+                }
+            ]
+        },
+        {
+            "slug": "season-sl-3-post-925",
+            "name": "SL Season 3 • Post 9.2.5",
+            "short_name": "SL3 (925)",
+            "seasonal_affix": {
+                "id": 130,
+                "name": "Encrypted",
+                "icon": "spell_progenitor_orb"
+            },
+            "starts": {
+                "us": "2022-05-31T15:00:00Z",
+                "eu": "2022-06-01T07:00:00Z",
+                "tw": "2022-06-01T23:00:00Z",
+                "kr": "2022-06-01T23:00:00Z",
+                "cn": "2022-06-01T23:00:00Z"
+            },
+            "ends": {
+                "us": "2022-08-02T15:00:00Z",
+                "eu": "2022-08-03T07:00:00Z",
+                "tw": "2022-08-03T23:00:00Z",
+                "kr": "2022-08-03T23:00:00Z",
+                "cn": "2022-08-03T23:00:00Z"
+            },
+            "dungeons": [
+                {
+                    "id": 13309,
+                    "challenge_mode_id": 377,
+                    "slug": "de-other-side",
+                    "name": "De Other Side",
+                    "short_name": "DOS"
+                },
+                {
+                    "id": 12831,
+                    "challenge_mode_id": 378,
+                    "slug": "halls-of-atonement",
+                    "name": "Halls of Atonement",
+                    "short_name": "HOA"
+                },
+                {
+                    "id": 13334,
+                    "challenge_mode_id": 375,
+                    "slug": "mists-of-tirna-scithe",
+                    "name": "Mists of Tirna Scithe",
+                    "short_name": "MISTS"
+                },
+                {
+                    "id": 13228,
+                    "challenge_mode_id": 379,
+                    "slug": "plaguefall",
+                    "name": "Plaguefall",
+                    "short_name": "PF"
+                },
+                {
+                    "id": 12842,
+                    "challenge_mode_id": 380,
+                    "slug": "sanguine-depths",
+                    "name": "Sanguine Depths",
+                    "short_name": "SD"
+                },
+                {
+                    "id": 12837,
+                    "challenge_mode_id": 381,
+                    "slug": "spires-of-ascension",
+                    "name": "Spires of Ascension",
+                    "short_name": "SOA"
+                },
+                {
+                    "id": 1000001,
+                    "challenge_mode_id": 392,
+                    "slug": "tazavesh-soleahs-gambit",
+                    "name": "Tazavesh: So'leah's Gambit",
+                    "short_name": "GMBT"
+                },
+                {
+                    "id": 1000000,
+                    "challenge_mode_id": 391,
+                    "slug": "tazavesh-streets-of-wonder",
+                    "name": "Tazavesh: Streets of Wonder",
+                    "short_name": "STRT"
+                },
+                {
+                    "id": 12916,
+                    "challenge_mode_id": 376,
+                    "slug": "the-necrotic-wake",
+                    "name": "The Necrotic Wake",
+                    "short_name": "NW"
+                },
+                {
+                    "id": 12841,
+                    "challenge_mode_id": 382,
+                    "slug": "theater-of-pain",
+                    "name": "Theater of Pain",
+                    "short_name": "TOP"
+                }
+            ]
+        },
+        {
+            "slug": "season-sl-3-legion-timewalking",
+            "name": "SL Season 3 • Legion Timewalking",
+            "short_name": "SL3 (TW)",
+            "seasonal_affix": {
+                "id": 129,
+                "name": "Infernal",
+                "icon": "inv_infernalbrimstone"
+            },
+            "starts": {
+                "us": "2022-04-12T15:00:00Z",
+                "eu": "2022-04-13T07:00:00Z",
+                "tw": "2022-04-13T23:00:00Z",
+                "kr": "2022-04-13T23:00:00Z",
+                "cn": "2022-04-13T23:00:00Z"
+            },
+            "ends": {
+                "us": "2022-08-02T15:00:00Z",
+                "eu": "2022-08-03T07:00:00Z",
+                "tw": "2022-08-03T23:00:00Z",
+                "kr": "2022-08-03T23:00:00Z",
+                "cn": "2022-08-03T23:00:00Z"
+            },
+            "dungeons": [
+                {
+                    "id": 7805,
+                    "challenge_mode_id": 199,
+                    "slug": "black-rook-hold",
+                    "name": "Black Rook Hold",
+                    "short_name": "BRH"
+                },
+                {
+                    "id": 8079,
+                    "challenge_mode_id": 210,
+                    "slug": "court-of-stars",
+                    "name": "Court of Stars",
+                    "short_name": "COS"
+                },
+                {
+                    "id": 7673,
+                    "challenge_mode_id": 198,
+                    "slug": "darkheart-thicket",
+                    "name": "Darkheart Thicket",
+                    "short_name": "DHT"
+                },
+                {
+                    "id": 8040,
+                    "challenge_mode_id": 197,
+                    "slug": "eye-of-azshara",
+                    "name": "Eye of Azshara",
+                    "short_name": "EOA"
+                },
+                {
+                    "id": 7546,
+                    "challenge_mode_id": 206,
+                    "slug": "neltharions-lair",
+                    "name": "Neltharion's Lair",
+                    "short_name": "NL"
+                },
+                {
+                    "id": 7787,
+                    "challenge_mode_id": 207,
+                    "slug": "vault-of-the-wardens",
+                    "name": "Vault of the Wardens",
+                    "short_name": "VOTW"
+                }
+            ]
+        },
+        {
+            "slug": "season-sl-2",
+            "name": "SL Season 2 • Overall",
+            "short_name": "SL2",
+            "seasonal_affix": {
+                "id": 128,
+                "name": "Tormented",
+                "icon": "spell_animamaw_orb"
+            },
+            "starts": {
+                "us": "2021-07-06T15:00:00Z",
+                "eu": "2021-07-07T07:00:00Z",
+                "tw": "2021-07-07T23:00:00Z",
+                "kr": "2021-07-07T23:00:00Z",
+                "cn": "2021-07-07T23:00:00Z"
+            },
+            "ends": {
+                "us": "2022-03-01T15:00:00Z",
+                "eu": "2022-03-02T07:00:00Z",
+                "tw": "2022-03-02T23:00:00Z",
+                "kr": "2022-03-02T23:00:00Z",
+                "cn": "2022-03-02T23:00:00Z"
+            },
+            "dungeons": [
+                {
+                    "id": 13309,
+                    "challenge_mode_id": 377,
+                    "slug": "de-other-side",
+                    "name": "De Other Side",
+                    "short_name": "DOS"
+                },
+                {
+                    "id": 12831,
+                    "challenge_mode_id": 378,
+                    "slug": "halls-of-atonement",
+                    "name": "Halls of Atonement",
+                    "short_name": "HOA"
+                },
+                {
+                    "id": 13334,
+                    "challenge_mode_id": 375,
+                    "slug": "mists-of-tirna-scithe",
+                    "name": "Mists of Tirna Scithe",
+                    "short_name": "MISTS"
+                },
+                {
+                    "id": 13228,
+                    "challenge_mode_id": 379,
+                    "slug": "plaguefall",
+                    "name": "Plaguefall",
+                    "short_name": "PF"
+                },
+                {
+                    "id": 12842,
+                    "challenge_mode_id": 380,
+                    "slug": "sanguine-depths",
+                    "name": "Sanguine Depths",
+                    "short_name": "SD"
+                },
+                {
+                    "id": 12837,
+                    "challenge_mode_id": 381,
+                    "slug": "spires-of-ascension",
+                    "name": "Spires of Ascension",
+                    "short_name": "SOA"
+                },
+                {
+                    "id": 12916,
+                    "challenge_mode_id": 376,
+                    "slug": "the-necrotic-wake",
+                    "name": "The Necrotic Wake",
+                    "short_name": "NW"
+                },
+                {
+                    "id": 12841,
+                    "challenge_mode_id": 382,
+                    "slug": "theater-of-pain",
+                    "name": "Theater of Pain",
+                    "short_name": "TOP"
+                }
+            ]
+        },
+        {
+            "slug": "season-sl-2-post",
+            "name": "SL Season 2 • Post 9.2.0",
+            "short_name": "SL2-P",
+            "seasonal_affix": {
+                "id": 128,
+                "name": "Tormented",
+                "icon": "spell_animamaw_orb"
+            },
+            "starts": {
+                "us": "2022-02-22T15:00:00Z",
+                "eu": "2022-02-23T07:00:00Z",
+                "tw": "2022-02-23T23:00:00Z",
+                "kr": "2022-02-23T23:00:00Z",
+                "cn": "2022-02-23T23:00:00Z"
+            },
+            "ends": {
+                "us": "2022-03-01T15:00:00Z",
+                "eu": "2022-03-02T07:00:00Z",
+                "tw": "2022-03-02T23:00:00Z",
+                "kr": "2022-03-02T23:00:00Z",
+                "cn": "2022-03-02T23:00:00Z"
+            },
+            "dungeons": [
+                {
+                    "id": 13309,
+                    "challenge_mode_id": 377,
+                    "slug": "de-other-side",
+                    "name": "De Other Side",
+                    "short_name": "DOS"
+                },
+                {
+                    "id": 12831,
+                    "challenge_mode_id": 378,
+                    "slug": "halls-of-atonement",
+                    "name": "Halls of Atonement",
+                    "short_name": "HOA"
+                },
+                {
+                    "id": 13334,
+                    "challenge_mode_id": 375,
+                    "slug": "mists-of-tirna-scithe",
+                    "name": "Mists of Tirna Scithe",
+                    "short_name": "MISTS"
+                },
+                {
+                    "id": 13228,
+                    "challenge_mode_id": 379,
+                    "slug": "plaguefall",
+                    "name": "Plaguefall",
+                    "short_name": "PF"
+                },
+                {
+                    "id": 12842,
+                    "challenge_mode_id": 380,
+                    "slug": "sanguine-depths",
+                    "name": "Sanguine Depths",
+                    "short_name": "SD"
+                },
+                {
+                    "id": 12837,
+                    "challenge_mode_id": 381,
+                    "slug": "spires-of-ascension",
+                    "name": "Spires of Ascension",
+                    "short_name": "SOA"
+                },
+                {
+                    "id": 12916,
+                    "challenge_mode_id": 376,
+                    "slug": "the-necrotic-wake",
+                    "name": "The Necrotic Wake",
+                    "short_name": "NW"
+                },
+                {
+                    "id": 12841,
+                    "challenge_mode_id": 382,
+                    "slug": "theater-of-pain",
+                    "name": "Theater of Pain",
+                    "short_name": "TOP"
+                }
+            ]
+        },
+        {
+            "slug": "season-sl-2-tormented-hero",
+            "name": "SL Season 2 • Tormented Hero",
+            "short_name": "SL2 Tormented Hero",
+            "seasonal_affix": {
+                "id": 128,
+                "name": "Tormented",
+                "icon": "spell_animamaw_orb"
+            },
+            "starts": {
+                "us": "2021-07-06T15:00:00Z",
+                "eu": "2021-07-07T07:00:00Z",
+                "tw": "2021-07-07T23:00:00Z",
+                "kr": "2021-07-07T23:00:00Z",
+                "cn": "2021-07-07T23:00:00Z"
+            },
+            "ends": {
+                "us": "2022-02-22T15:00:00Z",
+                "eu": "2022-02-23T07:00:00Z",
+                "tw": "2022-02-23T23:00:00Z",
+                "kr": "2022-02-23T23:00:00Z",
+                "cn": "2022-02-23T23:00:00Z"
+            },
+            "dungeons": [
+                {
+                    "id": 13309,
+                    "challenge_mode_id": 377,
+                    "slug": "de-other-side",
+                    "name": "De Other Side",
+                    "short_name": "DOS"
+                },
+                {
+                    "id": 12831,
+                    "challenge_mode_id": 378,
+                    "slug": "halls-of-atonement",
+                    "name": "Halls of Atonement",
+                    "short_name": "HOA"
+                },
+                {
+                    "id": 13334,
+                    "challenge_mode_id": 375,
+                    "slug": "mists-of-tirna-scithe",
+                    "name": "Mists of Tirna Scithe",
+                    "short_name": "MISTS"
+                },
+                {
+                    "id": 13228,
+                    "challenge_mode_id": 379,
+                    "slug": "plaguefall",
+                    "name": "Plaguefall",
+                    "short_name": "PF"
+                },
+                {
+                    "id": 12842,
+                    "challenge_mode_id": 380,
+                    "slug": "sanguine-depths",
+                    "name": "Sanguine Depths",
+                    "short_name": "SD"
+                },
+                {
+                    "id": 12837,
+                    "challenge_mode_id": 381,
+                    "slug": "spires-of-ascension",
+                    "name": "Spires of Ascension",
+                    "short_name": "SOA"
+                },
+                {
+                    "id": 12916,
+                    "challenge_mode_id": 376,
+                    "slug": "the-necrotic-wake",
+                    "name": "The Necrotic Wake",
+                    "short_name": "NW"
+                },
+                {
+                    "id": 12841,
+                    "challenge_mode_id": 382,
+                    "slug": "theater-of-pain",
+                    "name": "Theater of Pain",
+                    "short_name": "TOP"
+                }
+            ]
+        },
+        {
+            "slug": "season-sl-2-post-915",
+            "name": "SL Season 2 • Post 9.1.5",
+            "short_name": "SL2 (915)",
+            "seasonal_affix": {
+                "id": 128,
+                "name": "Tormented",
+                "icon": "spell_animamaw_orb"
+            },
+            "starts": {
+                "us": "2021-11-02T15:00:00Z",
+                "eu": "2021-11-03T07:00:00Z",
+                "tw": "2021-11-03T23:00:00Z",
+                "kr": "2021-11-03T23:00:00Z",
+                "cn": "2021-11-03T23:00:00Z"
+            },
+            "ends": {
+                "us": "2022-02-22T15:00:00Z",
+                "eu": "2022-02-23T07:00:00Z",
+                "tw": "2022-02-23T23:00:00Z",
+                "kr": "2022-02-23T23:00:00Z",
+                "cn": "2022-02-23T23:00:00Z"
+            },
+            "dungeons": [
+                {
+                    "id": 13309,
+                    "challenge_mode_id": 377,
+                    "slug": "de-other-side",
+                    "name": "De Other Side",
+                    "short_name": "DOS"
+                },
+                {
+                    "id": 12831,
+                    "challenge_mode_id": 378,
+                    "slug": "halls-of-atonement",
+                    "name": "Halls of Atonement",
+                    "short_name": "HOA"
+                },
+                {
+                    "id": 13334,
+                    "challenge_mode_id": 375,
+                    "slug": "mists-of-tirna-scithe",
+                    "name": "Mists of Tirna Scithe",
+                    "short_name": "MISTS"
+                },
+                {
+                    "id": 13228,
+                    "challenge_mode_id": 379,
+                    "slug": "plaguefall",
+                    "name": "Plaguefall",
+                    "short_name": "PF"
+                },
+                {
+                    "id": 12842,
+                    "challenge_mode_id": 380,
+                    "slug": "sanguine-depths",
+                    "name": "Sanguine Depths",
+                    "short_name": "SD"
+                },
+                {
+                    "id": 12837,
+                    "challenge_mode_id": 381,
+                    "slug": "spires-of-ascension",
+                    "name": "Spires of Ascension",
+                    "short_name": "SOA"
+                },
+                {
+                    "id": 12916,
+                    "challenge_mode_id": 376,
+                    "slug": "the-necrotic-wake",
+                    "name": "The Necrotic Wake",
+                    "short_name": "NW"
+                },
+                {
+                    "id": 12841,
+                    "challenge_mode_id": 382,
+                    "slug": "theater-of-pain",
+                    "name": "Theater of Pain",
+                    "short_name": "TOP"
+                }
+            ]
+        },
+        {
+            "slug": "season-sl-2-legion-timewalking",
+            "name": "SL Season 2 • Legion Timewalking",
+            "short_name": "SL2 (TW)",
+            "seasonal_affix": {
+                "id": 129,
+                "name": "Infernal",
+                "icon": "inv_infernalbrimstone"
+            },
+            "starts": {
+                "us": "2021-12-07T15:00:00Z",
+                "eu": "2021-12-08T07:00:00Z",
+                "tw": "2021-12-08T23:00:00Z",
+                "kr": "2021-12-08T23:00:00Z",
+                "cn": "2021-12-08T23:00:00Z"
+            },
+            "ends": {
+                "us": "2022-02-22T15:00:00Z",
+                "eu": "2022-02-23T07:00:00Z",
+                "tw": "2022-02-23T23:00:00Z",
+                "kr": "2022-02-23T23:00:00Z",
+                "cn": "2022-02-23T23:00:00Z"
+            },
+            "dungeons": [
+                {
+                    "id": 7805,
+                    "challenge_mode_id": 199,
+                    "slug": "black-rook-hold",
+                    "name": "Black Rook Hold",
+                    "short_name": "BRH"
+                },
+                {
+                    "id": 8079,
+                    "challenge_mode_id": 210,
+                    "slug": "court-of-stars",
+                    "name": "Court of Stars",
+                    "short_name": "COS"
+                },
+                {
+                    "id": 7673,
+                    "challenge_mode_id": 198,
+                    "slug": "darkheart-thicket",
+                    "name": "Darkheart Thicket",
+                    "short_name": "DHT"
+                },
+                {
+                    "id": 8040,
+                    "challenge_mode_id": 197,
+                    "slug": "eye-of-azshara",
+                    "name": "Eye of Azshara",
+                    "short_name": "EOA"
+                },
+                {
+                    "id": 7546,
+                    "challenge_mode_id": 206,
+                    "slug": "neltharions-lair",
+                    "name": "Neltharion's Lair",
+                    "short_name": "NL"
+                },
+                {
+                    "id": 7787,
+                    "challenge_mode_id": 207,
+                    "slug": "vault-of-the-wardens",
+                    "name": "Vault of the Wardens",
+                    "short_name": "VOTW"
+                }
+            ]
+        },
+        {
+            "slug": "season-sl-1",
+            "name": "SL Season 1",
+            "short_name": "SL1",
+            "seasonal_affix": {
+                "id": 121,
+                "name": "Prideful",
+                "icon": "spell_animarevendreth_buff"
+            },
+            "starts": {
+                "us": "2020-12-08T15:00:00Z",
+                "eu": "2020-12-09T07:00:00Z",
+                "tw": "2020-12-09T23:00:00Z",
+                "kr": "2020-12-09T23:00:00Z",
+                "cn": "2020-12-09T23:00:00Z"
+            },
+            "ends": {
+                "us": "2021-06-29T15:00:00Z",
+                "eu": "2021-06-30T07:00:00Z",
+                "tw": "2021-06-30T23:00:00Z",
+                "kr": "2021-06-30T23:00:00Z",
+                "cn": "2021-06-30T23:00:00Z"
+            },
+            "dungeons": [
+                {
+                    "id": 13309,
+                    "challenge_mode_id": 377,
+                    "slug": "de-other-side",
+                    "name": "De Other Side",
+                    "short_name": "DOS"
+                },
+                {
+                    "id": 12831,
+                    "challenge_mode_id": 378,
+                    "slug": "halls-of-atonement",
+                    "name": "Halls of Atonement",
+                    "short_name": "HOA"
+                },
+                {
+                    "id": 13334,
+                    "challenge_mode_id": 375,
+                    "slug": "mists-of-tirna-scithe",
+                    "name": "Mists of Tirna Scithe",
+                    "short_name": "MISTS"
+                },
+                {
+                    "id": 13228,
+                    "challenge_mode_id": 379,
+                    "slug": "plaguefall",
+                    "name": "Plaguefall",
+                    "short_name": "PF"
+                },
+                {
+                    "id": 12842,
+                    "challenge_mode_id": 380,
+                    "slug": "sanguine-depths",
+                    "name": "Sanguine Depths",
+                    "short_name": "SD"
+                },
+                {
+                    "id": 12837,
+                    "challenge_mode_id": 381,
+                    "slug": "spires-of-ascension",
+                    "name": "Spires of Ascension",
+                    "short_name": "SOA"
+                },
+                {
+                    "id": 12916,
+                    "challenge_mode_id": 376,
+                    "slug": "the-necrotic-wake",
+                    "name": "The Necrotic Wake",
+                    "short_name": "NW"
+                },
+                {
+                    "id": 12841,
+                    "challenge_mode_id": 382,
+                    "slug": "theater-of-pain",
+                    "name": "Theater of Pain",
+                    "short_name": "TOP"
+                }
+            ]
+        },
+        {
+            "slug": "season-sl-1-post",
+            "name": "SL Post-Season 1",
+            "short_name": "SL1-P",
+            "seasonal_affix": {
+                "id": 121,
+                "name": "Prideful",
+                "icon": "spell_animarevendreth_buff"
+            },
+            "starts": {
+                "us": "2020-12-08T15:00:00Z",
+                "eu": "2020-12-09T07:00:00Z",
+                "tw": "2020-12-09T23:00:00Z",
+                "kr": "2020-12-09T23:00:00Z",
+                "cn": "2020-12-09T23:00:00Z"
+            },
+            "ends": {
+                "us": "2021-07-06T15:00:00Z",
+                "eu": "2021-07-07T07:00:00Z",
+                "tw": "2021-07-07T23:00:00Z",
+                "kr": "2021-07-07T23:00:00Z",
+                "cn": "2021-07-07T23:00:00Z"
+            },
+            "dungeons": [
+                {
+                    "id": 13309,
+                    "challenge_mode_id": 377,
+                    "slug": "de-other-side",
+                    "name": "De Other Side",
+                    "short_name": "DOS"
+                },
+                {
+                    "id": 12831,
+                    "challenge_mode_id": 378,
+                    "slug": "halls-of-atonement",
+                    "name": "Halls of Atonement",
+                    "short_name": "HOA"
+                },
+                {
+                    "id": 13334,
+                    "challenge_mode_id": 375,
+                    "slug": "mists-of-tirna-scithe",
+                    "name": "Mists of Tirna Scithe",
+                    "short_name": "MISTS"
+                },
+                {
+                    "id": 13228,
+                    "challenge_mode_id": 379,
+                    "slug": "plaguefall",
+                    "name": "Plaguefall",
+                    "short_name": "PF"
+                },
+                {
+                    "id": 12842,
+                    "challenge_mode_id": 380,
+                    "slug": "sanguine-depths",
+                    "name": "Sanguine Depths",
+                    "short_name": "SD"
+                },
+                {
+                    "id": 12837,
+                    "challenge_mode_id": 381,
+                    "slug": "spires-of-ascension",
+                    "name": "Spires of Ascension",
+                    "short_name": "SOA"
+                },
+                {
+                    "id": 12916,
+                    "challenge_mode_id": 376,
+                    "slug": "the-necrotic-wake",
+                    "name": "The Necrotic Wake",
+                    "short_name": "NW"
+                },
+                {
+                    "id": 12841,
+                    "challenge_mode_id": 382,
+                    "slug": "theater-of-pain",
+                    "name": "Theater of Pain",
+                    "short_name": "TOP"
+                }
+            ]
+        }
+    ],
+    "dungeons": [
+        {
+            "id": 13309,
+            "challenge_mode_id": 377,
+            "slug": "de-other-side",
+            "name": "De Other Side",
+            "short_name": "DOS"
+        },
+        {
+            "id": 12831,
+            "challenge_mode_id": 378,
+            "slug": "halls-of-atonement",
+            "name": "Halls of Atonement",
+            "short_name": "HOA"
+        },
+        {
+            "id": 13334,
+            "challenge_mode_id": 375,
+            "slug": "mists-of-tirna-scithe",
+            "name": "Mists of Tirna Scithe",
+            "short_name": "MISTS"
+        },
+        {
+            "id": 13228,
+            "challenge_mode_id": 379,
+            "slug": "plaguefall",
+            "name": "Plaguefall",
+            "short_name": "PF"
+        },
+        {
+            "id": 12842,
+            "challenge_mode_id": 380,
+            "slug": "sanguine-depths",
+            "name": "Sanguine Depths",
+            "short_name": "SD"
+        },
+        {
+            "id": 12837,
+            "challenge_mode_id": 381,
+            "slug": "spires-of-ascension",
+            "name": "Spires of Ascension",
+            "short_name": "SOA"
+        },
+        {
+            "id": 1000001,
+            "challenge_mode_id": 392,
+            "slug": "tazavesh-soleahs-gambit",
+            "name": "Tazavesh: So'leah's Gambit",
+            "short_name": "GMBT"
+        },
+        {
+            "id": 1000000,
+            "challenge_mode_id": 391,
+            "slug": "tazavesh-streets-of-wonder",
+            "name": "Tazavesh: Streets of Wonder",
+            "short_name": "STRT"
+        },
+        {
+            "id": 12916,
+            "challenge_mode_id": 376,
+            "slug": "the-necrotic-wake",
+            "name": "The Necrotic Wake",
+            "short_name": "NW"
+        },
+        {
+            "id": 12841,
+            "challenge_mode_id": 382,
+            "slug": "theater-of-pain",
+            "name": "Theater of Pain",
+            "short_name": "TOP"
+        }
+    ]
+}

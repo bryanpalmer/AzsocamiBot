@@ -1706,6 +1706,17 @@ def updateMythicPlusScores():
     return retList
 
 
+def resetMythicPlusScores():
+    devmode(f"Resetting mythic plus players list")
+    sql = "UPDATE mythicplus SET highscore=0, prevscore=0;"
+    try:
+        conn = create_connection()
+        cursor = conn.cursor()
+        cursor.execute(sql)
+    except mysql.Error as e:
+        print(f"Error:  {e}")
+
+
 def updateMythicPlusById(conn, recId, highScore, prevScore, thumbnail):
     sql = "UPDATE mythicplus SET highscore = %s, prevscore = %s, thumbnail_url = %s WHERE id = %s;"
     mbr = (highScore, prevScore, thumbnail, recId)
