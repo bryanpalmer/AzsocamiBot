@@ -14,6 +14,27 @@ COMMAND_PREFIX = os.getenv("COMMAND_PREFIX")  # Bot command prefix
 # TIMEZONE = "US/Central"  # Timezone for bot responses
 # TIMEFORMAT = "%Y-%m-%d %H:%M:%S %Z"
 
+# Global dungeon shortnames
+dungeon_count = 8
+mplusdungeons = []
+mplusdungeons.append("GD")
+mplusdungeons.append("ID")
+mplusdungeons.append("YARD")
+mplusdungeons.append("WORK")
+mplusdungeons.append("LOWR")
+mplusdungeons.append("UPPR")
+mplusdungeons.append("GMBT")
+mplusdungeons.append("STRT")
+
+# mplusdungeons[0] = "GD"
+# mplusdungeons[1] = "ID"
+# mplusdungeons[2] = "YARD"
+# mplusdungeons[3] = "WORK"
+# mplusdungeons[4] = "LOWR"
+# mplusdungeons[5] = "UPPR"
+# mplusdungeons[6] = "GMBT"
+# mplusdungeons[7] = "STRT"
+
 
 class MythicPlus(commands.Cog):
     """
@@ -293,14 +314,14 @@ class MythicPlus(commands.Cog):
     async def score(self, ctx, playerName):
         """ Reports current Mythic Plus dungeon scores and rankings """
 
-        dng1 = "GD"
-        dng2 = "ID"
-        dng3 = "YARD"
-        dng4 = "WORK"
-        dng5 = "LOWR"
-        dng6 = "UPPR"
-        dng7 = "GMBT"
-        dng8 = "STRT"
+        # dng1 = "GD"
+        # dng2 = "ID"
+        # dng3 = "YARD"
+        # dng4 = "WORK"
+        # dng5 = "LOWR"
+        # dng6 = "UPPR"
+        # dng7 = "GMBT"
+        # dng8 = "STRT"
 
         playerRow = wowapi.getMythicPlusByName(playerName)
         # print(playerRow)
@@ -365,80 +386,94 @@ class MythicPlus(commands.Cog):
             playerRankClass = rioRank["mythic_plus_ranks"]["class"]["realm"]
 
             ## best = fortified, alt = tyrannical
-            dDict = {
-                dng1: {
-                    "shortname": dng1,
+
+            dDict = {}
+            for i in range(len(mplusdungeons)):
+                print(f"{i} - {mplusdungeons[i]}")
+                dDict[mplusdungeons[i]] = {
+                    "shortname": mplusdungeons[i],
                     "best_level": 0,
                     "best_result": 0,
                     "best_score": 0,
                     "alt_level": 0,
                     "alt_result": 0,
                     "alt_score": 0,
-                },
-                dng2: {
-                    "shortname": dng2,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng3: {
-                    "shortname": dng3,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng4: {
-                    "shortname": dng4,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng5: {
-                    "shortname": dng5,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng6: {
-                    "shortname": dng6,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng7: {
-                    "shortname": dng7,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng8: {
-                    "shortname": dng8,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-            }
+                }
+
+            # dDict = {
+            #     dng1: {
+            #         "shortname": dng1,
+            #         "best_level": 0,
+            #         "best_result": 0,
+            #         "best_score": 0,
+            #         "alt_level": 0,
+            #         "alt_result": 0,
+            #         "alt_score": 0,
+            #     },
+            #     dng2: {
+            #         "shortname": dng2,
+            #         "best_level": 0,
+            #         "best_result": 0,
+            #         "best_score": 0,
+            #         "alt_level": 0,
+            #         "alt_result": 0,
+            #         "alt_score": 0,
+            #     },
+            #     dng3: {
+            #         "shortname": dng3,
+            #         "best_level": 0,
+            #         "best_result": 0,
+            #         "best_score": 0,
+            #         "alt_level": 0,
+            #         "alt_result": 0,
+            #         "alt_score": 0,
+            #     },
+            #     dng4: {
+            #         "shortname": dng4,
+            #         "best_level": 0,
+            #         "best_result": 0,
+            #         "best_score": 0,
+            #         "alt_level": 0,
+            #         "alt_result": 0,
+            #         "alt_score": 0,
+            #     },
+            #     dng5: {
+            #         "shortname": dng5,
+            #         "best_level": 0,
+            #         "best_result": 0,
+            #         "best_score": 0,
+            #         "alt_level": 0,
+            #         "alt_result": 0,
+            #         "alt_score": 0,
+            #     },
+            #     dng6: {
+            #         "shortname": dng6,
+            #         "best_level": 0,
+            #         "best_result": 0,
+            #         "best_score": 0,
+            #         "alt_level": 0,
+            #         "alt_result": 0,
+            #         "alt_score": 0,
+            #     },
+            #     dng7: {
+            #         "shortname": dng7,
+            #         "best_level": 0,
+            #         "best_result": 0,
+            #         "best_score": 0,
+            #         "alt_level": 0,
+            #         "alt_result": 0,
+            #         "alt_score": 0,
+            #     },
+            #     dng8: {
+            #         "shortname": dng8,
+            #         "best_level": 0,
+            #         "best_result": 0,
+            #         "best_score": 0,
+            #         "alt_level": 0,
+            #         "alt_result": 0,
+            #         "alt_score": 0,
+            #     },
+            # }
 
             for run in rioBest["mythic_plus_best_runs"]:
                 # print(run)
@@ -870,14 +905,14 @@ class MythicPlus(commands.Cog):
         """ Reports current Mythic Plus dungeon scores and rankings """
 
         # Set up generic vars to hold dungeon shortnames
-        dng1 = "GD"
-        dng2 = "ID"
-        dng3 = "YARD"
-        dng4 = "WORK"
-        dng5 = "LOWR"
-        dng6 = "UPPR"
-        dng7 = "GMBT"
-        dng8 = "STRT"
+        # dng1 = "GD"
+        # dng2 = "ID"
+        # dng3 = "YARD"
+        # dng4 = "WORK"
+        # dng5 = "LOWR"
+        # dng6 = "UPPR"
+        # dng7 = "GMBT"
+        # dng8 = "STRT"
 
         playersList = wowapi.getMythicPlusPlayers()
         results = []
@@ -887,80 +922,19 @@ class MythicPlus(commands.Cog):
             # print(f"Retrieving {player} {realm}")
             rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
             rioAlts = wowapi.api_raiderio_char_mplus_alternate_runs(player, realm)
-            dDict = {
-                dng1: {
-                    "shortname": dng1,
+
+            dDict = {}
+            for i in range(len(mplusdungeons)):
+                # print(f"{i} - {mplusdungeons[i]}")
+                dDict[mplusdungeons[i]] = {
+                    "shortname": mplusdungeons[i],
                     "best_level": 0,
                     "best_result": 0,
                     "best_score": 0,
                     "alt_level": 0,
                     "alt_result": 0,
                     "alt_score": 0,
-                },
-                dng2: {
-                    "shortname": dng2,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng3: {
-                    "shortname": dng3,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng4: {
-                    "shortname": dng4,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng5: {
-                    "shortname": dng5,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng6: {
-                    "shortname": dng6,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng7: {
-                    "shortname": dng7,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng8: {
-                    "shortname": dng8,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-            }
+                }
 
             for run in rioBest["mythic_plus_best_runs"]:
                 affix = run["affixes"][0]["name"]
@@ -998,37 +972,31 @@ class MythicPlus(commands.Cog):
 
         # print(results)
 
-        msg = f"```{'Player'.ljust(13)} {dng1[:3].ljust(7)} {dng2[:3].ljust(7)} {dng3[:3].ljust(7)} {dng4[:3].ljust(7)} {dng5[:3].ljust(7)} {dng6[:3].ljust(7)} {dng7[:3].ljust(7)} {dng8[:3].ljust(7)}\n"
+        # Build header string
+        msg = f"```{'Player'.ljust(13)}"
+        for i in range(len(mplusdungeons)):
+            msg += f" {mplusdungeons[i].ljust(7)}"
+        msg += "\n"
+
         for player in results:
             playerName = player[0]
             dDict = player[1]
             # print(player[0])
-            fDng1 = dDict[dng1]["best_level"] if dDict[dng1]["best_score"] > 0 else 0
-            tDng1 = dDict[dng1]["alt_level"] if dDict[dng1]["alt_score"] > 0 else 0
-            fDng2 = dDict[dng2]["best_level"] if dDict[dng2]["best_score"] > 0 else 0
-            tDng2 = dDict[dng2]["alt_level"] if dDict[dng2]["alt_score"] > 0 else 0
-            fDng3 = dDict[dng3]["best_level"] if dDict[dng3]["best_score"] > 0 else 0
-            tDng3 = dDict[dng3]["alt_level"] if dDict[dng3]["alt_score"] > 0 else 0
-            fDng4 = dDict[dng4]["best_level"] if dDict[dng4]["best_score"] > 0 else 0
-            tDng4 = dDict[dng4]["alt_level"] if dDict[dng4]["alt_score"] > 0 else 0
-            fDng5 = dDict[dng5]["best_level"] if dDict[dng5]["best_score"] > 0 else 0
-            tDng5 = dDict[dng5]["alt_level"] if dDict[dng5]["alt_score"] > 0 else 0
-            fDng6 = dDict[dng6]["best_level"] if dDict[dng6]["best_score"] > 0 else 0
-            tDng6 = dDict[dng6]["alt_level"] if dDict[dng6]["alt_score"] > 0 else 0
-            fDng7 = dDict[dng7]["best_level"] if dDict[dng7]["best_score"] > 0 else 0
-            tDng7 = dDict[dng7]["alt_level"] if dDict[dng7]["alt_score"] > 0 else 0
-            fDng8 = dDict[dng8]["best_level"] if dDict[dng8]["best_score"] > 0 else 0
-            tDng8 = dDict[dng8]["alt_level"] if dDict[dng8]["alt_score"] > 0 else 0
 
-            msg += f"{playerName.ljust(13)} "
-            msg += f"{fDng1:>2} {tDng1:>2} | "
-            msg += f"{fDng2:>2} {tDng2:>2} | "
-            msg += f"{fDng3:>2} {tDng3:>2} | "
-            msg += f"{fDng4:>2} {tDng4:>2} | "
-            msg += f"{fDng5:>2} {tDng5:>2} | "
-            msg += f"{fDng6:>2} {tDng6:>2} | "
-            msg += f"{fDng7:>2} {tDng7:>2} | "
-            msg += f"{fDng8:>2} {tDng8:>2}\n"
+            msg += f"{playerName.ljust(13)}"
+            for i in range(len(mplusdungeons)):
+                fortResult = (
+                    dDict[mplusdungeons[i]]["best_level"]
+                    if dDict[mplusdungeons[i]]["best_score"] > 0
+                    else 0
+                )
+                tyrResult = (
+                    dDict[mplusdungeons[i]]["alt_level"]
+                    if dDict[mplusdungeons[i]]["alt_score"] > 0
+                    else 0
+                )
+                msg += f" {fortResult:>2} {tyrResult:>2} |"
+            msg += "\n"
 
         msg += "```\n"
         msg += "*All dungeons shown are Fortified Tyrannical, and only show positive values if the score>0 for the run.*"
@@ -1040,14 +1008,14 @@ class MythicPlus(commands.Cog):
         """ Reports current Mythic Plus dungeon scores and rankings """
 
         # Set up generic vars to hold dungeon shortnames
-        dng1 = "GD"
-        dng2 = "ID"
-        dng3 = "YARD"
-        dng4 = "WORK"
-        dng5 = "LOWR"
-        dng6 = "UPPR"
-        dng7 = "GMBT"
-        dng8 = "STRT"
+        # dng1 = "GD"
+        # dng2 = "ID"
+        # dng3 = "YARD"
+        # dng4 = "WORK"
+        # dng5 = "LOWR"
+        # dng6 = "UPPR"
+        # dng7 = "GMBT"
+        # dng8 = "STRT"
 
         msgId = await ctx.send("Gathering BRF data, please wait...")
         playersList = wowapi.getMythicPlusPlayers()
@@ -1058,80 +1026,18 @@ class MythicPlus(commands.Cog):
             print(f"Retrieving {player} {realm}")
             rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
             rioAlts = wowapi.api_raiderio_char_mplus_alternate_runs(player, realm)
-            dDict = {
-                dng1: {
-                    "shortname": dng1,
+            dDict = {}
+            for i in range(len(mplusdungeons)):
+                # print(f"{i} - {mplusdungeons[i]}")
+                dDict[mplusdungeons[i]] = {
+                    "shortname": mplusdungeons[i],
                     "best_level": 0,
                     "best_result": 0,
                     "best_score": 0,
                     "alt_level": 0,
                     "alt_result": 0,
                     "alt_score": 0,
-                },
-                dng2: {
-                    "shortname": dng2,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng3: {
-                    "shortname": dng3,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng4: {
-                    "shortname": dng4,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng5: {
-                    "shortname": dng5,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng6: {
-                    "shortname": dng6,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng7: {
-                    "shortname": dng7,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng8: {
-                    "shortname": dng8,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-            }
+                }
 
             for run in rioBest["mythic_plus_best_runs"]:
                 # print(run)
@@ -1172,119 +1078,148 @@ class MythicPlus(commands.Cog):
 
         msg = "**Best FORTIFIED Runs**\n"
         # Modified header for 9.2
-        msg += f"```{'Player'.ljust(13)} {dng1[:3].ljust(4)} {dng2[:3].ljust(4)} {dng3[:3].ljust(4)} {dng4[:3].ljust(4)} {dng5[:3].ljust(4)} {dng6[:3].ljust(4)} {dng7[:3].ljust(4)} {dng8[:3].ljust(4)}\n"
-        # msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(4)} {'HOA'.ljust(4)} {'MST'.ljust(4)} {'NW'.ljust(4)} {'PF'.ljust(4)} {'SD'.ljust(4)} {'SOA'.ljust(4)} {'TOP'.ljust(4)}\n"
-        # msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(7)} {'HOA'.ljust(7)} {'MST'.ljust(7)} {'NW'.ljust(7)} {'PF'.ljust(7)} {'SD'.ljust(7)} {'SOA'.ljust(7)} {'TOP'.ljust(7)}\n"
+        msg += f"```{'Player'.ljust(13)}"
+        for i in range(len(mplusdungeons)):
+            msg += f" {mplusdungeons[i][:3].ljust(4)}"
+        msg += "\n"
+
         for player in results:
             playerName = player[0]
             dDict = player[1]
             # print(player[0])
-            fDng1 = dDict[dng1]["best_level"] if dDict[dng1]["best_score"] > 0 else 0
-            tDng1 = dDict[dng1]["alt_level"] if dDict[dng1]["alt_score"] > 0 else 0
-            fDng2 = dDict[dng2]["best_level"] if dDict[dng2]["best_score"] > 0 else 0
-            tDng2 = dDict[dng2]["alt_level"] if dDict[dng2]["alt_score"] > 0 else 0
-            fDng3 = dDict[dng3]["best_level"] if dDict[dng3]["best_score"] > 0 else 0
-            tDng3 = dDict[dng3]["alt_level"] if dDict[dng3]["alt_score"] > 0 else 0
-            fDng4 = dDict[dng4]["best_level"] if dDict[dng4]["best_score"] > 0 else 0
-            tDng4 = dDict[dng4]["alt_level"] if dDict[dng4]["alt_score"] > 0 else 0
-            fDng5 = dDict[dng5]["best_level"] if dDict[dng5]["best_score"] > 0 else 0
-            tDng5 = dDict[dng5]["alt_level"] if dDict[dng5]["alt_score"] > 0 else 0
-            fDng6 = dDict[dng6]["best_level"] if dDict[dng6]["best_score"] > 0 else 0
-            tDng6 = dDict[dng6]["alt_level"] if dDict[dng6]["alt_score"] > 0 else 0
-            fDng7 = dDict[dng7]["best_level"] if dDict[dng7]["best_score"] > 0 else 0
-            tDng7 = dDict[dng7]["alt_level"] if dDict[dng7]["alt_score"] > 0 else 0
-            fDng8 = dDict[dng8]["best_level"] if dDict[dng8]["best_score"] > 0 else 0
-            tDng8 = dDict[dng8]["alt_level"] if dDict[dng8]["alt_score"] > 0 else 0
 
-            t1affix = (
-                ";"
-                if dDict[dng1]["best_result"] == 3
-                else ":"
-                if dDict[dng1]["best_result"] == 2
-                else "."
-                if dDict[dng1]["best_result"] == 1
-                else " "
-            )
+            msg += f"{playerName.ljust(13)}"
 
-            t2affix = (
-                ";"
-                if dDict[dng2]["best_result"] == 3
-                else ":"
-                if dDict[dng2]["best_result"] == 2
-                else "."
-                if dDict[dng2]["best_result"] == 1
-                else " "
-            )
+            for i in range(len(mplusdungeons)):
+                fortResult = (
+                    dDict[mplusdungeons[i]]["best_level"]
+                    if dDict[mplusdungeons[i]]["best_score"] > 0
+                    else 0
+                )
+                tyrResult = (
+                    dDict[mplusdungeons[i]]["alt_level"]
+                    if dDict[mplusdungeons[i]]["alt_score"] > 0
+                    else 0
+                )
+                affix = (
+                    ";"
+                    if dDict[mplusdungeons[i]]["best_result"] == 3
+                    else ":"
+                    if dDict[mplusdungeons[i]]["best_result"] == 2
+                    else "."
+                    if dDict[mplusdungeons[i]]["best_result"] == 1
+                    else " "
+                )
 
-            t3affix = (
-                ";"
-                if dDict[dng3]["best_result"] == 3
-                else ":"
-                if dDict[dng3]["best_result"] == 2
-                else "."
-                if dDict[dng3]["best_result"] == 1
-                else " "
-            )
+                msg += f" {fortResult:>2}{affix}|"
+            msg += "\n"
 
-            t4affix = (
-                ";"
-                if dDict[dng4]["best_result"] == 3
-                else ":"
-                if dDict[dng4]["best_result"] == 2
-                else "."
-                if dDict[dng4]["best_result"] == 1
-                else " "
-            )
+            # fDng1 = dDict[dng1]["best_level"] if dDict[dng1]["best_score"] > 0 else 0
+            # tDng1 = dDict[dng1]["alt_level"] if dDict[dng1]["alt_score"] > 0 else 0
+            # fDng2 = dDict[dng2]["best_level"] if dDict[dng2]["best_score"] > 0 else 0
+            # tDng2 = dDict[dng2]["alt_level"] if dDict[dng2]["alt_score"] > 0 else 0
+            # fDng3 = dDict[dng3]["best_level"] if dDict[dng3]["best_score"] > 0 else 0
+            # tDng3 = dDict[dng3]["alt_level"] if dDict[dng3]["alt_score"] > 0 else 0
+            # fDng4 = dDict[dng4]["best_level"] if dDict[dng4]["best_score"] > 0 else 0
+            # tDng4 = dDict[dng4]["alt_level"] if dDict[dng4]["alt_score"] > 0 else 0
+            # fDng5 = dDict[dng5]["best_level"] if dDict[dng5]["best_score"] > 0 else 0
+            # tDng5 = dDict[dng5]["alt_level"] if dDict[dng5]["alt_score"] > 0 else 0
+            # fDng6 = dDict[dng6]["best_level"] if dDict[dng6]["best_score"] > 0 else 0
+            # tDng6 = dDict[dng6]["alt_level"] if dDict[dng6]["alt_score"] > 0 else 0
+            # fDng7 = dDict[dng7]["best_level"] if dDict[dng7]["best_score"] > 0 else 0
+            # tDng7 = dDict[dng7]["alt_level"] if dDict[dng7]["alt_score"] > 0 else 0
+            # fDng8 = dDict[dng8]["best_level"] if dDict[dng8]["best_score"] > 0 else 0
+            # tDng8 = dDict[dng8]["alt_level"] if dDict[dng8]["alt_score"] > 0 else 0
 
-            t5affix = (
-                ";"
-                if dDict[dng5]["best_result"] == 3
-                else ":"
-                if dDict[dng5]["best_result"] == 2
-                else "."
-                if dDict[dng5]["best_result"] == 1
-                else " "
-            )
+            # t1affix = (
+            #     ";"
+            #     if dDict[dng1]["best_result"] == 3
+            #     else ":"
+            #     if dDict[dng1]["best_result"] == 2
+            #     else "."
+            #     if dDict[dng1]["best_result"] == 1
+            #     else " "
+            # )
 
-            t6affix = (
-                ";"
-                if dDict[dng6]["best_result"] == 3
-                else ":"
-                if dDict[dng6]["best_result"] == 2
-                else "."
-                if dDict[dng6]["best_result"] == 1
-                else " "
-            )
+            # t2affix = (
+            #     ";"
+            #     if dDict[dng2]["best_result"] == 3
+            #     else ":"
+            #     if dDict[dng2]["best_result"] == 2
+            #     else "."
+            #     if dDict[dng2]["best_result"] == 1
+            #     else " "
+            # )
 
-            t7affix = (
-                ";"
-                if dDict[dng7]["best_result"] == 3
-                else ":"
-                if dDict[dng7]["best_result"] == 2
-                else "."
-                if dDict[dng7]["best_result"] == 1
-                else " "
-            )
+            # t3affix = (
+            #     ";"
+            #     if dDict[dng3]["best_result"] == 3
+            #     else ":"
+            #     if dDict[dng3]["best_result"] == 2
+            #     else "."
+            #     if dDict[dng3]["best_result"] == 1
+            #     else " "
+            # )
 
-            t8affix = (
-                ";"
-                if dDict[dng8]["best_result"] == 3
-                else ":"
-                if dDict[dng8]["best_result"] == 2
-                else "."
-                if dDict[dng8]["best_result"] == 1
-                else " "
-            )
+            # t4affix = (
+            #     ";"
+            #     if dDict[dng4]["best_result"] == 3
+            #     else ":"
+            #     if dDict[dng4]["best_result"] == 2
+            #     else "."
+            #     if dDict[dng4]["best_result"] == 1
+            #     else " "
+            # )
 
-            msg += f"{playerName.ljust(13)} "
-            msg += f"{fDng1:>2}{t1affix}| "
-            msg += f"{fDng2:>2}{t2affix}| "
-            msg += f"{fDng3:>2}{t3affix}| "
-            msg += f"{fDng4:>2}{t4affix}| "
-            msg += f"{fDng5:>2}{t5affix}| "
-            msg += f"{fDng6:>2}{t6affix}| "
-            msg += f"{fDng7:>2}{t7affix}| "
-            msg += f"{fDng8:>2}{t8affix}|\n"
+            # t5affix = (
+            #     ";"
+            #     if dDict[dng5]["best_result"] == 3
+            #     else ":"
+            #     if dDict[dng5]["best_result"] == 2
+            #     else "."
+            #     if dDict[dng5]["best_result"] == 1
+            #     else " "
+            # )
+
+            # t6affix = (
+            #     ";"
+            #     if dDict[dng6]["best_result"] == 3
+            #     else ":"
+            #     if dDict[dng6]["best_result"] == 2
+            #     else "."
+            #     if dDict[dng6]["best_result"] == 1
+            #     else " "
+            # )
+
+            # t7affix = (
+            #     ";"
+            #     if dDict[dng7]["best_result"] == 3
+            #     else ":"
+            #     if dDict[dng7]["best_result"] == 2
+            #     else "."
+            #     if dDict[dng7]["best_result"] == 1
+            #     else " "
+            # )
+
+            # t8affix = (
+            #     ";"
+            #     if dDict[dng8]["best_result"] == 3
+            #     else ":"
+            #     if dDict[dng8]["best_result"] == 2
+            #     else "."
+            #     if dDict[dng8]["best_result"] == 1
+            #     else " "
+            # )
+
+            # msg += f"{playerName.ljust(13)} "
+            # msg += f"{fDng1:>2}{t1affix}| "
+            # msg += f"{fDng2:>2}{t2affix}| "
+            # msg += f"{fDng3:>2}{t3affix}| "
+            # msg += f"{fDng4:>2}{t4affix}| "
+            # msg += f"{fDng5:>2}{t5affix}| "
+            # msg += f"{fDng6:>2}{t6affix}| "
+            # msg += f"{fDng7:>2}{t7affix}| "
+            # msg += f"{fDng8:>2}{t8affix}|\n"
 
         msg += "```\n"
         msg += "*All dungeons shown are Fortified, and only show positive values if the score>0 for the run. (Results ;=3 key  :=2 key  .=1 key)*"
@@ -1297,14 +1232,14 @@ class MythicPlus(commands.Cog):
         """ Reports current Mythic Plus dungeon scores and rankings """
 
         # hardcoding dungeon shortnames here for season
-        dng1 = "GD"
-        dng2 = "ID"
-        dng3 = "YARD"
-        dng4 = "WORK"
-        dng5 = "LOWR"
-        dng6 = "UPPR"
-        dng7 = "GMBT"
-        dng8 = "STRT"
+        # dng1 = "GD"
+        # dng2 = "ID"
+        # dng3 = "YARD"
+        # dng4 = "WORK"
+        # dng5 = "LOWR"
+        # dng6 = "UPPR"
+        # dng7 = "GMBT"
+        # dng8 = "STRT"
 
         msgId = await ctx.send("Gathering BRT data, please wait...")
         playersList = wowapi.getMythicPlusPlayers()
@@ -1315,80 +1250,18 @@ class MythicPlus(commands.Cog):
             # print(f"Retrieving {player} {realm}")
             rioBest = wowapi.api_raiderio_char_mplus_best_runs(player, realm)
             rioAlts = wowapi.api_raiderio_char_mplus_alternate_runs(player, realm)
-            dDict = {
-                dng1: {
-                    "shortname": dng1,
+            dDict = {}
+            for i in range(len(mplusdungeons)):
+                # print(f"{i} - {mplusdungeons[i]}")
+                dDict[mplusdungeons[i]] = {
+                    "shortname": mplusdungeons[i],
                     "best_level": 0,
                     "best_result": 0,
                     "best_score": 0,
                     "alt_level": 0,
                     "alt_result": 0,
                     "alt_score": 0,
-                },
-                dng2: {
-                    "shortname": dng2,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng3: {
-                    "shortname": dng3,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng4: {
-                    "shortname": dng4,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng5: {
-                    "shortname": dng5,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng6: {
-                    "shortname": dng6,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng7: {
-                    "shortname": dng7,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-                dng8: {
-                    "shortname": dng8,
-                    "best_level": 0,
-                    "best_result": 0,
-                    "best_score": 0,
-                    "alt_level": 0,
-                    "alt_result": 0,
-                    "alt_score": 0,
-                },
-            }
+                }
 
             for run in rioBest["mythic_plus_best_runs"]:
                 affix = run["affixes"][0]["name"]
@@ -1427,282 +1300,48 @@ class MythicPlus(commands.Cog):
         # print(results)
 
         msg = "**Best TYRANNICAL Runs**\n"
-        # Modified header for 9.2.5
-        msg += f"```{'Player'.ljust(13)} {dng1[:3].ljust(4)} {dng2[:3].ljust(4)} {dng3[:3].ljust(4)} {dng4[:3].ljust(4)} {dng5[:3].ljust(4)} {dng6[:3].ljust(4)} {dng7[:3].ljust(4)} {dng8[:3].ljust(4)}\n"
-        # old msg += f"```{'Player'.ljust(13)} {'DOS'.ljust(4)} {'HOA'.ljust(4)} {'MST'.ljust(4)} {'NW'.ljust(4)} {'PF'.ljust(4)} {'SD'.ljust(4)} {'SOA'.ljust(4)} {'TOP'.ljust(4)} {'TZG'.ljust(4)} {'TZS'.ljust(4)}\n"
+
+        msg += f"```{'Player'.ljust(13)}"
+        for i in range(len(mplusdungeons)):
+            msg += f" {mplusdungeons[i][:3].ljust(4)}"
+        msg += "\n"
+
         for player in results:
             playerName = player[0]
             dDict = player[1]
             # print(player[0])
-            fDng1 = dDict[dng1]["best_level"] if dDict[dng1]["best_score"] > 0 else 0
-            tDng1 = dDict[dng1]["alt_level"] if dDict[dng1]["alt_score"] > 0 else 0
-            fDng2 = dDict[dng2]["best_level"] if dDict[dng2]["best_score"] > 0 else 0
-            tDng2 = dDict[dng2]["alt_level"] if dDict[dng2]["alt_score"] > 0 else 0
-            fDng3 = dDict[dng3]["best_level"] if dDict[dng3]["best_score"] > 0 else 0
-            tDng3 = dDict[dng3]["alt_level"] if dDict[dng3]["alt_score"] > 0 else 0
-            fDng4 = dDict[dng4]["best_level"] if dDict[dng4]["best_score"] > 0 else 0
-            tDng4 = dDict[dng4]["alt_level"] if dDict[dng4]["alt_score"] > 0 else 0
-            fDng5 = dDict[dng5]["best_level"] if dDict[dng5]["best_score"] > 0 else 0
-            tDng5 = dDict[dng5]["alt_level"] if dDict[dng5]["alt_score"] > 0 else 0
-            fDng6 = dDict[dng6]["best_level"] if dDict[dng6]["best_score"] > 0 else 0
-            tDng6 = dDict[dng6]["alt_level"] if dDict[dng6]["alt_score"] > 0 else 0
-            fDng7 = dDict[dng7]["best_level"] if dDict[dng7]["best_score"] > 0 else 0
-            tDng7 = dDict[dng7]["alt_level"] if dDict[dng7]["alt_score"] > 0 else 0
-            fDng8 = dDict[dng8]["best_level"] if dDict[dng8]["best_score"] > 0 else 0
-            tDng8 = dDict[dng8]["alt_level"] if dDict[dng8]["alt_score"] > 0 else 0
 
-            t1affix = (
-                ";"
-                if dDict[dng1]["best_result"] == 3
-                else ":"
-                if dDict[dng1]["best_result"] == 2
-                else "."
-                if dDict[dng1]["best_result"] == 1
-                else " "
-            )
+            msg += f"{playerName.ljust(13)}"
 
-            t2affix = (
-                ";"
-                if dDict[dng2]["best_result"] == 3
-                else ":"
-                if dDict[dng2]["best_result"] == 2
-                else "."
-                if dDict[dng2]["best_result"] == 1
-                else " "
-            )
+            for i in range(len(mplusdungeons)):
+                fortResult = (
+                    dDict[mplusdungeons[i]]["best_level"]
+                    if dDict[mplusdungeons[i]]["best_score"] > 0
+                    else 0
+                )
+                tyrResult = (
+                    dDict[mplusdungeons[i]]["alt_level"]
+                    if dDict[mplusdungeons[i]]["alt_score"] > 0
+                    else 0
+                )
+                affix = (
+                    ";"
+                    if dDict[mplusdungeons[i]]["best_result"] == 3
+                    else ":"
+                    if dDict[mplusdungeons[i]]["best_result"] == 2
+                    else "."
+                    if dDict[mplusdungeons[i]]["best_result"] == 1
+                    else " "
+                )
 
-            t3affix = (
-                ";"
-                if dDict[dng3]["best_result"] == 3
-                else ":"
-                if dDict[dng3]["best_result"] == 2
-                else "."
-                if dDict[dng3]["best_result"] == 1
-                else " "
-            )
-
-            t4affix = (
-                ";"
-                if dDict[dng4]["best_result"] == 3
-                else ":"
-                if dDict[dng4]["best_result"] == 2
-                else "."
-                if dDict[dng4]["best_result"] == 1
-                else " "
-            )
-
-            t5affix = (
-                ";"
-                if dDict[dng5]["best_result"] == 3
-                else ":"
-                if dDict[dng5]["best_result"] == 2
-                else "."
-                if dDict[dng5]["best_result"] == 1
-                else " "
-            )
-
-            t6affix = (
-                ";"
-                if dDict[dng6]["best_result"] == 3
-                else ":"
-                if dDict[dng6]["best_result"] == 2
-                else "."
-                if dDict[dng6]["best_result"] == 1
-                else " "
-            )
-
-            t7affix = (
-                ";"
-                if dDict[dng7]["best_result"] == 3
-                else ":"
-                if dDict[dng7]["best_result"] == 2
-                else "."
-                if dDict[dng7]["best_result"] == 1
-                else " "
-            )
-
-            t8affix = (
-                ";"
-                if dDict[dng8]["best_result"] == 3
-                else ":"
-                if dDict[dng8]["best_result"] == 2
-                else "."
-                if dDict[dng8]["best_result"] == 1
-                else " "
-            )
-
-            msg += f"{playerName.ljust(13)} "
-            msg += f"{fDng1:>2}{t1affix}| "
-            msg += f"{fDng2:>2}{t2affix}| "
-            msg += f"{fDng3:>2}{t3affix}| "
-            msg += f"{fDng4:>2}{t4affix}| "
-            msg += f"{fDng5:>2}{t5affix}| "
-            msg += f"{fDng6:>2}{t6affix}| "
-            msg += f"{fDng7:>2}{t7affix}| "
-            msg += f"{fDng8:>2}{t8affix}\n"
+                msg += f" {tyrResult:>2}{affix}|"
+            msg += "\n"
 
         msg += "```\n"
         msg += "*All dungeons shown are Tyrannical, and only show positive values if the score>0 for the run. (Results ;=3 key  :=2 key  .=1 key)*"
 
         await ctx.send(msg)
         await msgId.delete()
-
-    # @commands.command(aliases=["brold"])
-    # async def bestrunsold(self, ctx, seasonId=7):
-    #     msgId = await ctx.send(
-    #         f"Gathering members mythic+ data for Season {seasonId}, please wait..."
-    #     )
-    #     ## id, name, realmslug, role, expires FROM members ORDER BY name
-    #     teamList = wowapi.getMembersList()
-    #     # teamRuns = []
-    #     dungeons = {
-    #         "Mists of Tirna Scithe": 0,
-    #         "Sanguine Depths": 0,
-    #         "De Other Side": 0,
-    #         "The Necrotic Wake": 0,
-    #         "Theater of Pain": 0,
-    #         "Halls of Atonement": 0,
-    #         "Spires of Ascension": 0,
-    #         "Plaguefall": 0,
-    #     }
-    #     teamRuns = {}
-    #     for member in teamList:
-    #         if member[3] != "Alt":
-    #             cName = member[1]
-    #             cRealm = member[2]
-    #             teamRuns[cName] = {
-    #                 "Name": cName,
-    #                 "Mists of Tirna Scithe": 0,
-    #                 "Sanguine Depths": 0,
-    #                 "De Other Side": 0,
-    #                 "The Necrotic Wake": 0,
-    #                 "Theater of Pain": 0,
-    #                 "Halls of Atonement": 0,
-    #                 "Spires of Ascension": 0,
-    #                 "Plaguefall": 0,
-    #             }
-    #             runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, seasonId)
-    #             if bool(runsData):
-    #                 print(f"Runs data for {cName}")
-    #                 # print(runsData)
-    #                 for run in runsData["best_runs"]:
-    #                     if run["is_completed_within_time"] == True:
-    #                         dName = run["dungeon"]["name"]
-    #                         teamRuns[cName][dName] = run["keystone_level"]
-
-    #     msg = "```| Name                | DOS | HOA | MST |  NW |  PF |  SD | SOA | TOP |\n"
-    #     msg += (
-    #         "|---------------------+-----+-----+-----+-----+-----+-----+-----+-----|\n"
-    #     )
-    #     for member in teamRuns:
-    #         print(teamRuns[member])
-    #         mbr5s = (
-    #             teamRuns[member]["De Other Side"] > 4
-    #             and teamRuns[member]["Halls of Atonement"] > 4
-    #             and teamRuns[member]["Mists of Tirna Scithe"] > 4
-    #             and teamRuns[member]["The Necrotic Wake"] > 4
-    #             and teamRuns[member]["Plaguefall"] > 4
-    #             and teamRuns[member]["Sanguine Depths"] > 4
-    #             and teamRuns[member]["Spires of Ascension"] > 4
-    #             and teamRuns[member]["Theater of Pain"] > 4
-    #         )
-    #         mbr10s = (
-    #             teamRuns[member]["De Other Side"] > 9
-    #             and teamRuns[member]["Halls of Atonement"] > 9
-    #             and teamRuns[member]["Mists of Tirna Scithe"] > 9
-    #             and teamRuns[member]["The Necrotic Wake"] > 9
-    #             and teamRuns[member]["Plaguefall"] > 9
-    #             and teamRuns[member]["Sanguine Depths"] > 9
-    #             and teamRuns[member]["Spires of Ascension"] > 9
-    #             and teamRuns[member]["Theater of Pain"] > 9
-    #         )
-    #         mbr15s = (
-    #             teamRuns[member]["De Other Side"] > 14
-    #             and teamRuns[member]["Halls of Atonement"] > 14
-    #             and teamRuns[member]["Mists of Tirna Scithe"] > 14
-    #             and teamRuns[member]["The Necrotic Wake"] > 14
-    #             and teamRuns[member]["Plaguefall"] > 14
-    #             and teamRuns[member]["Sanguine Depths"] > 14
-    #             and teamRuns[member]["Spires of Ascension"] > 14
-    #             and teamRuns[member]["Theater of Pain"] > 14
-    #         )
-
-    #         lineval = ""
-    #         lineval += f"| {teamRuns[member]['Name'].ljust(19,' ')} "
-    #         lineval += f"| {str(teamRuns[member]['De Other Side']).rjust(3,' ')} "
-    #         lineval += f"| {str(teamRuns[member]['Halls of Atonement']).rjust(3,' ')} "
-    #         lineval += (
-    #             f"| {str(teamRuns[member]['Mists of Tirna Scithe']).rjust(3,' ')} "
-    #         )
-    #         lineval += f"| {str(teamRuns[member]['The Necrotic Wake']).rjust(3,' ')} "
-    #         lineval += f"| {str(teamRuns[member]['Plaguefall']).rjust(3,' ')} "
-    #         lineval += f"| {str(teamRuns[member]['Sanguine Depths']).rjust(3,' ')} "
-    #         lineval += f"| {str(teamRuns[member]['Spires of Ascension']).rjust(3,' ')} "
-    #         lineval += f"| {str(teamRuns[member]['Theater of Pain']).rjust(3,' ')} "
-    #         lineval += f"| {'*' if mbr5s else ' '} | {'*' if mbr10s else ' '} | {'*' if mbr15s else ' '} |\n"
-    #         msg += lineval
-    #     msg += "```"
-    #     print(f"BestRuns msg length is: {len(msg)}")
-    #     await ctx.send(msg)
-    #     response = discord.Embed(
-    #         title="Mythic+ Spreadsheet",
-    #         description="Online manually-updated spreadsheet for mythic+ tracking is [found here](https://docs.google.com/spreadsheets/d/1SULr3J7G2TkHbzHhJQJZUGYFk9LPAfX44s499NA01tw/edit#gid=0).",
-    #         color=discord.Color.blue(),
-    #     )
-    #     await ctx.send(embed=response)
-    #     await msgId.delete()
-
-    # @commands.command(aliases=["br4"])
-    # async def bestrunsfor(self, ctx, charName, seasonId=8):
-    #     msgId = await ctx.send(f"Gathering mythic+ data for {charName}, please wait...")
-    #     ## id, name, realmslug, role, expires FROM members ORDER BY name
-    #     teamList = wowapi.getMembersList()
-    #     runsList = []
-    #     msg = ""
-    #     for member in teamList:
-    #         cName = member[1]
-    #         cRealm = member[2]
-    #         if cName.upper() == charName.upper():
-    #             msg += f"Best runs for **{cName}:** (SeasonId {seasonId})\n"
-    #             runsData = wowapi.getCharacterSeasonDetails(cName, cRealm, seasonId)
-    #             if bool(runsData):
-    #                 for run in runsData["best_runs"]:
-    #                     keyLvl = run["keystone_level"]
-    #                     keyTimed = run["is_completed_within_time"] == True
-    #                     kT = "**" if keyTimed else ""
-    #                     keyName = run["dungeon"]["name"]
-    #                     keyDuration = int(run["duration"] / 1000)
-    #                     keyAffixes = []
-    #                     for affix in run["keystone_affixes"]:
-    #                         keyAffixes.append(affix["name"])
-    #                     runsList.append(
-    #                         {
-    #                             "name": keyName,
-    #                             "level": keyLvl,
-    #                             "timed": keyTimed,
-    #                             "duration": keyDuration,
-    #                             "affixes": keyAffixes,
-    #                         }
-    #                     )
-    #             else:
-    #                 msg = "No data found."
-
-    #     sortedList = sorted(runsList, key=lambda k: k["name"])
-    #     for item in sortedList:
-    #         # print(item)
-    #         iName = item["name"]
-    #         iLvl = item["level"]
-    #         iTimed = item["timed"]
-    #         iDuration = item["duration"]
-    #         iAffixes = item["affixes"]
-    #         kT = "**" if iTimed else ""
-    #         msg += f"{kT}{iLvl} {iName} - {wowapi.format_duration(iDuration)}{kT} - "
-    #         for affix in iAffixes:
-    #             msg += f"{affix} "
-    #         msg += f"\n"
-
-    #     await ctx.send(msg)
-    #     await msgId.delete()
 
     ###################################################################
     ###################################################################
