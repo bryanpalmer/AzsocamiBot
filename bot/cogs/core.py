@@ -27,7 +27,7 @@ class Core(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print("Core is initialized.")
-        actMsg = "Let's Blame Ben"
+        actMsg = "on Zul'jin"
         if DEVMODE == False:
             # updateTeamDataBG.start()
             # updateMythicPlusDataBG.start()
