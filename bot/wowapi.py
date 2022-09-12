@@ -232,7 +232,7 @@ def api_raiderio_char_raid_progress(playerName, playerRealm):
     return dataJson
 
 
-def api_raiderio_mythicplus_ranks(playerName, playerRealm="silver-hand"):
+def api_raiderio_mythicplus_ranks(playerName, playerRealm="zuljin"):
     raiderio_uri = "https://raider.io/api/v1/characters/profile"
     parameters = {
         "region": "us",
@@ -2035,20 +2035,8 @@ def initMythicPlusTable():
         cursor.execute(sql)
         conn.commit()
         memberList = [
-            ("Aaryn", "silver-hand", 0, 1),
-            ("Murinn", "silver-hand", 0, 1),
-            ("Kaitaa", "silver-hand", 0, 1),
-            ("Razzlectria", "silver-hand", 0, 1),
-            ("Cradon", "silver-hand", 0, 1),
-            ("Ragebear", "silver-hand", 0, 1),
-            ("Agaviss", "silver-hand", 0, 1),
-            ("Frënchie", "silver-hand", 0, 1),
-            ("Areisda", "silver-hand", 0, 1),
-            ("Aryxi", "silver-hand", 0, 1),
-            ("Ekkoe", "farstriders", 0, 1),
-            ("Pert", "farstriders", 0, 1),
-            ("Pertnok", "farstriders", 0, 1),
-            ("Antigen", "silver-hand", 0, 1)
+            ("Aarynn", "zuljin", 0, 1),
+            ("Murinn", "zuljin", 0, 1),
             # ,("Bubblebutt", "bloodhoof", 0, 1),
         ]
         cursor.executemany(
@@ -2072,7 +2060,7 @@ def initMythicPlusRanksTable():
         sql = """CREATE TABLE mythicranks (
                 id              INTEGER   PRIMARY KEY AUTO_INCREMENT,
                 name            NVARCHAR (30) UNIQUE,
-                realmslug       VARCHAR (25) DEFAULT ('silver-hand'),
+                realmslug       VARCHAR (25) DEFAULT ('zuljin'),
                 tankrank        INTEGER DEFAULT (0),
                 dpsrank         INTEGER DEFAULT (0),
                 healsrank       INTEGER DEFAULT (0),
@@ -2083,17 +2071,7 @@ def initMythicPlusRanksTable():
         cursor.execute(sql)
         conn.commit()
         memberList = [
-            ("Aaryn", "silver-hand"),
-            ("Murinn", "silver-hand"),
-            ("Kaitaa", "silver-hand"),
-            ("Razzlectria", "silver-hand"),
-            ("Cradon", "silver-hand"),
-            ("Ragebear", "silver-hand"),
-            ("Agaviss", "silver-hand"),
-            ("Frënchie", "silver-hand"),
-            ("Areisda", "silver-hand"),
-            ("Aryxi", "silver-hand"),
-            ("Velalda", "silver-hand"),
+            ("Aarynn", "zuljin"),
         ]
         cursor.executemany(
             "insert into mythicplus (name, realmslug) values (%s,%s);",
@@ -2125,8 +2103,8 @@ def initMembersTable():
                 spec        VARCHAR (25),
                 level       INTEGER,
                 gender      VARCHAR (10),
-                realmname   VARCHAR (25) DEFAULT ('Silver Hand'),
-                realmslug   VARCHAR (25) DEFAULT ('silver-hand'),
+                realmname   VARCHAR (25) DEFAULT ('Zul'Jin'),
+                realmslug   VARCHAR (25) DEFAULT ('zuljin'),
                 realmid     INTEGER DEFAULT (12),
                 guild       VARCHAR (50),
                 faction     VARCHAR(10),
@@ -2138,18 +2116,7 @@ def initMembersTable():
             );"""
         cursor.execute(sql)
         conn.commit()
-        memberList = [
-            ("Aaryn", "silver-hand", "Melee DPS"),
-            ("Nethershade", "silver-hand", "Ranged DPS"),
-            ("Winteros", "silver-hand", "Ranged DPS"),
-            ("Agaviss", "silver-hand", "Ranged DPS"),
-            ("Murinn", "silver-hand", "Tank"),
-            ("Antigen", "silver-hand", "Healer"),
-            ("Kaitaa", "silver-hand", "Healer"),
-            ("Nixena", "silver-hand", "Alt"),
-            ("Aresda", "silver-hand", "Healer"),
-            ("Cradon", "silver-hand", "Ranged DPS"),
-        ]
+        memberList = []
         cursor.executemany(
             "insert into members (name, realmslug, role) values (%s,%s,%s);", memberList
         )
