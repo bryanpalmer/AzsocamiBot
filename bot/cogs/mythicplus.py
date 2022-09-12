@@ -168,7 +168,7 @@ class MythicPlus(commands.Cog):
     ## COMMANDS
     # follow
     @commands.command()
-    async def follow(self, ctx, playerName, realmName="silver-hand"):
+    async def follow(self, ctx, playerName, realmName="zuljin"):
         """ Adds <playerName> <realmName> to the Mythic Plus tracking system """
         print(f"Adding {playerName} {realmName} to mythic plus tracking")
         msg = wowapi.addPlayerToMythicPlus(playerName, realmName)
