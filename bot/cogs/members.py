@@ -33,7 +33,7 @@ class Members(commands.Cog):
             self.updateTeamDataBG.start()
 
     @commands.command()
-    async def add_member(self, ctx, playerName, playerRealm="silver-hand"):
+    async def add_member(self, ctx, playerName, playerRealm="zuljin"):
         msgId = await ctx.send(
             f"**T**ank or **H**ealer or **M**elee DPS or **R**anged DPS (or **A**lt)?"
         )
