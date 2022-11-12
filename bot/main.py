@@ -206,12 +206,14 @@ print(os.getcwd())
 # for filename in os.listdir("./bot/cogs"):
 #     if filename.endswith(".py"):
 #         bot.load_extension(f"cogs.{filename[:-3]}")
+async def load_bot_extensions():
+    await bot.load_extension(f"cogs.core")
+    await bot.load_extension(f"cogs.members")
+    await bot.load_extension(f"cogs.mythicplus")
+    await bot.load_extension(f"cogs.auctionhouse")
+    await bot.load_extension(f"cogs.database")
 
-await bot.load_extension(f"cogs.core")
-await bot.load_extension(f"cogs.members")
-await bot.load_extension(f"cogs.mythicplus")
-await bot.load_extension(f"cogs.auctionhouse")
-await bot.load_extension(f"cogs.database")
+load_bot_extensions()
 # bot.load_extension(f"cogs.dnd")
 # bot.load_extension(f"cogs.customhelp")
 # bot.load_extension(f"cogs.events")
