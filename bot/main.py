@@ -58,7 +58,7 @@ if DEVMODE:
     print("Debug mode: ", DEBUG_MODE)
 
 
-bot = commands.Bot(command_prefix=COMMAND_PREFIX)
+bot = commands.Bot(command_prefix=COMMAND_PREFIX, intents=discord.Intents.all())
 # Remove built-in help command
 # bot.remove_command("help")
 
