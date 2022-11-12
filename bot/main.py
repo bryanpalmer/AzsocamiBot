@@ -213,7 +213,8 @@ async def load_bot_extensions():
     await bot.load_extension(f"cogs.auctionhouse")
     await bot.load_extension(f"cogs.database")
 
-load_bot_extensions()
+
+await load_bot_extensions()
 # bot.load_extension(f"cogs.dnd")
 # bot.load_extension(f"cogs.customhelp")
 # bot.load_extension(f"cogs.events")
