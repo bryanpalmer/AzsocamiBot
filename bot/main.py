@@ -1,8 +1,8 @@
 # main.py
 # TODO: Add automatic versioning system
 # versioneer
-VERSION = "0.2.42"
-VERSIONDATE = "2022-08-02"
+VERSION = "0.2.45"
+VERSIONDATE = "2022-11-11"
 
 from os.path import dirname, join, os
 
@@ -202,18 +202,16 @@ def devmode(msg):
 print(os.getcwd())
 
 ## Load in and activate cogs
-for filename in os.listdir("./bot/cogs"):
-    if filename.endswith(".py"):
-        bot.load_extension(f"cogs.{filename[:-3]}")
+# for filename in os.listdir("./bot/cogs"):
+#     if filename.endswith(".py"):
+#         bot.load_extension(f"cogs.{filename[:-3]}")
 # async def load_bot_extensions():
-#     await bot.load_extension(f"cogs.core")
-#     await bot.load_extension(f"cogs.members")
-#     await bot.load_extension(f"cogs.mythicplus")
-#     await bot.load_extension(f"cogs.auctionhouse")
-#     await bot.load_extension(f"cogs.database")
+bot.load_extension(f"cogs.core")
+bot.load_extension(f"cogs.members")
+bot.load_extension(f"cogs.mythicplus")
+bot.load_extension(f"cogs.auctionhouse")
+bot.load_extension(f"cogs.database")
 
-
-# asyncio.run(load_bot_extensions())
 # bot.load_extension(f"cogs.dnd")
 # bot.load_extension(f"cogs.customhelp")
 # bot.load_extension(f"cogs.events")
