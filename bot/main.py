@@ -20,19 +20,18 @@ load_dotenv(
 
 import asyncio
 import datetime
-from pytz import timezone
-from operator import itemgetter
-import time
 import os
-
-import discord
-from discord.ext import commands, tasks
-from discord.ext.commands import CommandNotFound
+import time
+from operator import itemgetter
 
 import botlib
+import discord
+import umj
 import wowapi
 import wowclasses
-import umj
+from discord.ext import commands, tasks
+from discord.ext.commands import CommandNotFound
+from pytz import timezone
 
 # Critical Vars and Settings
 COMMAND_PREFIX = os.getenv("COMMAND_PREFIX")  # Bot command prefix
@@ -214,7 +213,7 @@ async def load_bot_extensions():
     await bot.load_extension(f"cogs.database")
 
 
-await load_bot_extensions()
+asyncio.run(load_bot_extensions())
 # bot.load_extension(f"cogs.dnd")
 # bot.load_extension(f"cogs.customhelp")
 # bot.load_extension(f"cogs.events")
